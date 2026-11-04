@@ -383,7 +383,7 @@
               DestinationFiles="$(RustBuildOutput)\$(OutputFileName)"
               Condition="!$([MSBuild]::IsOSPlatform('Windows'))" />
 
-        <Exec Command="cargo run --bin generate_licenses --release --target $(RustTarget)" 
+        <Exec Command="cargo run --bin generate_licenses --release" 
               WorkingDirectory="$(RustAppDir)" 
               Condition="'$(ConfigurationType)' == 'release'" />
 
