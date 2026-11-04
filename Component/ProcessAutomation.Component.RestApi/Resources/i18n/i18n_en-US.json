@@ -1,0 +1,40 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Method": {
+      "Label": "Method",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Url": {
+      "Label": "Url",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Header": {
+      "Label": "Header",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Body": {
+      "Label": "Body",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "BaseUrl": {
+      "Label": "Base url",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

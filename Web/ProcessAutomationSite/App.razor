@@ -1,0 +1,22 @@
+@using ProcessAutomationSite.Pages.Security 
+
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(Program).Assembly">
+        <Found Context="routeData">
+            @*<RouteView RouteData="@routeData" DefaultLayout="@typeof(ShellLayoutView)" />*@
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(ShellLayoutView)">
+                <NotAuthorized>
+                    <RedirectToLoginComponent></RedirectToLoginComponent>
+                </NotAuthorized>
+                <Authorizing>
+                    <h4>Autenticación en progreso</h4>
+                </Authorizing>
+            </AuthorizeRouteView>
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@typeof(ShellLayoutView)">
+                <RedirectToHomeComponent></RedirectToHomeComponent>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

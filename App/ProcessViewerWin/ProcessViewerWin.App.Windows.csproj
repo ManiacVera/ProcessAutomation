@@ -1,0 +1,177 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>ProcessViewerWin</AssemblyName>
+    <Configurations>Debug;Release</Configurations>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <Platforms>AnyCPU;x64</Platforms>
+</PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="CefSharp.WinForms.NETCore" Version="147.0.100"></PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--<ProjectReference Include="..\..\Business\ProcessAutomation.Business\ProcessAutomation.Business.csproj" />-->
+    <ProjectReference Include="..\..\Common\ProcessAutomation.Common\ProcessAutomation.Common.csproj" />
+    <ProjectReference Include="..\..\Framework\ProcessAutomation.Framework\ProcessAutomation.Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\ProgressBarExtended.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="i18n\InputForm_en-US.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InputForm_en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Update="i18n\InputForm_es-MX.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InputForm_es-MX.resx</DependentUpon>
+    </Compile>
+    <Compile Update="i18n\InputFormatForm_en-US.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InputFormatForm_en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Update="i18n\InputFormatForm_es-MX.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InputFormatForm_es-MX.resx</DependentUpon>
+    </Compile>
+    <Compile Update="i18n\InputSingleValueForm_en-US.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InputSingleValueForm_en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Update="i18n\InputSingleValueForm_es-MX.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>InputSingleValueForm_es-MX.resx</DependentUpon>
+    </Compile>
+    <Compile Update="i18n\ShellForm_en-US.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShellForm_en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Update="i18n\ShellForm_es-MX.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShellForm_es-MX.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTO\Info\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="i18n\InputForm_en-US.resx">
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InputForm_en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="i18n\InputForm_es-MX.resx">
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InputForm_es-MX.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="i18n\InputFormatForm_en-US.resx">
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InputFormatForm_en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="i18n\InputFormatForm_es-MX.resx">
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InputFormatForm_es-MX.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="i18n\InputSingleValueForm_en-US.resx">
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InputSingleValueForm_en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="i18n\InputSingleValueForm_es-MX.resx">
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InputSingleValueForm_es-MX.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="i18n\ShellForm_en-US.resx">
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShellForm_en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="i18n\ShellForm_es-MX.resx">
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShellForm_es-MX.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <Target Name="RemoveBuild" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release' OR '$(Configuration)'=='DebugMAC' OR '$(Configuration)'=='ReleaseMAC'">
+    <Message Text="Delete build app folder" Importance="high" />
+    <RemoveDir Directories="$(SolutionDir)Build/App/$(TargetName)" ContinueOnError="true"></RemoveDir>
+  </Target>  
+	
+	<Target Name="CopyRuntimeFiles" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release' OR '$(Configuration)'=='DebugMAC' OR '$(Configuration)'=='ReleaseMAC'">
+		<ItemGroup>
+			<CopyRuntimeWin Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\win\**\*.*;" />
+			<CopyRuntimeWin64 Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\win-x64\**\*.*;" />
+		</ItemGroup>
+
+		<Message Text="Copy CopyRuntimeFiles @(CopyRuntimeFiles)" Importance="high" />
+		<Copy SourceFiles="@(CopyRuntimeWin)" DestinationFolder="$(SolutionDir)/Build/runtimes/win/%(RecursiveDir)" ContinueOnError="true" />
+		<Copy SourceFiles="@(CopyRuntimeWin64)" DestinationFolder="$(SolutionDir)/Build/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+	</Target>
+
+  <Target Name="CopyAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release' OR '$(Configuration)'=='DebugMAC' OR '$(Configuration)'=='ReleaseMAC'">
+    <ItemGroup>
+      <PackageApp Include="$(TargetDir)$(TargetName).*;" />
+      <PackageLocalNuget Include="$(TargetDir)/CefSharp.WinForms.dll;$(SolutionDir)Build/Package/Newtonsoft.Json.dll;" />
+	  <PackageCommon Include="$(SolutionDir)Build/Package/ProcessAutomation.Common*.dll;$(SolutionDir)Build/Package/ProcessAutomation.Framework*.dll;$(SolutionDir)Build/Package/Microsoft.Extensions.DependencyModel.dll;" />
+	  <PackageNuget Include="$(SolutionDir)/Build/Package/*.dll;" />
+	  <ProcessCommonsScripts Include="$(SolutionDir)Build/Resources/Scripts/*.*;" />
+	  <!--<BaseRuntimes Include="$(SolutionDir)/Build/runtimes/**/*.*;" />-->
+	  <BaseRuntimesWinx64Native Include="$(SolutionDir)/Build/runtimes/win-x64/native/**/*.*;" />
+	  <BaseRuntimesWinx64Lib Include="$(SolutionDir)/Build/runtimes/win-x64/lib/netcoreapp3.1/**/*.*;" />
+    </ItemGroup>    
+    
+    <Message Text="Copy App INIT" Importance="high" />
+	<Copy SourceFiles="@(PackageLocalNuget)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageApp)" DestinationFolder="$(SolutionDir)Build/App/$(TargetName)" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageCommon)" DestinationFolder="$(SolutionDir)Build/App/$(TargetName)" ContinueOnError="true" />	
+	<!--<Copy SourceFiles="@(PackageLocalNuget)" DestinationFolder="$(SolutionDir)Build/App/$(TargetName)" ContinueOnError="true" />-->
+	<Copy SourceFiles="@(PackageNuget)" DestinationFolder="$(SolutionDir)/Build/App/$(TargetName)/Package" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProcessCommonsScripts)" DestinationFolder="$(TargetDir)Form/Scripts" ContinueOnError="true" />	
+	<Copy SourceFiles="@(BaseRuntimesWinx64Lib)" DestinationFolder="$(SolutionDir)/Build/App/$(TargetName)/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+	<Copy SourceFiles="@(BaseRuntimesWinx64Native)" DestinationFolder="$(SolutionDir)/Build/App/$(TargetName)/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+	  
+	<Copy SourceFiles="@(PackageNuget)" DestinationFolder="$(TargetDir)/Package" ContinueOnError="true" />  
+	<Copy SourceFiles="@(BaseRuntimesWinx64Lib)" DestinationFolder="$(TargetDir)/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+	<Copy SourceFiles="@(BaseRuntimesWinx64Native)" DestinationFolder="$(TargetDir)/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+	<!--<Copy SourceFiles="@(BaseRuntimes)" DestinationFolder="$(SolutionDir)/Build/App/$(TargetName)/runtimes/%(RecursiveDir)" ContinueOnError="true" />-->
+    <Message Text="Copy App END" Importance="high" />
+  </Target>
+
+  <Target Name="CopyCommonsAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release' OR '$(Configuration)'=='DebugMAC' OR '$(Configuration)'=='ReleaseMAC'">
+    <ItemGroup>
+      <ProcessCommonsScriptsAngular Include="$(SolutionDir)Build/Resources/Scripts/AngularJS/angular/*.*;" />
+      <ProcessCommonsScriptsCss Include="$(SolutionDir)Build/Resources/Scripts/AngularJS/css/*.*;" />
+      <ProcessCommonsScriptsJs Include="$(SolutionDir)Build/Resources/Scripts/AngularJS/js/*.*;" />
+    </ItemGroup>
+
+    <Message Text="Copy ProcessCommonsScripts INIT" Importance="high" />
+    <Copy SourceFiles="@(ProcessCommonsScriptsAngular)" DestinationFolder="$(SolutionDir)Build/App/$(TargetName)/Form/Scripts/AngularJS/angular" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProcessCommonsScriptsCss)" DestinationFolder="$(SolutionDir)Build/App/$(TargetName)/Form/Scripts/AngularJS/css" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProcessCommonsScriptsJs)" DestinationFolder="$(SolutionDir)Build/App/$(TargetName)/Form/Scripts/AngularJS/js" ContinueOnError="true" />
+    <Message Text="Copy ProcessCommonsScripts END" Importance="high" />
+  </Target>
+
+</Project>

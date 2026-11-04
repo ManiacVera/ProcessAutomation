@@ -1,0 +1,40 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Printer": {
+      "Label": "Printer",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "File": {
+      "Label": "File",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OptionPrint": {
+      "Label": "Pages",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "BeginRange": {
+      "Label": "Begin range",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "EndRange": {
+      "Label": "End range",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

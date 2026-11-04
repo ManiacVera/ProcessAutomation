@@ -1,0 +1,508 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+      <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>ProcessAutomationSite</AssemblyName>
+    <RootNamespace>ProcessAutomationSite</RootNamespace>
+    <UserSecretsId>0880e5a9-8704-48bc-a41a-f6a88447a09d</UserSecretsId>
+    <Configurations>Debug;Release</Configurations>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DTO\Info\**" />
+    <Compile Remove="Pages\Shared\**" />
+    <Content Remove="DTO\Info\**" />
+    <Content Remove="Pages\Shared\**" />
+    <EmbeddedResource Remove="DTO\Info\**" />
+    <EmbeddedResource Remove="Pages\Shared\**" />
+    <None Remove="DTO\Info\**" />
+    <None Remove="Pages\Shared\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="10.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.8" />
+    <PackageReference Include="Radzen.Blazor" Version="12.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\WeatherForecastController.cs" />
+    <Compile Remove="Data\SiteContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\InputFields.html" />
+    <None Remove="Resources\InputTextField.html" />
+    <None Remove="Resources\OutputValueOption.html" />
+    <None Remove="Resources\RegisterEmail.html" />
+    <None Remove="Resources\RememberPassword.html" />
+    <None Remove="Scripts\AngularJS\angular\tribute.min.js" />
+    <None Remove="Scripts\AngularJS\angular\tribute.data.js" />
+    <None Remove="Scripts\AngularJS\angular\tribute.directive.js" />
+    <None Remove="Scripts\AngularJS\angular\tribute.service.js" />
+    <None Remove="Scripts\AngularJS\angular\angular-translate-loader-partial.min.js" />
+    <None Remove="Scripts\AngularJS\angular\angular-translate.min.js" />
+    <None Remove="Scripts\AngularJS\angular\angular.min.js" />
+    <None Remove="Scripts\AngularJS\angular\angularjs-dropdown-multiselect.min.js" />
+    <None Remove="Scripts\AngularJS\angular\datepicker.js" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\external\jquery\jquery.js" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\images\ui-icons_444444_256x240.png" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\images\ui-icons_555555_256x240.png" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\images\ui-icons_777620_256x240.png" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\images\ui-icons_777777_256x240.png" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\images\ui-icons_cc0000_256x240.png" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\jquery-ui.css" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\jquery-ui.js" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\jquery-ui.min.css" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\jquery-ui.min.js" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\jquery-ui.structure.css" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\jquery-ui.structure.min.css" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\jquery-ui.theme.css" />
+    <None Remove="Scripts\AngularJS\angular\jquery-ui\jquery-ui.theme.min.css" />
+    <None Remove="Scripts\AngularJS\angular\jquery.min.js" />
+    <None Remove="Scripts\AngularJS\angular\mentio.js" />
+    <None Remove="Scripts\AngularJS\angular\generic-scripts.js" />
+    <None Remove="Scripts\AngularJS\css\bootstrap-grid.css" />
+    <None Remove="Scripts\AngularJS\css\bootstrap-grid.css.map" />
+    <None Remove="Scripts\AngularJS\css\bootstrap-grid.min.css" />
+    <None Remove="Scripts\AngularJS\css\bootstrap-grid.min.css.map" />
+    <None Remove="Scripts\AngularJS\css\bootstrap-icons.css" />
+    <None Remove="Scripts\AngularJS\css\bootstrap-icons.min.css" />
+    <None Remove="Scripts\AngularJS\css\bootstrap-icons.scss" />
+    <None Remove="Scripts\AngularJS\css\bootstrap-reboot.css" />
+    <None Remove="Scripts\AngularJS\css\bootstrap-reboot.css.map" />
+    <None Remove="Scripts\AngularJS\css\bootstrap-reboot.min.css" />
+    <None Remove="Scripts\AngularJS\css\bootstrap-reboot.min.css.map" />
+    <None Remove="Scripts\AngularJS\css\bootstrap.css" />
+    <None Remove="Scripts\AngularJS\css\bootstrap.css.map" />
+    <None Remove="Scripts\AngularJS\css\bootstrap.min.css" />
+    <None Remove="Scripts\AngularJS\css\bootstrap.min.css.map" />
+    <None Remove="Scripts\AngularJS\css\fonts\bootstrap-icons.woff" />
+    <None Remove="Scripts\AngularJS\css\fonts\bootstrap-icons.woff2" />
+    <None Remove="Scripts\AngularJS\css\main.css" />
+    <None Remove="Scripts\AngularJS\css\spinner.css" />
+    <None Remove="Scripts\AngularJS\js\bootstrap.bundle.js" />
+    <None Remove="Scripts\AngularJS\js\bootstrap.bundle.js.map" />
+    <None Remove="Scripts\AngularJS\js\bootstrap.bundle.min.js" />
+    <None Remove="Scripts\AngularJS\js\bootstrap.bundle.min.js.map" />
+    <None Remove="Scripts\AngularJS\js\bootstrap.js" />
+    <None Remove="Scripts\AngularJS\js\bootstrap.js.map" />
+    <None Remove="Scripts\AngularJS\js\bootstrap.min.js" />
+    <None Remove="Scripts\AngularJS\js\bootstrap.min.js.map" />
+    <None Remove="Scripts\jquery\jquery-1.12.5.min.js" />
+    <None Remove="Scripts\jquery\jquery-3.5.1.min.js" />
+    <None Remove="Scripts\jquery\jquery-ui.min.js" />
+    <None Remove="Scripts\tagit\tag-it.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\AngularJS\angular\angular-translate-loader-partial.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\angular-translate.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+      <Content Include="Scripts\AngularJS\angular\tribute.min.js">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Scripts\AngularJS\angular\tribute.data.js">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Scripts\AngularJS\angular\tribute.directive.js">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Scripts\AngularJS\angular\tribute.service.js">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\RememberPassword.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\angular.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\angularjs-dropdown-multiselect.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\datepicker.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\external\jquery\jquery.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\images\ui-icons_444444_256x240.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\images\ui-icons_555555_256x240.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\images\ui-icons_777620_256x240.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\images\ui-icons_777777_256x240.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\images\ui-icons_cc0000_256x240.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\images\ui-icons_ffffff_256x240.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\jquery-ui.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\jquery-ui.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\jquery-ui.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\jquery-ui.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\jquery-ui.structure.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\jquery-ui.structure.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\jquery-ui.theme.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery-ui\jquery-ui.theme.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\jquery.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\mentio.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\angular\generic-scripts.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap-grid.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap-grid.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap-grid.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap-grid.min.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap-icons.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap-icons.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap-icons.scss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap-reboot.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap-reboot.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap-reboot.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap-reboot.min.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\bootstrap.min.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\fonts\bootstrap-icons.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\fonts\bootstrap-icons.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\main.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\css\spinner.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\js\bootstrap.bundle.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\js\bootstrap.bundle.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\js\bootstrap.bundle.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\js\bootstrap.bundle.min.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\js\bootstrap.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\js\bootstrap.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\js\bootstrap.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\AngularJS\js\bootstrap.min.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\InputFields.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\InputTextField.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\OutputValueOption.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\RegisterEmail.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery\jquery-1.12.5.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery\jquery-3.5.1.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\jquery\jquery-ui.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\tagit\tag-it.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Business\ProcessAutomation.Business\ProcessAutomation.Business.csproj" />
+    <ProjectReference Include="..\..\Common\ProcessAutomation.Common\ProcessAutomation.Common.csproj" />
+    <ProjectReference Include="..\..\Common\ProcessAutomation.CommonExpress\ProcessAutomation.CommonExpress.csproj" />
+    <ProjectReference Include="..\..\Framework\ProcessAutomation.Framework\ProcessAutomation.Framework.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\css\spinner.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Target Name="CopyRuntimeFiles" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <ItemGroup>
+      <CopyRuntimeWin Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\win\**\*.*;" />
+      <CopyRuntimeWin64 Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\win-x64\**\*.*;" />
+      <CopyRuntimeUnix Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\unix\**\*.*;" />
+      <CopyRuntimeLinux Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\linux\**\*.*;" />
+      <CopyRuntimeLinuxX64 Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\linux-x64\**\*.*;" />
+      <CopyRuntimeLinuxArm64 Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\linux-arm64\**\*.*;" />
+      <CopyRuntimeMacCatalystArm64 Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\maccatalyst-arm64\**\*.*;" />
+      <CopyRuntimeMacCatalyst64 Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\maccatalyst-x64\**\*.*;" />
+      <CopyRuntimeMacOsxArm64 Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\osx-arm64\**\*.*;" />
+      <CopyRuntimeMacOsx64 Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\osx-x64\**\*.*;" />
+    </ItemGroup>
+
+    <Message Text="Copy CopyRuntimeFiles" Importance="high" />
+    <Copy SourceFiles="@(CopyRuntimeWin)" DestinationFolder="$(SolutionDir)/Build/runtimes/win/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(CopyRuntimeWin64)" DestinationFolder="$(SolutionDir)/Build/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(CopyRuntimeUnix)" DestinationFolder="$(SolutionDir)/Build/runtimes/unix/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(CopyRuntimeLinux)" DestinationFolder="$(SolutionDir)/Build/runtimes/linux/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(CopyRuntimeLinuxX64)" DestinationFolder="$(SolutionDir)/Build/runtimes/linux-x64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(CopyRuntimeLinuxArm64)" DestinationFolder="$(SolutionDir)/Build/runtimes/linux-arm64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(CopyRuntimeMacCatalystArm64)" DestinationFolder="$(SolutionDir)/Build/runtimes/maccatalyst-arm64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(CopyRuntimeMacCatalyst64)" DestinationFolder="$(SolutionDir)/Build/runtimes/maccatalyst-x64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(CopyRuntimeMacOsxArm64)" DestinationFolder="$(SolutionDir)/Build/runtimes/osx-arm64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(CopyRuntimeMacOsx64)" DestinationFolder="$(SolutionDir)/Build/runtimes/osx-x64/%(RecursiveDir)" ContinueOnError="true" />
+  </Target>
+
+  <Target Name="CopyAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <ItemGroup>
+      <PackageApp Include="$(TargetDir)$(TargetName).*;" />
+      <PackageAppResources Include="$(TargetDir)Resources/*.*;" />
+      <PackageProcessFiles Include="$(TargetDir)ProcessFiles/*.json;" />
+      <PackageNuget Include="$(SolutionDir)/Build/Package/*.dll;" />
+      <PackageLocalNuget Include="$(TargetDir)Blazored.LocalStorage.dll;$(TargetDir)Microsoft.AspNetCore.*.dll;$(TargetDir)Radzen.Blazor.dll" />
+      <PackageCommon Include="$(SolutionDir)Build/Package/ProcessAutomation.Common*.dll;$(SolutionDir)Build/Package/ProcessAutomation.Framework*.dll;$(SolutionDir)Build/Package/Microsoft.Extensions.DependencyModel.dll;" />
+      <PackageComponent Include="$(SolutionDir)/Build/Component/*.dll;" />
+      <ProcessViewerApp Include="$(SolutionDir)/Build/App/ProcessViewerWin/*.*;" />
+      <PackageExternal Include="$(SolutionDir)/Build/External/*.exe;" />
+      <PackagePages Include="$(SolutionDir)/Build/Resources/Pages/*.html;" />
+      <PackageConfigServerConnection Include="$(SolutionDir)/Build/Config/ServerConnection.json;" />
+      <PackageConfig Include="$(TargetDir)Config/Config.json;" />
+      <!--<BaseRuntimes Include="$(SolutionDir)/Build/runtimes/**/*.*;" />-->
+      <BaseRuntimesWinx64Native Include="$(SolutionDir)/Build/runtimes/win-x64/native/**/*.*;" />
+      <BaseRuntimesWinx64Lib Include="$(SolutionDir)/Build/runtimes/win-x64/lib/netcoreapp3.1/**/*.*;" />
+      <BaseRuntimesUnix Include="$(SolutionDir)/Build/runtimes/unix/**/*.*;" />
+      <BaseRuntimesLinux Include="$(SolutionDir)/Build/runtimes/linux/**/*.*;" />
+      <BaseRuntimesLinuxX64Native Include="$(SolutionDir)/Build/runtimes/linux-x64/native/**/*.*;" />
+      <BaseRuntimesLinuxX64Lib Include="$(SolutionDir)/Build/runtimes/linux-x64/lib/netcoreapp3.1/**/*.*;" />
+      <BaseRuntimesLinuxArm64Native Include="$(SolutionDir)/Build/runtimes/linux-arm64/native/**/*.*;" />
+      <BaseRuntimesLinuxArm64Lib Include="$(SolutionDir)/Build/runtimes/linux-arm64/lib/netcoreapp3.1/**/*.*;" />
+      <BaseRuntimesMacOsx64Native Include="$(SolutionDir)/Build/runtimes/osx-x64/native/**/*.*;" />
+      <BaseRuntimesMacOsx64Lib Include="$(SolutionDir)/Build/runtimes/osx-x64/lib/netcoreapp3.1/**/*.*;" />
+      <BaseRuntimesMacOsarm64Native Include="$(SolutionDir)/Build/runtimes/maccatalyst-arm64/native/**/*.*;" />
+      <BaseRuntimesMacOsarm64Lib Include="$(SolutionDir)/Build/runtimes/maccatalyst-arm64/lib/netcoreapp3.1/**/*.*;" />
+    </ItemGroup>
+    <Message Text="Copy PackageApp INIT" Importance="normal" />
+    <Copy SourceFiles="@(PackageLocalNuget)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageApp)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageCommon)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageLocalNuget)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageAppResources)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Resources" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageProcessFiles)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/ProcessFiles" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageNuget)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageComponent)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Component" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProcessViewerApp)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Viewer" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageExternal)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/External" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackagePages)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Resources/Pages" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageConfigServerConnection)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Config" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageConfig)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Config" ContinueOnError="true" />    
+    
+    <Copy SourceFiles="@(BaseRuntimesUnix)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package/runtimes/unix/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesLinux)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package/runtimes/linux/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesLinuxX64Native)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package/runtimes/linux-x64/native/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesLinuxX64Lib)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package/runtimes/linux-x64/lib/netcoreapp3.1/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesLinuxArm64Native)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package/runtimes/linux-arm64/native/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesLinuxArm64Lib)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package/runtimes/linux-arm64/lib/netcoreapp3.1/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesMacOsx64Lib)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package/runtimes/osx-x64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesMacOsx64Native)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package/runtimes/osx-x64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesMacOsarm64Lib)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package/runtimes/maccatalyst-arm64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesMacOsarm64Native)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package/runtimes/maccatalyst-arm64/%(RecursiveDir)" ContinueOnError="true" />    
+    <Copy SourceFiles="@(BaseRuntimesWinx64Lib)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesWinx64Native)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+
+    <RemoveDir Directories="$(TargetDir)/Component"></RemoveDir>
+    <RemoveDir Directories="$(TargetDir)/Package"></RemoveDir>
+    <RemoveDir Directories="$(TargetDir)/External"></RemoveDir>
+    <RemoveDir Directories="$(TargetDir)/Resources/Pages"></RemoveDir>
+    <RemoveDir Directories="$(TargetDir)/Viewer"></RemoveDir>
+    <RemoveDir Directories="$(TargetDir)/BaseRuntimes"></RemoveDir>
+
+    <Copy SourceFiles="@(PackageComponent)" DestinationFolder="$(TargetDir)/Component" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageNuget)" DestinationFolder="$(TargetDir)/Package" ContinueOnError="true" />
+    
+    <Copy SourceFiles="@(BaseRuntimesUnix)" DestinationFolder="$(TargetDir)/Package/runtimes/unix/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesLinux)" DestinationFolder="$(TargetDir)/Package/runtimes/linux/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesLinuxX64Native)" DestinationFolder="$(TargetDir)/Package/runtimes/linux-x64/native/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesLinuxX64Lib)" DestinationFolder="$(TargetDir)/Package/runtimes/linux-x64/lib/netcoreapp3.1/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesLinuxArm64Native)" DestinationFolder="$(TargetDir)/Package/runtimes/linux-arm64/native/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesLinuxArm64Lib)" DestinationFolder="$(TargetDir)/Package/runtimes/linux-arm64/lib/netcoreapp3.1/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesMacOsx64Lib)" DestinationFolder="$(TargetDir)/Package/runtimes/osx-x64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesMacOsx64Native)" DestinationFolder="$(TargetDir)/Package/runtimes/osx-x64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesMacOsarm64Lib)" DestinationFolder="$(TargetDir)/Package/runtimes/maccatalyst-arm64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesMacOsarm64Native)" DestinationFolder="$(TargetDir)/Package/runtimes/maccatalyst-arm64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesWinx64Lib)" DestinationFolder="$(TargetDir)/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesWinx64Native)" DestinationFolder="$(TargetDir)/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+    
+    <Copy SourceFiles="@(ProcessViewerApp)" DestinationFolder="$(TargetDir)/Viewer" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageExternal)" DestinationFolder="$(TargetDir)/External" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackagePages)" DestinationFolder="$(TargetDir)/Resources/Pages" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageCommon)" DestinationFolder="$(TargetDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageConfigServerConnection)" DestinationFolder="$(TargetDir)/Config" ContinueOnError="true" Condition="!Exists('$(TargetDir)/Config/ServerConnection.json')" />
+    <Message Text="Copy PackageApp END" Importance="normal" />
+  </Target>
+
+  <!--<Target Name="RemoveRuntimeFiles" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+	    <Message Text="RemoveRuntimeFiles" Importance="high" />
+		<RemoveDir Directories="$(TargetDir)/runtimes"></RemoveDir>		
+	</Target>-->
+
+  <Target Name="ProjectFiles" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <ItemGroup>
+      <ProjectFilesCss Include="$(ProjectDir)wwwroot/css/*;" />
+      <ProjectFilesBootstrap Include="$(ProjectDir)wwwroot/css/bootstrap/*;" />
+      <ProjectFilesJquery Include="$(ProjectDir)wwwroot/css/jquery/*;" />
+      <ProjectFilesTagit Include="$(ProjectDir)wwwroot/css/tagit/*;" />
+      <ProjectFilesOpenIonicCss Include="$(ProjectDir)wwwroot/css/open-iconic/font/css/*;" />
+      <ProjectFilesOpenIonicFonts Include="$(ProjectDir)wwwroot/css/open-iconic/font/fonts/*;" />
+
+      <ProjectFilesJqueryOther Include="$(ProjectDir)Scripts/jquery/*;" />
+      <ProjectFilesTagitOther Include="$(ProjectDir)Scripts/tagit/*;" />
+    </ItemGroup>
+
+    <Message Text="Copy ProjectFiles INIT" Importance="high" />
+    <Copy SourceFiles="@(ProjectFilesCss)" DestinationFolder="$(TargetDir)css" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProjectFilesBootstrap)" DestinationFolder="$(TargetDir)css/bootstrap" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProjectFilesJquery)" DestinationFolder="$(TargetDir)css/jquery" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProjectFilesOpenIonicCss)" DestinationFolder="$(TargetDir)css/open-iconic/font/css" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProjectFilesOpenIonicFonts)" DestinationFolder="$(TargetDir)css/open-iconic/font/fonts" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProjectFilesTagit)" DestinationFolder="$(TargetDir)css/tagit" ContinueOnError="true" />
+
+    <Copy SourceFiles="@(ProjectFilesCss)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite/css" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProjectFilesBootstrap)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite/css/bootstrap" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProjectFilesJquery)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite/css/jquery" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProjectFilesOpenIonicCss)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite/css/open-iconic/font/css" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProjectFilesOpenIonicFonts)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite/css/open-iconic/font/fonts" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProjectFilesTagit)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite/css/tagit" ContinueOnError="true" />
+
+    <Copy SourceFiles="@(ProjectFilesJqueryOther)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite/Scripts/jquery" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProjectFilesTagitOther)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite/Scripts/tagit" ContinueOnError="true" />
+    <Message Text="Copy ProjectFiles END" Importance="high" />
+  </Target>
+
+  <Target Name="CopyCommonsAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <ItemGroup>
+      <ProcessCommonsScriptsAngular Include="$(SolutionDir)Build/Resources/Scripts/AngularJS/angular/*.*;" />
+      <ProcessCommonsScriptsCss Include="$(SolutionDir)Build/Resources/Scripts/AngularJS/css/*.*;" />
+      <ProcessCommonsScriptsJs Include="$(SolutionDir)Build/Resources/Scripts/AngularJS/js/*.*;" />
+    </ItemGroup>
+
+    <Message Text="Copy ProcessCommonsScripts INIT" Importance="high" />
+    <Copy SourceFiles="@(ProcessCommonsScriptsAngular)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite/Scripts/AngularJS/angular" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProcessCommonsScriptsCss)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite/Scripts/AngularJS/css" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProcessCommonsScriptsJs)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationSite/Scripts/AngularJS/js" ContinueOnError="true" />
+    <Message Text="Copy ProcessCommonsScripts END" Importance="high" />
+  </Target>
+
+  <Target Name="RemoveBuild" BeforeTargets="PreBuildEvent">
+    <RemoveDir Directories="$(SolutionDir)/Build/App/ProcessAutomationSite" ContinueOnError="true"></RemoveDir>
+  </Target>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <ItemGroup>
+      <PackageExeRun Include="$(SolutionDir)Build/App/ProcessExeWin/ProcessExeWin.exe;" />
+      <PackageForm Include="$(SolutionDir)Common/ProcessAutomation.Common/Form/InputFields.html;$(SolutionDir)Common/ProcessAutomation.Common/Form/InputTextField.html;$(SolutionDir)Common/ProcessAutomation.Common/Form/OutputValueOption.html;" />
+    </ItemGroup>
+    <Message Text="Copy PackageExeRun" Importance="normal" />
+    <!--
+    <Copy SourceFiles="@(PackageExeRun)" DestinationFolder="$(TargetDir)/ExeRun" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageExeRun)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationSite/ExeRun" ContinueOnError="true" />
+    -->
+
+    <Message Text="Copy InputFields.html" Importance="high" />
+    <Copy SourceFiles="@(PackageForm)" DestinationFolder="$(ProjectDir)/Resources" ContinueOnError="true" />
+  </Target>
+
+</Project>

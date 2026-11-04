@@ -1,0 +1,90 @@
+{
+  "COMPONENT": {
+    "Browser": {
+      "Label": "Browser",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "BinaryLocation": {
+      "Label": "Ruta binario",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Options": {
+      "Label": "Opciones",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Incognito": {
+      "Label": "Incognito",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    } 
+  },
+  "FIELD_LIST": {
+    "CurrentPage": {
+      "Label": "Pagina actual",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Page": {
+      "Label": "Pagina",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Delay": {
+      "Label": "Delay",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Multiple": {
+      "Label": "Multiple",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OnlyText": {
+      "Label": "Solo texto",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Attribute": {
+      "Label": "Attributo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Object": {
+      "Label": "Objeto",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Value": {
+      "Label": "Valor",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SearchType": {
+      "Label": "Tipo de busqueda",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Event": {
+      "Label": "Evento",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "ProcessViewerTitle": "Visor de procesos",
+  "File": "Archivo",
+  "Save": "Guardar",
+  "Regenerar": "Regenerar",
+  "ProcessDetail": "Ver detalle",
+  "SelectAll": "Seleccionar todos",
+  "UnselectAll": "Deseleccionar todos",
+  "Refresh": "Refrescar",
+  "Run": "Ejecutar",
+  "OpenProcessViewer": "Abrir process viewer",
+  "ProcessList": "Lista de procesos",
+  "ProcessHeader": "Proceso",
+  "DescriptionHeader": "Descripción",
+  "FolderHeader": "Carpeta",
+  "ShowInputHeader": "Mostrar input",
+  "RunHeader": "Ejecutar",
+  "editHeader": "Editar",
+  "deleteHeader": "Borrar",
+  "selectHeader": "Seleccionar",
+  "copy": "Copiar",
+  "shortcut": "Acceso directo"
+}

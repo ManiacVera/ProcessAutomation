@@ -1,0 +1,101 @@
+﻿[
+  {
+    "Name": "id",
+    "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+    "Required": false,
+    "Type": "KEY"
+  },
+  {
+    "Name": "name",
+    "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+    "Required": false,
+    "Type": "NAME"
+  },
+  {
+    "Name": "urlSubmit",
+    "DefaultValue": "[@EXT-FIELD_VALUE]",
+    "Required": false,
+    "Type": "URL"
+  },
+  {
+    "Name": "ng-click",
+    "DefaultValue": "[@EXT-FIELD_VALUE]",
+    "Required": false,
+    "Type": "CLICK_EVENT",
+    "PropertyFormat": "[@NAME]=\"submit($data)\"",
+    "Event": "Submit_Click"
+  },
+  {
+    "Name": "placeholder",
+    "DefaultValue": "",
+    "Required": false,
+    "Type": "PLACE_HOLDER"
+  },
+  {
+    "Name": "ng-model",
+    "DefaultValue": "[@EXT-FIELD_VALUE]",
+    "Required": true,
+    "Type": "MODEL",
+    "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+  },
+  {
+    "Name": "ng-required",
+    "DefaultValue": "[@EXT-REQUIRED]",
+    "Required": false,
+    "Type": "REQUIRED",
+    "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+  },
+  {
+    "Name": "ng-hide",
+    "DefaultValue": "[@EXT-HIDE]",
+    "Required": false,
+    "Type": "HIDE",
+    "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+  },
+  {
+    "Name": "ng-disabled",
+    "DefaultValue": "[@EXT-DISABLED]",
+    "Required": false,
+    "Type": "DISABLE",
+    "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+  },
+  {
+    "Name": "ng-options",
+    "DefaultValue": "[@EXT-OPTION_VALUE]",
+    "Required": false,
+    "Type": "OPTION",
+    "PropertyFormat": "[@NAME]='[@EXT-ITEM] for $item in [@DEFAULT_VALUE]'"
+  },
+  {
+    "Name": "change-directive",
+    "DefaultValue": "[@EXT-OPTION_VALUE]",
+    "Required": false,
+    "Type": "CHANGE_EVENT",
+    "PropertyFormat": "[@NAME]='{\"ref\": \"[@DEFAULT_VALUE]_ref\", \"option\": \"[@EXT-ITEM]\"}'"
+  },
+  {
+    "Name": "date-picker",
+    "DefaultValue": null,
+    "Required": true,
+    "Type": "DATE_PICKER_EVENT",
+    "PropertyFormat": "[@NAME]"
+  },
+  {
+    "Name": "dateformat",
+    "DefaultValue": null,
+    "Required": false,
+    "Type": "DATE_FORMAT"
+  },
+  {
+    "Name": "ng-minlength",
+    "DefaultValue": "0",
+    "Required": false,
+    "Type": "MIN_LENGTH"
+  },
+  {
+    "Name": "ng-maxlength",
+    "DefaultValue": "9999",
+    "Required": false,
+    "Type": "MAX_LENGTH"
+  }
+]

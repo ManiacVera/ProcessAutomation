@@ -1,0 +1,154 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "FieldList": {
+      "Label": "Campos",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FieldName": {
+      "Label": "Campo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Type": {
+      "Label": "Tipo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "RowNumber": {
+      "Label": "Fila",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ColumnNumber": {
+      "Label": "Columna",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FieldValue": {
+      "Label": "Valor",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "StyleList": {
+      "Label": "Stilos",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "StyleName": {
+      "Label": "Nombre",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "StyleValue": {
+      "Label": "Valor",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OutputData": {
+      "Label": "Salida de datos",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "VariableList": {
+      "Label": "Variables",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "VariableValue": {
+      "Label": "Valor",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "VariableType": {
+      "Label": "Tipo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DefaultValue": {
+      "Label": "Valor default",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "LocationType": {
+      "Label": "Ubicacion",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FormName": {
+      "Label": "Formulario",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ColumnSize": {
+      "Label": "Tamano columna",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Item": {
+      "Label": "Item",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ByDynamicValue": {
+      "Label": "Por valor dinamico",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FormType": {
+      "Label": "Tipo de formulario",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Disabled": {
+      "Label": "Deshabilitar",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Required": {
+      "Label": "Requerido",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Hidden": {
+      "Label": "Esconder",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "LabelHidden": {
+      "Label": "Esconder etiqueta",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

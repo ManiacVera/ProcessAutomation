@@ -1,0 +1,184 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Function",
+        "Field": "Function",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "TRIM", "ROUND", "CEIL", "FLOOR", "ONLY_NUMBER", "GET_DATE", "ADD_DATE", "CONVERT", "JSON_ARRAY" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Input",
+        "Field": "Input",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Function != 'GET_DATE' && $data.Function != 'JSON_ARRAY'"
+      },
+      {
+        "Label": "Tipo de dato",
+        "Field": "DataType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "INT", "LONG", "TEXT", "CHAR", "DECIMAL", "FLOAT", "DATETIME", "DATETIME_STRING" ],
+        "DefaultValue": null,
+        "Visible": "$data.Function == 'CONVERT'"
+      },
+      {
+        "Label": "Format",
+        "Field": "Format",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Function == 'GET_DATE' || $data.Function == 'ADD_DATE' || $data.DataType == 'DATETIME'"
+      },
+      {
+        "Label": "Format input",
+        "Field": "FormatInput",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.DataType == 'DATETIME_STRING'"
+      },
+      {
+        "Label": "Format output",
+        "Field": "FormatOutput",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.DataType == 'DATETIME_STRING'"
+      },
+      {
+        "Label": "Interval",
+        "Field": "Interval",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Function == 'ADD_DATE'"
+      },
+      {
+        "Label": "Quantity",
+        "Field": "Quantity",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Function == 'ROUND' || $data.Function == 'ADD_DATE'"
+      },
+      {
+        "Label": "Propiedades Json",
+        "Field": "JsonArrayList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "Visible": "$data.Function == 'JSON_ARRAY'",
+        "DefaultValue": [
+          {
+            "Label": "Propiedad",
+            "Field": "Property",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Valor",
+            "Field": "Value",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTAREA",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Tipo valor",
+            "Field": "ValueType",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": [ "LIST", "TEXT" ],
+            "DefaultValue": null
+          },
+          {
+            "Label": "Valor como",
+            "Field": "ValueAs",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": [ "ONE_BY_REGEDIT", "ALL_BY_REGEDIT" ],
+            "DefaultValue": null,
+            "Visible": "$dataRow.ValueType == 'LIST'"
+          },
+          {
+            "Label": "Llenar vacios o nulos con",
+            "Field": "FillNullOrEmpty",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": [ "", "NULL", "EMPTY", "REPEAT_LAST_VALUE", "DEFAULT_VALUE" ],
+            "DefaultValue": null,
+            "Visible": "$dataRow.ValueType == 'TEXT'"
+          },
+          {
+            "Label": "Valor default",
+            "Field": "DefaultValue",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.FillNullOrEmpty == 'DEFAULT_VALUE'"
+          }
+        ]
+      }
+    ]
+  }
+]

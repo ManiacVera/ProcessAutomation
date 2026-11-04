@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+	<br />
+	<br />
+	<br />
+	<div style="width: 100%; font-family: Lucida Bright;">
+		<table style="width: 450px; height: 400px; border-style: solid; border-width: 2px; border-radius:5px; margin-left: auto;
+  margin-right: auto; text-align: center;">
+			<thead style="background-color: orange; color: white;">
+				<tr>
+					<th>
+						<h2>Stop Component</h2>
+						<br />
+						<button id="btnClearMessage" onclick="return ClearMessage();"></button>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<h3>
+							Please click in button for close and run application
+						</h3>
+						<br />
+						<label id="lblMessage"></label>
+					</td>
+				</tr>				
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>
+						<button id="btnAccept" style="font-family: Lucida Bright; font-weight: bold;" onclick="return CloseWindow();">Accept</button>						
+						<br />
+						<br />
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+
+    function CloseWindow() {
+        var lblMessage = document.getElementById("lblMessage");
+
+        if (lblMessage != null)
+        {
+            lblMessage.innerHTML = "Closing...";
+        }
+
+        //window.close();
+
+        return false;
+    }
+
+    function ClearMessage() {
+        var lblMessage = document.getElementById("lblMessage");
+
+        if (lblMessage != null) {
+            lblMessage.innerHTML = "";
+        }
+
+        return false;
+    }
+
+</script>

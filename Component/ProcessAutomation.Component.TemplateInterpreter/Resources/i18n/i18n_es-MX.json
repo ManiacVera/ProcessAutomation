@@ -1,0 +1,88 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "TemplateType": {
+      "Label": "Tipo de plantilla",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Separator": {
+      "Label": "Separador",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Template": {
+      "Label": "Plantilla",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "VariableList": {
+      "Label": "Variables",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Variable": {
+      "Label": "Variable",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Value": {
+      "Label": "Valor",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ValueType": {
+      "Label": "Tipo de valor",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "AsAttribute": {
+      "Label": "Valor de attributo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Columns": {
+      "Label": "Columnas",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OutputCustomTemplate": {
+      "Label": "Tipo de salida",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SanitizeFielName": {
+      "Label": "Sanitizar nombre del campo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FromFile": {
+      "Label": "Desde archivo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "TemplateFile": {
+      "Label": "Archivo plantilla",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

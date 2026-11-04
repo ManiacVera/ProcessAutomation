@@ -1,0 +1,106 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "DemandSourceBy": {
+      "Label": "Fuenta demanda",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DemandTable": {
+      "Label": "Tabla de demanda",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DemandQuery": {
+      "Label": "Demanda Query",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DemandRelationalField": {
+      "Label": "Campo relacion",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DemandKeyField": {
+      "Label": "Campo llave",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DemandQuantityField": {
+      "Label": "Campo cantidad",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DemandOrderBy": {
+      "Label": "Orden por",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SupplySourceBy": {
+      "Label": "Fuente oferta",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SupplyTable": {
+      "Label": "Tabla de oferta",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SupplyQuery": {
+      "Label": "Oferta Query",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SupplyRelationalField": {
+      "Label": "Campo relacion",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SupplyKeyField": {
+      "Label": "Campo llave",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SupplyQuantityField": {
+      "Label": "Campo cantidad",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SupplyOrderBy": {
+      "Label": "Order por",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DecimalQuantity": {
+      "Label": "Cantidad decimales",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DecimalOption": {
+      "Label": "Opcion decimales",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

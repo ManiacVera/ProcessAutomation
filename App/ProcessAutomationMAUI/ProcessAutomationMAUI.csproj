@@ -1,0 +1,453 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<MtouchDebug>true</MtouchDebug>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">
+			net10.0-android;
+			net10.0-ios;
+			net10.0-maccatalyst;
+			net10.0-windows10.0.19041.0
+		</TargetFrameworks>
+
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('osx'))">
+			net10.0-android;
+			net10.0-ios;
+			net10.0-maccatalyst;
+		</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
+
+		<!-- Note for MacCatalyst:
+		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
+		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
+		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
+		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
+		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>ProcessAutomationMAUI</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<NoWarn>$(NoWarn);MVVMTK0034;MVVMTK0039;MVVMTK0042;MVVMTK0045</NoWarn>
+		
+
+		<!-- Display name -->
+		<ApplicationTitle>ProcessAutomationMAUI</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.processautomationmaui</ApplicationId>
+
+		<!-- Versions -->
+		<Version>0.1.0</Version>
+		<ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU;x64</Platforms>
+
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Remove="Config\**" />
+	  <Compile Remove="Config\**" />
+	  <EmbeddedResource Remove="Config\**" />
+	  <MauiCss Remove="Config\**" />
+	  <MauiXaml Remove="Config\**" />
+	  <None Remove="Config\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.min.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.structure.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.structure.min.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.theme.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.theme.min.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap-grid.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap-grid.min.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap-icons.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap-icons.min.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap-reboot.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap-reboot.min.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap.min.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\css\main.css" />
+	  <MauiCss Remove="Resources\Raw\Scripts\AngularJS\css\spinner.css" />
+	</ItemGroup>
+
+	<ItemGroup>
+    <!--<None Remove="Resources\Raw\ConfigAdapter.json" />
+    <Compile Remove="Resources\Raw\ConfigAdapter.json" />
+    -->
+    <None Remove="Resources\Images\delete_icon.png" />
+    <None Remove="Resources\Images\edit_icon.png" />
+    <None Remove="Resources\Images\remove_icon.png" />
+    <None Remove="Resources\Raw\ConfigAdapter.json" />
+    <None Remove="Resources\Raw\S_DATABASE_V1.sqlite" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\angular-translate-loader-partial.min.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\angular-translate.min.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\angular.min.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\angularjs-dropdown-multiselect.min.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\datepicker.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\generic-scripts.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\external\jquery\jquery.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_444444_256x240.png" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_555555_256x240.png" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_777620_256x240.png" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_777777_256x240.png" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_cc0000_256x240.png" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.min.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\jquery.min.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\angular\mentio.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap-grid.css.map" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap-grid.min.css.map" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap-icons.json" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap-icons.scss" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap-reboot.css.map" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap-reboot.min.css.map" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap.css.map" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\css\bootstrap.min.css.map" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\css\fonts\bootstrap-icons.woff" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\css\fonts\bootstrap-icons.woff2" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\js\bootstrap.bundle.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\js\bootstrap.bundle.js.map" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\js\bootstrap.bundle.min.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\js\bootstrap.bundle.min.js.map" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\js\bootstrap.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\js\bootstrap.js.map" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\js\bootstrap.min.js" />
+	  <None Remove="Resources\Raw\Scripts\AngularJS\js\bootstrap.min.js.map" />
+	  <None Remove="Resources\Raw\Scripts\jquery\jquery-1.12.5.min.js" />
+	  <None Remove="Resources\Raw\Scripts\jquery\jquery-3.5.1.min.js" />
+	  <None Remove="Resources\Raw\Scripts\jquery\jquery-ui.min.js" />
+	  <None Remove="Resources\Raw\Scripts\tagit\tag-it.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\Common\SplashPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Process\ComponentPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Process\StepPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Process\ProcessPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+	  <MauiXaml Update="Pages\Security\AccountPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Process\InputValuePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Process\OutputValuePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Security\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Process\StatementPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Process\TaskPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+    <PackageReference Include="CommunityToolkit.Maui" Version="14.1.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+	<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.70" />
+	<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.70" />
+	<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="10.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.8" />
+	<PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.12" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="DTO\Contract\" />
+	  <Folder Include="DTO\Enum\" />
+	  <Folder Include="DTO\Info\" />
+	  <Folder Include="i18n\Pages\Common\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Api\ProcessAutomation.Api.Adapter\ProcessAutomation.Api.Adapter.csproj" />
+	  <ProjectReference Include="..\..\Common\ProcessAutomation.CommonExpress\ProcessAutomation.CommonExpress.csproj" />
+    <ProjectReference Include="..\..\Framework\ProcessAutomation.FrameworkExpress\ProcessAutomation.FrameworkExpress.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="i18n\Pages\Process\ProcessPage.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>ProcessPage.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="i18n\Pages\Security\AccountPage.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>AccountPage.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Process\ComponentPage.xaml.cs">
+	    <DependentUpon>ComponentPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Process\StepPage.xaml.cs">
+	    <DependentUpon>StepPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="i18n\Pages\Process\ProcessPage.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>ProcessPage.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="i18n\Pages\Security\AccountPage.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>AccountPage.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Update="Resources\Raw\ConfigAdapter.json">
+	    <CopyToOutputDirectory></CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Form\InputFields.html">
+	    <CopyToOutputDirectory></CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Form\OutputValueOption.html">
+	    <CopyToOutputDirectory></CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\angular-translate-loader-partial.min.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\angular-translate.min.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\angular.min.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\angularjs-dropdown-multiselect.min.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\datepicker.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\generic-scripts.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\external\jquery\jquery.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_444444_256x240.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_555555_256x240.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_777620_256x240.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_777777_256x240.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_cc0000_256x240.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_ffffff_256x240.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.css">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.min.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.min.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.structure.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.structure.min.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.theme.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery-ui\jquery-ui.theme.min.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\jquery.min.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\angular\mentio.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap-grid.css">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap-grid.css.map">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap-grid.min.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap-grid.min.css.map">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap-icons.css">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap-icons.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap-icons.min.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap-icons.scss">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap-reboot.css">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap-reboot.css.map">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap-reboot.min.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap-reboot.min.css.map">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap.css">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap.css.map">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap.min.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\bootstrap.min.css.map">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\fonts\bootstrap-icons.woff">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\fonts\bootstrap-icons.woff2">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\main.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\css\spinner.css">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\js\bootstrap.bundle.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\js\bootstrap.bundle.js.map">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\js\bootstrap.bundle.min.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\js\bootstrap.bundle.min.js.map">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\js\bootstrap.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\js\bootstrap.js.map">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\js\bootstrap.min.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\AngularJS\js\bootstrap.min.js.map">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\jquery\jquery-1.12.5.min.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\jquery\jquery-3.5.1.min.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\jquery\jquery-ui.min.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Update="Resources\Raw\Scripts\tagit\tag-it.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	</ItemGroup>
+  
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <ItemGroup>
+      <ApiConfig Include="$(SolutionDir)Api/ProcessAutomation.Api.Adapter/ConfigAdapter.json;" />
+    </ItemGroup>
+    <Message Text="Copy Config" Importance="normal" />
+    <Copy SourceFiles="@(ApiConfig)" DestinationFolder="$(ProjectDir)/Resources/Raw" ContinueOnError="true" />
+  </Target>
+
+  <!--<ItemGroup>
+		<Compile Update="Pages\Common\SplashPage.xaml.cs">
+	    <DependentUpon>SplashPage.xaml</DependentUpon>
+	  </Compile>
+    
+	  <Compile Update="Pages\Security\AccountPage.xaml.cs">
+	    <DependentUpon>AccountPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Process\InputValuePage.xaml.cs">
+	    <DependentUpon>InputValuePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Process\OutputValuePage.xaml.cs">
+	    <DependentUpon>OutputValuePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Security\LoginPage.xaml.cs">
+	    <DependentUpon>LoginPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Process\StatementPage.xaml.cs">
+	    <DependentUpon>StatementPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>-->
+
+</Project>

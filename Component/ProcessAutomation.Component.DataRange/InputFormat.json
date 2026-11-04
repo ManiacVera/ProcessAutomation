@@ -1,0 +1,78 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Tipo",
+        "Field": "Type",
+        "Value": "MANUAL",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "MANUAL", "OBJECT_COLLECTION", "OBJECT_JSON_ARRAY", "OBJECT_JSON", "OBJECT_STRING", "OBJECT_INT" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "ObjectData",
+        "Field": "ObjectData",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Type != 'MANUAL'"
+      },
+      {
+        "Label": "Comenzar desde 0",
+        "Field": "StartWithZero",
+        "Value": "",
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Type != 'MANUAL'"
+      },
+      {
+        "Label": "Inicio",
+        "Field": "DataBegin",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Type == 'MANUAL'"
+      },
+      {
+        "Label": "Fin",
+        "Field": "DataEnd",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Type == 'MANUAL'"
+      },
+      {
+        "Label": "Tipo de dato",
+        "Field": "DataType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "TEXT", "NUMBER", "LIST", "JSON" ],
+        "DefaultValue": null,
+        "Visible": "$data.Type == 'MANUAL'"
+      }
+    ]
+  }
+]

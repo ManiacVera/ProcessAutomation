@@ -1,0 +1,151 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>ProcessAutomationWin.App.Windows</RootNamespace>
+    <AssemblyName>ProcessAutomation</AssemblyName>
+    <Configurations>Debug;Release</Configurations>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutputPath />
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Component\**" />
+    <EmbeddedResource Remove="Component\**" />
+    <None Remove="Component\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary.dll">
+      <Guid>f935dc20-1cf0-11d0-adb9-00c04fd58a0b</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CefSharp.WinForms.NETCore" Version="147.0.100" />
+    <PackageReference Include="Jint" Version="4.9.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Business\ProcessAutomation.Business\ProcessAutomation.Business.csproj" />
+    <ProjectReference Include="..\..\Common\ProcessAutomation.Common\ProcessAutomation.Common.csproj" />
+    <ProjectReference Include="..\..\Common\ProcessAutomation.CommonExpress\ProcessAutomation.CommonExpress.csproj" />
+    <ProjectReference Include="..\..\Framework\ProcessAutomation.Framework\ProcessAutomation.Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Process\RunEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <Target Name="CopyAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release' OR '$(Configuration)'=='DebugMAC' OR '$(Configuration)'=='ReleaseMAC'">
+    <ItemGroup>
+      <PackageApp Include="$(TargetDir)/$(TargetName).*;" />
+      <PackageProcessFiles Include="$(TargetDir)/ProcessFiles/*.json;" />
+      <PackageNuget Include="$(SolutionDir)/Build/Package/*.dll;$(TargetDir)/CefSharp.WinForms.dll;" />
+	  <PackageLocalNuget Include="$(TargetDir)/CefSharp.WinForms.dll;$(TargetDir)Microsoft.AspNetCore.*.dll;$(TargetDir)Swashbuckle*.dll;" />
+	  <PackageCommon Include="$(SolutionDir)Build/Package/ProcessAutomation.Common*.dll;$(SolutionDir)Build/Package/ProcessAutomation.Framework*.dll;$(SolutionDir)Build/Package/Microsoft.Extensions.DependencyModel.dll;" />
+      <PackageComponent Include="$(SolutionDir)/Build/Component/*.dll;" />
+      <PackageExternal Include="$(SolutionDir)/Build/External/*.exe;" />
+      <PackagePages Include="$(SolutionDir)/Build/Resources/Pages/*.html;" />
+      <ProcessViewerApp Include="$(SolutionDir)/Build/App/ProcessViewerWin/*;" />
+      <!--<BaseRuntimes Include="$(SolutionDir)/Build/runtimes/**/*.*;" />-->
+	  <BaseRuntimesWinx64Native Include="$(SolutionDir)/Build/runtimes/win-x64/native/**/*.*;" />
+	  <BaseRuntimesWinx64Lib Include="$(SolutionDir)/Build/runtimes/win-x64/lib/netcoreapp3.1/**/*.*;" />
+      <!--<BaseRuntimesWinx64 Include="$(SolutionDir)/Build/runtimes/win-x64/**/*.*;" />-->
+    </ItemGroup>
+    <Message Text="Copy PackageApp INIT" Importance="normal" />
+	<Copy SourceFiles="@(PackageLocalNuget)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageApp)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationWin" ContinueOnError="true" />
+	<Copy SourceFiles="@(PackageCommon)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationWin" ContinueOnError="true" />
+	<Copy SourceFiles="@(PackageLocalNuget)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationWin" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageProcessFiles)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationWin/ProcessFiles" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageNuget)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationWin/Package" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageComponent)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationWin/Component" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageExternal)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationWin/External" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackagePages)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationWin/Resources/Pages" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProcessViewerApp)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationWin/Viewer" ContinueOnError="true" />	
+	<Copy SourceFiles="@(BaseRuntimesWinx64Lib)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationWin/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+	<Copy SourceFiles="@(BaseRuntimesWinx64Native)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationWin/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+	<!--<Copy SourceFiles="@(BaseRuntimes)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationWin/runtimes/%(RecursiveDir)" ContinueOnError="true" />-->
+	<!--<Copy SourceFiles="@(BaseRuntimesWinx64)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationWin/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />-->
+
+	<RemoveDir Directories="$(TargetDir)/Component"></RemoveDir>
+	<RemoveDir Directories="$(TargetDir)/Package"></RemoveDir>
+	<RemoveDir Directories="$(TargetDir)/External"></RemoveDir>
+	<RemoveDir Directories="$(TargetDir)/Resources/Pages"></RemoveDir>
+	<RemoveDir Directories="$(TargetDir)/Viewer"></RemoveDir>
+	<RemoveDir Directories="$(TargetDir)/BaseRuntimes"></RemoveDir>
+	  
+    <Copy SourceFiles="@(PackageComponent)" DestinationFolder="$(TargetDir)/Component" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageNuget)" DestinationFolder="$(TargetDir)/Package" ContinueOnError="true" />
+	<Copy SourceFiles="@(BaseRuntimesWinx64Lib)" DestinationFolder="$(TargetDir)/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+	<Copy SourceFiles="@(BaseRuntimesWinx64Native)" DestinationFolder="$(TargetDir)/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+	<!--<Copy SourceFiles="@(BaseRuntimesWinx64)" DestinationFolder="$(TargetDir)/Package/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />-->
+    <Copy SourceFiles="@(PackageExternal)" DestinationFolder="$(TargetDir)/External" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackagePages)" DestinationFolder="$(TargetDir)/Resources/Pages" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProcessViewerApp)" DestinationFolder="$(TargetDir)/Viewer" ContinueOnError="true" />	
+	<Message Text="Copy PackageApp END" Importance="normal" />
+  </Target>
+  
+  <Target Name="CopyCommonsAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release' OR '$(Configuration)'=='DebugMAC' OR '$(Configuration)'=='ReleaseMAC'">
+    <ItemGroup>
+      <ProcessCommonsScriptsAngular Include="$(SolutionDir)Build/Resources/Scripts/AngularJS/angular/*.*;" />
+      <ProcessCommonsScriptsCss Include="$(SolutionDir)Build/Resources/Scripts/AngularJS/css/*.*;" />
+      <ProcessCommonsScriptsJs Include="$(SolutionDir)Build/Resources/Scripts/AngularJS/js/*.*;" />
+    </ItemGroup>
+
+    <Message Text="Copy ProcessCommonsScripts INIT" Importance="high" />
+    <Copy SourceFiles="@(ProcessCommonsScriptsAngular)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationWin/Form/Scripts/AngularJS/angular" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProcessCommonsScriptsCss)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationWin/Form/Scripts/AngularJS/css" ContinueOnError="true" />
+    <Copy SourceFiles="@(ProcessCommonsScriptsJs)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationWin/Form/Scripts/AngularJS/js" ContinueOnError="true" />
+    <Message Text="Copy ProcessCommonsScripts END" Importance="high" />
+  </Target>
+
+	<Target Name="CopyRuntimeFiles" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release' OR '$(Configuration)'=='DebugMAC' OR '$(Configuration)'=='ReleaseMAC'">
+		<ItemGroup>
+			<!--<CopyRuntimeFolder Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\**\*.*;" />-->
+			<CopyRuntimeWin Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\win\**\*.*;" />
+			<CopyRuntimeWin64 Condition="'$(MSBuildThisFileDirectory)' != '' And HasTrailingSlash('$(MSBuildThisFileDirectory)')" Include="$(TargetDir)runtimes\win-x64\**\*.*;" />
+		</ItemGroup>
+
+		<Message Text="Copy CopyRuntimeFiles @(CopyRuntimeFiles)" Importance="high" />
+		<!--<Copy SourceFiles="@(CopyRuntimeFolder)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationWin/runtimes/%(RecursiveDir)" ContinueOnError="true" />-->
+		<Copy SourceFiles="@(CopyRuntimeWin)" DestinationFolder="$(SolutionDir)/Build/runtimes/win/%(RecursiveDir)" ContinueOnError="true" />
+		<Copy SourceFiles="@(CopyRuntimeWin64)" DestinationFolder="$(SolutionDir)/Build/runtimes/win-x64/%(RecursiveDir)" ContinueOnError="true" />
+	</Target>
+
+  <Target Name="RemoveBuild" BeforeTargets="PreBuildEvent">    
+    <RemoveDir Directories="$(SolutionDir)/Build/App/ProcessAutomationWin" ContinueOnError="true"></RemoveDir>
+  </Target>
+  
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <ItemGroup>
+      <PackageExeRun Include="$(SolutionDir)/Build/App/ProcessExeWin/ProcessExeWin.exe;" />
+    </ItemGroup>
+    <Message Text="Copy PackageExeRun" Importance="normal" />
+    <RemoveDir Directories="$(TargetDir)/ExeRun"></RemoveDir>
+    <Copy SourceFiles="@(PackageExeRun)" DestinationFolder="$(TargetDir)/ExeRun" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageExeRun)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationWin/ExeRun" ContinueOnError="true" />
+  </Target>
+</Project>

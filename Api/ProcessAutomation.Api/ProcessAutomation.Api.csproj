@@ -1,0 +1,140 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+      <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>ProcessAutomationApi</AssemblyName>
+    <RootNamespace>ProcessAutomationApi</RootNamespace>
+    <Configurations>Debug;Release</Configurations>
+    <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Business\ProcessAutomation.Business\ProcessAutomation.Business.csproj" />
+    <ProjectReference Include="..\..\Common\ProcessAutomation.Common\ProcessAutomation.Common.csproj" />
+    <ProjectReference Include="..\..\Framework\ProcessAutomation.Framework\ProcessAutomation.Framework.csproj" />
+  </ItemGroup>
+
+  <Target Name="RemoveBuild" BeforeTargets="PreBuildEvent">
+    <RemoveDir Directories="$(SolutionDir)/Build/App/ProcessAutomationApi"></RemoveDir>
+  </Target>
+
+  <Target Name="CopyApps" BeforeTargets="PreBuildEvent">
+    <ItemGroup>
+      <PackageTemplateLauncherApp Include="$(SolutionDir)/Build/App/TemplateLauncherRust/template_launcher.*;" />
+      <PackageRunProcessApp Include="$(SolutionDir)/Build/App/RunProcessApp/RunProcessApp.*;" />
+      <PackageInterface Include="$(SolutionDir)/Build/App/RunProcessApp/ProcessAutomation.Interface.dll;" />
+    </ItemGroup>
+    <Message Text="Copy PackageExeRun" Importance="normal" />
+    <RemoveDir Directories="$(TargetDir)/Templates"></RemoveDir>
+    <Copy SourceFiles="@(PackageTemplateLauncherApp)" DestinationFolder="$(TargetDir)/Templates" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageRunProcessApp)" DestinationFolder="$(TargetDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageInterface)" DestinationFolder="$(TargetDir)" ContinueOnError="true" />
+  </Target>
+  
+	<Target Name="CopyNetCore" AfterTargets="AfterBuild;Publish" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+		<ItemGroup>
+			<CopyNetCoreFiles Include="$(TargetDir)clrjit.dll;$(TargetDir)coreclr.dll;$(TargetDir)hostfxr.dll;$(TargetDir)hostpolicy.dll;$(TargetDir)Microsoft.Extensions.Caching.Memory.dll;$(TargetDir)Microsoft.CSharp.dll;$(TargetDir)Microsoft.AspNetCore.Authentication.Abstractions.dll;$(TargetDir)Microsoft.AspNetCore.Authentication.Core.dll;$(TargetDir)Microsoft.AspNetCore.Authentication.dll;$(TargetDir)Microsoft.AspNetCore.Authorization.dll;$(TargetDir)Microsoft.AspNetCore.Authorization.Policy.dll;$(TargetDir)Microsoft.AspNetCore.Connections.Abstractions.dll;$(TargetDir)Microsoft.AspNetCore.Cors.dll;$(TargetDir)Microsoft.AspNetCore.dll;$(TargetDir)Microsoft.AspNetCore.HostFiltering.dll;$(TargetDir)Microsoft.AspNetCore.Hosting.Abstractions.dll;$(TargetDir)Microsoft.AspNetCore.Hosting.dll;$(TargetDir)Microsoft.AspNetCore.Hosting.Server.Abstractions.dll;$(TargetDir)Microsoft.AspNetCore.Http.Abstractions.dll;$(TargetDir)Microsoft.AspNetCore.Http.dll;$(TargetDir)Microsoft.AspNetCore.Http.Features.dll;$(TargetDir)Microsoft.AspNetCore.HttpOverrides.dll;$(TargetDir)Microsoft.AspNetCore.Metadata.dll;$(TargetDir)Microsoft.AspNetCore.Mvc.Abstractions.dll;$(TargetDir)Microsoft.AspNetCore.Mvc.ApiExplorer.dll;$(TargetDir)Microsoft.AspNetCore.Mvc.Core.dll;$(TargetDir)Microsoft.AspNetCore.Mvc.Cors.dll;$(TargetDir)Microsoft.AspNetCore.Mvc.DataAnnotations.dll;$(TargetDir)Microsoft.AspNetCore.Mvc.dll;$(TargetDir)Microsoft.AspNetCore.Routing.Abstractions.dll;$(TargetDir)Microsoft.AspNetCore.Routing.dll;$(TargetDir)Microsoft.AspNetCore.Server.IIS.dll;$(TargetDir)Microsoft.AspNetCore.Server.IISIntegration.dll;$(TargetDir)Microsoft.AspNetCore.Server.Kestrel.Core.dll;$(TargetDir)Microsoft.AspNetCore.Server.Kestrel.dll;$(TargetDir)Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.dll;$(TargetDir)Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.dll;$(TargetDir)Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.dll;$(TargetDir)Microsoft.EntityFrameworkCore.dll;$(TargetDir)Microsoft.Extensions.Configuration.Abstractions.dll;$(TargetDir)Microsoft.Extensions.Configuration.Binder.dll;$(TargetDir)Microsoft.Extensions.Configuration.dll;$(TargetDir)Microsoft.Extensions.Configuration.EnvironmentVariables.dll;$(TargetDir)Microsoft.Extensions.Configuration.FileExtensions.dll;$(TargetDir)Microsoft.Extensions.Configuration.Json.dll;$(TargetDir)Microsoft.Extensions.DependencyInjection.Abstractions.dll;$(TargetDir)Microsoft.Extensions.DependencyInjection.dll;$(TargetDir)Microsoft.Extensions.DependencyModel.dll;$(TargetDir)Microsoft.Extensions.Diagnostics.Abstractions.dll;$(TargetDir)Microsoft.Extensions.Diagnostics.dll;$(TargetDir)Microsoft.Extensions.Features.dll;$(TargetDir)Microsoft.Extensions.FileProviders.Abstractions.dll;$(TargetDir)Microsoft.Extensions.FileProviders.Physical.dll;$(TargetDir)Microsoft.Extensions.Hosting.Abstractions.dll;$(TargetDir)Microsoft.Extensions.Hosting.dll;$(TargetDir)Microsoft.Extensions.Localization.Abstractions.dll;$(TargetDir)Microsoft.Extensions.Logging.Abstractions.dll;$(TargetDir)Microsoft.Extensions.Logging.Configuration.dll;$(TargetDir)Microsoft.Extensions.Logging.Console.dll;$(TargetDir)Microsoft.Extensions.Logging.Debug.dll;$(TargetDir)Microsoft.Extensions.Logging.dll;$(TargetDir)Microsoft.Extensions.Logging.EventLog.dll;$(TargetDir)Microsoft.Extensions.Logging.EventSource.dll;$(TargetDir)Microsoft.Extensions.ObjectPool.dll;$(TargetDir)Microsoft.Extensions.Options.ConfigurationExtensions.dll;$(TargetDir)Microsoft.Extensions.Options.dll;$(TargetDir)Microsoft.Extensions.Primitives.dll;$(TargetDir)Microsoft.Net.Http.Headers.dll;$(TargetDir)Microsoft.OpenApi.dll;$(TargetDir)Microsoft.Win32.Primitives.dll;$(TargetDir)Microsoft.Win32.Registry.dll;$(TargetDir)msquic.dll;$(TargetDir)Swashbuckle.AspNetCore.Swagger.dll;$(TargetDir)Swashbuckle.AspNetCore.SwaggerGen.dll;$(TargetDir)Swashbuckle.AspNetCore.SwaggerUI.dll;$(TargetDir)System.Collections.Concurrent.dll;$(TargetDir)System.Collections.dll;$(TargetDir)System.Collections.NonGeneric.dll;$(TargetDir)System.Collections.Specialized.dll;$(TargetDir)System.ComponentModel.Annotations.dll;$(TargetDir)System.ComponentModel.dll;$(TargetDir)System.ComponentModel.Primitives.dll;$(TargetDir)System.ComponentModel.TypeConverter.dll;$(TargetDir)System.Console.dll;$(TargetDir)System.Diagnostics.DiagnosticSource.dll;$(TargetDir)System.Diagnostics.EventLog.dll;$(TargetDir)System.Diagnostics.Tracing.dll;$(TargetDir)System.IO.FileSystem.Watcher.dll;$(TargetDir)System.IO.Pipelines.dll;$(TargetDir)System.IO.Pipes.dll;$(TargetDir)System.Linq.dll;$(TargetDir)System.Linq.Expressions.dll;$(TargetDir)System.Memory.dll;$(TargetDir)System.Net.Http.dll;$(TargetDir)System.Net.Primitives.dll;$(TargetDir)System.Net.Quic.dll;$(TargetDir)System.Net.Sockets.dll;$(TargetDir)System.Numerics.Vectors.dll;$(TargetDir)System.ObjectModel.dll;$(TargetDir)System.Private.CoreLib.dll;$(TargetDir)System.Private.DataContractSerialization.dll;$(TargetDir)System.Private.Uri.dll;$(TargetDir)System.Private.Xml.dll;$(TargetDir)System.Reflection.Emit.ILGeneration.dll;$(TargetDir)System.Reflection.Emit.Lightweight.dll;$(TargetDir)System.Reflection.Primitives.dll;$(TargetDir)System.Runtime.dll;$(TargetDir)System.Runtime.InteropServices.dll;$(TargetDir)System.Runtime.Intrinsics.dll;$(TargetDir)System.Runtime.Loader.dll;$(TargetDir)System.Runtime.Numerics.dll;$(TargetDir)System.Runtime.Serialization.Json.dll;$(TargetDir)System.Runtime.Serialization.Primitives.dll;$(TargetDir)System.Runtime.Serialization.Xml.dll;$(TargetDir)System.Security.Claims.dll;$(TargetDir)System.Security.Cryptography.dll;$(TargetDir)System.Text.Encoding.Extensions.dll;$(TargetDir)System.Text.Encodings.Web.dll;$(TargetDir)System.Text.Json.dll;$(TargetDir)System.Text.RegularExpressions.dll;$(TargetDir)System.Threading.dll;$(TargetDir)System.Threading.Overlapped.dll;$(TargetDir)System.Threading.Thread.dll;$(TargetDir)System.Threading.ThreadPool.dll;&#xD;&#xA;				          $(TargetDir)System.Xml.ReaderWriter.dll;$(TargetDir)*.dylib;$(TargetDir)*.so" Exclude="$(TargetDir)ProcessAutomation*.*" />
+		</ItemGroup>
+
+		<Message Text="Copy CopyNetCore" Importance="high" />
+		<Copy SourceFiles="@(CopyNetCoreFiles)" DestinationFolder="$(SolutionDir)Build\App\ProcessAutomationApi" SkipUnchangedFiles="true" ContinueOnError="true" />
+	</Target>
+
+  <Target Name="CopyRuntimeFiles" AfterTargets="AfterBuild;Publish" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <ItemGroup>
+      <CopyRuntimeCommon Include="$(TargetDir)runtimes\$(ActiveCommonFolder)\**\*.*" />
+      <CopyRuntimeSpecific Include="$(TargetDir)runtimes\$(ActiveRuntime)\**\*.*" />
+    </ItemGroup>
+
+    <Message Text="Copy CopyRuntimeFiles" Importance="high" />
+    <Copy SourceFiles="@(CopyRuntimeCommon)" DestinationFolder="$(SolutionDir)/Build/runtimes/$(ActiveCommonFolder)/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(CopyRuntimeSpecific)" DestinationFolder="$(SolutionDir)/Build/runtimes/$(ActiveRuntime)/%(RecursiveDir)" ContinueOnError="true" />
+  </Target>
+
+  <Target Name="CopyAssembly" AfterTargets="AfterBuild;Publish" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <ItemGroup>
+      <PackageApp Include="$(TargetDir)$(TargetName).*;" Exclude="$(TargetDir)$(TargetName).json;$(TargetDir)$(TargetName).xml;$(TargetDir)$(TargetName).pdb" />
+      <PackageAppResources Include="$(TargetDir)Resources/*.*;" />
+      <PackageForm Include="$(TargetDir)Form/**/*.*;" />
+      <PackageProcessFiles Include="$(TargetDir)ProcessFiles/*.json;" />
+      <PackageNuget Include="$(SolutionDir)/Build/Package/*.dll;" />
+      <PackageLocalNuget Include="$(TargetDir)Microsoft.AspNetCore.*.dll;$(TargetDir)Swashbuckle*.dll;$(TargetDir)Microsoft.OpenApi.dll;" />
+      <PackageCommon Include="$(SolutionDir)Build/Package/ProcessAutomation.Business*.dll;$(SolutionDir)Build/Package/ProcessAutomation.Common*.dll;$(SolutionDir)Build/Package/ProcessAutomation.Framework*.dll;$(SolutionDir)Build/Package/Microsoft.Extensions.DependencyModel.dll;$(SolutionDir)Build/Package/Microsoft.EntityFrameworkCore.dll;$(SolutionDir)Build/Package/Microsoft.Bcl.AsyncInterfaces.dll;$(SolutionDir)Build/Package/Microsoft.CSharp.dll" />
+      <PackageComponent Include="$(SolutionDir)/Build/Component/*.dll;" />
+      <PackageExternal Include="$(SolutionDir)/Build/External/*.exe;" />
+      <PackagePages Include="$(SolutionDir)/Build/Resources/Pages/*.html;" />
+      <PackageConfigServerConnection Include="$(SolutionDir)/Build/Config/ServerConnection.json;" />
+      <PackageUserSettings Include="$(SolutionDir)/Build/Config/UserSettings.json;" />
+      <PackageTemplateLauncherApp Include="$(SolutionDir)/Build/App/TemplateLauncherRust/template_launcher.*;" />
+      <PackageRunProcessApp Include="$(SolutionDir)/Build/App/RunProcessApp/RunProcessApp.*;" />
+      <PackageInterface Include="$(SolutionDir)/Build/App/RunProcessApp/ProcessAutomation.Interface.dll;" />
+
+      <BaseRuntimesCommon Include="$(SolutionDir)/Build/runtimes/$(ActiveCommonFolder)/**/*.*;" />
+      <BaseRuntimesNative Include="$(SolutionDir)/Build/runtimes/$(ActiveRuntime)/native/**/*.*;" />
+      <BaseRuntimesLib Include="$(SolutionDir)/Build/runtimes/$(ActiveRuntime)/lib/netcoreapp3.1/**/*.*;" />
+    </ItemGroup>
+
+    <Message Text="Copy PackageApp" Importance="normal" />
+    <Copy SourceFiles="@(PackageLocalNuget)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageApp)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageAppResources)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi/Resources" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageForm)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi/Form/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageCommon)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationApi" ContinueOnError="true" />
+    
+    <Copy SourceFiles="@(PackageTemplateLauncherApp)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationApi/Templates" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageRunProcessApp)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationApi" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageInterface)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationApi" ContinueOnError="true" />
+
+    <Copy SourceFiles="@(PackageLocalNuget)" DestinationFolder="$(SolutionDir)Build/App/ProcessAutomationApi" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageProcessFiles)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi/ProcessFiles" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageNuget)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi/Package" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageComponent)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi/Component" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageExternal)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi/External" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackagePages)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi/Resources/Pages" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageConfigServerConnection)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi/Config" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageUserSettings)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi/Config" ContinueOnError="true" />
+
+    <Copy SourceFiles="@(BaseRuntimesCommon)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi/Package/runtimes/$(ActiveCommonFolder)/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesNative)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi/Package/runtimes/$(ActiveRuntime)/native/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesLib)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomationApi/Package/runtimes/$(ActiveRuntime)/lib/netcoreapp3.1/%(RecursiveDir)" ContinueOnError="true" />
+
+    <RemoveDir Directories="$(TargetDir)/Component"></RemoveDir>
+    <RemoveDir Directories="$(TargetDir)/Package"></RemoveDir>
+    <RemoveDir Directories="$(TargetDir)/External"></RemoveDir>
+    <RemoveDir Directories="$(TargetDir)/Resources/Pages"></RemoveDir>
+    <RemoveDir Directories="$(TargetDir)/Viewer"></RemoveDir>
+    <RemoveDir Directories="$(TargetDir)/BaseRuntimes"></RemoveDir>
+
+    <Copy SourceFiles="@(PackageComponent)" DestinationFolder="$(TargetDir)/Component" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageNuget)" DestinationFolder="$(TargetDir)/Package" ContinueOnError="true" />
+    
+    <Copy SourceFiles="@(BaseRuntimesCommon)" DestinationFolder="$(TargetDir)/Package/runtimes/$(ActiveCommonFolder)/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesNative)" DestinationFolder="$(TargetDir)/Package/runtimes/$(ActiveRuntime)/native/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(BaseRuntimesLib)" DestinationFolder="$(TargetDir)/Package/runtimes/$(ActiveRuntime)/lib/netcoreapp3.1/%(RecursiveDir)" ContinueOnError="true" />
+
+    <Copy SourceFiles="@(PackageExternal)" DestinationFolder="$(TargetDir)/External" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackagePages)" DestinationFolder="$(TargetDir)/Resources/Pages" ContinueOnError="true" />
+  </Target>
+
+  <Target Name="CopyAssemblyRemaining" AfterTargets="AfterBuild;Publish" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <ItemGroup>
+        <AllTargetDlls Include="$(TargetDir)*.dll" />
+    </ItemGroup>
+    <ItemGroup>
+        <RemainingDlls Include="@(AllTargetDlls)" Condition="!Exists('$(SolutionDir)Build\App\ProcessAutomationApi\%(Filename)%(Extension)')" />
+    </ItemGroup>
+    <Message Text="Remaining DLLs: @(RemainingDlls)" Importance="High" />
+    <Copy SourceFiles="@(RemainingDlls)" DestinationFolder="$(SolutionDir)Build\Package\" />
+    <Copy SourceFiles="@(RemainingDlls)" DestinationFolder="$(SolutionDir)Build\App\ProcessAutomationApi\Package\" />
+  </Target>
+
+</Project>

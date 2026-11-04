@@ -1,0 +1,171 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Accion",
+        "Field": "Action",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "READ", "WRITE" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo de archivo",
+        "Field": "InputFileType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "JSON", "TEXT" ],
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'WRITE'"
+      },
+      {
+        "Label": "Archivo",
+        "Field": "File",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Hoja",
+        "Field": "Sheet",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Separador",
+        "Field": "Separator",
+        "Value": ",",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'READ' || ($data.Action == 'WRITE' && $data.InputFileType == 'TEXT')"
+      },
+      {
+        "Label": "Primer registro con columnas",
+        "Field": "FirstRowColumns",
+        "Value": false,
+        "ValueType": "TEXT",
+        "ControlType": "CHECKBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.InputFileType == 'READ' || ($data.InputFileType == 'WRITE' && $data.InputFileType == 'TEXT')"
+      },
+      {
+        "Label": "Data",
+        "Field": "Data",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'WRITE'"
+      },
+      {
+        "Label": "Registros unicos",
+        "Field": "Distinct",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'READ'"
+      },
+      {
+        "Label": "Query filtro",
+        "Field": "QueryFilter",
+        "Value": null,
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'READ'"
+      },
+      {
+        "Label": "Ordenar por",
+        "Field": "OrderBy",
+        "Value": null,
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'READ'"
+      },
+      {
+        "Label": "Columnas",
+        "Field": "Columns",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "Visible": "$data.Action == 'READ'",
+        "DefaultValue": [
+          {
+            "Label": "Columna",
+            "Field": "Column",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Tipo",
+            "Field": "Type",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": [ "INT", "STRING", "DATETIME", "MONEY", "DECIMAL" ],
+            "DefaultValue": null
+          },
+          {
+            "Label": "Formato",
+            "Field": "Format",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          }
+        ]
+      }
+    ]
+  }
+  
+]

@@ -1,0 +1,10 @@
+﻿			$scope.$var.@VARIABLE = null;
+			$scope.$var.@VARIABLE_ref = {
+								"type" : "@TYPE",
+								"value" : '@VALUE',
+								"watchExpression" : @WATCH_EXPRESSION,
+								"processingData" : false,
+								"cache": null,
+								"milliSecondsCache": 0,
+								"startTimeCache" : null
+							};

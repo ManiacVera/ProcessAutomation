@@ -1,0 +1,40 @@
+{
+  "COMPONENT": {
+    "Title": "Compress",
+    "Description": "Compress or extract files and/or folders in zip format",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Action": {
+      "Label": "Accion",
+      "Description": "Parameter to choose between the option to extract or compress",
+      "ErrorMessage": "",
+      "ValueExample": "COMPRESS"
+    },
+    "File": {
+      "Label": "OutputFile",
+      "Description": "Parameter that defines the output file along with its path",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FormatFile": {
+      "Label": "FormatFile",
+      "Description": "Parameter to define the format of the compressed file",
+      "ErrorMessage": "",
+      "ValueExample": "ZIP"
+    },
+    "FileList": {
+      "Label": "FileList",
+      "Description": "List of files separated by the symbol ;",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OptionFile": {
+      "Label": "OptionFile",
+      "Description": "Parameter to choose between passing or overwriting file OVERWRITE, KEEP",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

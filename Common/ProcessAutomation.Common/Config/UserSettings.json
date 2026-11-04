@@ -1,0 +1,11 @@
+{
+  "Account": {
+    "Name": null,
+    "UserName": null,
+    "Email": null
+  },
+  "Preferences": {
+    "Language": "es-MX",
+    "Theme": null
+  }
+}

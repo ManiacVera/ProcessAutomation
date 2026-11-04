@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+	<Configurations>Debug;Release</Configurations>
+	<Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ConfigAdapter.json" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <Content Include="ConfigAdapter.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Business\ProcessAutomation.Business.DTO\ProcessAutomation.Business.DTO.csproj" />
+    <ProjectReference Include="..\..\Common\ProcessAutomation.Common.DTO\ProcessAutomation.Common.DTO.csproj" />
+    <ProjectReference Include="..\..\Common\ProcessAutomation.CommonExpress\ProcessAutomation.CommonExpress.csproj" />
+	  <ProjectReference Include="..\..\Framework\ProcessAutomation.Framework.DTO\ProcessAutomation.Framework.DTO.csproj" />
+	  <ProjectReference Include="..\..\Framework\ProcessAutomation.FrameworkExpress\ProcessAutomation.FrameworkExpress.csproj" />
+  </ItemGroup>
+
+	<Target Name="CopyAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release' OR '$(Configuration)'=='DebugMAC' OR '$(Configuration)'=='ReleaseMAC'">
+		<ItemGroup>
+			<PackageInterface Include="$(TargetDir)/$(TargetFileName);" />
+		</ItemGroup>
+		<Message Text="Copy PackageInterface" Importance="normal" />
+		<Copy SourceFiles="@(PackageInterface)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+	</Target>
+
+</Project>

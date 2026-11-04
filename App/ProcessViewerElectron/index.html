@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>Process Viewer</title>
+    </head>
+
+    <body>
+        <div id="custom-menubar">
+            <div class="menu-left">
+                <!-- <span class="app-title">Process Viewer</span> -->
+
+                <!--
+                <div class="menu-dropdown">
+                    <button class="menu-btn">Application</button>
+
+                    <div class="menu-content">
+                        <a href="#" onclick="window.electronAPI.windowAction('close')" >Exit</a>
+                    </div>
+                </div>
+                -->
+            </div>
+
+            <div class="window-controls">
+                <button class="win-control-btn" onclick="window.electronAPI.windowAction('minimize')">−</button>
+                <button class="win-control-btn" onclick="window.electronAPI.windowAction(event.shiftKey ? 'fullscreen' : 'maximize')" >▢</button>
+                <button class="win-control-btn close-btn" onclick="window.electronAPI.windowAction('close')" >✕</button>
+            </div>
+        </div>
+        <div id="app"></div>
+        <script type="module" src="/Scripts/app.js"></script>
+    </body>
+</html>

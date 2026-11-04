@@ -1,0 +1,123 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Tipo",
+        "Field": "Type",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "BAT", "PYTHON" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Directorio de trabajo",
+        "Field": "WorkingDirectory",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Aplicacion",
+        "Field": "Application",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Archivo",
+        "Field": "File",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Parametros",
+        "Field": "ParameterList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "DefaultValue": [
+          {
+            "Label": "Parametro",
+            "Field": "Parameter",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Tipo",
+            "Field": "Type",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": [ "STRING", "INT", "DATETIME", "DECIMAL", "OBJECT", "LIST" ],
+            "DefaultValue": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "FORMAT": "COMPONENT",
+    "FIELD_LIST": [
+      {
+        "Label": "Tipo",
+        "Field": "Type",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "BAT", "PYTHON" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Directorio de trabajo",
+        "Field": "WorkingDirectory",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Aplicacion",
+        "Field": "Application",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  }
+]

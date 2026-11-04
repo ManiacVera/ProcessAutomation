@@ -1,0 +1,28 @@
+{
+  "COMPONENT": {
+    "Title": "Clipboard",
+    "Description": "Hacer uso del contenido actual del portapapeles puede copiar, pegar y obtener información",
+    "Return": "Retorna el portapales actual",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Action": {
+      "Label": "Accion",
+      "Description": "Parametro indica la acción a ejecutar las cuale sson COPY,PASTE,GET_DATA",
+      "ErrorMessage": "",
+      "ValueExample": "COPY"
+    },
+    "Type": {
+      "Label": "Tipo",
+      "Description": "Parametro indica el tipo de procedimiento puede ser VALUE, TEXT, FILE, SCREENSHOT, SHORT_SCREENSHOT",
+      "ErrorMessage": "",
+      "ValueExample": "TEXT"
+    },
+    "Value": {
+      "Label": "Valor",
+      "Description": "Parametro define la ruta, texto para copiar archivo o pega texto en una ventana",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

@@ -1,0 +1,61 @@
+.tribute-container {  
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  max-height: 300px;
+  max-width: 520px;
+
+  overflow: auto;
+  z-index: 999999;
+
+  background: #0f172a; /* dark limpio */
+  border: 1px solid #243244;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,.35);
+  border-radius: 4px;
+}
+
+/* lista */
+.tribute-container ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* items */
+.tribute-container li {
+  padding: 7px 10px;
+  cursor: pointer;
+
+  color: #e5e7eb;
+  white-space: nowrap;
+}
+
+/* hover */
+.tribute-container li:hover {
+  background: rgba(255, 122, 0, 0.10);
+}
+
+/* seleccionado */
+.tribute-container li.highlight {
+  background: #ff7a00;
+  color: #fff;
+}
+
+/* texto resaltado */
+.tribute-container li span,
+.tribute-container .menu-highlighted {
+  font-weight: 600;
+  color: #ffb86b;
+}
+
+.tribute-container li.highlight span {
+  color: #fff;
+}
+
+/* sin resultados */
+.tribute-container li.no-match {
+  cursor: default;
+  opacity: .6;
+}

@@ -1,0 +1,130 @@
+{
+    "version": "2.0.0",
+
+    "tasks": [
+        {
+            "label": "PublishApi",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "msbuild",
+                "${workspaceFolder}/Build.proj",
+                "/t:PublishApi"
+            ],
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        },
+        {
+            "label": "MSBuild",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "msbuild",
+                "${workspaceFolder}/Build.proj",
+                "/t:${input:msbuildTarget}",
+                "/p:UserRuntimeIdentifier=${input:selectRuntimeId}"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        }
+    ],
+
+    "inputs": [
+        {
+            "id": "selectRuntimeId",
+            "type": "pickString",
+            "description": "Runtime Identifier:",
+            "options": [
+                {
+                    "label": "Any CPU",
+                    "value": ""
+                },
+                {
+                    "label": "Windows 64-bit (win-x64)",
+                    "value": "win-x64"
+                },
+                {
+                    "label": "Windows ARM64 (win-arm64)",
+                    "value": "win-arm64"
+                },
+                {
+                    "label": "Linux 64-bit (linux-x64)",
+                    "value": "linux-x64"
+                },
+                {
+                    "label": "Linux ARM64 (linux-arm64)",
+                    "value": "linux-arm64"
+                },
+                {
+                    "label": "macOS Apple Silicon (osx-arm64)",
+                    "value": "osx-arm64"
+                },
+                {
+                    "label": "macOS Intel (osx-x64)",
+                    "value": "osx-x64"
+                }
+            ]
+        },
+        {
+            "id": "msbuildTarget",
+            "type": "pickString",
+            "description": "Select MSBuild",
+            "options": [
+                "BuildFrameworkNative",
+                "RebuildFrameworkNative",
+                "ReleaseFrameworkNative",
+                "BuildFramework",
+                "RebuildFramework",
+                "ReleaseFramework",
+                "BuildCommon",
+                "RebuildCommon",
+                "ReleaseCommon",
+                "BuildComponents",
+                "RebuildComponents",
+                "ReleaseComponents",
+                "BuildWeb",
+                "RebuildWeb",
+                "ReleaseWeb",
+                "PublishWeb",
+                "BuildApi",
+                "RebuildApi",
+                "ReleaseApi",
+                "PublishApi",
+                "BuildMAUIAndroid",
+                "RebuildMAUIAndroid",
+                "ReleaseMAUIAndroid",
+                "PublishMAUIAndroid",
+                "BuildMAUIiOS",
+                "RebuildMAUIiOS",
+                "ReleaseMAUIiOS",
+                "PublishMAUIiOS",
+                "BuildSolution",
+                "RebuildSolution",
+                "ReleaseSolution",
+                "BuildTest",
+                "RebuildTest",
+                "BuildRunProcessApp",
+                "RebuildRunProcessApp",
+                "ReleaseRunProcessApp",
+                "PublishRunProcessApp",
+                "BuildTemplateLauncher",
+                "ReleaseTemplateLauncher",
+                "BuildDevInstaller",
+                "ReleaseDevInstaller",
+                "BuildSystemToken",
+                "ReleaseSystemToken",
+                "PublishProcessAutomationApp",
+                "PublishProcessViewerApp",
+                "RestoreApplications"
+            ]
+        }
+    ]
+}

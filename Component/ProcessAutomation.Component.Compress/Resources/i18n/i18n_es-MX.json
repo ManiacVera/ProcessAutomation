@@ -1,0 +1,40 @@
+{
+  "COMPONENT": {
+    "Title": "Compress",
+    "Description": "Comprime o extraer archivos y/o carpetas en formato zip",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Action": {
+      "Label": "Accion",
+      "Description": "Parametro para elegir entre la opción de extrar o comprimir",
+      "ErrorMessage": "",
+      "ValueExample": "COMPRESS"
+    },
+    "File": {
+      "Label": "OutputFile",
+      "Description": "Parametro que define el archivo de salida junto con su ruta",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FormatFile": {
+      "Label": "FormatFile",
+      "Description": "Parametro para definir el formato del archivo comprimido",
+      "ErrorMessage": "",
+      "ValueExample": "ZIP"
+    },
+    "FileList": {
+      "Label": "FileList",
+      "Description": "Lista de archivos separados por el simbolo ;",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OptionFile": {
+      "Label": "OptionFile",
+      "Description": "Parametro para elegir entre dejar pasar o sobre escribir archivo OVERWRITE, KEEP",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

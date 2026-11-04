@@ -1,0 +1,62 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Accion",
+        "Field": "Action",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "COMPRESS", "EXTRACT" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Archivo de salida",
+        "Field": "OutputFile",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Opcion",
+        "Field": "OptionFile",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "OVERWRITE", "KEEP"],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Formato de archivo",
+        "Field": "FormatFile",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "ZIP" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Archivos a comprimir",
+        "Field": "FileList",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  }
+]

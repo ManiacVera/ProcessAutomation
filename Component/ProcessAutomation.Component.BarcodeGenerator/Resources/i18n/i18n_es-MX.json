@@ -1,0 +1,52 @@
+{
+  "COMPONENT": {
+    "Title": "Bardcode Generator",
+    "Description": "Lee o escribe de código de barras de diferentes tipos, soporta: AZTEC,CODABAR,CODE_39,CODE_93,CODE_128,DATA_MATRIX,EAN_8,EAN_13,ITF,MAXICODE,PDF_417,QR_CODE,RSS_14,RSS_EXPANDED,UPC_A,UPC_E,All_1D,UPC_EAN_EXTENSION,MSI,PLESSEY,IMB,PHARMA_CODE",
+    "Return": "Retorna el Bitmap del código leído y a su vez puede ser guardado en una carpeta",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Action": {
+      "Label": "Accion",
+      "Description": "Parámetro para seleccionar entre LECTURA o ESCRITURA",
+      "ErrorMessage": "",
+      "ValueExample": "READ"
+    },
+    "BarcodeType": {
+      "Label": "Tipo de código de barras",
+      "Description": "Parámetro para seleccionar entre diferentes tipos de códigos de barras",
+      "ErrorMessage": "",
+      "ValueExample": "QR_CODE"
+    },
+    "Value": {
+      "Label": "Valor",
+      "Description": "Parametro para escribir ruta de la imagen a leer o texto a generar nuevo código de barras",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Width": {
+      "Label": "Ancho",
+      "Description": "Parametro para indicar el ancho de la imagen a leer o escribir",
+      "ErrorMessage": "",
+      "ValueExample": "10.00"
+    },
+    "Height": {
+      "Label": "Alto",
+      "Description": "Parametro para indicar la altura de la imagen a leer o escribir",
+      "ErrorMessage": "",
+      "ValueExample": "20.00"
+    },
+    "OutputPath": {
+      "Label": "Archivo de salida",
+      "Description": "Parametro par indicar la ruta de salida del bitmap a escribir",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OnlyBarcode": {
+      "Label": "Solo imagen",
+      "Description": "Parametro para indicar que solo se va a generar el código de barras sin texto",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

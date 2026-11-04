@@ -1,0 +1,180 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Tipo de plantilla",
+        "Field": "TemplateType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "XML", "JSON", "HTML", "TEXT", "CUSTOM" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Separador",
+        "Field": "Separator",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.TemplateType == 'TEXT'"
+      },
+      {
+        "Label": "Tipo de salida",
+        "Field": "OutputCustomTemplate",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "XML", "JSON", "HTML", "TEXT", "CUSTOM" ],
+        "DefaultValue": null,
+        "Visible": "$data.TemplateType == 'CUSTOM' || $data.TemplateType == 'XML' || $data.TemplateType == 'JSON'"
+      },
+      {
+        "Label": "Sanitizar nombre del campo",
+        "Field": "SanitizeFielName",
+        "Value": true,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": true,
+        "Visible": "$data.TemplateType == 'XML' && $data.OutputCustomTemplate == 'JSON'"
+      },
+      {
+        "Label": "Desde archivo",
+        "Field": "FromFile",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": false,
+        "Visible": "$data.TemplateType != ''"
+      },
+      {
+        "Label": "Plantilla",
+        "Field": "Template",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.FromFile == false"
+      },
+      {
+        "Label": "Archivo plantilla",
+        "Field": "TemplateFile",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.FromFile == true"
+      },
+      {
+        "Label": "Variables",
+        "Field": "VariableList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "DefaultValue": [
+          {
+            "Label": "Variable",
+            "Field": "Variable",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Valor",
+            "Field": "Value",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTAREA",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Tag",
+            "Field": "Tag",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Tipo valor",
+            "Field": "ValueType",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": [ "", "XML", "JSON", "HTML", "TEXT" ],
+            "DefaultValue": null
+          },
+          {
+            "Label": "Separador",
+            "Field": "Separator",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.ValueType == '' || $dataRow.ValueType == 'TEXT'"
+          },
+          {
+            "Label": "Columnas",
+            "Field": "Columns",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Valor de attributo",
+            "Field": "AsAttribute",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          }
+        ]
+      }
+    ]
+  }
+]

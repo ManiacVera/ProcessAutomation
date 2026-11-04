@@ -1,0 +1,28 @@
+﻿@page "/ShellTopComponent"
+@using ProcessAutomationSite.Service
+@inject DialogService dialogService
+@inject StateManagement stateManagement
+
+<br />
+<div class="row rounded-top align-items-md-center" style="background-color: black; vertical-align:central;">
+    <RadzenLabel Text="Process Automation" class="col-md-6" Style="font-size: 18px; color:white; margin-top: 10px; margin-bottom: 10px;"></RadzenLabel>
+
+    <div class="input-group col-md-6 oi-vertical-align-center top-search" style="margin-top:10px; margin-bottom:10px; width: 100%">
+        @*<div class="left-div input-group-prepend">
+            <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            Multiple="true" Placeholder="Tiendas" Data="@storeInfoList" ValueProperty="IdStore" TextProperty="Store"
+                            @bind-Value="storeListValue" class="left-control input-group-text" />
+        </div>
+        <RadzenTextBox @bind-Value="@searchValue" Placeholder="Buscar producto" FullWidth="true" Outlined="true"
+                       @onkeypress="@OnSearchkeyPress" @oninput="@(args => searchValue = args.Value.ToString())"
+                       class="form-control middle-div" @ref="@txtSearch" Style=" border-width: 3px; border-right: 0px; border-color: darkorange;">
+        </RadzenTextBox>*@
+        <div class="input-group-append">
+            @*<RadzenButton Icon="pageview" Style="height: 45px; width: 40px; background-color: darkorange; border-width: 3px; border-left: 0px; border-color: darkorange;" class="input-group-text" Click="() => OnSearchClick()" />*@
+        </div>
+    </div>
+</div>
+
+@*<RadzenCard @ref="DivNotification" Style="@(divNotificationStyle)" class="bg-dark rounded shadow-4">
+    <NotificationListComponent></NotificationListComponent>
+</RadzenCard>*@

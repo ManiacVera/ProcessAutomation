@@ -1,0 +1,327 @@
+[
+  {
+    "FORMAT": "COMPONENT",
+    "FIELD_LIST": [
+      {
+        "Label": "Estilos",
+        "Field": "StyleList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "DefaultValue": [
+          {
+            "Label": "Nombre",
+            "Field": "StyleName",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Valor",
+            "Field": "StyleValue",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTAREA",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Ubicacion",
+        "Field": "LocationType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "LOCAL", "REMOTE" ],
+        "DefaultValue": ""
+      },
+      {
+        "Label": "Tipo de formulario",
+        "Field": "FormType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "COMMON", "GRID" ],
+        "DefaultValue": ""
+      },
+      {
+        "Label": "Formulario",
+        "Field": "FormName",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": ""
+      },
+      {
+        "Label": "Objeto salida datos",
+        "Field": "OutputData",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": false,
+        "IsPassword": false,
+        "DefaultValue": null,
+        "Visible": "$data.LocationType == 'LOCAL'"
+      },
+      {
+        "Label": "Campos",
+        "Field": "FieldList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "Visible": "$data.LocationType == 'LOCAL'",
+        "DefaultValue": [
+          {
+            "Label": "Nombre",
+            "Field": "FieldName",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Tipo",
+            "Field": "Type",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": [ "EMPTY", "BOOL", "BUTTON", "DATE", "DECIMAL", "FILE", "GRID", "INT", "LABEL", "LIST", "MONEY", "OPTION", "PASSWORD", "TABLE", "TEXT" ],
+            "DefaultValue": ""
+          },
+          {
+            "Label": "Encapsulado",
+            "Field": "Encapsulated",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": [ "", "BEGIN", "END" ],
+            "DefaultValue": ""
+          },
+          {
+            "Label": "Fila",
+            "Field": "RowNumber",
+            "Value": 0,
+            "ValueType": "NUMBER",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.Encapsulated != 'END'"
+          },
+          {
+            "Label": "Columna",
+            "Field": "ColumnNumber",
+            "Value": 0,
+            "ValueType": "NUMBER",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.Encapsulated != 'END'"
+          },
+          {
+            "Label": "Tamano",
+            "Field": "ColumnSize",
+            "Value": 0,
+            "ValueType": "NUMBER",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.Encapsulated != 'END'"
+          },
+          {
+            "Label": "Value",
+            "Field": "FieldValue",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.Encapsulated != 'END'"
+          },
+          {
+            "Label": "Default value",
+            "Field": "DefaultValue",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.Encapsulated != 'END'"
+          },
+          {
+            "Label": "By dynamic value",
+            "Field": "ByDynamicValue",
+            "Value": false,
+            "ValueType": "BOOL",
+            "ControlType": "CHECKBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.Encapsulated != 'END'"
+          },
+          {
+            "Label": "Options",
+            "Field": "OptionValue",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "($dataRow.ByDynamicValue == true) && $dataRow.Encapsulated != 'END'"
+          },
+          {
+            "Label": "Item",
+            "Field": "Item",
+            "Value": null,
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": "$item",
+            "Visible": "($dataRow.ByDynamicValue == true) && $dataRow.Encapsulated != 'END'"
+          },
+          {
+            "Label": "Disabled",
+            "Field": "Disabled",
+            "Value": "false",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.Encapsulated != 'END'"
+          },
+          {
+            "Label": "Required",
+            "Field": "Required",
+            "Value": "false",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.Encapsulated != 'END'"
+          },
+          {
+            "Label": "Hidden",
+            "Field": "Hidden",
+            "Value": "false",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.Encapsulated != 'END'"
+          },
+          {
+            "Label": "Label hidden",
+            "Field": "LabelHidden",
+            "Value": false,
+            "ValueType": "BOOL",
+            "ControlType": "CHECKBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.Encapsulated != 'END'"
+          }
+        ]
+      },
+      {
+        "Label": "Variables",
+        "Field": "VariableList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "Visible": "$data.LocationType == 'LOCAL'",
+        "DefaultValue": [
+          {
+            "Label": "Variable",
+            "Field": "VariableName",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Tipo",
+            "Field": "VariableType",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": [ "REST_API", "QUERY_STRING", "JSON", "STRING", "NUMBER", "JAVASCRIPT" ],
+            "DefaultValue": ""
+          },
+          {
+            "Label": "Valor",
+            "Field": "VariableValue",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.VariableType != ''"
+          }
+        ]
+      }
+    ]
+  }
+]

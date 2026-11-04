@@ -1,0 +1,28 @@
+﻿{
+  "WebApi": "http://localhost:5000",
+  "RouteApi": "api",
+  "DatabaseType": "LOCAL",
+  "EmailServer": {
+    "Display": "Process Automation",
+    "Host": "smtp.office365.com",
+    "Port": 587,
+    "EmailAdmin" : "email@hotmail.com",
+    "UserName": "User01",
+    "Password": "Pass01",
+    "EnableSsl": true,
+    "TargetName": "STARTTLS/smtp.office365.com",
+    "Protocol": null
+  },
+  "DatabaseServer": {
+    "Server": "localhost\\SQLExpress2012",
+    "Port": 0,
+    "Database": "PROC_AUTO_STORE",
+    "UserId": "sa",
+    "Password": "Indra01"
+  },
+  "NetCore": {
+    "Name": "NetCore",
+    "Version": 3.1,
+    "Url": "https://dotnet.microsoft.com/download/dotnet/3.1"
+  }
+}

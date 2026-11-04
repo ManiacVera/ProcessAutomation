@@ -1,0 +1,42 @@
+[
+  {
+    "FORMAT": "COMPONENT",
+    "FIELD_LIST": [
+      {
+        "Label": "Accion",
+        "Field": "Action",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "ENCRYPT", "DECRYPT" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo encriptacion",
+        "Field": "AlgorithmType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "MD5", "BASE64", "SHA1", "SHA256", "SHA384", "SHA512", "TRIPLEDES" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Llave",
+        "Field": "Key",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": true,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.AlgorithmType == 'TRIPLEDES'",
+        "Enabled": true
+      }
+    ]
+  }
+]

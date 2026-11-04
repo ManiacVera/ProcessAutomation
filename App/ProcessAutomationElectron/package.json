@@ -1,0 +1,96 @@
+{
+  "name": "processautomationapp",
+  "version": "0.1.0",
+  "description": "",
+  "main": "Scripts/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "clean": "node -e \"require('fs').rmSync('./Core', { recursive: true, force: true })\"",
+    "copy-files": "node Scripts/copy-files.js",
+    "licenses": "node Scripts/generate-licenses.js",
+    "dev": "vite",
+    "build": "vite build",
+    "start": "npm run clean && npm run copy-files && npm run build && electron .",
+    "start_debug": "npm run build && electron .",
+    "electron:build": "npm run build && npx electron-builder",
+    "electron:build:win:x64": "npm run clean && npm run copy-files && npm run build && npx electron-builder --win --x64",
+    "electron:build:win:arm64": "npm run clean && npm run copy-files && npm run build && npx electron-builder --win --arm64",
+    "electron:build:mac:x64": "npm run clean && npm run copy-files && npm run build && npx electron-builder --mac --x64",
+    "electron:build:mac:arm64": "npm run clean && npm run copy-files && npm run build && npx electron-builder --mac --arm64",
+    "electron:build:linux:x64": "npm run clean && npm run copy-files && npm run build && npx electron-builder --linux --x64",
+    "electron:build:linux:arm64": "npm run clean && npm run copy-files && npm run build && npx electron-builder --linux --arm64"
+  },
+  "dependencies": {
+    "i18next": "^25.8.4",
+    "pinia": "^3.0.4",
+    "vite": "^7.3.1",
+    "vue": "^3.5.30",
+    "vue-router": "^5.0.4",
+    "vue3-toastify": "^0.2.9"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.4",
+    "electron": "^44.0.0",
+    "electron-builder": "^24.13.3",
+    "license-checker": "^25.0.1"
+  },
+  "build": {
+    "appId": "com.processautomation.app",
+    "productName": "ProcessAutomation",
+    "afterPack": "./Scripts/after-pack.js",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "assets/**/*",
+      "dist/**/*",
+      "Scripts/**/*",
+      "!Scripts/copy-files.js",
+      "!Scripts/generate-licenses.js",
+      "Core/**/*",
+      "Pages/**/*",
+      "Styles/**/*",
+      "locales/**/*",
+      "Resources/**/*",
+      "node_modules/**/*",
+      "third-party-licenses/**/*",
+      "system_token*",
+      "package.json"
+    ],
+    "asar": false,
+    "win": {
+      "executableName": "ProcessAutomation",
+      "target": [
+        {
+          "target": "nsis"
+        },
+        {
+          "target": "msi"
+        }
+      ],
+      "icon": "assets/app-icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "mac": {
+      "executableName": "ProcessAutomation",
+      "target": [
+        {
+          "target": "dmg"
+        }
+      ],
+      "icon": "assets/app-icon.icns"
+    },
+    "linux": {
+      "executableName": "ProcessAutomation",
+      "target": [
+        {
+          "target": "AppImage"
+        }
+      ],
+      "icon": "assets/logo-linux.png"
+    }
+  }
+}

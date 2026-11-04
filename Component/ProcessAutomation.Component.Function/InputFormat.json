@@ -1,0 +1,188 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Type",
+        "Field": "Type",
+        "Value": "DEFINE",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "DEFINE", "EXECUTE" ],
+        "DefaultValue": "DEFINE"
+      },
+      {
+        "Label": "Function",
+        "Field": "FunctionName",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Type == 'EXECUTE'"
+      },
+      {
+        "Label": "Active WebApi",
+        "Field": "ActiveWebApi",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": false,
+        "Visible": "$data.Type == 'DEFINE'"
+      },
+      {
+        "Label": "Metodo HTTP",
+        "Field": "HttpMethod",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "GET", "POST", "PUT", "DELETE" ],
+        "DefaultValue": null,
+        "Visible": "$data.Type == 'DEFINE' && $data.ActiveWebApi == true"
+      },
+      {
+        "Label": "Body",
+        "Field": "WebApiBody",
+        "Value": [
+          {
+            "Parameter": "",
+            "ParameterType": "JSON",
+            "IsArray": false
+          }
+        ],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "Visible": "$data.Type == 'DEFINE' && $data.ActiveWebApi == true && ($data.HttpMethod == 'POST' || $data.HttpMethod == 'PUT')",
+        "DefaultValue": [
+          {
+            "Label": "Parametro",
+            "Field": "Parameter",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Tipo de dato",
+            "Field": "ParameterType",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": [ "STRING", "INT", "CHAR", "FLOAT", "DECIMAL", "DATETIME", "OBJECT", "JSON" ],
+            "DefaultValue": null
+          },
+          {
+            "Label": "Is array",
+            "Field": "IsArray",
+            "Value": false,
+            "ValueType": "BOOL",
+            "ControlType": "CHECKBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": false
+          }
+        ]
+      },
+      {
+        "Label": "Parametros",
+        "Field": "ParameterList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "DefaultValue": [
+          {
+            "Label": "Parametro",
+            "Field": "Parameter",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Tipo de dato",
+            "Field": "ParameterType",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": [ "STRING", "INT", "CHAR", "FLOAT", "DECIMAL", "DATETIME", "ARRAY_OBJECT", "LIST_OBJECT", "OBJECT" ],
+            "DefaultValue": null,
+            "Visible": "$data.Type == 'DEFINE'"
+          },
+          {
+            "Label": "Valor",
+            "Field": "ParameterValue",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$data.Type == 'EXECUTE'"
+          }
+        ]
+      },
+      {
+        "Label": "Variables de retorno",
+        "Field": "ReturnList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "Visible": "$data.Type == 'DEFINE'",
+        "DefaultValue": [
+          {
+            "Label": "Variable",
+            "Field": "Variable",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Tipo de dato",
+            "Field": "VariableType",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": [ "STRING", "INT", "CHAR", "FLOAT", "DECIMAL", "DATETIME", "ARRAY_OBJECT", "OBJECT", "LIST_OBJECT", "JSON", "JSON_ARRAY" ],
+            "DefaultValue": null
+          }
+        ]
+      }
+    ]
+  }
+]

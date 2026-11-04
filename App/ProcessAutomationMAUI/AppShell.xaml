@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ProcessAutomationMAUI.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ProcessAutomationMAUI"
+    xmlns:ProcessPages="clr-namespace:ProcessAutomationMAUI.Pages.Process"
+    xmlns:SecurityPages="clr-namespace:ProcessAutomationMAUI.Pages.Security"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.NavBarIsVisible="False">
+
+    <Shell.TitleView>
+        <StackLayout BackgroundColor="Black">
+            <Label Text="Process Automation" VerticalOptions="Center" HorizontalOptions="Center" FontSize="Large" TextColor="White" FontAttributes="Bold" />
+        </StackLayout>
+    </Shell.TitleView>
+
+    <TabBar>
+        <Tab Title="Home">
+            <ShellContent
+                ContentTemplate="{DataTemplate local:MainPage}"
+             Route="MainPage"/>
+        </Tab>
+        <Tab Title="Process">
+            <ShellContent
+                ContentTemplate="{DataTemplate ProcessPages:ProcessPage}"
+             Route="ProcessPage"/>
+        </Tab>
+        <Tab Title="Account">
+            <ShellContent
+                ContentTemplate="{DataTemplate SecurityPages:AccountPage}"
+                Route="ProcessPage"/>
+        </Tab>
+    </TabBar>
+</Shell>

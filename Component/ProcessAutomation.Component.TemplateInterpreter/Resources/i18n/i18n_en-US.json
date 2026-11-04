@@ -1,0 +1,88 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "TemplateType": {
+      "Label": "Template type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Separator": {
+      "Label": "Separator",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Template": {
+      "Label": "Template",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "VariableList": {
+      "Label": "Variables",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Variable": {
+      "Label": "Variable",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Value": {
+      "Label": "Value",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ValueType": {
+      "Label": "Value type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "AsAttribute": {
+      "Label": "As attribute",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Columns": {
+      "Label": "Columns",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OutputCustomTemplate": {
+      "Label": "Output type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SanitizeFielName": {
+      "Label": "Sanitize field name",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FromFile": {
+      "Label": "From file",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "TemplateFile": {
+      "Label": "Template file",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

@@ -1,0 +1,76 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Objeto",
+        "Field": "Object",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Valor",
+        "Field": "Value",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo de busqueda",
+        "Field": "SearchType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Evento",
+        "Field": "Event",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "ENTER", "CLICK" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Paises",
+        "Field": "CountryList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "CHECKBOXLIST",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "España", "Estados Unidos", "Mexico" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Fecha",
+        "Field": "Fecha",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "DATE",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Settings": {
+          "Format": "dd/mm/yy"
+        }
+      }
+    ]
+  }
+]

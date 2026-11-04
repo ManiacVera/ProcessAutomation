@@ -1,0 +1,31 @@
+﻿@page "/Logout"
+@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<LogoutComponent> localizer
+
+<br />
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="row bg-dark rounded shadow" style="border-left: 0px; border-right: 0px; border-top: 15px; border-bottom: 15px; border-style: solid; border-color: orange;">
+            <div class="col-md-12">
+                <br />
+                <RadzenFieldset class="rounded shadow" Style="color: white; font-size: 20px;">
+                    <HeaderTemplate>
+                        <RadzenLabel Text="@localizer["Usuario"]" Style="color: white; font-size: 22px;"></RadzenLabel>
+                    </HeaderTemplate>
+                    <ChildContent>
+                        <div class="row" style="margin-bottom: 6px;">
+                            <div class="col-md-12">
+                                <h5>
+                                    @localizer["CloseSession"]                                    
+                                </h5>
+                            </div>
+                        </div>
+                    </ChildContent>
+                </RadzenFieldset>
+                <br />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>

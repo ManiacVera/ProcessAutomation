@@ -1,0 +1,42 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Accion",
+        "Field": "Action",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "COPY", "PASTE", "GET_DATA" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo",
+        "Field": "Type",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "VALUE", "TEXT", "FILE", "SCREENSHOT", "SHORT_SCREENSHOT" ],
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'COPY' || $data.Action == 'GET_DATA' || $data.Action == 'PASTE'"
+      },
+      {
+        "Label": "Value",
+        "Field": "Value",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action != 'GET_DATA' && ($data.Type == 'FILE' || $data.Type == 'VALUE' || $data.Action == 'PASTE')"
+      }
+    ]
+  }
+]

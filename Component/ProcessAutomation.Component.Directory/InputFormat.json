@@ -1,0 +1,101 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Action",
+        "Field": "Action",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "GET_FILES", "CREATE_DIRECTORY", "COPY_DIRECTORY", "MOVE_DIRECTORY", "DELETE_DIRECTORY", "RENAME_DIRECTORY" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Path",
+        "Field": "Path",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Directory",
+        "Field": "Directory",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'RENAME_DIRECTORY'"
+      },
+      {
+        "Label": "New path",
+        "Field": "NewPath",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'MOVE_DIRECTORY' || $data.Action == 'COPY_DIRECTORY'"
+      },
+      {
+        "Label": "New directory",
+        "Field": "NewPath",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'RENAME_DIRECTORY'"
+      },
+      {
+        "Label": "Tipo de archivo",
+        "Field": "FileType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'GET_FILES'"
+      },
+      {
+        "Label": "Recursivo",
+        "Field": "IsRecursive",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'GET_FILES'"
+      },
+      {
+        "Label": "Regular expression",
+        "Field": "RegEx",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'GET_FILES'"
+      }
+    ]
+  }
+]

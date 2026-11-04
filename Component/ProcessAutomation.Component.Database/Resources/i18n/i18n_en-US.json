@@ -1,0 +1,64 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "DatabaseType": {
+      "Label": "Database type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ConnetionType": {
+      "Label": "Connetion type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Server": {
+      "Label": "Server",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DataBase": {
+      "Label": "Database",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "UserName": {
+      "Label": "User",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Password": {
+      "Label": "Password",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ConnectionTimeout": {
+      "Label": "Connection Timeout",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Encrypt": {
+      "Label": "Encrypt",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "TrustServerCertificate": {
+      "Label": "Trust server certificate",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

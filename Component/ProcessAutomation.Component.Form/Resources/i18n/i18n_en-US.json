@@ -1,0 +1,154 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "FieldList": {
+      "Label": "Fields",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FieldName": {
+      "Label": "Field",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Type": {
+      "Label": "Type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "RowNumber": {
+      "Label": "Row",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ColumnNumber": {
+      "Label": "Column",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FieldValue": {
+      "Label": "Value",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "StyleList": {
+      "Label": "Styles",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "StyleName": {
+      "Label": "Name",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "StyleValue": {
+      "Label": "Value",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OutputData": {
+      "Label": "Output data",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "VariableList": {
+      "Label": "Variables",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "VariableValue": {
+      "Label": "Value",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "VariableType": {
+      "Label": "Type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DefaultValue": {
+      "Label": "Default value",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "LocationType": {
+      "Label": "Location",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FormName": {
+      "Label": "Form",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ColumnSize": {
+      "Label": "Column size",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Item": {
+      "Label": "Item",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ByDynamicValue": {
+      "Label": "By dynamic value",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FormType": {
+      "Label": "Form type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Disabled": {
+      "Label": "Disabled",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Required": {
+      "Label": "Required",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Hidden": {
+      "Label": "Hidden",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "LabelHidden": {
+      "Label": "LabelHidden",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

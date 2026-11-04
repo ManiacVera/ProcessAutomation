@@ -1,0 +1,745 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ProcessAutomationMAUI.Pages.Process.TaskPage"
+             xmlns:dtoInfo="clr-namespace:ProcessAutomationMAUI.DTO.Model"
+             Title="Task"
+             BackgroundColor="{StaticResource bgPage}"
+             xmlns:Converter="clr-namespace:ProcessAutomationMAUI.Converter">
+    <ContentPage.Resources>
+        <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></Converter:BooleanToVisibilityConverter>
+        <Converter:PickerSelectorConverter x:Key="PickerSelectorConverter"></Converter:PickerSelectorConverter>
+        <Converter:BoolToColorConverter x:Key="BoolToColorConverter"></Converter:BoolToColorConverter>
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+        <toolkit:EventToCommandBehavior Command="{Binding DisappearingCommand}" EventName="Disappearing" />
+        <!--<toolkit:EventToCommandBehavior Command="{Binding BackButtonPressedCommand}" EventName="BackButtonPressed" />-->
+    </ContentPage.Behaviors>
+
+    <Grid Margin="2, 10, 2, 10">
+        <Border BackgroundColor="{StaticResource bgForm}">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5"/>
+            </Border.StrokeShape>
+
+            <Grid Margin="0,14,0,14">
+                <Border BackgroundColor="{StaticResource bgArea}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="0"/>
+                    </Border.StrokeShape>
+
+                    <ScrollView>
+                        <Grid Margin="4" RowSpacing="4">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="500"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" Margin="4,20,4,20" Stroke="White">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+
+                                <Grid Margin="10,10,10,20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Text="Información de Tarea" Style="{StaticResource SubHeadline}" HorizontalOptions="Start" 
+                                           Margin="0, 0, 0, 20"></Label>
+
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Text="Número:" VerticalOptions="Center" Style="{StaticResource PageLabel}"></Label>
+
+                                        <Border Grid.Column="1" Stroke="White" StrokeThickness="2" Margin="0,2,0,2" BackgroundColor="White">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="2" />
+                                            </Border.StrokeShape>
+                                            <Entry  Keyboard="Numeric" Text="{Binding TaskData.Number}"></Entry>
+                                        </Border>
+                                    </Grid>
+
+                                    <Grid Grid.Row="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Text="Tarea:" VerticalOptions="Center" Style="{StaticResource PageLabel}"></Label>
+
+                                        <Border Grid.Column="1" Stroke="White" StrokeThickness="2" Margin="0,2,0,2" BackgroundColor="White">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="2" />
+                                            </Border.StrokeShape>
+                                            <Entry Text="{Binding TaskData.Name}"></Entry>
+                                        </Border>
+                                    </Grid>
+
+                                    <Grid Grid.Row="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Text="Delay:" VerticalOptions="Center" Style="{StaticResource PageLabel}"></Label>
+
+                                        <Border Grid.Column="1" Stroke="White" StrokeThickness="2" Margin="0,2,0,2" BackgroundColor="White">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="2" />
+                                            </Border.StrokeShape>
+                                            <Entry  Keyboard="Numeric" Text="{Binding TaskData.Delay}"></Entry>
+                                        </Border>
+                                    </Grid>
+
+                                    <Grid Grid.Row="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"></ColumnDefinition>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Text="Habilitar:" VerticalOptions="Center" Style="{StaticResource PageLabel}"></Label>
+
+                                        <CheckBox Grid.Column="1" IsChecked="{Binding TaskData.Enabled}"></CheckBox>
+                                    </Grid>
+
+                                    <Grid Grid.Row="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Button Grid.Column="0" Text="Aceptar" Margin="4" Command="{Binding AcceptTaskCommand}"></Button>
+                                            <Button Grid.Column="1" Text="Cancelar" Margin="4" Command="{Binding CancelTaskCommand}"></Button>
+                                        </Grid>
+                                    </Grid>
+
+                                </Grid>
+                            </Border>
+
+                            <Border Grid.Row="1" Margin="4,20,4,20" Stroke="White">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="5"/>
+                                </Border.StrokeShape>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="Start" Spacing="2">
+                                        <Button Text="Pasos" Style="{StaticResource TabButton}" Command="{Binding IsVisibleOptionCommand}" CommandParameter="STEP">
+                                            <!--<Button.Behaviors>
+                                                <toolkit:EventToCommandBehavior EventName="Clicked" Command="TabClickCommand" ></toolkit:EventToCommandBehavior>
+                                            </Button.Behaviors>-->
+                                        </Button>
+                                        <Button Text="Componentes" Style="{StaticResource TabButton}" Command="{Binding IsVisibleOptionCommand}" CommandParameter="COMPONENT"></Button>
+                                        <Button Text="Declaración de Sentencia" Style="{StaticResource TabButton}" Command="{Binding IsVisibleOptionCommand}" CommandParameter="STATEMENT"></Button>
+                                    </StackLayout>
+
+                                    <Grid Grid.Row="1" Margin="10, 20, 10, 20" IsVisible="{Binding VisibleOptionStep}">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="Lista de Pasos" Style="{StaticResource SubHeadline}" HorizontalOptions="Start" Margin="0, 0, 0, 5"></Label>
+
+                                        <Button Grid.Row="1" Text="Agregar Paso" Command="{Binding StepAddCommand}"></Button>
+
+                                        <ScrollView Grid.Row="2" Orientation="Horizontal" IsVisible="{OnIdiom Default=False, Desktop=True}">
+                                            <CollectionView x:Name="StepCollectionView" ItemsSource="{Binding StepList, Mode=TwoWay}" VerticalScrollBarVisibility="Always"
+                                                        BackgroundColor="White">
+                                                <CollectionView.ItemsLayout>
+                                                    <LinearItemsLayout ItemSpacing="2" Orientation="Vertical"></LinearItemsLayout>
+                                                </CollectionView.ItemsLayout>
+
+                                                <CollectionView.Header>
+                                                    <Border HorizontalOptions="FillAndExpand">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="2"/>
+                                                        </Border.StrokeShape>
+
+                                                        <Grid Padding="5" ColumnSpacing="20">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="70"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="120"/>
+                                                                <ColumnDefinition Width="150"/>
+                                                                <ColumnDefinition Width="100"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="150"/>
+                                                                <ColumnDefinition Width="100"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="150"/>
+                                                                <ColumnDefinition Width="150"/>
+                                                                <ColumnDefinition Width="80"/>
+                                                                <ColumnDefinition Width="100"/>
+                                                                <ColumnDefinition Width="100"/>
+                                                                <ColumnDefinition Width="100"/>
+                                                                <ColumnDefinition Width="100"/>
+                                                                <ColumnDefinition Width="80"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Label Grid.Column="0" Text="Número" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="1" Text="Componente" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="2" Text="Descripción" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="3" Text="Encapsulado" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="4" Text="Variable" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="5" Text="Variable Publica" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="6" Text="Valor" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="7" Text="Valor por Formato" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="8" Text="Aplicar Formula" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="9" Text="Tipo Valor Entrada" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="10" Text="Tipo Valor Salida" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="11" Text="Opción Valor Salida" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="12" Text="Tipo Declaración" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="13" Text="Delay" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="14" Text="Requerido" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="15" Text="Asincrono" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="16" Text="Log" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="17" Text="Deshabilitar" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="18" Text="" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                        </Grid>
+                                                    </Border>
+
+                                                </CollectionView.Header>
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate x:DataType="dtoInfo:StepModel">
+
+                                                        <Border HorizontalOptions="FillAndExpand">
+                                                            <Border.StrokeShape>
+                                                                <RoundRectangle CornerRadius="0,0,0,0"/>
+                                                            </Border.StrokeShape>
+
+                                                            <Grid Padding="5" ColumnSpacing="20"
+                                                                  BackgroundColor="{Binding IsBeingDragged, Converter={StaticResource BoolToColor}}">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="50"></RowDefinition>
+                                                                </Grid.RowDefinitions>
+
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="70"/>
+                                                                    <ColumnDefinition Width="200"/>
+                                                                    <ColumnDefinition Width="200"/>
+                                                                    <ColumnDefinition Width="120"/>
+                                                                    <ColumnDefinition Width="150"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="200"/>
+                                                                    <ColumnDefinition Width="150"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="200"/>
+                                                                    <ColumnDefinition Width="200"/>
+                                                                    <ColumnDefinition Width="150"/>
+                                                                    <ColumnDefinition Width="150"/>
+                                                                    <ColumnDefinition Width="80"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="100"/>
+                                                                    <ColumnDefinition Width="50"/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Label Grid.Column="0" Text="{Binding Number}" TextColor="Black" VerticalOptions="Center" Style="{StaticResource PageLabel}" HorizontalOptions="Center"></Label>
+
+                                                                <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                                                    <Label Grid.Column="1" Text="{Binding Component}" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" Style="{StaticResource PageLabel}" WidthRequest="150"></Label>
+                                                                    <Button Text="..." Command="{Binding BindingContext.ComponentTapCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding}"
+                                                                            HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                                </StackLayout>
+
+                                                                <!--<Picker x:Name="ComponentPicker" Grid.Column="1" ItemsSource="{Binding BindingContext.ComponentList, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        ItemDisplayBinding="{Binding Text}" SelectedIndex="{Binding ComponentIndex, Mode=TwoWay}"
+                                                                        SelectedIndexChanged="ComponentPicker_SelectedIndexChanged">
+                                                                </Picker>-->
+
+                                                                <Border Grid.Column="2" Stroke="Black" StrokeThickness="1" Margin="0,2,0,2" BackgroundColor="White">
+                                                                    <Border.StrokeShape>
+                                                                        <RoundRectangle CornerRadius="2" />
+                                                                    </Border.StrokeShape>
+                                                                    <Entry Text="{Binding Description}"></Entry>
+                                                                </Border>
+
+                                                                <Picker x:Name="picEncapsulated" Grid.Column="3" ItemsSource="{Binding BindingContext.EncapsulatedList, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        ItemDisplayBinding="{Binding Text}">
+                                                                    <Picker.SelectedItem>
+                                                                        <MultiBinding Converter="{StaticResource PickerSelectorConverter}" ConverterParameter="Value">
+                                                                            <Binding Mode="TwoWay" Path="EncapsulatedPartitionType" />
+                                                                            <Binding Mode="OneWay" Path="BindingContext.EncapsulatedList" Source="{x:RelativeSource AncestorType={x:Type ContentPage}}" />
+                                                                        </MultiBinding>
+                                                                    </Picker.SelectedItem>
+                                                                </Picker>
+
+                                                                <Border Grid.Column="4" Stroke="Black" StrokeThickness="1" Margin="0,2,0,2" BackgroundColor="White">
+                                                                    <Border.StrokeShape>
+                                                                        <RoundRectangle CornerRadius="2" />
+                                                                    </Border.StrokeShape>
+                                                                    <Entry Text="{Binding Variable}"></Entry>
+                                                                </Border>
+
+                                                                <CheckBox Grid.Column="5" IsChecked="{Binding IsPublicVariable}" HorizontalOptions="Center"></CheckBox>
+
+                                                                <Border Grid.Column="6" Stroke="Black" StrokeThickness="1" Margin="0,2,0,2" BackgroundColor="White">
+                                                                    <Border.StrokeShape>
+                                                                        <RoundRectangle CornerRadius="2" />
+                                                                    </Border.StrokeShape>
+                                                                    <ScrollView MaximumHeightRequest="100" VerticalScrollBarVisibility="Always">
+                                                                        <Editor Text="{Binding Value}" AutoSize="TextChanges"></Editor>
+                                                                    </ScrollView>
+                                                                </Border>
+
+                                                                <Button Grid.Column="7" Text="..."  VerticalOptions="Center" Style="{StaticResource PageLabel}" 
+                                                                        Command="{Binding BindingContext.ValueByFormatCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        CommandParameter="{Binding}" HorizontalOptions="Center"></Button>
+
+                                                                <CheckBox Grid.Column="8" IsChecked="{Binding ApplyFormula}" HorizontalOptions="Center"></CheckBox>
+
+                                                                <Picker Grid.Column="9" ItemsSource="{Binding BindingContext.TypeValueTypeList, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        ItemDisplayBinding="{Binding Text}">
+                                                                    <Picker.SelectedItem>
+                                                                        <MultiBinding Converter="{StaticResource PickerSelectorConverter}" ConverterParameter="Value">
+                                                                            <Binding Mode="TwoWay" Path="InputValueType" />
+                                                                            <Binding Mode="OneWay" Path="BindingContext.TypeValueTypeList" Source="{x:RelativeSource AncestorType={x:Type ContentPage}}" />
+                                                                        </MultiBinding>
+                                                                    </Picker.SelectedItem>
+                                                                </Picker>
+
+                                                                <Picker Grid.Column="10" ItemsSource="{Binding BindingContext.ValueOutputTypeList, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        ItemDisplayBinding="{Binding Text}">
+                                                                    <Picker.SelectedItem>
+                                                                        <MultiBinding Converter="{StaticResource PickerSelectorConverter}" ConverterParameter="Value">
+                                                                            <Binding Mode="TwoWay" Path="OutputValueType" />
+                                                                            <Binding Mode="OneWay" Path="BindingContext.ValueOutputTypeList" Source="{x:RelativeSource AncestorType={x:Type ContentPage}}" />
+                                                                        </MultiBinding>
+                                                                    </Picker.SelectedItem>
+                                                                </Picker>
+
+                                                                <Button Grid.Column="11" Text="..."  VerticalOptions="Center" Style="{StaticResource PageLabel}" 
+                                                                        Command="{Binding BindingContext.OptionValueByFormatCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        CommandParameter="{Binding}" HorizontalOptions="Center"></Button>
+
+                                                                <Picker Grid.Column="12" ItemsSource="{Binding BindingContext.TypeValueOptionList, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        ItemDisplayBinding="{Binding Text}">
+                                                                    <Picker.SelectedItem>
+                                                                        <MultiBinding Converter="{StaticResource PickerSelectorConverter}" ConverterParameter="Value">
+                                                                            <Binding Mode="TwoWay" Path="ValueTypeDeclaration" />
+                                                                            <Binding Mode="OneWay" Path="BindingContext.TypeValueOptionList" Source="{x:RelativeSource AncestorType={x:Type ContentPage}}" />
+                                                                        </MultiBinding>
+                                                                    </Picker.SelectedItem>
+                                                                </Picker>
+
+                                                                <Border Grid.Column="13" Stroke="White" StrokeThickness="2" Margin="0,2,0,2" BackgroundColor="White">
+                                                                    <Border.StrokeShape>
+                                                                        <RoundRectangle CornerRadius="2" />
+                                                                    </Border.StrokeShape>
+                                                                    <Entry Text="{Binding Delay}" Keyboard="Numeric"></Entry>
+                                                                </Border>
+
+                                                                <CheckBox Grid.Column="14" IsChecked="{Binding Required}" HorizontalOptions="Center"></CheckBox>
+
+                                                                <CheckBox Grid.Column="15" IsChecked="{Binding Async}" HorizontalOptions="Center"></CheckBox>
+
+                                                                <CheckBox Grid.Column="16" IsChecked="{Binding Log}" HorizontalOptions="Center"></CheckBox>
+
+                                                                <CheckBox Grid.Column="17" IsChecked="{Binding Disable}" HorizontalOptions="Center"></CheckBox>
+
+                                                                <!--<Button Grid.Column="18" Text="Borrar"  VerticalOptions="Center" Style="{StaticResource PageLabel}" 
+                                                                        Command="{Binding BindingContext.StepDeleteCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        CommandParameter="{Binding}" HorizontalOptions="Center"></Button>-->
+
+                                                                <ImageButton Grid.Column="18" VerticalOptions="Center" Style="{StaticResource PageLabel}"
+                                                                    Source="delete_icon.png" WidthRequest="38" HeightRequest="38"
+                                                                    Command="{Binding BindingContext.StepDeleteCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                    CommandParameter="{Binding}" HorizontalOptions="Center"></ImageButton>
+
+                                                                <Grid.GestureRecognizers>
+                                                                    <DragGestureRecognizer
+                                                                        CanDrag="True"
+                                                                        DragStartingCommand="{Binding BindingContext.ItemDraggedCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        DragStartingCommandParameter="{Binding}" />
+                                                                    
+                                                                    <DropGestureRecognizer
+                                                                        AllowDrop="True"
+                                                                        DragLeaveCommand="{Binding BindingContext.ItemDragLeaveCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        DragLeaveCommandParameter="{Binding}"
+                                                                        DragOverCommand="{Binding BindingContext.ItemDraggedOverCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        DragOverCommandParameter="{Binding}"
+                                                                        DropCommand="{Binding BindingContext.ItemDroppedCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        DropCommandParameter="{Binding}" />
+                                                                </Grid.GestureRecognizers>
+                                                            </Grid>
+
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </ScrollView>
+
+                                        <ScrollView Grid.Row="2" Orientation="Horizontal" IsVisible="{OnIdiom Default=True, Desktop=False}">
+                                            <CollectionView ItemsSource="{Binding StepList}" VerticalScrollBarVisibility="Always"
+                                                            BackgroundColor="White">
+                                                <CollectionView.ItemsLayout>
+                                                    <LinearItemsLayout ItemSpacing="2" Orientation="Vertical"></LinearItemsLayout>
+                                                </CollectionView.ItemsLayout>
+
+                                                <CollectionView.Header>
+                                                    <Border HorizontalOptions="FillAndExpand">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="2"/>
+                                                        </Border.StrokeShape>
+
+                                                        <Grid Padding="5" ColumnSpacing="20">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="70"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="50"/>
+                                                                <ColumnDefinition Width="50"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Label Grid.Column="0" Text="Número" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="1" Text="Descripción" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="2" Text="" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="2" Text="" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                        </Grid>
+                                                    </Border>
+
+                                                </CollectionView.Header>
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate x:DataType="dtoInfo:StepModel">
+
+                                                        <Border HorizontalOptions="FillAndExpand">
+                                                            <Border.StrokeShape>
+                                                                <RoundRectangle CornerRadius="0,0,0,0"/>
+                                                            </Border.StrokeShape>
+
+                                                            <Grid Padding="5" ColumnSpacing="20">
+
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="70"/>
+                                                                    <ColumnDefinition Width="200"/>
+                                                                    <ColumnDefinition Width="50"/>
+                                                                    <ColumnDefinition Width="50"/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Label Grid.Column="0" Text="{Binding Number}" TextColor="Black" VerticalOptions="Center" Style="{StaticResource PageLabel}" HorizontalOptions="Center"></Label>
+
+                                                                <Border Grid.Column="1" Stroke="Black" StrokeThickness="1" Margin="0,2,0,2" BackgroundColor="White">
+                                                                    <Border.StrokeShape>
+                                                                        <RoundRectangle CornerRadius="2" />
+                                                                    </Border.StrokeShape>
+                                                                    <Entry Text="{Binding Description}"></Entry>
+                                                                </Border>
+
+                                                                <ImageButton Grid.Column="2" VerticalOptions="Center" Style="{StaticResource PageLabel}" 
+                                                                    Source="edit_icon.png" WidthRequest="32" HeightRequest="32"
+                                                                    Command="{Binding BindingContext.StepEditCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                    CommandParameter="{Binding}" HorizontalOptions="Center"></ImageButton>
+
+                                                                <ImageButton Grid.Column="18" VerticalOptions="Center" Style="{StaticResource PageLabel}"
+                                                                    Source="delete_icon.png" WidthRequest="38" HeightRequest="38"
+                                                                    Command="{Binding BindingContext.StepDeleteCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                    CommandParameter="{Binding}" HorizontalOptions="Center"></ImageButton>
+
+                                                            </Grid>
+
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </ScrollView>
+
+                                        <Button Grid.Row="3" Text="Agregar Paso" Command="{Binding StepAddCommand}"></Button>
+                                    </Grid>
+
+                                    <Grid Grid.Row="1" Margin="10, 20, 10, 20" IsVisible="{Binding VisibleOptionComponent}">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="Lista de Componentes" Style="{StaticResource SubHeadline}" HorizontalOptions="Start" Margin="0, 0, 0, 5"></Label>
+
+                                        <Button Grid.Row="1" Text="Agregar Componente" Command="{Binding ComponentAddCommand}"></Button>
+
+                                        <ScrollView Grid.Row="2" Orientation="Horizontal" IsVisible="{OnIdiom Default=False, Desktop=True}">
+                                            <CollectionView ItemsSource="{Binding TaskComponentList}" VerticalScrollBarVisibility="Always"
+                                                            BackgroundColor="White">
+                                                <CollectionView.ItemsLayout>
+                                                    <LinearItemsLayout ItemSpacing="2" Orientation="Vertical"></LinearItemsLayout>
+                                                </CollectionView.ItemsLayout>
+
+                                                <CollectionView.Header>
+                                                    <Border HorizontalOptions="FillAndExpand">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="2"/>
+                                                        </Border.StrokeShape>
+
+                                                        <Grid Padding="5" ColumnSpacing="20">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="80"/>
+                                                                <ColumnDefinition Width="150"/>
+                                                                <ColumnDefinition Width="50"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Label Grid.Column="0" Text="Tipo" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="1" Text="Componente" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="2" Text="Descripción" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="3" Text="Valor" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="4" Text="Valor por Formato" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="5" Text="Tipo Valor Entrada" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="6" Text="" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                        </Grid>
+                                                    </Border>
+
+                                                </CollectionView.Header>
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate x:DataType="dtoInfo:ComponentModel">
+
+                                                        <Border HorizontalOptions="FillAndExpand">
+                                                            <Border.StrokeShape>
+                                                                <RoundRectangle CornerRadius="0,0,0,0"/>
+                                                            </Border.StrokeShape>
+
+                                                            <Grid Padding="5" ColumnSpacing="20">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="50"></RowDefinition>
+                                                                </Grid.RowDefinitions>
+
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="200"/>
+                                                                    <ColumnDefinition Width="200"/>
+                                                                    <ColumnDefinition Width="200"/>
+                                                                    <ColumnDefinition Width="200"/>
+                                                                    <ColumnDefinition Width="80"/>
+                                                                    <ColumnDefinition Width="150"/>
+                                                                    <ColumnDefinition Width="50"/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Picker Grid.Column="0" ItemsSource="{Binding BindingContext.ComponentTypeList, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}" 
+                                                                        ItemDisplayBinding="{Binding Text}">
+                                                                    <Picker.SelectedItem>
+                                                                        <MultiBinding Converter="{StaticResource PickerSelectorConverter}" ConverterParameter="Value">
+                                                                            <Binding Mode="TwoWay" Path="ComponentType" />
+                                                                            <Binding Mode="OneWay" Path="BindingContext.ComponentTypeList" Source="{x:RelativeSource AncestorType={x:Type ContentPage}}" />
+                                                                        </MultiBinding>
+                                                                    </Picker.SelectedItem>
+                                                                </Picker>
+
+                                                                <Border Grid.Column="1" Stroke="Black" StrokeThickness="1" Margin="0,2,0,2" BackgroundColor="White">
+                                                                    <Border.StrokeShape>
+                                                                        <RoundRectangle CornerRadius="2" />
+                                                                    </Border.StrokeShape>
+                                                                    <Entry Text="{Binding Name}"></Entry>
+                                                                </Border>
+
+                                                                <Border Grid.Column="2" Stroke="Black" StrokeThickness="1" Margin="0,2,0,2" BackgroundColor="White">
+                                                                    <Border.StrokeShape>
+                                                                        <RoundRectangle CornerRadius="2" />
+                                                                    </Border.StrokeShape>
+                                                                    <Entry Text="{Binding Description}"></Entry>
+                                                                </Border>
+
+                                                                <Border Grid.Column="3" Stroke="Black" StrokeThickness="1" Margin="0,2,0,2" BackgroundColor="White">
+                                                                    <Border.StrokeShape>
+                                                                        <RoundRectangle CornerRadius="2" />
+                                                                    </Border.StrokeShape>
+                                                                    <ScrollView MaximumHeightRequest="100" VerticalScrollBarVisibility="Always">
+                                                                        <Editor Text="{Binding Value, Mode=TwoWay}" AutoSize="TextChanges"></Editor>
+                                                                    </ScrollView>
+                                                                </Border>
+
+                                                                <Button Grid.Column="4" Text="..."  VerticalOptions="Center" Style="{StaticResource PageLabel}" 
+                                                                        Command="{Binding BindingContext.ConfigValueByFormatCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        CommandParameter="{Binding}" HorizontalOptions="Center"></Button>
+
+                                                                
+                                                                <Picker Grid.Column="5" ItemsSource="{Binding BindingContext.TypeValueTypeList, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        ItemDisplayBinding="{Binding Text}">
+                                                                    <Picker.SelectedItem>
+                                                                        <MultiBinding Converter="{StaticResource PickerSelectorConverter}" ConverterParameter="Value">
+                                                                            <Binding Mode="TwoWay" Path="ValueType" />
+                                                                            <Binding Mode="OneWay" Path="BindingContext.TypeValueTypeList" Source="{x:RelativeSource AncestorType={x:Type ContentPage}}" />
+                                                                        </MultiBinding>
+                                                                    </Picker.SelectedItem>
+                                                                </Picker>
+
+                                                                <ImageButton Grid.Column="6" 
+                                                                        Source="delete_icon.png" WidthRequest="38" HeightRequest="38" VerticalOptions="Center" Style="{StaticResource PageLabel}" 
+                                                                        Command="{Binding BindingContext.ComponentDeleteCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        CommandParameter="{Binding}" HorizontalOptions="Center"></ImageButton>
+
+                                                            </Grid>
+
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </ScrollView>
+
+                                        <ScrollView Grid.Row="2" Orientation="Horizontal" IsVisible="{OnIdiom Default=True, Desktop=False}">
+                                            <CollectionView ItemsSource="{Binding TaskComponentList}" VerticalScrollBarVisibility="Always"
+                                                            BackgroundColor="White">
+                                                <CollectionView.ItemsLayout>
+                                                    <LinearItemsLayout ItemSpacing="2" Orientation="Vertical"></LinearItemsLayout>
+                                                </CollectionView.ItemsLayout>
+
+                                                <CollectionView.Header>
+                                                    <Border HorizontalOptions="FillAndExpand">
+                                                        <Border.StrokeShape>
+                                                            <RoundRectangle CornerRadius="2"/>
+                                                        </Border.StrokeShape>
+
+                                                        <Grid Padding="5" ColumnSpacing="20">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="200"/>
+                                                                <ColumnDefinition Width="50"/>
+                                                                <ColumnDefinition Width="50"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Label Grid.Column="0" Text="Tipo" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="1" Text="Componente" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="2" Text="" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                            <Label Grid.Column="3" Text="" HorizontalOptions="Center" Style="{StaticResource Black}"></Label>
+                                                        </Grid>
+                                                    </Border>
+
+                                                </CollectionView.Header>
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate x:DataType="dtoInfo:ComponentModel">
+
+                                                        <Border HorizontalOptions="FillAndExpand">
+                                                            <Border.StrokeShape>
+                                                                <RoundRectangle CornerRadius="0,0,0,0"/>
+                                                            </Border.StrokeShape>
+
+                                                            <Grid Padding="5" ColumnSpacing="20">
+
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="200"/>
+                                                                    <ColumnDefinition Width="200"/>
+                                                                    <ColumnDefinition Width="50"/>
+                                                                    <ColumnDefinition Width="50"/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <Picker Grid.Column="0" ItemsSource="{Binding BindingContext.ComponentTypeList, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}" 
+                                                                        ItemDisplayBinding="{Binding Text}">
+                                                                    <Picker.SelectedItem>
+                                                                        <MultiBinding Converter="{StaticResource PickerSelectorConverter}" ConverterParameter="Value">
+                                                                            <Binding Mode="TwoWay" Path="ComponentType" />
+                                                                            <Binding Mode="OneWay" Path="BindingContext.ComponentTypeList" Source="{x:RelativeSource AncestorType={x:Type ContentPage}}" />
+                                                                        </MultiBinding>
+                                                                    </Picker.SelectedItem>
+                                                                </Picker>
+
+                                                                <Border Grid.Column="1" Stroke="Black" StrokeThickness="1" Margin="0,2,0,2" BackgroundColor="White">
+                                                                    <Border.StrokeShape>
+                                                                        <RoundRectangle CornerRadius="2" />
+                                                                    </Border.StrokeShape>
+                                                                    <Entry Text="{Binding Name}"></Entry>
+                                                                </Border>
+
+                                                                <ImageButton Grid.Column="2" VerticalOptions="Center" Style="{StaticResource PageLabel}" 
+                                                                        Source="edit_icon.png" WidthRequest="32" HeightRequest="32"
+                                                                        Command="{Binding BindingContext.ComponentEditCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        CommandParameter="{Binding}" HorizontalOptions="Center"></ImageButton>
+
+                                                                <ImageButton Grid.Column="3" VerticalOptions="Center" Style="{StaticResource PageLabel}" 
+                                                                        Source="delete_icon.png" WidthRequest="38" HeightRequest="38"
+                                                                        Command="{Binding BindingContext.ComponentDeleteCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                                        CommandParameter="{Binding}" HorizontalOptions="Center"></ImageButton>
+
+                                                            </Grid>
+
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </ScrollView>
+
+                                        <Button Grid.Row="3" Text="Agregar Componente" Command="{Binding ComponentAddCommand}"></Button>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ScrollView>
+                </Border>
+            </Grid>
+        </Border>
+        
+        <AbsoluteLayout BackgroundColor="#22000000" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsBusy,Mode=OneWay}">
+            <AbsoluteLayout.GestureRecognizers>
+                <TapGestureRecognizer />
+            </AbsoluteLayout.GestureRecognizers>
+
+            <StackLayout  Margin="0" Padding="0" AbsoluteLayout.LayoutBounds="0.5,0.5,AutoSize,AutoSize"
+                                       AbsoluteLayout.LayoutFlags="PositionProportional" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" >
+                <ActivityIndicator IsRunning="{Binding IsBusy, Mode=OneWay}" IsVisible="True" IsEnabled="True" Color="Orange" 
+                           HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand"/>
+            </StackLayout>
+        </AbsoluteLayout>
+        
+        <AbsoluteLayout BackgroundColor="#22000000" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsOpenComponentList,Mode=OneWay}">
+            <AbsoluteLayout.GestureRecognizers>
+                <TapGestureRecognizer />
+            </AbsoluteLayout.GestureRecognizers>
+
+            <Border Grid.Row="1" Margin="0" Stroke="Black" Padding="0" AbsoluteLayout.LayoutBounds="0.5,0.5,AutoSize,AutoSize"
+                               AbsoluteLayout.LayoutFlags="PositionProportional" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="5"/>
+                </Border.StrokeShape>
+                <StackLayout  Orientation="Vertical" BackgroundColor="White" MinimumHeightRequest="100" MinimumWidthRequest="250">
+                    <!--<Picker HorizontalOptions="CenterAndExpand"  VerticalOptions="CenterAndExpand"
+                        ItemsSource="{Binding BindingContext.ComponentList, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                        ItemDisplayBinding="{Binding Text}" SelectedIndex="{Binding ComponentIndex, Mode=TwoWay}"
+                        SelectedIndexChanged="ComponentListPicker_SelectedIndexChanged">
+                    </Picker>-->
+
+                    <Label Text="Component" TextColor="Black" Style="{StaticResource SubHeadline}" HorizontalOptions="Center"></Label>
+                    <Line Stroke="Black" HorizontalOptions="StartAndExpand" BackgroundColor="Black" StrokeThickness="1"></Line>
+                    <ListView SeparatorVisibility="Default" ItemsSource="{Binding BindingContext.ComponentList, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}" VerticalScrollBarVisibility="Default"
+                         SelectedItem="{Binding BindingContext.ComponentItem, Mode=OneWay, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}" ItemTapped="ComponentListView_ItemTapped">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="dtoInfo:ComboBoxModel">
+                                <ViewCell>
+                                    <Label Text="{Binding Text}" FontSize="Small" />
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Border>
+        </AbsoluteLayout>
+    </Grid>
+</ContentPage>

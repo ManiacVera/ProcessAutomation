@@ -1,0 +1,8 @@
+{
+  "server": "localhost\\SqlExpress",
+  "port": 1401,
+  "database": "MERP",
+  "username": "sa",
+  "password": "Script1234",
+  "databaseType": "SQLSERVER"
+}

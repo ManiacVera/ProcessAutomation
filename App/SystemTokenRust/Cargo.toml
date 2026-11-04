@@ -1,0 +1,26 @@
+[package]
+name = "SystemToken"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+cargo-license = "0.6"
+cargo_metadata = "0.18"
+reqwest = { version = "0.11", features = ["blocking", "json"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "1.0", features = ["v4"] }
+sysinfo = "0.30" # o la versión que estés usando
+aes-gcm = "0.10"
+base64 = "0.21"
+rand = "0.8"
+
+[profile.release]
+opt-level = "s"
+lto = "thin"
+codegen-units = 1
+strip = true
+
+[[bin]]
+name = "system_token"
+path = "src/main.rs"

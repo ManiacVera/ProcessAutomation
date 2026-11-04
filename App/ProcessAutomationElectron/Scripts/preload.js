@@ -1,0 +1,52 @@
+const { contextBridge, ipcRenderer } = require('electron');
+
+contextBridge.exposeInMainWorld('api', {
+    setDefaultSettings: (settings) => ipcRenderer.invoke('api:setDefaultSettings', settings),
+    openProcess: (processFile, userCode, directory) => ipcRenderer.invoke('api:openProcess', processFile, userCode, directory),
+    saveProcess: (data) => ipcRenderer.invoke('api:saveProcess', data),
+    buildProcess: (data) => ipcRenderer.invoke('api:buildProcess', data),
+    retrieveProcessList: (userCode, directory) => ipcRenderer.invoke('api:retrieveProcessList', userCode, directory),
+    retrieveComponent: () => ipcRenderer.invoke('api:retrieveComponent'),
+    retrieveDeclarationType: () => ipcRenderer.invoke('api:retrieveDeclarationType'),
+    retrieveValueAccess: () => ipcRenderer.invoke('api:retrieveValueAccess'),
+    retrieveValueType: () => ipcRenderer.invoke('api:retrieveValueType'),
+    retrieveValueOutputType: () => ipcRenderer.invoke('api:retrieveValueOutputType'),
+    retrieveEncapsulatedPartitionType: () => ipcRenderer.invoke('api:retrieveEncapsulatedPartitionType'),
+    retrieveOutputValueOption: (data) => ipcRenderer.invoke('api:retrieveOutputValueOption', data),
+    retrieveLanguageList: () => ipcRenderer.invoke('api:retrieveLanguageList'),
+    buildInputFormat: (buildDataInfo) => ipcRenderer.invoke('api:buildInputFormat', buildDataInfo),
+    buildResultValueFormat: (buildDataInfo) => ipcRenderer.invoke('api:buildResultValueFormat', buildDataInfo),
+    initProcess: (processData) => ipcRenderer.invoke('api:initProcess', processData),
+    getStepDescription: () => ipcRenderer.invoke('api:getStepDescription'),
+    getProgress: () => ipcRenderer.invoke('api:getProgress'),
+    getMaximumProgress: () => ipcRenderer.invoke('api:getMaximumProgress'),
+    isRunning: () => ipcRenderer.invoke('api:isRunning'),
+    abortProcess: () => ipcRenderer.invoke('api:abortProcess'),
+    setInputValue: (data) => ipcRenderer.invoke('api:setInputValue', data),
+    runProcess: () => ipcRenderer.invoke('api:runProcess'),
+    loadUserSettings: () => ipcRenderer.invoke('api:loadUserSettings'),
+    saveUserSettings: (data) => ipcRenderer.invoke('api:saveUserSettings', data),
+    getDataPath: () => ipcRenderer.invoke('api:getDataPath')
+});
+
+contextBridge.exposeInMainWorld('electronAPI', {
+  windowAction: (action) => ipcRenderer.send('window-action', action),
+  setGlobal: (key, value) => ipcRenderer.invoke('set-global', key, value),
+  getGlobal: (key) => ipcRenderer.invoke('get-global', key),
+  openProcessFile: () => ipcRenderer.invoke('open-process-file'),
+  openProcessPage: () => ipcRenderer.invoke("go-process-page"),
+  openTaskPage: (id) => ipcRenderer.invoke("go-task-page", id),
+  openRunProcessPage: () => ipcRenderer.invoke('go-run-process-page'),
+  openPopup: (page, data) => ipcRenderer.send('open-popup', page, data),
+  openPath: (path) => ipcRenderer.invoke('open-path', path),
+  onPopupData: (callback) => ipcRenderer.on('on-popup-data', (_, data) => callback(data)),
+  sendPopupResult: (result) => ipcRenderer.send('send-popup-result', result),
+  onPopupResult: (callback) => ipcRenderer.on('on-popup-result', (_, data) => callback(data)),
+  i18nInit: (page, lang) => ipcRenderer.invoke('i18n:init', page, lang),
+  i18nT: (key) => ipcRenderer.invoke('i18n:t', key),
+  showAlert: (message, title) => ipcRenderer.invoke("show-alert", message, title),
+  showConfirm: (message, title) => ipcRenderer.invoke("show-confirm", message, title),
+  onDialogInit: (callback) => ipcRenderer.on('dialog-init', (event, data) => callback(data)),
+  sendDialogResult: (value) => ipcRenderer.send('dialog-result', value),
+  onLogData: (callback) => { ipcRenderer.on('log-data', (event, data) => { callback(data); }) }
+});

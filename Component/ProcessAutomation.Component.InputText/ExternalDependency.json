@@ -1,0 +1,8 @@
+﻿[
+  {
+    "Name": "Input Page",
+    "Description": "Show input page",
+    "File": "InputPageComponent.html",
+    "Type": "RESOURCE_PAGE"
+  }
+]

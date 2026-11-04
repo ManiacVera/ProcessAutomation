@@ -1,0 +1,14 @@
+﻿[
+  {
+    "Name": "Chrome Driver",
+    "Description": "Driver for web navigation",
+    "File": "chromedriver.exe",
+    "Type": "EXTERNAL"
+  },
+  {
+    "Name": "Stop Page",
+    "Description": "Show stop page",
+    "File": "StopPageComponent.html",
+    "Type": "RESOURCE_PAGE"
+  }
+]

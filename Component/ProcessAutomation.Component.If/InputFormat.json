@@ -1,0 +1,97 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Valor 1",
+        "Field": "Value1",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo validador",
+        "Field": "ValidatorType1",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "VALUE", "COUNT_ITEMS", "LENGTH", "SIZE_BYTES", "GET_FIRST_N_CHAR", "GET_LAST_N_CHAR" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Valor validador",
+        "Field": "ValidatorValue1",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.ValidatorType1 == 'GET_FIRST_N_CHAR' || $data.ValidatorType1 == 'GET_LAST_N_CHAR'"
+      },
+      {
+        "Label": "Condicion",
+        "Field": "ConditionType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "=", "<>", ">", ">=", "<", "<=", "CONTAINS", "BEGIN WITH", "END WITH", "CUSTOM" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Valor 2",
+        "Field": "Value2",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo validador",
+        "Field": "ValidatorType2",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "VALUE", "COUNT_ITEMS", "LENGTH", "SIZE_BYTES", "GET_FIRST_N_CHAR", "GET_LAST_N_CHAR" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Valor validador",
+        "Field": "ValidatorValue2",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.ValidatorType2 == 'GET_FIRST_N_CHAR' || $data.ValidatorType2 == 'GET_LAST_N_CHAR'"
+      },
+      {
+        "Label": "Tipo de dato",
+        "Field": "DataType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "STRING", "NUMBER", "OBJECT" ],
+        "DefaultValue": null
+      }
+    ]
+  }
+]

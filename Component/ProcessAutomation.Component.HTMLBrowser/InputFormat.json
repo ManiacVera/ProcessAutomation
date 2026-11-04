@@ -1,0 +1,166 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Archivo local",
+        "Field": "IsLocalFile",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Pagina actual",
+        "Field": "CurrentPage",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.IsLocalFile == false"
+      },
+      {
+        "Label": "Page",
+        "Field": "Page",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.CurrentPage == false && $data.IsLocalFile == false"
+      },
+      {
+        "Label": "File",
+        "Field": "File",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.IsLocalFile == true"
+      },
+      {
+        "Label": "Delay",
+        "Field": "Delay",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo de busqueda",
+        "Field": "SearchType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "ID", "NAME", "TAG_NAME", "XPATH", "CLASS_NAME" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Objeto",
+        "Field": "Object",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Decodificar objeto",
+        "Field": "DecodeObject",
+        "Value": "",
+        "ValueType": "BOOL",
+        "ControlType": "COMBOBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "", "DECODE", "ENCODE" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Obtener",
+        "Field": "Get",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "INNER_TEXT", "INNER_HTML", "OUTER_HTML", "ATTRIBUTE", "PROPERTY" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Attributo",
+        "Field": "Attribute",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Get == 'ATTRIBUTE'"
+      },
+      {
+        "Label": "Propiedad",
+        "Field": "Property",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Get == 'PROPERTY'"
+      },
+      {
+        "Label": "Profundidad",
+        "Field": "Depth",
+        "Value": "",
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Decodificar resultado",
+        "Field": "DecodeResult",
+        "Value": "",
+        "ValueType": "BOOL",
+        "ControlType": "COMBOBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "", "DECODE", "ENCODE" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Multiple",
+        "Field": "Multiple",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  }
+]

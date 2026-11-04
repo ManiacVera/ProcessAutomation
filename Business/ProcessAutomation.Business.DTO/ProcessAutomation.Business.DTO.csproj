@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+	<Configurations>Debug;Release</Configurations>
+	<Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\ProcessAutomation.Common.DTO\ProcessAutomation.Common.DTO.csproj" />
+    <ProjectReference Include="..\..\Common\ProcessAutomation.CommonExpress\ProcessAutomation.CommonExpress.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Info\" />
+  </ItemGroup>
+
+	<Target Name="CopyAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug'">
+		<ItemGroup>
+			<PackageBusiness Include="$(TargetDir)/*.dll;" />
+		</ItemGroup>
+		<Message Text="Copy PackageBusiness" Importance="normal" />
+		<Copy SourceFiles="@(PackageBusiness)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+	</Target>
+
+</Project>

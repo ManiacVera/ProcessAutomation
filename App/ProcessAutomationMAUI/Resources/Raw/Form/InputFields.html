@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link href="../Scripts/AngularJS/angular/jquery-ui/jquery-ui.css" rel="stylesheet">
+	<link href="../Scripts/AngularJS/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../Scripts/AngularJS/css/bootstrap-icons.min.css" rel="stylesheet">
+	<!--<link href="../Scripts/AngularJS/css/bootstrap-theme.min.css" rel="stylesheet">-->
+	<link href="../Scripts/AngularJS/css/scrollbar.css" rel="stylesheet">
+	<link href="../Scripts/AngularJS/css/spinner.css" rel="stylesheet">
+	<link href="../Scripts/AngularJS/css/main.css" rel="stylesheet">
+
+	<meta charset="utf 8">
+	<title>AppAutomation</title>
+</head>
+<body ng-app="app" id="appId">
+	<div ng-controller="AppController" id="controllerId">
+		<form name="form">
+			<div class="row table-dark" ng-show="isLoading" style="height:600px; vertical-align: middle;">
+				<div class="col-md-12">
+					<div class="spinner">
+						<div class="double-bounce1"></div>
+						<div class="double-bounce2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row" ng-show="!isLoading">
+				<div class="col-md-12">
+					<table class="table table-dark" style="border-width: 1.5px;">
+						<thead style="text-align:center;">
+							<tr style="background-color: orange;">
+								<th colspan="2">
+									<h1 class="labelText"> {{componentName}} </h1>
+								</th>
+							</tr>
+							<tr>
+								<th style="width: 120px; text-align:left;">
+									<label class="labelText">Campo:</label>
+								</th>
+								<th style="text-align: left">
+									<h4 class="labelText"> {{fieldName}} </h4>
+								</th>
+							</tr>
+							<tr>
+								<th style="width: 120px; text-align:left;">
+									<label class="labelText">Formato:</label>
+								</th>
+								<th style="text-align: left">
+									<h4 class="labelText">{{getSetSelected}}</h4>
+									<button id="btnDummy" ng-click="onChangeGetSet()" style="display: none;"></button>
+									<button id="btnRefreshTranslation" ng-click="changeLanguage('es')" style="display: none;"></button>
+								</th>
+							</tr>
+						</thead>
+						<tbody ng-if="getSetSelected != null && getSetSelected != ''">
+							<tr ng-repeat="(key, value) in fieldList" ng-init="onRowInit(value)" ng-show="onVisibleValidation(value)">
+								<td colspan="2">
+									<div class="fieldOptions" ng-show="enabledOptions" ng-style="commonStyle">
+										<div class="rounded-top float-right" style="width: 250px; background-color: orange; text-align: center;">
+											<input type="checkbox" ng-model="value.RequiredByUser" ng-checked='value.RequiredByUser != undefined ? value.RequiredByUser : true' /><b>Required</b>&nbsp;
+											<input type="checkbox" ng-model="value.VisibleByUser" ng-checked='value.VisibleByUser != undefined ? value.VisibleByUser : true' /><b>Visible</b>&nbsp;
+											<input type="checkbox" ng-model="value.EditableByUser" ng-checked='value.EditableByUser != undefined ? value.EditableByUser : true' /><b>Editable</b>&nbsp;
+										</div>
+									</div>
+									<div class="rounded shadow-5 inputField" ng-if="value.IsPassword && value.IsPassword == true" ng-style="commonStyle">
+										<span class="labelField">{{setFieldTranslation(value.Field, value.Label)}}</span><br />
+										<input class="form-control" ng-model="$data[value.Field]" type="password" ng-required="onValueRequired(value.Required, value.Visible)" />
+									</div>
+									<div class="rounded shadow-5 inputField" ng-if="!value.IsPassword">
+										<span class="labelField">{{setFieldTranslation(value.Field, value.Label)}}</span><br />
+										<div ng-switch="value.ControlType" ng-style="commonStyle">
+											<input class="form-control" type="text" datepicker="" format="{{(value.Settings.Format ? value.Settings.Format : 'dd/mm/yy')}}" ng-model="$data[value.Field]" ng-switch-when="DATE" ng-required="onValueRequired(value.Required, value.Visible)" />
+											<input class="form-control" type="text" ng-model="$data[value.Field]" ng-switch-when="TEXTBOX" ng-required="onValueRequired(value.Required, value.Visible)" />
+											<textarea class="form-control" ng-model="$data[value.Field]" ng-switch-when="TEXTAREA" rows="3" ng-required="onValueRequired(value.Required, value.Visible)"></textarea>
+											<input class="form-control" type="checkbox" ng-model="$data[value.Field]" ng-switch-when="CHECKBOX" />
+											<select class="form-control" ng-model="$data[value.Field]" ng-options="x for x in onSetOptionValue(value.OptionValue, value.OptionDisplay, value.OptionKey, value.OptionSort)" ng-switch-when="COMBOBOX" ng-required="onValueRequired(value.Required, value.Visible)"></select>
+											<div ng-init="onCheckboxListInit(value)" ng-dropdown-multiselect="" options="value.OptionValue" selected-model="$data[value.Field]" checkboxes="true" extra-settings="checkboxListSettings" ng-switch-when="CHECKBOXLIST" ng-required="onValueRequired(value.Required, value.Visible)"></div>
+											<table class="table table-dark" ng-switch-when="GRID" ng-init="onGridInit(value)" ng-style="tableStyle">
+												<thead style="text-align:center;">
+													<tr>
+														<th>
+														</th>
+														<th ng-repeat="(gridHeaderKey, gridHeaderValue) in value.DefaultValue" style="min-width: 200px;">
+															<!--{{gridHeaderValue.Label}}-->
+															{{setFieldTranslation(gridHeaderValue.Field, gridHeaderValue.Label)}}
+														</th>
+														<th>
+														</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-init="$dataRow = $data[value.Field][gridRowKey]" ng-repeat="(gridRowKey, gridRowValue) in $data[value.Field]">
+														<td>
+															<button class="rounded iconMove" ng-click="onMoveUpClick(value.Field, $index)" ng-show="enabledOptionGrid('MOVE', value.OptionValue)">&#8593;</button>
+															<button class="rounded iconMove" ng-click="onMoveDownClick(value.Field, $index)" ng-show="enabledOptionGrid('MOVE', value.OptionValue)">&#8595;</button>
+														</td>
+														<td ng-repeat="(gridKey, gridValue) in gridRowValue">
+															<div ng-repeat="(gridDefaultKey, gridDefaultValue) in value.DefaultValue" ng-show="gridDefaultValue.Visible != undefined ? $eval(gridDefaultValue.Visible) : true">
+																<div ng-if="gridDefaultValue.Field == gridKey">
+																	<div ng-if="gridDefaultValue.IsPassword && gridDefaultValue.IsPassword == true">
+																		<input class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" type="password" ng-required="onValueRequired(gridDefaultValue.Required, gridDefaultValue.Visible)" />
+																	</div>
+																	<div ng-if="!gridDefaultValue.IsPassword">
+																		<div ng-switch="gridDefaultValue.ControlType">
+																			<input class="form-control" type="text" datepicker="" format="{{(gridDefaultValue.Settings.Format ? gridDefaultValue.Settings.Format : 'dd/mm/yy')}}" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="DATE" ng-required="onValueRequired(gridDefaultValue.Required, gridDefaultValue.Visible)" />
+																			<input class="form-control" type="text" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="TEXTBOX" ng-required="onValueRequired(gridDefaultValue.Required, gridDefaultValue.Visible)" />
+																			<textarea class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="TEXTAREA" rows="3" ng-required="onValueRequired(gridDefaultValue.Required, gridDefaultValue.Visible)"></textarea>
+																			<input class="form-control" type="checkbox" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="CHECKBOX" ng-required="onValueRequired(gridDefaultValue.Required, gridDefaultValue.Visible)" />
+																			<select class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" ng-options="x for x in onSetOptionValue(gridDefaultValue.OptionValue, gridDefaultValue.OptionDisplay, gridDefaultValue.OptionKey, gridDefaultValue.OptionSort)" ng-switch-when="COMBOBOX" ng-required="onValueRequired(gridDefaultValue.Required, gridDefaultValue.Visible)"></select>
+																			<div ng-init="onGridCheckboxListInit(gridRowValue, gridKey, gridDefaultValue)" ng-dropdown-multiselect="" options="gridDefaultValue.OptionValue"
+																				 selected-model="$dataRow[gridDefaultValue.Field]" checkboxes="true" extra-settings="checkboxListSettings" ng-switch-when="CHECKBOXLIST" ng-required="onValueRequired(gridDefaultValue.Required, gridDefaultValue.Visible)"></div>
+																		</div>
+																		<input class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" type="text" ng-switch-default ng-required="onValueRequired(gridDefaultValue.Required, gridDefaultValue.Visible)" />
+																		<div style="display:none;" ng-if="gridDefaultValue.ControlType == 'TEXTAREA' || gridDefaultValue.ControlType == 'TEXTBOX'">
+																			<div mentio mentio-typed-text="typedTerm" trimTerm="true" mentio-trigger-char="'@'" mentio-items="variableArray" mentio-trigger-delete="false" mentio-format="'[@{0}]'" ng-model="$dataRow[gridDefaultValue.Field]"></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</td>
+														<td>
+															<button class="rounded iconAdd" ng-click="onInsertClick(value, value.Field, gridRowKey)" ng-show="enabledOptionGrid('ADD', value.OptionValue)">+</button>
+															<button class="rounded iconDelete" ng-click="onDeleteClick(value, value.Field, gridRowKey)" ng-show="enabledOptionGrid('DELETE', value.OptionValue)">-</button>
+														</td>
+													</tr>
+												</tbody>
+												<tfoot>
+													<tr ng-init="$dataRow = getDefaultValueGrid(value)" ng-show="enabledOptionGrid('ADD', value.OptionValue)">
+														<td></td>
+														<td ng-repeat="(gridDefaultKey, gridDefaultValue) in value.DefaultValue">
+															<div ng-show="gridDefaultValue.Visible != undefined ? $eval(gridDefaultValue.Visible) : true">
+																<div ng-if="gridDefaultValue.IsPassword && gridDefaultValue.IsPassword == true">
+																	<input class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" type="password">
+																</div>
+																<div ng-if="!gridDefaultValue.IsPassword">
+																	<div ng-switch="gridDefaultValue.ControlType">
+																		<input class="form-control" type="text" datepicker="" format="{{(gridDefaultValue.Settings.Format ? gridDefaultValue.Settings.Format : 'dd/mm/yy')}}" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="DATE" />
+																		<input class="form-control" type="text" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="TEXTBOX">
+																		<textarea class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="TEXTAREA" rows="3"></textarea>
+																		<input class="form-control" type="checkbox" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="CHECKBOX">
+																		<select class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" ng-options="x for x in onSetOptionValue(gridDefaultValue.OptionValue, gridDefaultValue.OptionDisplay, gridDefaultValue.OptionKey, gridDefaultValue.OptionSort)" ng-switch-when="COMBOBOX"></select>
+																		<div ng-init="onGridCheckboxListInit($dataRow, gridDefaultValue.Field, gridDefaultValue)" ng-dropdown-multiselect="" options="gridDefaultValue.OptionValue"
+																			 selected-model="$dataRow[gridDefaultValue.Field]" checkboxes="true" extra-settings="checkboxListSettings" ng-switch-when="CHECKBOXLIST"></div>
+																	</div>
+																	<input class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" type="text" ng-switch-default>
+																	<div style="display:none;" ng-if="gridDefaultValue.ControlType == 'TEXTAREA' || gridDefaultValue.ControlType == 'TEXTBOX'">
+																		<div mentio mentio-typed-text="typedTerm" trimTerm="true" mentio-trigger-char="'@'" mentio-items="variableArray" mentio-trigger-delete="false" mentio-format="'[@{0}]'" ng-model="$dataRow[gridDefaultValue.Field]"></div>
+																	</div>
+																</div>
+															</div>
+														</td>
+														<td>
+															<button class="rounded iconAdd" ng-click="onAddClick(value, value.Field, $dataRow)" ng-show="enabledOptionGrid('ADD', value.OptionValue)">+</button>
+														</td>
+													</tr>
+												</tfoot>
+											</table>
+											<input class="form-control" ng-model="value.Value" type="text" ng-switch-default ng-required="onValueRequired(value.Required, value.Visible)">
+											<div style="display:none;" ng-if="value.ControlType == 'TEXTAREA' || value.ControlType == 'TEXTBOX'">
+												<div mentio mentio-typed-text="typedTerm" trimTerm="true" mentio-trigger-char="'@'" mentio-items="variableArray" mentio-trigger-delete="false" mentio-format="'[@{0}]'" ng-model="$data[value.Field]"></div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<script src="../Scripts/AngularJS/angular/jquery.min.js" type="text/javascript"></script>
+	<script src="../Scripts/AngularJS/angular/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="../Scripts/AngularJS/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../Scripts/AngularJS/angular/angular.min.js" type="text/javascript"></script>
+	<script src="../Scripts/AngularJS/angular/angularjs-contenteditable.js" type="text/javascript"></script>
+	<script src="../Scripts/AngularJS/angular/angularjs-dropdown-multiselect.min.js" type="text/javascript"></script>
+	<script src="../Scripts/AngularJS/angular/angular-translate.min.js" type="text/javascript"></script>
+	<script src="../Scripts/AngularJS/angular/angular-translate-loader-partial.min.js" type="text/javascript"></script>
+	<script src="../Scripts/AngularJS/angular/generic-scripts.js" type="text/javascript"></script>
+	<script src="../Scripts/AngularJS/angular/mentio.js" type="text/javascript"></script>
+	<script>
+		var app = angular.module('app', ['angularjs-dropdown-multiselect', 'pascalprecht.translate', 'mentio']);
+		var translationValue = null;
+		var translationReady = false;
+		var providerTranslations = null;
+
+		app.config(function ($translateProvider, $httpProvider) {
+			$httpProvider.defaults.useXDomain = true;
+			delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+			//$translateProvider.useLoader('$translatePartialLoader', {
+			//	urlTemplate: 'Resources/{part}/{lang}.json'
+			//});
+
+			setTimeout(function () {
+
+				$translateProvider.translations('es', {
+					TRANSLATION: translationValue
+				});
+				$translateProvider.useLoaderCache(false);
+				$translateProvider.preferredLanguage('es');
+				document.getElementById('btnRefreshTranslation').click();
+
+				translationReady = true;
+			}, 1000);
+
+		});
+
+		app.controller("AppController", function ($scope, $translate, $translatePartialLoader) {
+			//$translatePartialLoader.addPart('i18n');
+			//$translate.refresh();
+			$scope.tableStyle = { "overflow-x": "auto" };
+			$scope.commonStyle = { "overflow-x": "auto" };
+			$scope.isLoading = true;
+			$scope.fieldName = "[@fieldName]";
+			$scope.componentName = "[@componentName]";
+			$scope.getSetSelected = '[@action]';
+			$scope.getSetOption = ["", "GET", "SET"];
+			$scope.checkboxListSettings = {
+				scrollableHeight: '250px',
+				scrollable: true,
+				enableSearch: false
+			};
+
+			$scope.enabledOptions = false;
+			$scope.fieldList = [];
+			$scope.fieldArray = [];
+			$scope.$data = {};
+
+			$scope.refreshTranslation = function () {
+				$translate.refresh();
+			};
+
+			$scope.changeLanguage = function (languageKey) {
+				$translate.use(languageKey);
+				$scope.isLoading = false;
+			};
+
+			$scope.setFieldTranslation = function (customTranslate, defaultTranslate) {
+				var result = null;
+
+				if ($translate.instant("TRANSLATION." + customTranslate) == "TRANSLATION." + customTranslate) {
+					result = defaultTranslate;
+				}
+				else {
+					result = $translate.instant("TRANSLATION." + customTranslate);
+				}
+
+				return result;
+			};
+
+			$scope.setAngularFields = function (fieldName, componentName, getSetSelected, fieldArray, variableArray) {
+				$scope.fieldName = fieldName;
+				$scope.componentName = componentName;
+				$scope.getSetSelected = getSetSelected;
+				$scope.fieldArray = angular.copy(fieldArray);
+				$scope.variableArray = [];
+				$scope.selectAction($scope.getSetSelected);
+
+				if (variableArray != null && variableArray.length > 0) {
+					$scope.variableArray = variableArray.map(function (item) {
+						return { 'label': item }
+					})
+				}
+
+				document.getElementById('btnDummy').click();
+
+				$scope.loadResult();
+
+				document.getElementById('btnDummy').click();
+			};
+
+			$scope.setTableStyle = function (tableStyle) {
+				$scope.tableStyle = tableStyle;
+				$scope.$apply();
+				//document.getElementById('btnDummy').click();
+			}
+
+			$scope.setCommonStyle = function (commonStyle) {
+				$scope.commonStyle = commonStyle;
+				$scope.$apply();
+				//document.getElementById('btnDummy').click();
+			}
+
+			$scope.setEnabledOptions = function (enabledOptions) {
+				$scope.enabledOptions = enabledOptions;
+
+				document.getElementById('btnDummy').click();
+			};
+
+			$scope.onVisibleValidation = function (value) {
+				var result = true;
+				if (value.Visible != undefined) {
+					result = $scope.$eval(value.Visible);
+				}
+				return result;
+			};
+
+			$scope.onValueRequired = function (required, visibleEval) {
+				var result = false;
+
+				if (required) {
+					result = required;
+				}
+
+				if (visibleEval) {
+					var visible = $scope.$eval(visibleEval);
+					if (!visible) {
+						result = false;
+					}
+				}
+
+				return result;
+			};
+
+			$scope.selectAction = function (selection) {
+				if (selection != null && selection != '') {
+					for (var item in $scope.fieldArray) {
+						if (selection == $scope.fieldArray[item].FORMAT) {
+							$scope.fieldList = $scope.fieldArray[item].FIELD_LIST;
+						}
+					}
+				}
+				//$scope.isLoading = false;
+			};
+
+			$scope.onChangeGetSet = function () {
+				$scope.selectAction($scope.getSetSelected);
+			};
+
+			$scope.checkboxListToArray = function (elementValue) {
+				var jsonArray = [];
+				for (e in elementValue) {
+					if (typeof elementValue === 'object') {
+						if (!elementValue[e].id) {
+							jsonArray.push({ "label": elementValue[e], "id": elementValue[e] });
+						} else {
+							jsonArray = angular.copy(elementValue);
+							break;
+						}
+					}
+					else {
+						jsonArray = angular.copy(elementValue);
+						break;
+					}
+				}
+				return jsonArray;
+			};
+
+			$scope.ArrayToCheckboxList = function (elementValue) {
+				var jsonArray = [];
+				for (e in elementValue) {
+					if (typeof elementValue[e] === 'object') {
+						jsonArray = angular.copy(elementValue);
+						break;
+					}
+					else {
+						jsonArray.push({ "label": elementValue[e], "id": elementValue[e] });
+					}
+				}
+				return jsonArray;
+			};
+
+			$scope.onRowInit = function (value) {
+
+				if (value != null) {
+					if (value.RequiredByUser == undefined) {
+						value.RequiredByUser = true;
+					}
+
+					if (value.EditableByUser == undefined) {
+						value.EditableByUser = true;
+					}
+
+					if (value.VisibleByUser == undefined) {
+						value.VisibleByUser = true;
+					}
+				}
+
+			};
+
+			$scope.onGridInit = function (value) {
+				if (value != null && $scope.$data[value.Field] == undefined) {
+					$scope.$data[value.Field] = [];
+				}
+			}
+
+
+			$scope.onCheckboxListInit = function (element) {
+				if (element) {
+					{
+						element.Value = $scope.checkboxListToArray(element.Value);
+					}
+					{
+						element.OptionValue = $scope.ArrayToCheckboxList(element.OptionValue);
+					}
+				}
+			};
+
+			$scope.onGridCheckboxListInit = function (element, key, defaultElement) {
+				if (defaultElement) {
+					{
+						element[key] = $scope.checkboxListToArray(element[key]);
+					}
+					{
+						defaultElement.OptionValue = $scope.ArrayToCheckboxList(defaultElement.OptionValue);
+					}
+				}
+			};
+
+			$scope.getDefaultValueGrid = function (grid) {
+				var json = {};
+				if (grid != null) {
+					for (var item in grid.DefaultValue) {
+						json[grid.DefaultValue[item].Field] = grid.DefaultValue[item].Value;
+					}
+				}
+				return angular.copy(json);
+			};
+
+			$scope.enabledOptionGrid = function (action, optionValue) {
+				var isEnabled = false;
+
+				if (optionValue != null && Array.isArray(optionValue)
+					&& action != null) {
+
+					if (optionValue.indexOf(action) > -1) {
+						isEnabled = true;
+					}
+
+				}
+
+				return isEnabled;
+			};
+
+			$scope.onDeleteClick = function (grid, gridField, rowIndex) {
+				if (grid != null && rowIndex > -1) {
+					$scope.$data[gridField].splice(rowIndex, 1);
+				}
+			};
+
+			$scope.onInsertClick = function (grid, gridField, rowIndex) {
+				if (grid != null && rowIndex > -1) {
+					var jsonRow = $scope.getDefaultValueGrid(grid);
+					$scope.$data[gridField].splice(rowIndex, 0, jsonRow);
+				}
+			};
+
+			$scope.onAddClick = function (grid, gridField, gridValue) {
+				if (grid != null) {
+					var json = {};
+					var assing = false;
+					for (var item in grid.DefaultValue) {
+						assing = false;
+						for (var itemFooter in gridValue) {
+							if (grid.DefaultValue[item].Field == itemFooter) {
+								json[grid.DefaultValue[item].Field] = angular.copy(gridValue[itemFooter]);
+								gridValue[itemFooter] = null;
+								assing = true;
+							}
+						}
+
+						if (!assing) {
+							gridValue[grid.DefaultValue[item].Field] = null;
+						}
+					}
+
+					$scope.$data[gridField].push(json);
+					gridValue = $scope.getDefaultValueGrid(grid);
+				}
+			};
+
+			$scope.onMoveUpClick = function (fieldName, index) {
+				if (index > 0) {
+					var grid = $scope.$data[fieldName];
+					const tmp = grid[index - 1];
+					grid[index - 1] = grid[index];
+					grid[index] = tmp;
+				}
+			};
+
+			$scope.onMoveDownClick = function (fieldName, index) {
+				var grid = $scope.$data[fieldName];
+				if (grid != null) {
+					if (index < grid.length - 1) {
+						const tmp = grid[index + 1];
+						grid[index + 1] = grid[index];
+						grid[index] = tmp;
+					}
+				}
+			};
+
+			// LUIS VERA: ESTA FUNCIÓN ES PARA LLENAR UN COMBOBOX CON LOS VALORES DE UN GRID DINAMICO, PERO SE QUEDABA CICLADO
+			// ng-options="key as value for (key , value) in onSetOptionValue(value.OptionValue, value.OptionDisplay, value.OptionKey, true)"
+			// ng-options="key as value for (key , value) in onSetOptionValue(gridDefaultValue.OptionValue, gridDefaultValue.OptionDisplay, gridDefaultValue.OptionKey, true)"
+			// ng-options="key as value for (key , value) in onSetOptionValue(gridDefaultValue.OptionValue, gridDefaultValue.OptionDisplay, gridDefaultValue.OptionKey, true)"
+			$scope.onSetOptionValue = function (optionValue, optionDisplay, optionKey, sort) {
+				var result = null;
+
+				if (optionDisplay && optionKey) {
+					result = [];
+					optionValue = $scope.$eval(optionValue);
+
+					for (var item in optionValue) {
+						result.push(optionValue[item][optionDisplay]);
+
+						//result.push({
+						//    "key": optionValue[item][optionKey],
+						//    "value": optionValue[item][optionDisplay]
+						//});
+					}
+
+					if (sort && sort == true) {
+						result.sort();
+					}
+
+					// LUIS VERA: ESTA FUNCION result.sort NO ES RECONOCIDA POR EL EDGE Y NO GENERABA EL FORMULARIO, PUEDE SER EL LAMBDA EXPRESSION
+					//if (sort && sort == true) {
+					//    result = result.sort((a, b) => {
+					//        if (a.value < b.value) {
+					//            return -1;
+					//        }
+					//    });
+					//}
+				}
+				else {
+					if (optionValue) {
+						result = [];
+						for (var item in optionValue) {
+							result.push(optionValue[item]);
+							//result.push({
+							//    "key": optionValue[item],
+							//    "value": optionValue[item]
+							//});
+						}
+
+						if (sort && sort == true) {
+							result.sort();
+						}
+					}
+				}
+
+				return result;
+			};
+
+			$scope.getCheckboxListValue = function (itemValue) {
+				var arrayValue = [];
+				for (var index in itemValue) {
+					arrayValue.push(itemValue[index].id);
+				}
+				return angular.copy(arrayValue);
+			};
+
+			$scope.loadResult = function () {
+				$scope.$data = {};
+
+				for (var item in $scope.fieldList) {
+					if ($scope.fieldList[item].ControlType == "CHECKBOXLIST") {
+						$scope.$data[$scope.fieldList[item].Field] = $scope.getCheckboxListValue($scope.fieldList[item].Value);
+					}
+					else if ($scope.fieldList[item].ControlType == "GRID") {
+						for (itemId in $scope.fieldList[item].DefaultValue) {
+							if ($scope.fieldList[item].DefaultValue[itemId].ControlType == "CHECKBOXLIST") {
+								var checkboxListField = $scope.fieldList[item].DefaultValue[itemId].Field;
+								for (var gridField in $scope.fieldList[item].Value) {
+									$scope.fieldList[item].Value[gridField][checkboxListField] = $scope.getCheckboxListValue($scope.fieldList[item].Value[gridField][checkboxListField]);
+								}
+							}
+						}
+
+						$scope.$data[$scope.fieldList[item].Field] = angular.copy($scope.fieldList[item].Value);
+					}
+					else {
+						$scope.$data[$scope.fieldList[item].Field] = angular.copy($scope.fieldList[item].Value);
+					}
+				}
+
+			};
+
+			$scope.onSuccess = function () {
+				var result = {};
+
+				if ($scope.form.$valid) {
+
+					for (var item in $scope.fieldList) {
+						if ($scope.fieldList[item].ControlType == "CHECKBOXLIST") {
+							if (!$scope.fieldList[item].RequiredByUser ||
+								!$scope.fieldList[item].EditableByUser ||
+								!$scope.fieldList[item].VisibleByUser) {
+								var jsonValue = {
+									"RequiredByUser": $scope.fieldList[item].RequiredByUser != undefined ? $scope.fieldList[item].RequiredByUser : true,
+									"VisibleByUser": $scope.fieldList[item].VisibleByUser != undefined ? $scope.fieldList[item].VisibleByUser : true,
+									"EditableByUser": $scope.fieldList[item].EditableByUser != undefined ? $scope.fieldList[item].EditableByUser : true,
+									"ValueByUser": $scope.getCheckboxListValue($scope.$data[$scope.fieldList[item].Field])
+								};
+
+								result[$scope.fieldList[item].Field] = jsonValue;
+
+							}
+							else {
+								result[$scope.fieldList[item].Field] = $scope.getCheckboxListValue($scope.$data[$scope.fieldList[item].Field]);
+							}
+						}
+						else if ($scope.fieldList[item].ControlType == "GRID") {
+							// LUIS VERA REVISAR LA PARTE DEL CHECKBOXLIST
+							for (itemId in $scope.fieldList[item].DefaultValue) {
+								if ($scope.fieldList[item].DefaultValue[itemId].ControlType == "CHECKBOXLIST") {
+									var checkboxListField = $scope.fieldList[item].DefaultValue[itemId].Field;
+									for (var gridField in $scope.fieldList[item].Value) {
+										//$scope.fieldList[item].Value[gridField][checkboxListField] = $scope.getCheckboxListValue($scope.fieldList[item].Value[gridField][checkboxListField]);
+										$scope.$data[$scope.fieldList[item].Field][gridField][checkboxListField] = $scope.getCheckboxListValue($scope.$data[$scope.fieldList[item].Field][gridField][checkboxListField]);
+									}
+								}
+							}
+
+							if (!$scope.fieldList[item].RequiredByUser ||
+								!$scope.fieldList[item].EditableByUser ||
+								!$scope.fieldList[item].VisibleByUser) {
+								var jsonValue = {
+									"RequiredByUser": $scope.fieldList[item].RequiredByUser != undefined ? $scope.fieldList[item].RequiredByUser : true,
+									"VisibleByUser": $scope.fieldList[item].VisibleByUser != undefined ? $scope.fieldList[item].VisibleByUser : true,
+									"EditableByUser": $scope.fieldList[item].EditableByUser != undefined ? $scope.fieldList[item].EditableByUser : true,
+									"ValueByUser": angular.copy($scope.$data[$scope.fieldList[item].Field])
+								};
+
+								result[$scope.fieldList[item].Field] = jsonValue;
+							}
+							else {
+								result[$scope.fieldList[item].Field] = angular.copy($scope.$data[$scope.fieldList[item].Field]);
+							}
+						}
+						else {
+							if (!$scope.fieldList[item].RequiredByUser ||
+								!$scope.fieldList[item].EditableByUser ||
+								!$scope.fieldList[item].VisibleByUser) {
+
+								var jsonValue = {
+									"RequiredByUser": $scope.fieldList[item].RequiredByUser != undefined ? $scope.fieldList[item].RequiredByUser : true,
+									"VisibleByUser": $scope.fieldList[item].VisibleByUser != undefined ? $scope.fieldList[item].VisibleByUser : true,
+									"EditableByUser": $scope.fieldList[item].EditableByUser != undefined ? $scope.fieldList[item].EditableByUser : true,
+									"ValueByUser": angular.copy($scope.$data[$scope.fieldList[item].Field])
+								};
+
+								result[$scope.fieldList[item].Field] = jsonValue;
+							}
+							else {
+								result[$scope.fieldList[item].Field] = angular.copy($scope.$data[$scope.fieldList[item].Field]);
+							}
+						}
+					}
+				}
+				else {
+					//result["errorMessageInForm"] = "";
+					result["hasErrorInForm"] = true;
+				}
+
+				return angular.toJson(result, true);
+			};
+		});
+
+		app.directive('datePicker', function () {
+			return {
+				restrict: 'A',
+				require: 'ngModel',
+				link: function (scope, elm, attr, ctrl) {
+
+					// Format date on load
+					ctrl.$formatters.unshift(function (value) {
+						if (value && moment(value).isValid()) {
+							return moment(new Date(value)).format('MM/DD/YYYY');
+						}
+						return value;
+					})
+
+					//Disable Calendar
+					scope.$watch(attr.ngDisabled, function (newVal) {
+						if (newVal === true)
+							$(elm).datepicker("disable");
+						else
+							$(elm).datepicker("enable");
+					});
+
+					// Datepicker Settings
+					elm.datepicker({
+						autoSize: true,
+						changeYear: true,
+						changeMonth: true,
+						dateFormat: attr["dateformat"] || 'mm/dd/yy',
+						showOn: 'button',
+						buttonText: '<i class="bi-calendar-event"></i>',
+						onSelect: function (valu) {
+							scope.$apply(function () {
+								ctrl.$setViewValue(valu);
+							});
+							elm.focus();
+						},
+
+						beforeShow: function () {
+							debugger;
+							if (attr["minDate"] != null)
+								$(elm).datepicker('option', 'minDate', attr["minDate"]);
+
+							if (attr["maxDate"] != null)
+								$(elm).datepicker('option', 'maxDate', attr["maxDate"]);
+						},
+
+
+					});
+				}
+			}
+		});
+
+		function getAngularScope() {
+			return angular.element(document.getElementById('controllerId')).scope();
+		}
+
+		function setFieldsEncode(fieldName, componentName, getSetSelected, fieldArray, variableArray) {
+            setFields(fieldName, componentName, getSetSelected, atob(fieldArray), atob(variableArray));
+		}
+
+		function setFields(fieldName, componentName, getSetSelected, fieldArray, variableArray) {
+			getAngularScope().setAngularFields(fieldName, componentName, getSetSelected, JSON.parse(fieldArray),
+				variableArray ? JSON.parse(variableArray) : []);
+		}
+
+		function setEnabledOptions(enabledOptions) {
+			getAngularScope().setEnabledOptions(enabledOptions);
+		}
+
+		function onSuccessData() {
+			return getAngularScope().onSuccess();
+		}
+
+        function setTranslationEncode(value) {
+            setTranslation(atob(value));
+        }
+
+		function setTranslation(value) {
+			translationValue = JSON.parse(value);
+		}
+
+		function setStyle() {
+			//alert(window.innerWidth); // tamaño actual de la ventana cliente
+			//alert(screen.width); // tamaño total de ventana
+
+			getAngularScope().setTableStyle({
+				"width": "100%"
+			});
+
+			getAngularScope().setCommonStyle({
+				"width": (window.innerWidth - 25).toString() + "px",
+				"overflow-x": "auto"
+			});
+
+		}
+
+		window.onresize = function () {
+			setStyle();
+		}
+
+	</script>
+	<script src="../Scripts/AngularJS/angular/datepicker.js" type="text/javascript"></script>
+
+	<!--<script type="text/ng-template" id="/variable-mentions.tpl">
+		<ul class="list-group user-search">
+			<li mentio-menu-item="item" ng-repeat="item in items" class="list-group-item">
+				<span class="text-primary" ng-bind-html="item.label | mentioHighlight:typedTerm:'menu-highlighted' | unsafe"></span>
+			</li>
+		</ul>
+	</script>-->
+
+</body>
+</html>

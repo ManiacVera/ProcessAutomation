@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
+    <Nullable>disable</Nullable>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProcessAutomation.FrameworkExpress\ProcessAutomation.FrameworkExpress.csproj" />
+  </ItemGroup>
+
+	<Target Name="CopyAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+		<ItemGroup>
+			<PackageFramework Include="$(TargetDir)/*.dll;" />
+		</ItemGroup>
+		<Message Text="Copy PackageApp" Importance="normal" />
+		<Copy SourceFiles="@(PackageFramework)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+	</Target>
+
+	<Target Name="CopyRuntimeFiles" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+        <ItemGroup>
+            <CopyRuntimeFiles Include="$(TargetDir)runtimes\$(ActiveCommonFolder)\**\*.dll;$(TargetDir)runtimes\$(ActiveRuntime)\**\*.dll;" />
+        </ItemGroup>
+
+        <Message Text="Copy CopyRuntimeFiles @(CopyRuntimeFiles)" Importance="high" />
+        <Copy SourceFiles="@(CopyRuntimeFiles)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+    </Target>
+
+</Project>

@@ -1,0 +1,218 @@
+[
+  {
+    "FORMAT": "COMPONENT",
+    "FIELD_LIST": [
+      {
+        "Label": "Navegador",
+        "Field": "Browser",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "", "BRAVE", "CHROME", "EDGE", "FIREFOX", "OTHER" ],
+        "DefaultValue": ""
+      },
+      {
+        "Label": "Ruta binario",
+        "Field": "BinaryLocation",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Browser == 'OTHER'"
+      },
+      {
+        "Label": "Opciones",
+        "Field": "Options",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Incognito",
+        "Field": "Incognito",
+        "Value": true,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": true
+      }
+    ]
+  },
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Pagina actual",
+        "Field": "CurrentPage",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Page",
+        "Field": "Page",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.CurrentPage == false"
+      },
+      {
+        "Label": "Delay",
+        "Field": "Delay",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Accion",
+        "Field": "Action",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "GET", "SET" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo de busqueda",
+        "Field": "SearchType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "ID", "NAME", "TAG_NAME", "TEXT", "CONTAINS", "CLASS_NAME", "CSS_SELECTOR", "XPATH" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Objeto",
+        "Field": "Object",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Concatenar uniones",
+        "Field": "ConcatUnion",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.SearchType == 'XPATH'"
+      },
+      {
+        "Label": "Cantidad de uniones",
+        "Field": "QuantityUnion",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.SearchType == 'XPATH' && $data.ConcatUnion == true"
+      },
+      {
+        "Label": "Separador de concatenacion",
+        "Field": "ConcatSeparator",
+        "Value": ",",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.SearchType == 'XPATH' && $data.ConcatUnion == true"
+      },
+      {
+        "Label": "Valor",
+        "Field": "Value",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'SET'"
+      },
+      {
+        "Label": "Multiple",
+        "Field": "Multiple",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Get only text",
+        "Field": "OnlyText",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'GET'"
+      },
+      {
+        "Label": "Atributo",
+        "Field": "Attribute",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'GET' && $data.OnlyText == false"
+      },
+      {
+        "Label": "Evento",
+        "Field": "Event",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "", "ENTER", "CLICK" ],
+        "DefaultValue": null
+      }
+    ]
+  }
+]

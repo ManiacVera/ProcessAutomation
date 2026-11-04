@@ -1,0 +1,94 @@
+[
+  {
+    "FORMAT": "COMPONENT",
+    "FIELD_LIST": [
+      {
+        "Label": "Usuario",
+        "Field": "User",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Contrasena",
+        "Field": "Password",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": true,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Logon type",
+        "Field": "LogonType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [
+          "Interactive",
+          "Network",
+          "Batch",
+          "Service",
+          "Unlock",
+          "NetworkCleartext",
+          "NewCredentials"
+        ],
+        "DefaultValue": null
+      }
+    ]
+  },
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Usuario",
+        "Field": "User",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Contrasena",
+        "Field": "Password",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": true,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Logon type",
+        "Field": "LogonType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [
+          "Interactive",
+          "Network",
+          "Batch",
+          "Service",
+          "Unlock",
+          "NetworkCleartext",
+          "NewCredentials"
+        ],
+        "DefaultValue": null
+      }
+    ]
+  }
+]

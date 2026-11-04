@@ -1,0 +1,24 @@
+﻿@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<ShellMenuComponent> localizer
+
+<div class="row rounded-bottom">
+    <RadzenMenu class="col-md-10" Click="@MenuClick">
+        <RadzenMenuItem Text="@localizer["ProcessMenu"]" Icon="lightbulb_outline" style="z-index: 10;" Path="ProcessPage">
+        </RadzenMenuItem>
+        <RadzenMenuItem Text="@localizer["CommentMenu"]" Icon="feedback" style="z-index: 10;" Path="CommentPage">
+        </RadzenMenuItem>
+        <RadzenMenuItem Text="@localizer["DependencyMenu"]" Icon="get_app" style="z-index: 10;">
+            <RadzenMenuItem Text="@localizer["NetCoreMenu"]"></RadzenMenuItem>
+        </RadzenMenuItem>
+        <RadzenMenuItem Text="@localizer["UserMenu"]" Icon="account_circle" style="z-index: 10;">
+            <RadzenMenuItem Text="@localizer["AccountMenu"]" Path="Account"></RadzenMenuItem>
+            <RadzenMenuItem Text="@localizer["LogoutMenu"]" Path="Logout"></RadzenMenuItem>
+        </RadzenMenuItem>
+    </RadzenMenu>
+    <RadzenMenu class="col-md-2" Click="@LanguageClick">
+        <RadzenMenuItem Text="@localizer["Language"]" Icon="language" style="z-index: 10;">
+            <RadzenMenuItem Text="@localizer["LanguageES"]"></RadzenMenuItem>
+            <RadzenMenuItem Text="@localizer["LanguageEN"]"></RadzenMenuItem>
+        </RadzenMenuItem>
+    </RadzenMenu>
+</div>

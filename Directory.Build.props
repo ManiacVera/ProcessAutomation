@@ -1,0 +1,25 @@
+<Project>
+ <PropertyGroup>
+    <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
+ </PropertyGroup>
+
+  <PropertyGroup>
+    <CurrentArch>$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLower())</CurrentArch>
+    
+    <OSPrefix Condition="$([MSBuild]::IsOSPlatform('Windows'))">win</OSPrefix>
+    <OSPrefix Condition="$([MSBuild]::IsOSPlatform('Linux'))">linux</OSPrefix>
+    <OSPrefix Condition="$([MSBuild]::IsOSPlatform('OSX'))">osx</OSPrefix>
+
+    <ActiveRuntime>$(RuntimeIdentifier)</ActiveRuntime>
+    <ActiveRuntime Condition="'$(ActiveRuntime)' == ''">$(OSPrefix)-$(CurrentArch)</ActiveRuntime>
+
+    <ActiveCommonFolder Condition="$(ActiveRuntime.StartsWith('win'))">win</ActiveCommonFolder>
+    <ActiveCommonFolder Condition="$(ActiveRuntime.StartsWith('linux'))">linux</ActiveCommonFolder>
+    <ActiveCommonFolder Condition="!$(ActiveRuntime.StartsWith('win')) And !$(ActiveRuntime.StartsWith('linux'))">unix</ActiveCommonFolder>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(MSBuildThisFileDirectory)' != ''">
+    <CopyRuntimeCommon Include="runtimes\$(ActiveCommonFolder)\**\*.*" />
+    <CopyRuntimeSpecific Include="runtimes\$(ActiveRuntime)\**\*.*" />
+  </ItemGroup>
+</Project>

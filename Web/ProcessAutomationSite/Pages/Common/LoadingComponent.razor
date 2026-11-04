@@ -1,0 +1,40 @@
+﻿@inject IJSRuntime JsRuntime;
+@using System.Threading;
+
+<div class="modal fade" tabindex="-1" role="dialog" id="loadingPopup" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: orange; color: white;">
+                <h3 class="modal-title">PROCESANDO</h3>
+            </div>
+            <div class="modal-body">
+                @*<h5>
+                        Favor de esperar
+                    </h5>*@
+                <SpinnerComponent></SpinnerComponent>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code
+{
+
+    public Guid Guid = Guid.NewGuid();
+
+    public void Open()
+    {
+        JsRuntime.InvokeVoidAsync("ShowLoading");
+        Thread.Sleep(1000);
+    }
+
+    public void Close()
+    {
+        Thread.Sleep(1000);
+        JsRuntime.InvokeVoidAsync("CloseLoading");
+    }
+
+}

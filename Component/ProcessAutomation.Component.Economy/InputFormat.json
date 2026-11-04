@@ -1,0 +1,247 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Economy type",
+        "Field": "EconomyType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "AMORTIZATION", "SUPPLY_AND_DEMAND" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Demand Source by",
+        "Field": "DemandSourceBy",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "TABLE", "QUERY" ],
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND'"
+      },
+      {
+        "Label": "Demand Table",
+        "Field": "DemandTable",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND' && $data.DemandSourceBy == 'TABLE'"
+      },
+      {
+        "Label": "Demand Query",
+        "Field": "DemandQuery",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND' && $data.DemandSourceBy == 'QUERY'"
+      },
+      {
+        "Label": "Demand Relational Field",
+        "Field": "DemandRelationalField",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND'"
+      },
+      {
+        "Label": "Demand Key Field",
+        "Field": "DemandKeyField",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND'"
+      },
+      {
+        "Label": "Demand Quantity Field",
+        "Field": "DemandQuantityField",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND'"
+      },
+      {
+        "Label": "Demand Order By",
+        "Field": "DemandOrderBy",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND' && $data.DemandSourceBy == 'TABLE'"
+      },
+      {
+        "Label": "Supply Source by",
+        "Field": "SupplySourceBy",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "TABLE", "QUERY" ],
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND'"
+      },
+      {
+        "Label": "Supply Table",
+        "Field": "SupplyTable",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND' && $data.SupplySourceBy == 'TABLE'"
+      },
+      {
+        "Label": "Supply Query",
+        "Field": "SupplyQuery",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND' && $data.SupplySourceBy == 'QUERY'"
+      },
+      {
+        "Label": "Supply Relational Field",
+        "Field": "SupplyRelationalField",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND'"
+      },
+      {
+        "Label": "Supply Key Field",
+        "Field": "SupplyKeyField",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND'"
+      },
+      {
+        "Label": "Supply Quantity Field",
+        "Field": "SupplyQuantityField",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND'"
+      },
+      {
+        "Label": "Supply Order By",
+        "Field": "SupplyOrderBy",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND' && $data.SupplySourceBy == 'TABLE'"
+      },
+
+      {
+        "Label": "Number periods",
+        "Field": "NumberPeriods",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'AMORTIZATION'"
+      },
+      {
+        "Label": "Loan amount",
+        "Field": "LoanAmount",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'AMORTIZATION'"
+      },
+      {
+        "Label": "Interest rate",
+        "Field": "InterestRate",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'AMORTIZATION'"
+      },
+      {
+        "Label": "Decimal option",
+        "Field": "DecimalOption",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "REAL_DECIMAL", "ROUND", "TRUNCATE" ],
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND'"
+      },
+      {
+        "Label": "Decimal quantity",
+        "Field": "DecimalQuantity",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.EconomyType == 'SUPPLY_AND_DEMAND' && ($data.DecimalOption == 'ROUND' || $data.DecimalOption == 'TRUNCATE')"
+      }
+    ]
+  }
+]

@@ -1,0 +1,220 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "DefaultScheme": {
+      "Label": "Esquema default",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SourceFrom": {
+      "Label": "Origen de",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ColumnSeparator": {
+      "Label": "Separador de columna",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DoNothingOnZeroRecords": {
+      "Label": "No hacer nada en 0 registros",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DontUploadEmptyRow": {
+      "Label": "No subir registros vacios",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ComponentReference": {
+      "Label": "Referencia componente",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Source": {
+      "Label": "Origen",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Data": {
+      "Label": "Data",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "TableAttributeList": {
+      "Label": "Attributes",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "IndexTable": {
+      "Label": "Indice tabla",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Scheme": {
+      "Label": "Esquema",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ImportOption": {
+      "Label": "Opcion al importar",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Table": {
+      "Label": "Tabla",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "RenameTable": {
+      "Label": "Renombrar tabla",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Columns": {
+      "Label": "Columnas",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "RemoveDuplicate": {
+      "Label": "Eliminar duplicados",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ReturnList": {
+      "Label": "Variables de retorno",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "PrimaryKeyName": {
+      "Label": "Llave primaria",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "PrimaryKeyColumns": {
+      "Label": "Columnas llave primaria",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "StructureTableList": {
+      "Label": "Estructura",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Column": {
+      "Label": "Columna",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Type": {
+      "Label": "Tipo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Length": {
+      "Label": "Longitud",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DefaultValue": {
+      "Label": "Valor default",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ForeignTableList": {
+      "Label": "Llaves foraneas",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ForeignKey": {
+      "Label": "Llave foranea",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Unique": {
+      "Label": "Unico",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "IndexTableList": {
+      "Label": "Indices",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Index": {
+      "Label": "Indice",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ConstraintTableList": {
+      "Label": "Constraint",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Constraint": {
+      "Label": "Constraint",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SpecialOptionList": {
+      "Label": "Opcion especial",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Option": {
+      "Label": "Opcion",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Separator": {
+      "Label": "Separador",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Value": {
+      "Label": "Valor",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

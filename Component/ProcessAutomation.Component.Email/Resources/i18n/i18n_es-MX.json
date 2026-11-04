@@ -1,0 +1,100 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "From": {
+      "Label": "De",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Display": {
+      "Label": "Display",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "To": {
+      "Label": "Para",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "CC": {
+      "Label": "CC",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "BCC": {
+      "Label": "BCC",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "IsHtml": {
+      "Label": "Html",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Subject": {
+      "Label": "Asunto",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Body": {
+      "Label": "Cuerpo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Host": {
+      "Label": "Servidor",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Port": {
+      "Label": "Puerto",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "UserName": {
+      "Label": "Usuario",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Password": {
+      "Label": "Password",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "EnableSsl": {
+      "Label": "Ssl",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "TargetName": {
+      "Label": "Target name",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Protocol": {
+      "Label": "Protocolo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}
