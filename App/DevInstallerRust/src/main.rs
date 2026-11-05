@@ -184,6 +184,23 @@ fn install_toolchain(os: &str, arch: &str, include_maui: bool) {
             .status();
     }
 
+    let extra_targets = match (os, arch) {
+        ("linux", "x86_64") => vec!["aarch64-unknown-linux-gnu"],
+        ("linux", "aarch64") => vec!["x86_64-unknown-linux-gnu"],
+        ("windows", "x86_64") => vec!["aarch64-pc-windows-msvc"],
+        ("windows", "aarch64") => vec!["x86_64-pc-windows-msvc"],
+        ("macos", "x86_64") => vec!["aarch64-apple-darwin"],
+        ("macos", "aarch64") => vec!["x86_64-apple-darwin"],
+        _ => vec![],
+    };
+
+    for target in extra_targets {
+        println!("Ensuring target {} is added...", target);
+        let _ = Command::new("rustup")
+            .args(["target", "add", target])
+            .status();
+    }
+
     if Command::new("node").arg("--version").status().is_err() {
         println!("Installing Node.js v25.5.0 for {} ({}) ...", os, arch);
         
