@@ -369,11 +369,13 @@
             <RustTargetDir>$(RustAppDir)\target\$(RustTarget)\$(ConfigurationType)</RustTargetDir>
             <RustBuildOutput>$(MSBuildProjectDirectory)\Build\App\$(AppName)</RustBuildOutput>
             <BinaryName Condition="'$(BinaryName)' == ''">$(AppName)</BinaryName>
+            <CargoCommand>cargo build</CargoCommand>
+            <CargoCommand Condition="$(RustTarget.Contains('linux'))">cargo zigbuild</CargoCommand>
         </PropertyGroup>
 
         <RemoveDir Directories="$(RustTargetDir)" Condition="Exists('$(RustTargetDir)')" />
 
-        <Exec Command="cargo build $(CargoFlags) --target $(RustTarget)" WorkingDirectory="$(RustAppDir)" />
+        <Exec Command="$(CargoCommand) $(CargoFlags) --target $(RustTarget)" WorkingDirectory="$(RustAppDir)" />
 
         <Copy SourceFiles="$(RustTargetDir)\$(BinaryName).exe"
               DestinationFiles="$(RustBuildOutput)\$(OutputFileName).exe"

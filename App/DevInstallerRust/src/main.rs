@@ -76,21 +76,32 @@ fn install_linux(arch: &str, include_maui: bool) {
     if is_fedora_rhel_family {
         println!("[Fedora / RHEL / Enterprise] Installing system dependencies...");
         let _ = Command::new("sudo").args(["dnf", "install", "-y", "zlib-ng-compat-devel", "gcc", "fuse", "make", "curl", "tar", "openssl-devel", "pkgconfig"]).status();
+        let _ = Command::new("sudo").args(["dnf", "install", "-y", "zig"]).status();
     } else if is_debian_family {
         println!("[Debian / Ubuntu / Mint] Installing system dependencies...");
         let _ = Command::new("sudo").args(["apt-get", "update"]).status();
         let _ = Command::new("sudo").args(["apt-get", "install", "-y", "build-essential", "zlib1g-dev", "libfuse2", "curl", "tar", "wget", "libssl-dev", "pkg-config"]).status();
+        let _ = Command::new("sudo").args(["apt-get", "install", "-y", "zig"]).status();
     } else if is_arch_family {
         println!("[Arch Linux / Manjaro] Installing system dependencies...");
         let _ = Command::new("sudo").args(["pacman", "-Syu", "--noconfirm", "base-devel", "zlib", "fuse2", "curl", "tar", "openssl", "pkgconf"]).status();
+        let _ = Command::new("sudo").args(["pacman", "-S", "--noconfirm", "zig"]).status();
     } else if is_suse_family {
         println!("[openSUSE] Installing system dependencies...");
         let _ = Command::new("sudo").args(["zypper", "install", "-y", "patterns-base-devel_basis", "zlib-devel", "fuse2", "curl", "tar", "libopenssl-devel", "pkg-config"]).status();
+        let _ = Command::new("sudo").args(["zypper", "install", "-y", "zig"]).status();
     } else {
         println!("[Warning] Unsupported Linux distribution. Skipping system dependencies installation...");
     }
 
     install_toolchain("linux", arch, include_maui);
+
+    if Command::new("cargo-zigbuild").arg("--version").status().is_err() {
+        println!("Installing cargo-zigbuild...");
+        let _ = Command::new("cargo").args(["install", "--locked", "cargo-zigbuild"]).status();
+    } else {
+        println!("cargo-zigbuild is already installed. Skipping.");
+    }
 }
 
 fn install_windows(arch: &str, include_maui: bool) {
