@@ -1,0 +1,64 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "DatabaseType": {
+      "Label": "Tipo base de datos",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ConnetionType": {
+      "Label": "Tipo Conexion",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Server": {
+      "Label": "Servidor",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DataBase": {
+      "Label": "Base de datos",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "UserName": {
+      "Label": "Usuario",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Password": {
+      "Label": "Password",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ConnectionTimeout": {
+      "Label": "Connection Timeout",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Encrypt": {
+      "Label": "Encrypt",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "TrustServerCertificate": {
+      "Label": "Confiar en el certificado del servidor",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

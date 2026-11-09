@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ProcessAutomationMAUI.Pages.Process.InputValuePage"
+             xmlns:dtoInfo="clr-namespace:ProcessAutomationMAUI.DTO.Model"
+             BackgroundColor="{StaticResource bgPage}"
+             Title="Input">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" BackgroundColor="{StaticResource bgArea}">
+            <WebView x:Name="inputWebView" Source="Form/InputFields.html" BackgroundColor="Transparent"  
+                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                IsVisible="True">
+                <WebView.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="Navigated" Command="{Binding WebViewNavigatedCommand}"></toolkit:EventToCommandBehavior>
+                </WebView.Behaviors>
+            </WebView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
+                <Button Text="Aceptar" Command="{Binding AcceptCommand}" ></Button>
+                <Button Text="Cancelar" Command="{Binding CancelCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

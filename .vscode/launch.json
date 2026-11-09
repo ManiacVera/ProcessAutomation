@@ -1,0 +1,93 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Api",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/Api/ProcessAutomation.Api/bin/Debug/net10.0/ProcessAutomationApi.dll",
+            "cwd": "${workspaceFolder}/Api/ProcessAutomation.Api",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Debug WebSite",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/Web/ProcessAutomationSite/bin/Debug/net10.0/ProcessAutomationSite.dll",
+            "cwd": "${workspaceFolder}/Web/ProcessAutomationSite",
+            "launchBrowser": {
+                "enabled": true,
+                "args": "${auto-detect-url}"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Debug Process Automation App",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "start_debug"],
+            "cwd": "${workspaceFolder}/App/ProcessAutomationElectron",
+            "console": "integratedTerminal",
+            "env": {
+                "DEBUG_MODE": "true"
+            }
+        },
+        {
+            "name": "Run Process Automation App",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "start"],
+            "cwd": "${workspaceFolder}/App/ProcessAutomationElectron",
+            "console": "integratedTerminal",
+            "preLaunchTask": "PublishApi"
+        },
+        {
+            "name": "Debug Viewer App",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "start_debug"],
+            "cwd": "${workspaceFolder}/App/ProcessViewerElectron",
+            "console": "integratedTerminal",
+            "env": {
+                "DEBUG_MODE": "true"
+            }
+        },
+        {
+            "name": "Run Viewer App",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "start"],
+            "cwd": "${workspaceFolder}/App/ProcessViewerElectron",
+            "console": "integratedTerminal",
+            "preLaunchTask": "PublishApi"
+        },
+        {
+            "name": "Debug MAUI App",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/App/ProcessAutomationMAUI/ProcessAutomationMAUI.csproj"
+        },
+        {
+            "name": "Debug Console Test",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/Test/ConsoleTest/bin/Debug/net10.0/ConsoleTest.dll",
+            "cwd": "${workspaceFolder}/Test/ConsoleTest",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "C#: Attach to Process",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ]
+}

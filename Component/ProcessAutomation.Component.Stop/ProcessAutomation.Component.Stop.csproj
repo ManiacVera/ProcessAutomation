@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>StopComponent</AssemblyName>
+    <RootNamespace>ProcessAutomation.Component</RootNamespace>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ExternalDependency.json" />
+    <None Remove="Resources\Pages\StopPageComponent.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Pages\StopPageComponent.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="ExternalDependency.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
+    <PackageReference Include="Selenium.Support" Version="4.44.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.44.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\ProcessAutomation.Common\ProcessAutomation.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="External\chromedriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="CopyAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <ItemGroup>
+      <PackageComponent Include="$(TargetDir)/$(TargetFileName);" />
+      <PackageResources Include="$(TargetDir)/Resources/Pages/*.*;" />
+      <PackageNuget Include="$(TargetDir)/*.dll;" Exclude="$(TargetDir)/Microsoft*.dll;$(TargetDir)/$(TargetFileName);" />
+    </ItemGroup>
+    <Message Text="Copy PackageComponent" Importance="normal" />
+    <Copy SourceFiles="@(PackageComponent)" DestinationFolder="$(SolutionDir)/Build/Component" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageNuget)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageResources)" DestinationFolder="$(SolutionDir)/Build/Resources/Pages" ContinueOnError="true" />
+  </Target>
+
+</Project>

@@ -1,0 +1,68 @@
+[
+  {
+    "FORMAT": "COMPONENT",
+    "FIELD_LIST": [
+      {
+        "Label": "Accion",
+        "Field": "Action",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "ENCODE", "DECODE" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo codificacion",
+        "Field": "CodingType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "BASE64", "BASE64URL", "URL" ],
+        "DefaultValue": null
+      }
+    ]
+  },
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Accion",
+        "Field": "Action",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "ENCODE", "DECODE" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo codificacion",
+        "Field": "CodingType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "BASE64", "BASE64URL", "URL" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Valor",
+        "Field": "Value",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Enabled": true
+      }
+    ]
+  }
+]

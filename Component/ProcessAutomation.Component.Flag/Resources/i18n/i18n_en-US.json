@@ -1,0 +1,70 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "FlagType": {
+      "Label": "Flag type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Source": {
+      "Label": "Source",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "WithCondition": {
+      "Label": "With condition",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ConditionType": {
+      "Label": "Condition",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DataType": {
+      "Label": "Data type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Value": {
+      "Label": "Value",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DatabaseComponent": {
+      "Label": "Database component",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "IfComponent": {
+      "Label": "If Component",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Retries": {
+      "Label": "Retries",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Interval": {
+      "Label": "Interval",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

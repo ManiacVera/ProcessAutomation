@@ -1,0 +1,20 @@
+<Project>
+
+  <PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+    <_IsExcludedProject Condition="'$(MSBuildProjectName)' == 'ProcessAutomationWin.App.Windows' Or
+                                   '$(MSBuildProjectName)' == 'ProcessViewerWin.App.Windows' Or
+                                   '$(MSBuildProjectName)' == 'ProcessExeWin'">true</_IsExcludedProject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(_IsExcludedProject)' == 'true'">
+    <BuildDependsOn></BuildDependsOn>
+    <RebuildDependsOn></RebuildDependsOn>
+    <CompileDependsOn></CompileDependsOn>
+    <RestoreByProject>false</RestoreByProject>
+  </PropertyGroup>
+
+  <Target Name="SkipUnsupportedProjectsOnMac" BeforeTargets="Restore;Build;Rebuild" Condition="'$(_IsExcludedProject)' == 'true'">
+    <Warning Text="[macOS Build] Omitiendo compilación de '$(MSBuildProjectName)' por no ser compatible con esta plataforma." />
+  </Target>
+
+</Project>

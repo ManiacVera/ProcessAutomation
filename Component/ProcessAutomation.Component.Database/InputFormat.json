@@ -1,0 +1,109 @@
+[
+  {
+    "FORMAT": "COMPONENT",
+    "FIELD_LIST": [
+      {
+        "Label": "Tipo base de datos",
+        "Field": "DatabaseType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "SQL", "MYSQL", "ORACLE" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo Conexion",
+        "Field": "ConnetionType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "STANDARD_CONNECTION", "TRUSTED_CONNECTION" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Server",
+        "Field": "Server",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "DataBase",
+        "Field": "DataBase",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "UserName",
+        "Field": "UserName",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.ConnetionType == 'STANDARD_CONNECTION'"
+      },
+      {
+        "Label": "Password",
+        "Field": "Password",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": true,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.ConnetionType == 'STANDARD_CONNECTION'"
+      },
+      {
+        "Label": "ConnectionTimeout",
+        "Field": "ConnectionTimeout",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Encrypt",
+        "Field": "Encrypt",
+        "Value": 0,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Trust server certificate",
+        "Field": "TrustServerCertificate",
+        "Value": 0,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  }
+
+]

@@ -1,0 +1,28 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "AlgorithmType": {
+      "Label": "Tipo encriptacion",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Key": {
+      "Label": "Llave",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Action": {
+      "Label": "Accion",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

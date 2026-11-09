@@ -1,0 +1,58 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Value1": {
+      "Label": "Value 1",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ConditionType": {
+      "Label": "Condition",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Value2": {
+      "Label": "Value 2",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DataType": {
+      "Label": "Data type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ValidatorType1": {
+      "Label": "Validator type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ValidatorType2": {
+      "Label": "Validator type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ValidatorValue1": {
+      "Label": "Validator value",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ValidatorValue2": {
+      "Label": "Validator value",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

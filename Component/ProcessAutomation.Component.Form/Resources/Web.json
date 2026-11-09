@@ -1,0 +1,514 @@
+﻿{
+  "RowTemplate": "\t\t\t\t<div class=\"form-group row\">[@CONTROL_LIST]\r\n\t\t\t\t</div>",
+  "ControlList": [
+    {
+      "ControlType": "BOOL",
+      "ControlTemplate": "\r\n\t\t\t\t\t<div class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<label name=\"lbl[@EXT-RES-FIELD_NAME]\" for=\"[@EXT-RES-FIELD_NAME]\">[@EXT-FIELD_NAME]</label>\r\n\t\t\t\t\t\t<input type=\"checkbox\" class=\"form-control\" [@PROPERTY_LIST]>\r\n\t\t\t\t\t</div>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "id",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "KEY"
+        },
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "ng-model",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": true,
+          "Type": "MODEL",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "autocomplete",
+          "DefaultValue": "off",
+          "Required": true,
+          "Type": "AUTOCOMPLETE",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-required",
+          "DefaultValue": "[@EXT-REQUIRED]",
+          "Required": false,
+          "Type": "REQUIRED",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-hide",
+          "DefaultValue": "[@EXT-HIDE]",
+          "Required": false,
+          "Type": "HIDE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-disabled",
+          "DefaultValue": "[@EXT-DISABLED]",
+          "Required": false,
+          "Type": "DISABLE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        }
+      ]
+    },
+    {
+      "ControlType": "TEXT",
+      "ControlTemplate": "\r\n\t\t\t\t\t<div class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<label name=\"lbl[@EXT-RES-FIELD_NAME]\" for=\"[@EXT-RES-FIELD_NAME]\">[@EXT-FIELD_NAME]</label>\r\n\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" [@PROPERTY_LIST]>\r\n\t\t\t\t\t</div>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "id",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "KEY"
+        },
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "placeholder",
+          "DefaultValue": "",
+          "Required": false,
+          "Type": "PLACE_HOLDER"
+        },
+        {
+          "Name": "ng-model",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": true,
+          "Type": "MODEL",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "autocomplete",
+          "DefaultValue": "off",
+          "Required": true,
+          "Type": "AUTOCOMPLETE",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-required",
+          "DefaultValue": "[@EXT-REQUIRED]",
+          "Required": false,
+          "Type": "REQUIRED",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-hide",
+          "DefaultValue": "[@EXT-HIDE]",
+          "Required": false,
+          "Type": "HIDE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-disabled",
+          "DefaultValue": "[@EXT-DISABLED]",
+          "Required": false,
+          "Type": "DISABLE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-minlength",
+          "DefaultValue": "0",
+          "Required": false,
+          "Type": "MIN_LENGTH"
+        },
+        {
+          "Name": "ng-maxlength",
+          "DefaultValue": "9999",
+          "Required": false,
+          "Type": "MAX_LENGTH"
+        },
+        {
+          "Name": "change-directive",
+          "DefaultValue": "[@EXT-OPTION_VALUE]",
+          "Required": false,
+          "Type": "CHANGE_EVENT",
+          "PropertyFormat": "[@NAME]='{\"ref\": \"[@DEFAULT_VALUE]_ref\", \"option\": \"[@EXT-ITEM]\"}'"
+        }
+      ]
+    },
+    {
+      "ControlType": "PASSWORD",
+      "ControlTemplate": "\r\n\t\t\t\t\t<div class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<label name=\"lbl[@EXT-RES-FIELD_NAME]\" for=\"[@EXT-RES-FIELD_NAME]\">[@EXT-FIELD_NAME]</label>\r\n\t\t\t\t\t\t<input type=\"password\" class=\"form-control\" [@PROPERTY_LIST]>\r\n\t\t\t\t\t</div>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "id",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "KEY"
+        },
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "placeholder",
+          "DefaultValue": "",
+          "Required": false,
+          "Type": "PLACE_HOLDER"
+        },
+        {
+          "Name": "ng-model",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": true,
+          "Type": "MODEL",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "autocomplete",
+          "DefaultValue": "off",
+          "Required": true,
+          "Type": "AUTOCOMPLETE",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-required",
+          "DefaultValue": "[@EXT-REQUIRED]",
+          "Required": false,
+          "Type": "REQUIRED",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-hide",
+          "DefaultValue": "[@EXT-HIDE]",
+          "Required": false,
+          "Type": "HIDE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-disabled",
+          "DefaultValue": "[@EXT-DISABLED]",
+          "Required": false,
+          "Type": "DISABLE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-minlength",
+          "DefaultValue": "0",
+          "Required": false,
+          "Type": "MIN_LENGTH"
+        },
+        {
+          "Name": "ng-maxlength",
+          "DefaultValue": "9999",
+          "Required": false,
+          "Type": "MAX_LENGTH"
+        }
+      ]
+    },
+    {
+      "ControlType": "LABEL",
+      "ControlTemplate": "\r\n\t\t\t\t\t<div class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<div>&nbsp;</div>\r\n\t\t\t\t\t\t<label [@PROPERTY_LIST]>{{[@EXT-FIELD_VALUE]}}</label>\r\n\t\t\t\t\t</div>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "id",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "KEY"
+        },
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        }
+      ]
+    },
+    {
+      "ControlType": "INT",
+      "ControlTemplate": "\r\n\t\t\t\t\t<div class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<label name=\"lbl[@EXT-RES-FIELD_NAME]\" for=\"[@EXT-RES-FIELD_NAME]\">[@EXT-FIELD_NAME]</label>\r\n\t\t\t\t\t\t<input type=\"number\" class=\"form-control\" ng-pattern=\"/^[0-9]+$/\" [@PROPERTY_LIST]>\r\n\t\t\t\t\t</div>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "id",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "KEY"
+        },
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "placeholder",
+          "DefaultValue": "",
+          "Required": false,
+          "Type": "PLACE_HOLDER"
+        },
+        {
+          "Name": "ng-model",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": true,
+          "Type": "MODEL",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "autocomplete",
+          "DefaultValue": "off",
+          "Required": true,
+          "Type": "AUTOCOMPLETE",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-required",
+          "DefaultValue": "[@EXT-REQUIRED]",
+          "Required": false,
+          "Type": "REQUIRED",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-hide",
+          "DefaultValue": "[@EXT-HIDE]",
+          "Required": false,
+          "Type": "HIDE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-disabled",
+          "DefaultValue": "[@EXT-DISABLED]",
+          "Required": false,
+          "Type": "DISABLE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-minlength",
+          "DefaultValue": "0",
+          "Required": false,
+          "Type": "MIN_LENGTH"
+        },
+        {
+          "Name": "ng-maxlength",
+          "DefaultValue": "9999",
+          "Required": false,
+          "Type": "MAX_LENGTH"
+        }
+      ]
+    },
+    {
+      "ControlType": "DATE",
+      "ControlTemplate": "\r\n\t\t\t\t\t<div class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<label name=\"lbl[@EXT-RES-FIELD_NAME]\" for=\"[@EXT-RES-FIELD_NAME]\">[@EXT-FIELD_NAME]</label>\r\n\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" [@PROPERTY_LIST]>\r\n\t\t\t\t\t</div>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "id",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "KEY"
+        },
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "placeholder",
+          "DefaultValue": "",
+          "Required": false,
+          "Type": "PLACE_HOLDER"
+        },
+        {
+          "Name": "ng-model",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": true,
+          "Type": "MODEL",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "autocomplete",
+          "DefaultValue": "off",
+          "Required": true,
+          "Type": "AUTOCOMPLETE",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-required",
+          "DefaultValue": "[@EXT-REQUIRED]",
+          "Required": false,
+          "Type": "REQUIRED",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-hide",
+          "DefaultValue": "[@EXT-HIDE]",
+          "Required": false,
+          "Type": "HIDE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-disabled",
+          "DefaultValue": "[@EXT-DISABLED]",
+          "Required": false,
+          "Type": "DISABLE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "date-picker",
+          "DefaultValue": null,
+          "Required": true,
+          "Type": "DATE_PICKER_EVENT",
+          "PropertyFormat": "[@NAME]"
+        },
+        {
+          "Name": "dateformat",
+          "DefaultValue": null,
+          "Required": false,
+          "Type": "DATE_FORMAT"
+        }
+      ]
+    },
+    {
+      "ControlType": "LIST",
+      "ControlTemplate": "\r\n\t\t\t\t\t<div class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<label name=\"lbl[@EXT-RES-FIELD_NAME]\" for=\"[@EXT-RES-FIELD_NAME]\">[@EXT-FIELD_NAME]</label>\r\n\t\t\t\t\t\t<select class=\"form-control\" [@PROPERTY_LIST]></select>\r\n\t\t\t\t\t</div>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "id",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "KEY"
+        },
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "placeholder",
+          "DefaultValue": "",
+          "Required": false,
+          "Type": "PLACE_HOLDER"
+        },
+        {
+          "Name": "ng-model",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": true,
+          "Type": "MODEL",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "autocomplete",
+          "DefaultValue": "off",
+          "Required": true,
+          "Type": "AUTOCOMPLETE",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-required",
+          "DefaultValue": "[@EXT-REQUIRED]",
+          "Required": false,
+          "Type": "REQUIRED",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-hide",
+          "DefaultValue": "[@EXT-HIDE]",
+          "Required": false,
+          "Type": "HIDE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-disabled",
+          "DefaultValue": "[@EXT-DISABLED]",
+          "Required": false,
+          "Type": "DISABLE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-options",
+          "DefaultValue": "[@EXT-DEFAULT_VALUE]",
+          "Required": false,
+          "Type": "OPTION",
+          "PropertyFormat": "[@NAME]='$item for $item in [@DEFAULT_VALUE]'"
+        },
+        {
+          "Name": "change-directive",
+          "DefaultValue": "[@EXT-OPTION_VALUE]",
+          "Required": false,
+          "Type": "CHANGE_EVENT",
+          "PropertyFormat": "[@NAME]='{\"ref\": \"[@DEFAULT_VALUE]_ref\", \"option\": \"[@EXT-ITEM]\"}'"
+        }
+      ]
+    },
+    {
+      "ControlType": "GRID",
+      "ComplexType": true,
+      "ControlTemplate": "\r\n\t\t\t\t\t<div class=\"table-responsive col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<label>[@EXT-FIELD_NAME]</label><br />\r\n\t\t\t\t\t\t<table class=\"table table-hover table-borderedl\" change-directive='{\"ref\": \"[@EXT-OPTION_VALUE]_ref\", \"option\": \"[@EXT-ITEM]\"}'>[@PROPERTY_LIST]</table>\r\n\t\t\t\t\t</div>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "thead",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Type": "HEADER",
+          "PropertyFormat": "<thead><tr><th class=\"col-lg-1 col-md-1 col-1\">&nbsp;</th><th ng-repeat='$itemTable in [@EXT-JARRAY-KEY_LIST]'>{{$itemTable}}</th><th>&nbsp;</th></tr></thead>"
+        },
+        {
+          "Name": "tbody",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Type": "BODY",
+          "PropertyFormat": "<tbody ng-model='$data.[@DEFAULT_VALUE]'><tr ng-repeat='$itemTable in $data.[@DEFAULT_VALUE]'><td class=\"col-lg-1 col-md-1 col-1\"><button class=\"rounded iconMove\" ng-click=\"OnMoveUpClick($data.[@DEFAULT_VALUE], $index)\">&#8593;</button><button class=\"rounded iconMove\" ng-click=\"OnMoveDownClick($data.[@DEFAULT_VALUE], $index)\">&#8595;</button></td>[@EXT-CONTROL_LIST]<td><button type=\"button\" class=\"btn btn-danger\" ng-click=\"DeleteItem($data.[@DEFAULT_VALUE], $index)\">-</button></td></tr></tbody>"
+        },
+        {
+          "Name": "tfoot",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Type": "FOOTER",
+          "PropertyFormat": "<tfoot ng-if=\"1==1\"><tr><td>&nbsp;</td>[@EXT-CONTROL_LIST]<td class=\"col-lg-1 col-md-1 col-1\"><button type=\"button\" class=\"btn btn-success\" ng-click=\"AddItem($data.[@DEFAULT_VALUE], $itemTable)\">+</button></td></tr></tfoot>"
+        }
+      ]
+    },
+    {
+      "ControlType": "BUTTON",
+      "ControlTemplate": "\r\n\t\t\t\t\t<div class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<label name=\"lbl[@EXT-RES-FIELD_NAME]\" for=\"[@EXT-RES-FIELD_NAME]\">&nbsp;</label>\r\n\t\t\t\t\t\t<button class=\"btn btn-success\" [@PROPERTY_LIST]>[@EXT-FIELD_NAME]</button>\r\n\t\t\t\t\t</div>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "id",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "KEY"
+        },
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "urlSubmit",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": false,
+          "Type": "URL"
+        },
+        {
+          "Name": "ng-click",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": false,
+          "Type": "CLICK_EVENT",
+          "PropertyFormat": "[@NAME]=\"submit($data)\"",
+          "Event": "Submit_Click"
+        }
+      ],
+      "EventList": [
+        {
+          "Name": "Submit_Click",
+          "Parameters": [ "$data", "@urlSubmit" ],
+          "EventFormat": ""
+        }
+      ]
+    }
+  ]
+}

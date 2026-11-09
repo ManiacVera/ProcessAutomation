@@ -1,0 +1,18 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Item list",
+        "Field": "ItemList",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  }
+]

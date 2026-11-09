@@ -1,0 +1,40 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Printer": {
+      "Label": "Impresora",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "File": {
+      "Label": "Archivo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OptionPrint": {
+      "Label": "Paginas",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "BeginRange": {
+      "Label": "Rango inicial",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "EndRange": {
+      "Label": "Rango final",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

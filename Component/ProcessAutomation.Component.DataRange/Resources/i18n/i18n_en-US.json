@@ -1,0 +1,28 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "DataBegin": {
+      "Label": "Begin",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DataEnd": {
+      "Label": "End",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DataType": {
+      "Label": "Date type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

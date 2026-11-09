@@ -1,0 +1,34 @@
+<script>
+  window.electronAPI.onLogData((data) => {
+    const logContainer = document.getElementById("log");
+    const items = Array.isArray(data) ? data : [data];
+
+    items.forEach((item) => {
+      const line = document.createElement("div");
+
+      if (item.startsWith("Error:")) {
+        line.style.color = "red";
+      }
+      else if (item.startsWith("Init run")){
+        const separator = document.createElement("div");
+        separator.style.borderTop = "2px solid #888";
+        separator.style.margin = "8px 0";
+        logContainer.appendChild(separator);
+
+        line.style.color = "blue";
+      }
+      else if (item.startsWith("End run")) {
+        line.style.color = "blue";
+      } 
+      else if (item.includes("ItsOk: 0")) {
+        line.style.color = "orange";
+      }
+
+      line.textContent = item;
+      logContainer.appendChild(line);
+    });
+
+    window.scrollTo(0, document.body.scrollHeight);
+  });
+</script>
+<pre id="log"></pre>

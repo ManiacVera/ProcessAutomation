@@ -1,0 +1,69 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Metodo",
+        "Field": "Method",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "GET", "POST", "PUT", "DELETE", "PATCH", "SEND" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Url",
+        "Field": "Url",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Header",
+        "Field": "Header",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Body",
+        "Field": "Body",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Method != 'GET'"
+      }
+    ]
+  },
+
+  {
+    "FORMAT": "COMPONENT",
+    "FIELD_LIST": [
+      {
+        "Label": "Url base",
+        "Field": "BaseUrl",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  }
+]

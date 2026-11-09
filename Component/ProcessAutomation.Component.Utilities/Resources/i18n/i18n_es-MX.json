@@ -1,0 +1,46 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Input": {
+      "Label": "Input",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Function": {
+      "Label": "Funcion",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Interval": {
+      "Label": "Intervalo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Quantity": {
+      "Label": "Cantidad",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Format": {
+      "Label": "Formato",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DataType": {
+      "Label": "Tipo de dato",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

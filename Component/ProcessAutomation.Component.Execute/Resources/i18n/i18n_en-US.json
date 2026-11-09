@@ -1,0 +1,46 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "File": {
+      "Label": "File",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ParameterList": {
+      "Label": "Parameters",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Parameter": {
+      "Label": "Parameter",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Type": {
+      "Label": "Type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Application": {
+      "Label": "Application",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "WorkingDirectory": {
+      "Label": "Working directory",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

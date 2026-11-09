@@ -1,0 +1,12 @@
+{
+  "Run": "Run",
+  "Abort": "Abort",
+  "Back": "Back",
+  "ProcessName": "Process",
+  "RunProcessInformation": "Run Process",
+  "TaskHeader": "Task",
+  "DescriptionHeader": "Description",
+  "ValueHeader": "Value",
+  "ValueFormatHeader": "Format Value",
+  "RunProcessListInformation": "Run process list"
+}

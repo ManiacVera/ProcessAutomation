@@ -1,0 +1,385 @@
+[
+  {
+    "Statement": "OUTPUT",
+    "Description": "OUTPUT",
+    "Symbol": ">",
+    "Separator": ";",
+    "ParameterList": [
+      {
+        "Label": "Output type",
+        "Field": "OutputType",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "OptionValue": [
+          "JSON",
+          "TEXT",
+          "LIST",
+          "OBJECT"
+        ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "First row as column",
+        "Field": "FirstRowAsColumn",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Separator",
+        "Field": "Separator",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  },
+  {
+    "Statement": "QUESTION",
+    "Description": "QUESTION",
+    "Symbol": "?",
+    "Separator": ",",
+    "ParameterList": [
+      {
+        "Label": "Condition",
+        "Field": "Condition",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "True value",
+        "Field": "TrueValue",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "False value",
+        "Field": "FalseValue",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  },
+  {
+    "Statement": "FILTER",
+    "Description": "FILTER",
+    "Symbol": "=",
+    "Separator": ",",
+    "ParameterList": [
+      {
+        "Label": "Where",
+        "Field": "Where",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  },
+  {
+    "Statement": "COLUMN",
+    "Description": "COLUMNS",
+    "Symbol": "|",
+    "Separator": ",",
+    "ParameterList": [
+      {
+        "Label": "Column list",
+        "Field": "ColumnList",
+        "ValueType": "JSON",
+        "ControlType": "GRID",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": [
+          {
+            "Label": "Column",
+            "Field": "Column",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true
+          },
+          {
+            "Label": "",
+            "Field": "Separator",
+            "Value": "|",
+            "ValueType": "TEXT",
+            "ControlType": "LABEL",
+            "Required": true,
+            "ExchangeSeparator": true,
+            "DefaultValue": "|"
+          },
+          {
+            "Label": "Rename",
+            "Field": "Rename",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Statement": "RANGE",
+    "Description": "RANGE",
+    "Symbol": ":",
+    "Separator": ",",
+    "ParameterList": [
+      {
+        "Label": "Init number",
+        "Field": "InitNumber",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "End number",
+        "Field": "EndNumber",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  },
+  {
+    "Statement": "JOIN",
+    "Description": "JOIN",
+    "Symbol": ".",
+    "Separator": "|",
+    "Example": "",
+    "ParameterList": [
+      {
+        "Label": "Column separator",
+        "Field": "ColumnSeparator",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "ExchangeSeparator": true
+      },
+      {
+        "Label": "Format",
+        "Field": "Format",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Option",
+        "Field": "Option",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": false,
+        "OptionValue": [ "", "IN_LINE", "BY_LINE", "CUSTOM" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "End line",
+        "Field": "EndLine",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  },
+  {
+    "Statement": "SPLIT",
+    "Description": "SPLIT",
+    "Symbol": ";",
+    "Separator": ",",
+    "Example": "",
+    "ParameterList": [
+      {
+        "Label": "Column separator",
+        "Field": "ColumnSeparator",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "ExchangeSeparator": false
+      }
+    ]
+  },
+  {
+    "Statement": "FORMAT",
+    "Description": "FORMAT",
+    "Symbol": "#",
+    "Separator": ",",
+    "Example": "",
+    "ParameterList": [
+      {
+        "Label": "Format",
+        "Field": "Format",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "ExchangeSeparator": false
+      }
+    ]
+  },
+  {
+    "Statement": "REPLACE",
+    "Description": "REPLACE",
+    "Symbol": "/",
+    "Separator": ",",
+    "Example": "",
+    "ParameterList": [
+      {
+        "Label": "Old value",
+        "Field": "OldValue",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "ExchangeSeparator": false
+      },
+      {
+        "Label": "New value",
+        "Field": "NewValue",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "ExchangeSeparator": false
+      },
+      {
+        "Label": "Option",
+        "Field": "OptionReplace",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": false,
+        "DefaultValue": null,
+        "ExchangeSeparator": false,
+        "OptionValue": [
+          {
+            "Text": "ALL",
+            "Value": "0"
+          },
+          {
+            "Text": "FIRST OCURRENCE",
+            "Value": "1"
+          },
+          {
+            "Text": "LAST OCURRENCE",
+            "Value": "2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Statement": "INPUT",
+    "Description": "INPUT",
+    "Symbol": "<",
+    "Separator": ",",
+    "Example": "",
+    "ParameterList": [
+      {
+        "Label": "Value",
+        "Field": "Value",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "ExchangeSeparator": false
+      },
+      {
+        "Label": "Input type",
+        "Field": "InputType",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "OptionValue": [
+          "JSON",
+          "TEXT",
+          "LIST",
+          "OBJECT"
+        ],
+        "DefaultValue": null
+      }
+    ]
+  },
+  {
+    "Statement": "FUNCTION",
+    "Description": "FUNCTION",
+    "Symbol": "$",
+    "Separator": ",",
+    "Example": "",
+    "ParameterList": [
+      {
+        "Label": "Function",
+        "Field": "Function",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "ExchangeSeparator": false
+      },
+      {
+        "Label": "Parameters",
+        "Field": "Parameters",
+        "ValueType": "JSON",
+        "ControlType": "GRID",
+        "Required": false,
+        "OptionValue": null,
+        "DefaultValue": [
+          {
+            "Label": "Parameter",
+            "Field": "Parameter",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTAREA",
+            "Required": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Statement": "QUERY",
+    "Description": "QUERY",
+    "Symbol": "?",
+    "Separator": ",",
+    "ParameterList": [
+      {
+        "Label": "Query",
+        "Field": "Query",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  }
+]

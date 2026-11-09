@@ -1,0 +1,125 @@
+﻿@page "/ProcessPage"
+@page "/ProcessPage/{idProcessParam:int}"
+@using ProcessAutomationSite.Data;
+@using ProcessAutomationSite.Pages.Common;
+@using ProcessAutomation.Common.DTO.Info;
+@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<ProcessPageComponent> localizer
+@attribute [Authorize]
+
+@if (processInfo == null)
+{
+    <SpinnerComponent></SpinnerComponent>
+}
+else
+{   
+    <br />
+    <div class="row bg-dark rounded shadow" style="border-left: 0px; border-right: 0px; border-top: 15px; border-bottom: 15px; border-style: solid; border-color: orange;">
+        <div class="col-md-12">
+            <br />
+            <RadzenFieldset class="rounded shadow" Style="color: white; font-size: 20px;">
+                <HeaderTemplate>
+                    <RadzenLabel Text="@localizer["ProcessInformation"]" Style="color: white; font-size: 22px;"></RadzenLabel>
+                </HeaderTemplate>
+                <ChildContent>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="row" style="margin-bottom: 5px;">
+                                <div class="col-md-3 align-items-start d-flex">
+                                    <RadzenLabel Text="@localizer["File"]" />
+                                </div>
+                                <div class="col-md-7 align-items-start d-flex">
+                                    @*<RadzenTextBox Name="ProcessName" @bind-Value="@processFile" Style="width: 100%" ReadOnly="true" />*@
+                                    <RadzenDropDown Name="ProcessName" @bind-Value="@processFile"
+                                                    AllowClear="false" AllowFiltering="false"
+                                                    Multiple="false"
+                                                    Data="@processFileList"
+                                                    Style="width: 100%;" Change="() => OnProcessSelect()">
+                                    </RadzenDropDown>
+                                </div>
+                                <div class="col-md-2 align-items-start d-flex">
+                                    <RadzenButton Text="@localizer["Open"]" Click="() => OnOpenProcess()"></RadzenButton>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 5px;">
+                                <div class="col-md-3 align-items-start d-flex">
+                                    <RadzenLabel Text="@localizer["Number"]" />
+                                </div>
+                                <div class="col-md-4 align-items-start d-flex">
+                                    <RadzenNumeric Name="Number" @bind-Value="@processInfo.Number" TValue="int" Style="width: 100%" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 align-items-start d-flex">
+                                    <RadzenLabel Text="@localizer["ProcessName"]" />
+                                </div>
+                                <div class="col-md-7 align-items-start d-flex">
+                                    <RadzenTextBox Name="ProcessName" @bind-Value="@processInfo.ProcessName" Style="width: 100%" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12" style="margin-bottom: 8px;">
+                                    <RadzenButton class="col-md-12" Text="@localizer["Save"]" Click="() => OnSaveProcess()"></RadzenButton>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" style="margin-bottom: 8px;">
+                                    <RadzenButton class="col-md-12" Text="@localizer["Build"]" Click="() => OnBuildProcess()"></RadzenButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                </ChildContent>
+            </RadzenFieldset>
+            <br />
+            <RadzenFieldset class="rounded shadow" Style="color: white; font-size: 20px;">
+                <HeaderTemplate>
+                    <RadzenLabel Text="@localizer["TaskList"]" Style="color: white; font-size: 22px;"></RadzenLabel>
+                </HeaderTemplate>
+                <ChildContent>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <RadzenButton class="col-md-12" Text="@localizer["AddTask"]" Click="() => OnNewTask()" Style="width: 100%;"></RadzenButton>
+                        </div>
+                    </div>
+                    <RadzenDataGrid WrapItems="true" AllowFiltering="false" AllowPaging="true" PageSize="20" AllowSorting="false"
+                                AllowColumnResize="true" Data="@processInfo.TaskList" TItem="TaskInfo">
+                        <Columns>
+                            <RadzenDataGridColumn TItem="TaskInfo" Property="Number" Title="@localizer["NumberHeader"]" CssClass="gridview-font" />
+                            <RadzenDataGridColumn TItem="TaskInfo" Property="Name" Title="@localizer["NameHeader"]" CssClass="gridview-font" />
+                            <RadzenDataGridColumn TItem="TaskInfo" Property="Enabled" Title="@localizer["EnabledHeader"]" TextAlign="TextAlign.Center" CssClass="gridview-font">
+                                <Template Context="data">
+                                    <RadzenCheckBox Name="Required" @bind-Value="@data.Enabled" Disabled="true"></RadzenCheckBox>
+                                </Template>
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="TaskInfo" Title="@localizer["EditHeader"]" TextAlign="TextAlign.Center" CssClass="gridview-font">
+                                <Template Context="data">
+                                    <RadzenButton Text="@localizer["Edit"]" class="gridview-font" Click="() => OnEditTask(data.Number)" />
+                                </Template>
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="TaskInfo" Title="@localizer["DeleteHeader"]" TextAlign="TextAlign.Center" CssClass="gridview-font">
+                                <Template Context="data">
+                                    <RadzenButton Text="@localizer["Delete"]" class="gridview-font" Click="() => OnDeleteTask(data)" />
+                                </Template>
+                            </RadzenDataGridColumn>
+                        </Columns>
+                    </RadzenDataGrid>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <RadzenButton class="col-md-12" Text="@localizer["AddTask"]" Click="() => OnNewTask()" Style="width: 100%;"></RadzenButton>
+                        </div>
+                    </div>
+                </ChildContent>
+            </RadzenFieldset>
+            <br />
+        </div>
+    </div>
+    <br />
+    <LoadingComponent @ref="loadingComponent" />
+}

@@ -1,0 +1,53 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Archivo",
+        "Field": "File",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo de acceso",
+        "Field": "FileAccessType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "APPEND_TEXT", "READ", "READ_BYTES", "WRITE_TEXT", "WRITE_BYTES", "COPY", "DELETE" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Archivo destino",
+        "Field": "DestFile",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.FileAccessType == 'COPY'"
+      },
+      {
+        "Label": "Value",
+        "Field": "Value",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.FileAccessType != 'COPY' && $data.FileAccessType != 'READ' && $data.FileAccessType != 'READ_BYTES' && $data.FileAccessType != 'DELETE'"
+      }
+    ]
+  }
+]

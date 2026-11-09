@@ -1,0 +1,435 @@
+﻿{
+  "RowTemplate": "",
+  "ControlList": [
+    {
+      "ControlType": "BOOL",
+      "ControlTemplate": "\r\n\t\t\t\t\t<td class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<input type=\"checkbox\" class=\"form-control\" [@PROPERTY_LIST]>\r\n\t\t\t\t\t</td>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "ng-model",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": true,
+          "Type": "MODEL",
+          "PropertyFormat": "[@NAME]=\"$itemTable.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "autocomplete",
+          "DefaultValue": "off",
+          "Required": true,
+          "Type": "AUTOCOMPLETE",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-required",
+          "DefaultValue": "[@EXT-REQUIRED]",
+          "Required": false,
+          "Type": "REQUIRED",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-hide",
+          "DefaultValue": "[@EXT-HIDE]",
+          "Required": false,
+          "Type": "HIDE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-disabled",
+          "DefaultValue": "[@EXT-DISABLED]",
+          "Required": false,
+          "Type": "DISABLE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        }
+      ]
+    },
+    {
+      "ControlType": "PASSWORD",
+      "ControlTemplate": "\r\n\t\t\t\t\t<td class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<input type=\"password\" class=\"form-control\" [@PROPERTY_LIST]>\r\n\t\t\t\t\t</td>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "placeholder",
+          "DefaultValue": "",
+          "Required": false,
+          "Type": "PLACE_HOLDER"
+        },
+        {
+          "Name": "ng-model",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": true,
+          "Type": "MODEL",
+          "PropertyFormat": "[@NAME]=\"$itemTable.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "autocomplete",
+          "DefaultValue": "off",
+          "Required": true,
+          "Type": "AUTOCOMPLETE",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-required",
+          "DefaultValue": "[@EXT-REQUIRED]",
+          "Required": false,
+          "Type": "REQUIRED",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-hide",
+          "DefaultValue": "[@EXT-HIDE]",
+          "Required": false,
+          "Type": "HIDE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-disabled",
+          "DefaultValue": "[@EXT-DISABLED]",
+          "Required": false,
+          "Type": "DISABLE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-minlength",
+          "DefaultValue": "0",
+          "Required": false,
+          "Type": "MIN_LENGTH"
+        },
+        {
+          "Name": "ng-maxlength",
+          "DefaultValue": "9999",
+          "Required": false,
+          "Type": "MAX_LENGTH"
+        }
+      ]
+    },
+    {
+      "ControlType": "TEXT",
+      "ControlTemplate": "\r\n\t\t\t\t\t<td class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" [@PROPERTY_LIST]>\r\n\t\t\t\t\t</td>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "placeholder",
+          "DefaultValue": "",
+          "Required": false,
+          "Type": "PLACE_HOLDER"
+        },
+        {
+          "Name": "ng-model",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": true,
+          "Type": "MODEL",
+          "PropertyFormat": "[@NAME]=\"$itemTable.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "autocomplete",
+          "DefaultValue": "off",
+          "Required": true,
+          "Type": "AUTOCOMPLETE",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-required",
+          "DefaultValue": "[@EXT-REQUIRED]",
+          "Required": false,
+          "Type": "REQUIRED",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-hide",
+          "DefaultValue": "[@EXT-HIDE]",
+          "Required": false,
+          "Type": "HIDE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-disabled",
+          "DefaultValue": "[@EXT-DISABLED]",
+          "Required": false,
+          "Type": "DISABLE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-minlength",
+          "DefaultValue": "0",
+          "Required": false,
+          "Type": "MIN_LENGTH"
+        },
+        {
+          "Name": "ng-maxlength",
+          "DefaultValue": "9999",
+          "Required": false,
+          "Type": "MAX_LENGTH"
+        },
+        {
+          "Name": "change-directive",
+          "DefaultValue": "[@EXT-OPTION_VALUE]",
+          "Required": false,
+          "Type": "CHANGE_EVENT",
+          "PropertyFormat": "[@NAME]='{\"ref\": \"[@DEFAULT_VALUE]_ref\", \"option\": \"[@EXT-ITEM]\"}'"
+        }
+      ]
+    },
+    {
+      "ControlType": "LABEL",
+      "ControlTemplate": "\r\n\t\t\t\t\t<td class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<label class=\"\" [@PROPERTY_LIST]>{{[@EXT-FIELD_VALUE]}}</label>\r\n\t\t\t\t\t</td>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "change-directive",
+          "DefaultValue": "[@EXT-OPTION_VALUE]",
+          "Required": false,
+          "Type": "CHANGE_EVENT",
+          "PropertyFormat": "[@NAME]='{\"ref\": \"[@DEFAULT_VALUE]_ref\", \"option\": \"[@EXT-ITEM]\"}'"
+        }
+      ]
+    },
+    {
+      "ControlType": "INT",
+      "ControlTemplate": "\r\n\t\t\t\t\t<td class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<input type=\"number\" class=\"form-control\" ng-pattern=\"/^[0-9]+$/\" [@PROPERTY_LIST]>\r\n\t\t\t\t\t</td>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "placeholder",
+          "DefaultValue": "",
+          "Required": false,
+          "Type": "PLACE_HOLDER"
+        },
+        {
+          "Name": "ng-model",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": true,
+          "Type": "MODEL",
+          "PropertyFormat": "[@NAME]=\"$itemTable.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "autocomplete",
+          "DefaultValue": "off",
+          "Required": true,
+          "Type": "AUTOCOMPLETE",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-required",
+          "DefaultValue": "[@EXT-REQUIRED]",
+          "Required": false,
+          "Type": "REQUIRED",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-hide",
+          "DefaultValue": "[@EXT-HIDE]",
+          "Required": false,
+          "Type": "HIDE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-disabled",
+          "DefaultValue": "[@EXT-DISABLED]",
+          "Required": false,
+          "Type": "DISABLE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-minlength",
+          "DefaultValue": "0",
+          "Required": false,
+          "Type": "MIN_LENGTH"
+        },
+        {
+          "Name": "ng-maxlength",
+          "DefaultValue": "9999",
+          "Required": false,
+          "Type": "MAX_LENGTH"
+        }
+      ]
+    },
+    {
+      "ControlType": "DATE",
+      "ControlTemplate": "\r\n\t\t\t\t\t<td class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\"><input type=\"text\" class=\"form-control\" [@PROPERTY_LIST]>\r\n\t\t\t\t\t</td>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "placeholder",
+          "DefaultValue": "",
+          "Required": false,
+          "Type": "PLACE_HOLDER"
+        },
+        {
+          "Name": "ng-model",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": true,
+          "Type": "MODEL",
+          "PropertyFormat": "[@NAME]=\"$itemTable.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "autocomplete",
+          "DefaultValue": "off",
+          "Required": true,
+          "Type": "AUTOCOMPLETE",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-required",
+          "DefaultValue": "[@EXT-REQUIRED]",
+          "Required": false,
+          "Type": "REQUIRED",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-hide",
+          "DefaultValue": "[@EXT-HIDE]",
+          "Required": false,
+          "Type": "HIDE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-disabled",
+          "DefaultValue": "[@EXT-DISABLED]",
+          "Required": false,
+          "Type": "DISABLE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "date-picker",
+          "DefaultValue": null,
+          "Required": true,
+          "Type": "DATE_PICKER_EVENT",
+          "PropertyFormat": "[@NAME]"
+        },
+        {
+          "Name": "dateformat",
+          "DefaultValue": null,
+          "Required": false,
+          "Type": "DATE_FORMAT"
+
+        }
+      ]
+    },
+    {
+      "ControlType": "LIST",
+      "ControlTemplate": "\r\n\t\t\t\t\t<td class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<select class=\"form-control\" [@PROPERTY_LIST]></select>\r\n\t\t\t\t\t</td>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "placeholder",
+          "DefaultValue": "",
+          "Required": false,
+          "Type": "PLACE_HOLDER"
+        },
+        {
+          "Name": "ng-model",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": true,
+          "Type": "MODEL",
+          "PropertyFormat": "[@NAME]=\"$itemTable.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "autocomplete",
+          "DefaultValue": "off",
+          "Required": true,
+          "Type": "AUTOCOMPLETE",
+          "PropertyFormat": "[@NAME]=\"$data.[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-required",
+          "DefaultValue": "[@EXT-REQUIRED]",
+          "Required": false,
+          "Type": "REQUIRED",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-hide",
+          "DefaultValue": "[@EXT-HIDE]",
+          "Required": false,
+          "Type": "HIDE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "ng-disabled",
+          "DefaultValue": "[@EXT-DISABLED]",
+          "Required": false,
+          "Type": "DISABLE",
+          "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\""
+        },
+        {
+          "Name": "change-directive",
+          "DefaultValue": "[@EXT-OPTION_VALUE]",
+          "Required": false,
+          "Type": "CHANGE_EVENT",
+          "PropertyFormat": "[@NAME]='{\"ref\": \"[@DEFAULT_VALUE]_ref\", \"option\": \"[@EXT-ITEM]\"}'"
+        }
+      ]
+    },
+    {
+      "ControlType": "BUTTON",
+      "ControlTemplate": "\r\n\t\t\t\t\t<td class=\"col-lg-[@EXT-COLUMN_SIZE] col-md-[@EXT-COLUMN_SIZE] col-sm-[@EXT-COLUMN_SIZE]\">\r\n\t\t\t\t\t\t<button class=\"btn btn-success\" [@PROPERTY_LIST]>[@EXT-FIELD_NAME]</button>\r\n\t\t\t\t\t</td>",
+      "PropertyFormat": "[@NAME]=\"[@DEFAULT_VALUE]\"",
+      "PropertyList": [
+        {
+          "Name": "name",
+          "DefaultValue": "[@EXT-RES-FIELD_NAME]",
+          "Required": false,
+          "Type": "NAME"
+        },
+        {
+          "Name": "submitUrl",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": false,
+          "Type": "URL"
+        },
+        {
+          "Name": "ng-click",
+          "DefaultValue": "[@EXT-FIELD_VALUE]",
+          "Required": false,
+          "Type": "EVENT",
+          "PropertyFormat": "[@NAME]=\"submit($itemTable.[@DEFAULT_VALUE])\"",
+          "Event": "CLICK_EVENT"
+        }
+      ],
+      "EventList": [
+        {
+          "Name": "Submit_Click",
+          "Parameters": [ "$itemTable", "@urlSubmit" ],
+          "EventFormat": ""
+        }
+      ]
+    }
+  ]
+}

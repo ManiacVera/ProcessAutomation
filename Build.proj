@@ -1,0 +1,501 @@
+<Project>
+    <PropertyGroup>
+        <RuntimeIdentifier Condition="'$(UserRuntimeIdentifier)' != ''">$(UserRuntimeIdentifier)</RuntimeIdentifier>
+        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' AND $([MSBuild]::IsOSPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64'">win-arm64</RuntimeIdentifier>
+        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' AND $([MSBuild]::IsOSPlatform('Windows')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">win-x64</RuntimeIdentifier>
+        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' AND $([MSBuild]::IsOSPlatform('OSX')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64'">osx-arm64</RuntimeIdentifier>
+        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' AND $([MSBuild]::IsOSPlatform('OSX')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">osx-x64</RuntimeIdentifier>
+        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' AND $([MSBuild]::IsOSPlatform('Linux')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64'">linux-arm64</RuntimeIdentifier>
+        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' AND $([MSBuild]::IsOSPlatform('Linux')) AND '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">linux-x64</RuntimeIdentifier>
+        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
+
+        <RustTarget Condition="'$(RuntimeIdentifier)' == 'win-x64'">x86_64-pc-windows-msvc</RustTarget>
+        <RustTarget Condition="'$(RuntimeIdentifier)' == 'win-arm64'">aarch64-pc-windows-msvc</RustTarget>
+        <RustTarget Condition="'$(RuntimeIdentifier)' == 'linux-x64'">x86_64-unknown-linux-gnu</RustTarget>
+        <RustTarget Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">aarch64-unknown-linux-gnu</RustTarget>
+        <RustTarget Condition="'$(RuntimeIdentifier)' == 'osx-x64'">x86_64-apple-darwin</RustTarget>
+        <RustTarget Condition="'$(RuntimeIdentifier)' == 'osx-arm64'">aarch64-apple-darwin</RustTarget>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <ElectronBuildScript Condition="$([MSBuild]::IsOSPlatform('Windows')) and '$(RuntimeIdentifier)' == 'win-x64'">electron:build:win:x64</ElectronBuildScript>
+        <ElectronBuildScript Condition="$([MSBuild]::IsOSPlatform('Windows')) and '$(RuntimeIdentifier)' == 'win-arm64'">electron:build:win:arm64</ElectronBuildScript>
+        <ElectronBuildScript Condition="$([MSBuild]::IsOSPlatform('OSX')) and '$(RuntimeIdentifier)' == 'osx-x64'">electron:build:mac:x64</ElectronBuildScript>
+        <ElectronBuildScript Condition="$([MSBuild]::IsOSPlatform('OSX')) and '$(RuntimeIdentifier)' == 'osx-arm64'">electron:build:mac:arm64</ElectronBuildScript>
+        <ElectronBuildScript Condition="$([MSBuild]::IsOSPlatform('Linux')) and '$(RuntimeIdentifier)' == 'linux-x64'">electron:build:linux:x64</ElectronBuildScript>
+        <ElectronBuildScript Condition="$([MSBuild]::IsOSPlatform('Linux')) and '$(RuntimeIdentifier)' == 'linux-arm64'">electron:build:linux:arm64</ElectronBuildScript>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <NativePrefix Condition="$([MSBuild]::IsOsPlatform('Windows'))"></NativePrefix>
+        <NativePrefix Condition="$([MSBuild]::IsOsPlatform('OSX')) OR $([MSBuild]::IsOsPlatform('Linux'))">lib</NativePrefix>
+
+        <NativeExt Condition="$([MSBuild]::IsOsPlatform('Windows'))">.dll</NativeExt>
+        <NativeExt Condition="$([MSBuild]::IsOsPlatform('OSX'))">.dylib</NativeExt>
+        <NativeExt Condition="$([MSBuild]::IsOsPlatform('Linux'))">.so</NativeExt>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <FrameworkNativeLibName>$(NativePrefix)ProcessAutomation.Framework.Native$(NativeExt)</FrameworkNativeLibName>
+    </PropertyGroup>
+
+    <ItemGroup>
+         <FrameworkNativeProjects Include="./Framework/ProcessAutomation.Framework.Native/ProcessAutomation.Framework.Native.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+         <FrameworkProjects Include="./Framework/ProcessAutomation.Framework/ProcessAutomation.Framework.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+         <CommonProjects Include="./Common/ProcessAutomation.Common/ProcessAutomation.Common.csproj" />
+         <CommonProjects Include="./Common/ProcessAutomation.Interface/ProcessAutomation.Interface.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ComponentProjects Include="./Component/**/*.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+         <WebProjects Include="./Web/ProcessAutomationSite/ProcessAutomationSite.Web.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+         <ApiProjects Include="./Api/ProcessAutomation.Api/ProcessAutomation.Api.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+         <MAUIProjects Include="./App/ProcessAutomationMAUI/ProcessAutomationMAUI.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+         <RunProcessProjects Include="./App/RunProcessApp/RunProcessApp.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Solution Include="./ProcessAutomationSolution.sln" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <TestProjects Include="./Test/**/*.csproj" />
+    </ItemGroup>
+    
+    <Target Name="BuildFrameworkNative">
+        <Message Text="Publishing @(FrameworkNativeProjects) in Debug (Native AOT)" Importance="high" />
+
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Publish" Properties="Configuration=Debug;PublishAot=true;SelfContained=true;RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="RebuildFrameworkNative">
+        <Message Text="Clean and Publishing @(FrameworkNativeProjects) in Debug (Native AOT)" Importance="high" />
+        
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Clean" Properties="Configuration=Debug;PublishAot=true;SelfContained=true;RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Publish" Properties="Configuration=Debug;PublishAot=true;SelfContained=true;RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="ReleaseFrameworkNative">
+        <Message Text="Publishing @(FrameworkNativeProjects) in Release (Native AOT)" Importance="high" />
+
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Clean" Properties="Configuration=Release;PublishAot=true;SelfContained=true;RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Publish" Properties="Configuration=Release;PublishAot=true;SelfContained=true;RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="RestoreFramework">
+        <Message Text="Restoring packages for @(FrameworkProjects)" Importance="high" />
+        <MSBuild Projects="@(FrameworkProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="BuildFramework" DependsOnTargets="RestoreFramework">
+        <Message Text="Building @(FrameworkProjects)" Importance="high" />
+        <MSBuild Projects="@(FrameworkProjects)" Targets="Build" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="RebuildFramework" DependsOnTargets="RestoreFramework">
+        <Message Text="Rebuilding @(FrameworkProjects)" Importance="high" />
+        <MSBuild Projects="@(FrameworkProjects)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="ReleaseFramework" DependsOnTargets="RestoreFramework">
+        <Message Text="Rebuilding @(FrameworkProjects) in Release" Importance="high" />
+        <MSBuild Projects="@(FrameworkProjects)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="RestoreCommon">
+        <Message Text="Restoring packages for @(CommonProjects)..." Importance="high" />
+        <MSBuild Projects="@(CommonProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="BuildCommon" DependsOnTargets="RestoreCommon">
+        <Message Text="Building @(CommonProjects)" Importance="high" />
+        <MSBuild Projects="@(CommonProjects)" Targets="Build" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="RebuildCommon" DependsOnTargets="RestoreCommon">
+        <Message Text="Rebuilding @(CommonProjects)" Importance="high" />
+        <MSBuild Projects="@(CommonProjects)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="ReleaseCommon" DependsOnTargets="RestoreCommon">
+        <Message Text="Rebuilding @(CommonProjects) in Release" Importance="high" />
+        <MSBuild Projects="@(CommonProjects)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="RestoreComponents">
+        <Message Text="Restoring packages for @(ComponentProjects)" Importance="high" />
+        <MSBuild Projects="@(ComponentProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="BuildComponents" DependsOnTargets="RestoreComponents">
+        <Message Text="Building @(ComponentProjects)" Importance="high" />
+        <MSBuild Projects="@(ComponentProjects)" Targets="Build" BuildInParallel="true"/>
+    </Target>
+
+    <PropertyGroup>
+        <BuildOutputDir>$(MSBuildProjectDirectory)\Build\Component</BuildOutputDir>
+    </PropertyGroup>
+
+    <Target Name="CleanComponents">
+        <RemoveDir Directories="$(BuildOutputDir)" Condition="Exists('$(BuildOutputDir)')" />
+    </Target>
+
+    <Target Name="RebuildComponents" DependsOnTargets="RestoreComponents;CleanComponents">
+        <Message Text="Rebuilding @(ComponentProjects)" Importance="high" />
+        <MSBuild Projects="@(ComponentProjects)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" BuildInParallel="true"/>
+    </Target>
+
+    <Target Name="ReleaseComponents" DependsOnTargets="RestoreComponents;CleanComponents">
+        <Message Text="Rebuilding @(ComponentProjects) in Release" Importance="high" />
+        <MSBuild Projects="@(ComponentProjects)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier)" BuildInParallel="true" />
+    </Target>
+
+    <Target Name="RestoreWeb">
+        <Message Text="Restoring packages for @(WebProjects)" Importance="high" />
+        <MSBuild Projects="@(WebProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="BuildWeb" DependsOnTargets="RestoreWeb">
+        <Message Text="Building @(WebProjects)" Importance="high" />
+        <MSBuild Projects="@(WebProjects)" Targets="Build" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="RebuildWeb" DependsOnTargets="RestoreWeb">
+        <Message Text="Rebuilding @(WebProjects)" Importance="high" />
+        <MSBuild Projects="@(WebProjects)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="ReleaseWeb" DependsOnTargets="RestoreWeb">
+        <Message Text="Rebuilding @(WebProjects) in Release" Importance="high" />
+        <MSBuild Projects="@(WebProjects)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="PublishWeb" DependsOnTargets="RestoreWeb">
+        <Message Text="Publishing @(WebProjects)" Importance="high" />
+        <MSBuild Projects="@(WebProjects)" Targets="Publish" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="RestoreApi">
+        <Message Text="Restoring packages for @(ApiProjects)..." Importance="high" />
+        <MSBuild Projects="@(ApiProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="BuildApi" DependsOnTargets="RestoreApi">
+        <Message Text="Building @(ApiProjects)" Importance="high" />
+        <MSBuild Projects="@(ApiProjects)" Targets="Build" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="RebuildApi" DependsOnTargets="RestoreApi">
+        <Message Text="Rebuilding @(ApiProjects)" Importance="high" />
+        <MSBuild Projects="@(ApiProjects)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="ReleaseApi" DependsOnTargets="RestoreApi">
+        <Message Text="Rebuilding @(ApiProjects) in Release" Importance="high" />
+        <MSBuild Projects="@(ApiProjects)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier);DefineConstants=ENABLE_TOKEN_VALIDATION" />
+    </Target>
+    
+    <Target Name="PublishApi" DependsOnTargets="RestoreApi;ReleaseSystemToken;ReleaseTemplateLauncher;PublishRunProcessApp;ReleaseComponents">
+        <PropertyGroup>
+            <AppDir>$(SolutionDir)Api\ProcessAutomation.Api</AppDir>
+            <BuildDir>$(SolutionDir)Build\App\ProcessAutomationApi</BuildDir>
+            <PublishProperties>Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier);SelfContained=true;PublishSingleFile=false;PublishTrimmed=false;AppendRuntimeIdentifierToOutputPath=false;DefineConstants=ENABLE_TOKEN_VALIDATION</PublishProperties>
+            <ApiProjectPath>%(ApiProjects.FullPath)</ApiProjectPath>
+        </PropertyGroup>
+
+        <XmlPeek XmlInputPath="$(ApiProjectPath)" Query="/Project/PropertyGroup/TargetFramework/text()">
+            <Output TaskParameter="Result" PropertyName="ApiTargetFramework" />
+        </XmlPeek>
+
+        <PropertyGroup>
+            <ApiPublishDir>$(AppDir)\bin\Release\$(ApiTargetFramework)</ApiPublishDir>
+        </PropertyGroup>
+
+        <Message Text="Publishing @(ApiProjects) targeting $(RuntimeIdentifier)" Importance="high" />
+        <MSBuild Projects="@(ApiProjects)" Targets="Publish" Properties="$(PublishProperties)" />
+    </Target>
+
+    <Target Name="PublishApiWithLicenses" DependsOnTargets="PublishApi">
+        <PropertyGroup>
+            <BuildLicensesDir>$(BuildDir)\third-party-licenses</BuildLicensesDir>
+        </PropertyGroup>
+
+        <Message Text="Generating third-party licenses for @(ApiProjects)" Importance="high" />
+        <Exec Command="nuget-license --input &quot;%(ApiProjects.FullPath)&quot; --include-transitive --license-information-download-location &quot;%(ApiProjects.RootDir)%(ApiProjects.Directory)bin/Release/$(ApiTargetFramework)/third-party-licenses/licenses&quot; --output Markdown --file-output &quot;%(ApiProjects.RootDir)%(ApiProjects.Directory)bin/Release/$(ApiTargetFramework)/third-party-licenses/THIRD-PARTY-NOTICES.md&quot;" />
+
+        <MakeDir Directories="$(BuildLicensesDir)\licenses" />
+
+        <Copy 
+            SourceFiles="%(ApiProjects.RootDir)%(ApiProjects.Directory)bin/Release/$(ApiTargetFramework)/third-party-licenses/THIRD-PARTY-NOTICES.md" 
+            DestinationFiles="$(BuildLicensesDir)\THIRD-PARTY-NOTICES.md" />
+
+        <ItemGroup>
+            <ApiLicenses Include="%(ApiProjects.RootDir)%(ApiProjects.Directory)bin/Release/$(ApiTargetFramework)/third-party-licenses\licenses\**\*" />
+        </ItemGroup>
+
+        <Copy
+            SourceFiles="@(ApiLicenses)"
+            DestinationFiles="@(ApiLicenses->'$(BuildLicensesDir)\licenses\%(RecursiveDir)%(Filename)%(Extension)')" />
+    </Target>
+
+    <Target Name="BuildMAUIAndroid">
+        <Message Text="Building MAUI for Android" Importance="high" />
+        <MSBuild Projects="@(MAUIProjects)" Targets="Build" Properties="TargetFramework=net10.0-android" />
+    </Target>
+
+    <Target Name="RebuildMAUIAndroid">
+        <Message Text="Rebuilding MAUI for Android" Importance="high" />
+        <MSBuild Projects="@(MAUIProjects)" Targets="Rebuild" Properties="TargetFramework=net10.0-android" />
+    </Target>
+
+    <Target Name="ReleaseMAUIAndroid">
+        <Message Text="Rebuilding release MAUI for Android" Importance="high" />
+        <MSBuild Projects="@(MAUIProjects)" Targets="Rebuild" Properties="TargetFramework=net10.0-android;Configuration=Release" />
+    </Target>
+
+    <Target Name="PublishMAUIAndroid"> 
+        <Message Text="Publishing MAUI for Android" Importance="high" />
+        <MSBuild Projects="@(MAUIProjects)" Targets="Publish" Properties="TargetFramework=net10.0-android;Configuration=Release;AndroidPackageFormats=aab" />
+    </Target>
+
+    <Target Name="BuildMAUIiOS">
+        <Message Text="Building MAUI for iOS" Importance="high" />
+        <MSBuild Projects="@(MAUIProjects)" Targets="Build" Properties="TargetFramework=net10.0-ios" />
+    </Target>
+
+    <Target Name="RebuildMAUIiOS">
+        <Message Text="Rebuilding MAUI for iOS" Importance="high" />
+        <MSBuild Projects="@(MAUIProjects)" Targets="Rebuild" Properties="TargetFramework=net10.0-ios" />
+    </Target>
+
+    <Target Name="ReleaseMAUIiOS">
+        <Message Text="Rebuilding release MAUI for iOS" Importance="high" />
+        <MSBuild Projects="@(MAUIProjects)" Targets="Rebuild" Properties="TargetFramework=net10.0-ios;Configuration=Release" />
+    </Target>
+
+    <Target Name="PublishMAUIiOS">
+        <Message Text="Publishing MAUI for iOS" Importance="high" />
+        <MSBuild Projects="@(MAUIProjects)" Targets="Publish" Properties="TargetFramework=net10.0-ios;Configuration=Release;BuildIpa=true" />
+    </Target>
+    
+    <Target Name="RestoreSolution">
+        <Message Text="Restoring packages for @(Solution)" Importance="high" />
+        <MSBuild Projects="@(Solution)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="BuildSolution" DependsOnTargets="RestoreSolution;DebugSystemToken;DebugTemplateLauncher;DebugDevInstaller">
+        <Message Text="Building @(Solution)" Importance="high"/>
+        <MSBuild Projects="@(Solution)" Targets="Build" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+    
+    <Target Name="RebuildSolution" DependsOnTargets="RestoreSolution;ReleaseSystemToken;ReleaseTemplateLauncher;ReleaseDevInstaller">
+        <Message Text="Rebuilding @(Solution)" Importance="high"/>
+        <MSBuild Projects="@(Solution)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="ReleaseSolution" DependsOnTargets="RestoreSolution;ReleaseSystemToken;ReleaseTemplateLauncher;ReleaseDevInstaller">
+        <Message Text="Rebuilding @(Solution) in Release" Importance="high" />
+        <MSBuild Projects="@(Solution)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="RestoreTest">
+        <Message Text="Restoring packages for @(TestProjects)..." Importance="high" />
+        <MSBuild Projects="@(TestProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="BuildTest" DependsOnTargets="RestoreTest">
+        <Message Text="Building @(TestProjects)" Importance="high" />
+        <MSBuild Projects="@(TestProjects)" Targets="Build" BuildInParallel="true" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="RebuildTest" DependsOnTargets="RestoreTest">
+        <Message Text="Rebuilding @(TestProjects)" Importance="high" />
+        <MSBuild Projects="@(TestProjects)" Targets="Rebuild" BuildInParallel="true" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="RestoreRunProcessApp">
+        <Message Text="Restoring packages for @(RunProcessProjects)" Importance="high" />
+        <MSBuild Projects="@(RunProcessProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="BuildRunProcessApp" DependsOnTargets="RestoreRunProcessApp">
+        <Message Text="Building @(RunProcessProjects)" Importance="high" />
+        <MSBuild Projects="@(RunProcessProjects)" Targets="Build" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="RebuildRunProcessApp" DependsOnTargets="RestoreRunProcessApp">
+        <Message Text="Rebuilding @(RunProcessProjects)" Importance="high" />
+        <MSBuild Projects="@(RunProcessProjects)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+    </Target>
+
+    <Target Name="ReleaseRunProcessApp" DependsOnTargets="RestoreRunProcessApp">
+        <Message Text="Rebuilding @(RunProcessProjects) in Release" Importance="high" />
+        <MSBuild Projects="@(RunProcessProjects)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier)" />
+    </Target>
+
+    <Target Name="PublishRunProcessApp" DependsOnTargets="RestoreRunProcessApp">
+        <PropertyGroup>
+            <PublishProperties>Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier);SelfContained=true;PublishSingleFile=false;PublishTrimmed=false;AppendRuntimeIdentifierToOutputPath=false</PublishProperties>
+        </PropertyGroup>
+
+        <Message Text="Publishing @(RunProcessProjects) targeting $(RuntimeIdentifier)" Importance="high" />
+        <MSBuild Projects="@(RunProcessProjects)" Targets="Publish" Properties="$(PublishProperties)"/>
+    </Target>
+
+    <Target Name="BuildRustApp">
+        <PropertyGroup>
+            <RustAppDir>$(MSBuildProjectDirectory)\App\$(AppName)</RustAppDir>
+            <RustTargetDir>$(RustAppDir)\target\$(RustTarget)\$(ConfigurationType)</RustTargetDir>
+            <RustBuildOutput>$(MSBuildProjectDirectory)\Build\App\$(AppName)</RustBuildOutput>
+            <BinaryName Condition="'$(BinaryName)' == ''">$(AppName)</BinaryName>
+            <CargoCommand>cargo build</CargoCommand>
+            <CargoCommand Condition="$(RustTarget.Contains('linux'))">cargo zigbuild</CargoCommand>
+        </PropertyGroup>
+
+        <RemoveDir Directories="$(RustTargetDir)" Condition="Exists('$(RustTargetDir)')" />
+
+        <Exec Command="$(CargoCommand) $(CargoFlags) --target $(RustTarget)" WorkingDirectory="$(RustAppDir)" />
+
+        <Copy SourceFiles="$(RustTargetDir)\$(BinaryName).exe"
+              DestinationFiles="$(RustBuildOutput)\$(OutputFileName).exe"
+              Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
+
+        <Copy SourceFiles="$(RustTargetDir)\$(BinaryName)"
+              DestinationFiles="$(RustBuildOutput)\$(OutputFileName)"
+              Condition="!$([MSBuild]::IsOSPlatform('Windows'))" />
+
+        <Exec Command="cargo run --bin generate_licenses --release" 
+              WorkingDirectory="$(RustAppDir)" 
+              Condition="'$(ConfigurationType)' == 'release'" />
+
+        <MakeDir Directories="$(RustBuildOutput)\third-party-licenses" 
+                 Condition="'$(ConfigurationType)' == 'release'" />
+        
+        <ItemGroup>
+            <LicenseFiles Include="$(RustAppDir)\target\release\third-party-licenses\**\*.*" />
+        </ItemGroup>
+
+        <Copy SourceFiles="@(LicenseFiles)"
+              DestinationFiles="@(LicenseFiles->'$(RustBuildOutput)\third-party-licenses\%(RecursiveDir)%(Filename)%(Extension)')"
+              Condition="'$(ConfigurationType)' == 'release' and Exists('$(RustAppDir)\target\release\third-party-licenses')" />
+    </Target>
+
+    <Target Name="BuildTemplateLauncher">
+        <MSBuild Projects="$(MSBuildProjectFile)" Targets="BuildRustApp" 
+                 Properties="AppName=TemplateLauncherRust;BinaryName=template_launcher;OutputFileName=template_launcher;ConfigurationType=debug;CargoFlags=" />
+    </Target>
+
+    <Target Name="ReleaseTemplateLauncher">
+        <MSBuild Projects="$(MSBuildProjectFile)" Targets="BuildRustApp" 
+                 Properties="AppName=TemplateLauncherRust;BinaryName=template_launcher;OutputFileName=template_launcher;ConfigurationType=release;CargoFlags=--release" />
+    </Target>
+
+    <Target Name="BuildDevInstaller">
+        <MSBuild Projects="$(MSBuildProjectFile)" Targets="BuildRustApp" 
+                 Properties="AppName=DevInstallerRust;BinaryName=dev_installer;OutputFileName=dev_installer_$(RuntimeIdentifier);ConfigurationType=debug;CargoFlags=" />
+    </Target>
+
+    <Target Name="ReleaseDevInstaller">
+        <MSBuild Projects="$(MSBuildProjectFile)" Targets="BuildRustApp" 
+                 Properties="AppName=DevInstallerRust;BinaryName=dev_installer;OutputFileName=dev_installer_$(RuntimeIdentifier);ConfigurationType=release;CargoFlags=--release" />
+    </Target>
+
+    <Target Name="BuildSystemToken">
+        <MSBuild Projects="$(MSBuildProjectFile)" Targets="BuildRustApp" 
+                 Properties="AppName=SystemTokenRust;BinaryName=system_token;OutputFileName=system_token;ConfigurationType=debug;CargoFlags=" />
+    </Target>
+
+    <Target Name="ReleaseSystemToken">
+        <MSBuild Projects="$(MSBuildProjectFile)" Targets="BuildRustApp" 
+                 Properties="AppName=SystemTokenRust;BinaryName=system_token;OutputFileName=system_token;ConfigurationType=release;CargoFlags=--release" />
+    </Target>
+    
+    <Target Name="PublishElectronApp">
+        <Error Condition="'$(ElectronAppName)' == ''" Text="The ElectronAppName property is not defined" />
+
+        <PropertyGroup>
+            <ElectronAppDir>$(SolutionDir)App\$(ElectronAppName)</ElectronAppDir>
+            <ElectronReleaseDir>$(ElectronAppDir)\release</ElectronReleaseDir>
+            <ElectronDestinationDir>$(SolutionDir)Build\App\$(ElectronAppName)</ElectronDestinationDir>
+            
+            <UnpackedFolderName Condition="$(RuntimeIdentifier.StartsWith('win')) and $(RuntimeIdentifier.EndsWith('arm64'))">win-arm64-unpacked</UnpackedFolderName>
+            <UnpackedFolderName Condition="$(RuntimeIdentifier.StartsWith('win')) and $(RuntimeIdentifier.EndsWith('x64'))">win-unpacked</UnpackedFolderName>
+
+            <UnpackedFolderName Condition="$(RuntimeIdentifier.StartsWith('osx')) and $(RuntimeIdentifier.EndsWith('arm64'))">mac-arm64</UnpackedFolderName>
+            <UnpackedFolderName Condition="$(RuntimeIdentifier.StartsWith('osx')) and $(RuntimeIdentifier.EndsWith('x64'))">mac</UnpackedFolderName>
+
+            <UnpackedFolderName Condition="$(RuntimeIdentifier.StartsWith('linux')) and $(RuntimeIdentifier.EndsWith('arm64'))">linux-arm64-unpacked</UnpackedFolderName>
+            <UnpackedFolderName Condition="$(RuntimeIdentifier.StartsWith('linux')) and $(RuntimeIdentifier.EndsWith('x64'))">linux-unpacked</UnpackedFolderName>            
+        </PropertyGroup>
+
+        <Message Text="Cleaning Electron directories for $(ElectronAppName)" Importance="high" />
+        <RemoveDir Directories="$(ElectronReleaseDir)" />
+        <RemoveDir Directories="$(ElectronDestinationDir)" />
+
+        <Message Text="Creating Licenses" Importance="high" />
+        <Exec Command="npm run licenses" WorkingDirectory="$(ElectronAppDir)" />
+
+        <Message Text="Building Electron application '$(ElectronAppName)' using '$(ElectronBuildScript)'" Importance="high" />
+        <Exec Command="npm run $(ElectronBuildScript)" WorkingDirectory="$(ElectronAppDir)" />
+
+        <ItemGroup>
+            <ElectronArtifacts Condition="$(RuntimeIdentifier.StartsWith('win'))" Include="$(ElectronReleaseDir)\*.msi;$(ElectronReleaseDir)\*.exe" />
+            <ElectronArtifacts Condition="$(RuntimeIdentifier.StartsWith('osx'))" Include="$(ElectronReleaseDir)\*.dmg" />
+            <ElectronArtifacts Condition="$(RuntimeIdentifier.StartsWith('linux'))" Include="$(ElectronReleaseDir)\*.AppImage" />
+            <ElectronUnpacked Include="$(ElectronReleaseDir)\$(UnpackedFolderName)\**\*.*" />
+        </ItemGroup>
+
+        <Copy SourceFiles="@(ElectronArtifacts)" DestinationFolder="$(ElectronDestinationDir)" />
+        <Copy SourceFiles="@(ElectronUnpacked)" DestinationFiles="@(ElectronUnpacked->'$(ElectronDestinationDir)\unpacked_$(RuntimeIdentifier)\%(RecursiveDir)%(Filename)%(Extension)')" />
+
+        <Message Text="Electron build artifacts for $(RuntimeIdentifier) copied successfully to $(ElectronDestinationDir)" Importance="high" />
+        <Message Text="Cleaning release directory" Importance="high" />
+        <RemoveDir Directories="$(ElectronReleaseDir)" />
+    </Target>
+
+    <Target Name="PublishProcessAutomationApp" DependsOnTargets="PublishApiWithLicenses">
+        <PropertyGroup>
+            <ElectronAppName>ProcessAutomationElectron</ElectronAppName>
+        </PropertyGroup>
+
+        <MSBuild Projects="$(MSBuildProjectFile)" Targets="PublishElectronApp" Properties="ElectronAppName=$(ElectronAppName)" />
+    </Target>
+
+    <Target Name="PublishProcessViewerApp" DependsOnTargets="PublishApiWithLicenses">
+        <PropertyGroup>
+            <ElectronAppName>ProcessViewerElectron</ElectronAppName>
+        </PropertyGroup>
+
+        <MSBuild Projects="$(MSBuildProjectFile)" Targets="PublishElectronApp" Properties="ElectronAppName=$(ElectronAppName)" />
+    </Target>
+
+    <Target Name="RestoreApplications" BeforeTargets="Build">
+        <Message Text="Restoring .NET dependencies..." Importance="high" />
+        <Exec Command="dotnet restore &quot;ProcessAutomationSolution.sln&quot;" WorkingDirectory="$(SolutionDir)"/>
+
+        <Message Text="Restoring Node dependencies (npm ci)..." Importance="high" />
+        <Exec Command="npm ci" WorkingDirectory="$(SolutionDir)App\ProcessAutomationElectron" />
+        <Exec Command="npm ci" WorkingDirectory="$(SolutionDir)App\ProcessViewerElectron" />
+    </Target>
+</Project>

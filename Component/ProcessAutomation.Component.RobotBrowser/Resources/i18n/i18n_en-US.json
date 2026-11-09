@@ -1,0 +1,96 @@
+{
+  "COMPONENT": {
+    "Browser": {
+      "Label": "Browser",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "BinaryLocation": {
+      "Label": "Binary location",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Options": {
+      "Label": "Options",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Incognito": {
+      "Label": "Incognito",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }    
+  },
+  "FIELD_LIST": {
+    "CurrentPage": {
+      "Label": "Current page",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Page": {
+      "Label": "Page",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Delay": {
+      "Label": "Delay",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Multiple": {
+      "Label": "Multiple",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OnlyText": {
+      "Label": "Only text",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Attribute": {
+      "Label": "Attribute",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Action": {
+      "Label": "Action",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Object": {
+      "Label": "Object",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Value": {
+      "Label": "Value",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SearchType": {
+      "Label": "Search type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Event": {
+      "Label": "Event",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

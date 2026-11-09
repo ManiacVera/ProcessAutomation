@@ -1,0 +1,23 @@
+{
+  "ProcessViewerTitle": "Process Viewer",
+  "File": "File",
+  "Save": "Save",
+  "Regenerar": "Regenerate",
+  "ProcessDetail": "View details",
+  "SelectAll": "Select All",
+  "UnselectAll": "Unselect All",
+  "Refresh": "Refresh",
+  "Run": "Run",
+  "OpenProcessViewer": "Open process viewer",
+  "ProcessList": "Process list",
+  "ProcessHeader": "Process",
+  "DescriptionHeader": "Description",
+  "FolderHeader": "Folder",
+  "ShowInputHeader": "Show input",
+  "RunHeader": "Run",
+  "editHeader": "Edit",
+  "deleteHeader": "Delete",
+  "selectHeader": "Select",
+  "copy": "Copy",
+  "shortcut": "Shortcut"
+}

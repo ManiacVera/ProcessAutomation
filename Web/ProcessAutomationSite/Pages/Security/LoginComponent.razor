@@ -1,0 +1,79 @@
+﻿@page "/Login"
+@using ProcessAutomationSite.Pages.Common;
+@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<LoginComponent> localizer
+
+@*<div class="row">
+        <div class="col-md-4"></div>
+        <button type="submit" class="col-md-4 fa fa-google" name="provider" value="Google" title="Google">
+            <span class="si-text">Sign up with Google</span>
+        </button>
+        <div class="col-md-4"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <fb:login-button scope="public_profile" onlogin="checkLoginState();">
+        </fb:login-button>
+        <div class="col-md-4"></div>
+    </div>*@
+
+
+<br />
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="row bg-dark rounded shadow" style="border-left: 0px; border-right: 0px; border-top: 15px; border-bottom: 15px; border-style: solid; border-color: orange;">
+            <div class="col-md-12">
+                <br />
+                <RadzenFieldset class="rounded shadow" Style="color: white; font-size: 20px;">
+                    <HeaderTemplate>
+                        <RadzenLabel Text="@localizer["User"]" Style="color: white; font-size: 22px;"></RadzenLabel>
+                    </HeaderTemplate>
+                    <ChildContent>
+                        <div class="row" style="margin-bottom: 6px;">
+                            <div class="col-md-12">
+                                <RadzenTextBox Name="Email" @bind-Value="@userInfo.Email" Style="width: 100%; font-size: 20px;"
+                                               Placeholder="@localizer["Email"]"
+                                               @oninput="@OnInputEmail"
+                                               @onkeypress="@OnEnter"></RadzenTextBox>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 8px;">
+                            <div class="col-md-12">
+                                <RadzenPassword Name="Password" @bind-Value="@userInfo.Password" Style=" width: 100%; font-size: 20px;"
+                                                Placeholder="@localizer["Password"]"
+                                                @oninput="@OnInputPassword"
+                                                @onkeypress="@OnEnter"></RadzenPassword>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 8px;">
+                            <div class="col-md-5">
+                                <RadzenButton Text="@localizer["Register"]" Click="@OnRegister" Style="width: 100%"></RadzenButton>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5">
+                                <RadzenButton Text="@localizer["Login"]" Click="@OnLogin" Style="width: 100%"></RadzenButton>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button @onclick="@OnRememberPassword" Style="width: 100%" class="btn btn-link">
+                                    @localizer["RememberPassword"]                                    
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <h4>@message</h4>
+                            </div>
+                        </div>
+                    </ChildContent>
+                </RadzenFieldset>
+                <br />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<LoadingComponent @ref="loadingComponent" />

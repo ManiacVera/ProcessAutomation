@@ -1,0 +1,28 @@
+{
+  "COMPONENT": {
+    "Title": "Clipboard",
+    "Description": "Use the current clipboard content, you can copy, paste and get information.",
+    "Return": "Returns the current clipboard.",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Action": {
+      "Label": "Action",
+      "Description": "The parameter indicates the action to be executed, which are COPY, PASTE, GET_DATA",
+      "ErrorMessage": "",
+      "ValueExample": "COPY"
+    },
+    "Type": {
+      "Label": "Type",
+      "Description": "The parameter indicates the type of procedure, it can be VALUE, TEXT, FILE, SCREEN CAPTURE, SHORT SCREEN CAPTURE",
+      "ErrorMessage": "",
+      "ValueExample": "TEXT"
+    },
+    "Value": {
+      "Label": "Value",
+      "Description": "The parameter defines the path, text to copy the file or paste text into a window",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

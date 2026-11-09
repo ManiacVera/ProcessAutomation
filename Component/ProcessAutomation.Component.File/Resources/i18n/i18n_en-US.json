@@ -1,0 +1,40 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "File": {
+      "Label": "File",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FileAccessType": {
+      "Label": "Access type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "DestFile": {
+      "Label": "Destination file",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "AsyncAccess": {
+      "Label": "Async",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Value": {
+      "Label": "Value",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

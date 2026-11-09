@@ -1,0 +1,8 @@
+﻿[
+  {
+    "Name": "Chrome Driver",
+    "Description": "Driver for web navigation",
+    "File": "chromedriver.exe",
+    "Type": "EXTERNAL"
+  }
+]

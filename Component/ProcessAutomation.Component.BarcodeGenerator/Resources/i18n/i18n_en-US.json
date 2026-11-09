@@ -1,0 +1,52 @@
+{
+  "COMPONENT": {
+    "Title": "Bardcode Generator",
+    "Description": "Read or write barcodes of different types, supported: AZTEC,CODABAR,CODE_39,CODE_93,CODE_128,DATA_MATRIX,EAN_8,EAN_13,ITF,MAXICODE,PDF_417,QR_CODE,RSS_14,RSS_EXPANDED,UPC_A,UPC_E,All_1D,UPC_EAN_EXTENSION,MSI, PLESSEY,IMB,PHARMA_CODE",
+    "Return": "Returns the Bitmap of the read code and in turn can be saved in a folder",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Action": {
+      "Label": "Action",
+      "Description": "Parameter to select between READ or WRITE",
+      "ErrorMessage": "",
+      "ValueExample": "READ"
+    },
+    "BarcodeType": {
+      "Label": "Barcode type",
+      "Description": "Parameter to select between different types of barcodes",
+      "ErrorMessage": "",
+      "ValueExample": "QR_CODE"
+    },
+    "Value": {
+      "Label": "Value",
+      "Description": "Parameter to write path of the image to read or text to generate new barcode",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Width": {
+      "Label": "Width",
+      "Description": "Parameter to indicate the width of the image to read or write",
+      "ErrorMessage": "",
+      "ValueExample": "10.00"
+    },
+    "Height": {
+      "Label": "Height",
+      "Description": "Parameter to indicate the height of the image to read or write",
+      "ErrorMessage": "",
+      "ValueExample": "20.00"
+    },
+    "OutputPath": {
+      "Label": "Output path",
+      "Description": "Parameter to indicate the output path of the bitmap to be written",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OnlyBarcode": {
+      "Label": "OnlyBarcode",
+      "Description": "Parameter to indicate that only the barcode without text will be generated",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

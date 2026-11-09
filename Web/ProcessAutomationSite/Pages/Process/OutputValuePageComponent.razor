@@ -1,0 +1,16 @@
+﻿@page "/OutputValuePage/{taskNumber:int}/{value}/{component}/{description}/{token}/{language}/{enabledOptions:bool}"
+@using Microsoft.Extensions.Localization;
+@inject DialogService dialogService
+@inject IStringLocalizer<OutputValuePageComponent> localizer
+
+<div class="row rounded shadow" style="background-color: #454d55;">
+    <div class="col-md-12">
+        <iframe id="ifrmOutputValue" src="../Resources/OutputValueOption.html" style="width: 100%; height: 500px;" onload="javascript:SetFullScreenHeight('ifrmOutputValue', 300)">
+        </iframe>
+    </div>
+    <div class="col-md-12 text-center">
+        <RadzenButton Text="@localizer["Accept"]" Click="() => AcceptDialog()"></RadzenButton>
+        &nbsp;&nbsp;
+        <RadzenButton Text="@localizer["Cancel"]" Click="() => CloseDialog()"></RadzenButton>
+    </div>
+</div>

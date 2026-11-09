@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutputPath />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\..\Common\ProcessAutomation.Common\ProcessAutomation.Common.csproj" />
+  <ProjectReference Include="..\..\Common\ProcessAutomation.CommonExpress\ProcessAutomation.CommonExpress.csproj" />
+	<ProjectReference Include="..\..\Framework\ProcessAutomation.Framework\ProcessAutomation.Framework.csproj" />
+	<ProjectReference Include="..\ProcessAutomation.Business.DTO\ProcessAutomation.Business.DTO.csproj" />
+  </ItemGroup>
+
+  <Target Name="CopyAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <ItemGroup>
+      <PackageBusiness Include="$(TargetDir)/*.dll;" />
+    </ItemGroup>
+    <Message Text="Copy PackageBusiness" Importance="normal" />
+    <Copy SourceFiles="@(PackageBusiness)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+  </Target>
+  
+</Project>

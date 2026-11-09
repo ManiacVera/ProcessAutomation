@@ -1,0 +1,28 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Object": {
+      "Label": "Objeto",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Value": {
+      "Label": "Valor",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "SearchType": {
+      "Label": "Tipo de busqueda",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

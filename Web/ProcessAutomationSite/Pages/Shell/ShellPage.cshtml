@@ -1,0 +1,440 @@
+﻿@page "/"
+@namespace ProcessAutomationSite.Pages.Shell
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProcessAutomationSite</title>
+    <base href="~/" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/site.css" rel="stylesheet" />
+    @*<link href="css/jquery/jquery-ui.css" rel="stylesheet" type="text/css">*@
+    <link href="css/tagit/jquery.tagit.css" rel="stylesheet" type="text/css">
+    <link href="css/tagit/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+@*     <link rel="stylesheet" href="_content/Radzen.Blazor/css/default-base.css">
+    <link rel="stylesheet" href="_content/Radzen.Blazor/css/default.css"> *@
+    @* <link rel="stylesheet" href="_content/Radzen.Blazor/css/material-base.css"> *@
+    <link rel="stylesheet" href="_content/Radzen.Blazor/css/standard-base.css">
+    <link href="css/scrollbar.css" rel="stylesheet" />
+    <link href="css/spinner.css" rel="stylesheet" />
+
+    <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
+    <script src="Scripts/jquery/jquery-1.12.5.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="Scripts/jquery/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="Scripts/tagit/tag-it.js" type="text/javascript" charset="utf-8"></script>
+    <script src="Scripts/AngularJS/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript">
+
+        var path = window.location.pathname.split('/');
+        var base = document.getElementsByTagName('base')[0];
+        if (window.location.host.includes('localhost')) {
+            base.setAttribute('href', '/');
+        } else if (path.length > 2) {
+            base.setAttribute('href', '/' + path[1] + '/');
+        } else if (path[path.length - 1].length != 0) {
+            window.location.replace(window.location.origin + window.location.pathname + '/' + window.location.search);
+        }
+
+
+        //(function (d, s, id) {
+        //    var js, fjs = d.getElementsByTagName(s)[0];
+        //    if (d.getElementById(id)) { return; }
+        //    js = d.createElement(s); js.id = id;
+        //    js.src = "https://connect.facebook.net/en_US/sdk.js";
+        //    fjs.parentNode.insertBefore(js, fjs);
+        //}(document, 'script', 'facebook-jssdk'));
+
+        //function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+        //    console.log('statusChangeCallback');
+        //    console.log(response);                   // The current login status of the person.
+        //    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+                
+        //    } else {                                 // Not logged into your webpage or we are unable to tell.
+        //        //document.getElementById('status').innerHTML = 'Please log ' + 'into this webpage.';
+        //    }
+        //}
+
+        //var finished_rendering = function () {
+        //    console.log("finished rendering plugins");
+        //    var spinner = document.getElementById("spinnerface");
+        //    spinner.removeAttribute("style");
+        //    spinner.removeChild(spinner.childNodes[0]);
+        //}
+        //FB.Event.subscribe('xfbml.render', finished_rendering);
+
+
+        //function checkLoginState() {               // Called when a person is finished with the Login Button.
+        //    FB.getLoginStatus(function (response) {   // See the onlogin handler
+        //        statusChangeCallback(response);
+        //    });
+        //}
+
+
+        //window.fbAsyncInit = function () {
+        //    FB.init({
+        //        appId: '482096936167389',
+        //        cookie: true,                     // Enable cookies to allow the server to access the session.
+        //        xfbml: true,                     // Parse social plugins on this webpage.
+        //        version: 'v10.0'           // Use this Graph API version for this call.
+        //    });
+
+        //    FB.AppEvents.logPageView();
+
+        //    FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
+        //        statusChangeCallback(response);        // Returns the login status.
+        //    });
+        //};
+
+        //function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+        //    console.log('Welcome!  Fetching your information.... ');
+        //    FB.api('/me', function (response) {
+        //        console.log('Successful login for: ' + response.name);
+        //        //document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+        //    });
+        //}
+
+        function TagIt(objectId) {
+            if (objectId != null) {
+                $('#' + objectId).tagit({
+                    allowSpaces: true
+                });
+            }
+        }
+
+        function GetPositionElement(elementId) {
+            var position = $('#' + elementId).offset();
+
+            return {
+                "x": position.left,
+                "y": position.top
+            };
+        }
+
+        function GetAttributeElement(elementId, attribute) {
+            return $('#' + elementId).attr(attribute);
+        }
+
+        function GetCssElement(elementId, css) {
+            return $('#' + elementId).css(css);
+        }
+
+        function SetAccordion(elementId) {
+            $("#" + elementId).accordion();
+        }
+
+        function SetScrollToBottom(elementId) {
+            var element = document.getElementById(elementId);
+
+            if (element != null) {
+                element.scrollTop = element.scrollHeight;
+            }
+        }
+
+        function SetElementValue(elementId, value) {
+            var element = document.getElementById(elementId);
+
+            if (element != null) {
+                element.value = value;
+            }
+        }
+
+        function SetFullWidth(elementId, substractWidth) {
+            var element = document.getElementById(elementId);
+
+            if (element != null) {
+                var body = document.body,
+                    html = document.documentElement;
+
+                var width = Math.max(body.scrollWidth, body.offsetWidth,
+                    html.clientWidth, html.scrollWidth, html.offsetWidth);
+
+                // width -= element.offsetRigth;
+
+                if (substractWidth) {
+                    width -= (substractWidth);
+                }
+
+                element.style.width = width.toString() + "px";
+            }
+        }
+
+        function SetFullHeight(elementId, substractHeight) {
+            var element = document.getElementById(elementId);
+
+            if (element != null) {
+                var body = document.body,
+                    html = document.documentElement;
+
+                var height = Math.max(body.scrollHeight, body.offsetHeight,
+                    html.clientHeight, html.scrollHeight, html.offsetHeight);
+
+                height -= element.offsetTop;
+
+                if (substractHeight) {
+                    height -= (substractHeight);
+                }
+
+                element.style.height = height.toString() + "px";
+            }
+        }
+
+        function SetFullScreenHeight(elementId, substractHeight) {
+            var element = document.getElementById(elementId);
+
+            if (element != null) {
+                var body = document.body,
+                    html = document.documentElement;
+
+                var height = window.screen.height;
+
+                height -= element.offsetTop;
+
+                if (substractHeight) {
+                    height -= (substractHeight);
+                }
+
+                element.style.height = height.toString() + "px";
+            }
+        }
+
+        function GetIframeWindow(iframeId) {
+            var doc;
+            var iframeObject = document.getElementById(iframeId);
+
+            if (iframeObject.contentWindow) {
+                return iframeObject.contentWindow;
+            }
+
+            if (iframeObject.window) {
+                return iframeObject.window;
+            }
+
+            if (!doc && iframeObject.contentDocument) {
+                doc = iframeObject.contentDocument;
+            }
+
+            if (!doc && iframeObject.document) {
+                doc = iframeObject.document;
+            }
+
+            if (doc && doc.defaultView) {
+                return doc.defaultView;
+            }
+
+            if (doc && doc.parentWindow) {
+                return doc.parentWindow;
+            }
+
+            return null;
+        }
+
+        function SetTranslation(iframeId, fieldTranslationList) {
+            setTimeout(function () {
+                var iframeElement = GetIframeWindow(iframeId);
+                if (iframeElement) {
+                    if (typeof iframeElement.setTranslation === 'function') {
+                        iframeElement.setTranslation(fieldTranslationList);
+                    }
+                    else {
+                        alert("Error al cargar funcion de setTranslation");
+                    }
+                }
+            }, 500);
+        }
+
+        function SetInputFields(iframeId, fieldName, componentName, getSetSelected, fieldArray, variableArray) {
+            setTimeout(function () {
+                var iframeElement = GetIframeWindow(iframeId);
+                if (iframeElement) {
+                    if (typeof iframeElement.setFields === 'function') {
+                        iframeElement.setFields(fieldName, componentName, getSetSelected, fieldArray, variableArray);
+                    }
+                    else {
+                        alert("Error al cargar funcion de setInputFieldArray");
+                    }
+                    }
+            }, 500);
+        }
+
+        function SetInputFieldsOptions(iframeId, enabledOptions) {
+            setTimeout(function () {
+                var iframeElement = GetIframeWindow(iframeId);
+                if (iframeElement) {
+                    if (typeof iframeElement.setEnabledOptions === 'function') {
+                        iframeElement.setEnabledOptions(enabledOptions);
+                    }
+                    else {
+                        alert("Error al cargar funcion de SetInputFieldsOptions");
+                    }
+                }
+            }, 500);
+        }
+
+        function SetOutputValueFields(iframeId, fieldName, componentName, token, fieldArray) {
+            setTimeout(function () {
+                var iframeElement = GetIframeWindow(iframeId);
+                if (iframeElement) {
+                    if (typeof iframeElement.setFields === 'function') {
+                        iframeElement.setFields(fieldName, componentName, token, fieldArray);
+                    }
+                    else {
+                        alert("Error al cargar funcion de setInputFieldArray");
+                    }
+                    }
+            }, 500);
+        }
+
+        function SetStyle(iframeId) {
+            setTimeout(function () {
+                var iframeElement = GetIframeWindow(iframeId);
+                if (iframeElement) {
+                    if (typeof iframeElement.setStyle === 'function') {
+                        iframeElement.setStyle();
+                    }
+                    else {
+                        alert("Error al cargar funcion de SetStyle");
+                    }
+                }
+            }, 500);
+        }
+
+        function OnInputSuccessData(iframeId) {
+            var result = "";
+            var iframeElement = GetIframeWindow(iframeId);
+            if (iframeElement) {
+                if (typeof iframeElement.onSuccessData === 'function') {
+                    result = iframeElement.onSuccessData();
+                }
+                else {
+                    alert("Error al cargar funcion de onSuccessData");
+                }
+            }
+            return result;
+        }
+
+        function SaveAsFile(filename, bytesBase64) {
+            var link = document.createElement('a');
+            link.download = filename;
+            link.href = "data:application/octet-stream;base64," + bytesBase64;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function ShowLoading()
+        {
+            if ($("#loadingPopup")) {
+                $("#loadingPopup").modal('show');
+            }
+        }
+
+        function CloseLoading()
+        {
+            if ($('#loadingPopup')) {
+                $('#loadingPopup').modal('hide');
+            }
+        }
+
+        function OpenTab(url)
+        {
+            const link = document.createElement('a');
+            link.href = url;
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        }
+
+        function AlertMessage(message)
+        {
+            alert(message);
+        }
+
+        function CopyToClipboard(elementId)
+        {
+            var element = document.getElementById(elementId);
+            if (element)
+            {
+                element.select();
+                document.execCommand("copy");
+            }
+        }
+
+        function CopyToClipboardWitAlert(elementId)
+        {
+            var element = document.getElementById(elementId);
+            if (element)
+            {
+                element.select();
+                document.execCommand("copy");
+                alert("Copied to clipboard");
+            }
+        }
+
+        // window.addEventListener('DOMContentLoaded', (event) => {
+            
+        //     // Blazor might need some extra time to get ready,
+        //     // so we give it two more seconds
+        //     setTimeout(() => {
+        //         alert("");
+        //         SetFullWidth('gdvStepList', 200);
+        //         // let hash = window.location.hash;
+        //         // if (hash) {
+        //         //     window.scrollIntoView(hash.substring(1));
+        //         // }
+        //     }, 2000);
+        // });
+
+        @*<img src="@Picture"  />
+
+        <input ref="fileUpload" class="form-control" type="file"
+            onchange="@(async (e) => Picture = await JSRuntime.Current.InvokeAsync<string>("ReadFileAsBase64", fileUpload))" />
+
+
+        window.ReadFileAsBase64 = (fileInput) => {
+            const readAsDataURL = (fileInput) => {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onerror = () => {
+                        reader.abort();
+                        reject(new Error("Error reading file."));
+                    };
+                    reader.addEventListener("load", () => {
+                        resolve(reader.result);
+                    }, false);
+                    reader.readAsDataURL(fileInput.files[0]);
+                });
+            };
+
+            return readAsDataURL(fileInput);
+        };*@
+
+    </script>
+
+</body>
+</html >

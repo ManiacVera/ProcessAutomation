@@ -1,0 +1,12 @@
+{
+  "Run": "Ejecutar",
+  "Abort": "Abortar",
+  "Back": "Regresar",
+  "ProcessName": "Proceso",
+  "RunProcessInformation": "Ejecutar proceso",
+  "TaskHeader": "Tarea",
+  "DescriptionHeader": "Descripción",
+  "ValueHeader": "Valor",
+  "ValueFormatHeader": "Valor por formato",
+  "RunProcessListInformation": "Lista de proceso de ejecución"
+}

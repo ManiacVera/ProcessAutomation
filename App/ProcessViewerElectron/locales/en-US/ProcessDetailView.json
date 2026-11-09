@@ -1,0 +1,12 @@
+{
+  "Accept": "Accept",
+  "Cancel": "Cancel",
+  "ProcessList": "Step list",
+  "TaskNameHeader": "Task",
+  "StepDescriptionHeader": "Description",
+  "InputValueFormatHeader": "Value",
+  "ValueFormatHeader": "By format",
+  "OutputValueTypeHeader": "Output type",
+  "ProcessTitleLabel": "Process detail",
+  "ProcessName": "Process"
+}

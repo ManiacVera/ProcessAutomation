@@ -1,0 +1,18 @@
+[package]
+name = "TemplateLauncherRust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+cargo-license = "0.6"
+cargo_metadata = "0.18"
+
+[profile.release]
+opt-level = "s"
+lto = "thin"
+codegen-units = 1
+strip = true
+
+[[bin]]
+name = "template_launcher"
+path = "src/main.rs"

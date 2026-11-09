@@ -1,0 +1,204 @@
+﻿
+/* BUTTON */
+.ui-button.btn-primary, .btn-primary.ui-paginator-element {
+    border-style: solid;
+    border-color: orange;
+    background-color: orange;
+    text-shadow: 2px 2px 4px #000000;
+    /*box-shadow: 0px 1px 2px 1px #000000;*/
+    /*box-sizing: border-box;*/
+    box-shadow: inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.18),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+}
+
+/* SCROLLBAR */
+
+/* width */
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, .5);
+    border-radius: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    background: orange;
+    border-radius: 7px;
+    background-clip: content-box;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        border: 3px solid transparent;
+        background: darkorange;
+        background-clip: content-box;
+    }
+
+/* width */
+div::-webkit-scrollbar {
+    width: 16px;
+}
+
+/* Track */
+div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, .5);
+    border-radius: 7px;
+}
+
+/* Handle */
+div::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    background: silver;
+    border-radius: 7px;
+    background-clip: content-box;
+}
+
+    /* Handle on hover */
+    div::-webkit-scrollbar-thumb:hover {
+        border: 3px solid transparent;
+        background: gray;
+        background-clip: content-box;
+    }
+
+/*RADZEN DIALOG POPUP*/
+.ui-dialog {
+    position: fixed;
+    overflow: hidden;
+    background-color: black;
+    box-shadow: 0 22px 64px 0 rgba(0, 0, 0, 0.22);
+    border-radius: 2px;
+}
+
+.ui-dialog-titlebar {
+    /*background-color: rgba(243, 245, 247, 0.56);*/
+    background-color: orange;
+    padding: 0.6875rem 1.25rem;
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+    color: white;
+}
+
+.ui-dialog-titlebar-close {
+    float: right;
+}
+
+    .ui-dialog-titlebar-close .pi-times {
+        font-size: 1.25rem;
+        color: #88989b;
+        vertical-align: middle;
+    }
+
+        .ui-dialog-titlebar-close .pi-times:before {
+            content: 'close';
+        }
+
+.ui-dialog-content {
+    padding: 1.25rem;
+    overflow: auto;
+}
+
+.ui-confirmdialog {
+    top: 50%;
+    left: 50%;
+}
+
+.ui-dialog-mask {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #3a474d;
+    opacity: 0.5;
+}
+
+.ui-dialog-footer {
+    text-align: right;
+    border: 0 none;
+    padding: 1em;
+}
+
+    .ui-dialog-footer .ui-button, .ui-dialog-footer .ui-paginator-element {
+        text-align: left !important;
+        padding: 6px;
+    }
+
+        .ui-dialog-footer .ui-button:first-child, .ui-dialog-footer .ui-paginator-element:first-child {
+            background-color: #ff6d41;
+            width: 80px;
+        }
+
+        .ui-dialog-footer .ui-button:last-child, .ui-dialog-footer .ui-paginator-element:last-child {
+            background-color: #479cc8;
+            width: 105px;
+        }
+
+
+
+@media (max-width: 768px) {
+    .ui-dialog:not(.ui-confirmdialog) {
+        width: 95% !important;
+        height: 95% !important;
+        top: 15px !important;
+    }
+
+    .ui-dialog-content {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .no-scroll {
+        padding-right: 0;
+    }
+}
+
+
+.ui-dialog-wrapper {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+    .ui-dialog-wrapper .ui-dialog {
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: static;
+    }
+
+    .ui-dialog-wrapper .ui-dialog-content {
+        flex: 0 1 auto;
+        overflow: auto;
+    }
+
+.ui-tabview-panels {
+    background-color: transparent;
+    color: white;
+}
+
+.ui-tabview-panel ui-widget-content {
+    background-color: transparent;
+    color: white;
+}
+
+.ui-tabview-nav li a {
+    color: white;
+    background-color: transparent;
+}
+
+.ui-datepicker-trigger {
+    position: absolute;
+    margin-top: -28px;
+    right: 15px;
+    border: none;
+    background-color: transparent;
+}

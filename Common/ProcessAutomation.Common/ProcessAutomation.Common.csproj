@@ -1,0 +1,370 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Model\CHAT.cs" />
+    <Compile Remove="Model\CHAT_MESSAGE.cs" />
+    <Compile Remove="Model\CHAT_USER_MESSAGE.cs" />
+    <Compile Remove="Resources\ProcessProgramFormat.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Form\Diagram.html" />
+    <None Remove="Form\InputFieldsVisor.html" />
+    <None Remove="Form\OutputValueOption.html" />
+    <None Remove="Form\Scripts\AngularJS\angular\angular-translate-loader-partial.min.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\angular-translate.min.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\angular.min.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\angularjs-contenteditable.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\angularjs-dropdown-multiselect.min.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\datepicker.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\generic-scripts.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\external\jquery\jquery.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_444444_256x240.png" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_555555_256x240.png" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_777620_256x240.png" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_777777_256x240.png" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_cc0000_256x240.png" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.css" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.min.css" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.min.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.structure.css" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.structure.min.css" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.theme.css" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.theme.min.css" />
+    <None Remove="Form\Scripts\AngularJS\angular\jquery.min.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\mentio.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\tribute.min.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\tribute.data.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\tribute.service.js" />
+    <None Remove="Form\Scripts\AngularJS\angular\tribute.directive.js" />
+    <None Remove="Form\Scripts\AngularJS\css\tribute.css" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-grid.css" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-grid.css.map" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-grid.min.css" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-grid.min.css.map" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-icons.css" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-icons.json" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-icons.min.css" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-icons.scss" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-reboot.css" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-reboot.css.map" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-reboot.min.css" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-reboot.min.css.map" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap-theme.min.css" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap.css" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap.css.map" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap.min.css" />
+    <None Remove="Form\Scripts\AngularJS\css\bootstrap.min.css.map" />
+    <None Remove="Form\Scripts\AngularJS\css\fonts\bootstrap-icons.woff" />
+    <None Remove="Form\Scripts\AngularJS\css\fonts\bootstrap-icons.woff2" />
+    <None Remove="Form\Scripts\AngularJS\css\main.css" />
+    <None Remove="Form\Scripts\AngularJS\css\scrollbar.css" />
+    <None Remove="Form\Scripts\AngularJS\css\spinner.css" />
+    <None Remove="Form\Scripts\AngularJS\js\bootstrap.bundle.js" />
+    <None Remove="Form\Scripts\AngularJS\js\bootstrap.bundle.js.map" />
+    <None Remove="Form\Scripts\AngularJS\js\bootstrap.bundle.min.js" />
+    <None Remove="Form\Scripts\AngularJS\js\bootstrap.bundle.min.js.map" />
+    <None Remove="Form\Scripts\AngularJS\js\bootstrap.js" />
+    <None Remove="Form\Scripts\AngularJS\js\bootstrap.js.map" />
+    <None Remove="Form\Scripts\AngularJS\js\bootstrap.min.js" />
+    <None Remove="Form\Scripts\AngularJS\js\bootstrap.min.js.map" />
+    <None Remove="Form\InputFields.html" />
+    <None Remove="Form\InputTextField.html" />
+    <None Remove="Form\shapes.js" />
+    <None Remove="Resources\Database\S_1_InitCreateDatabase.sql" />
+    <None Remove="Resources\Database\S_1_InitCreateDatabase.sqlite" />
+    <None Remove="Resources\ServerConnection.json" />
+    <None Remove="Resources\UserSettings.json" />
+    <None Remove="Resources\StatementList.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Form\Diagram.html" />
+    <EmbeddedResource Include="Form\OutputValueOption.html" />
+    <EmbeddedResource Include="Form\InputFieldsVisor.html" />
+    <EmbeddedResource Include="Form\InputTextField.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Form\Scripts\AngularJS\angular\angular-translate-loader-partial.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\angular-translate.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\angular.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\angularjs-contenteditable.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\angularjs-dropdown-multiselect.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\datepicker.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\generic-scripts.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\external\jquery\jquery.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_444444_256x240.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_555555_256x240.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_777620_256x240.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_777777_256x240.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_cc0000_256x240.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\images\ui-icons_ffffff_256x240.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.structure.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.structure.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.theme.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery-ui\jquery-ui.theme.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\jquery.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\mentio.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\tribute.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\tribute.data.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\tribute.service.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\angular\tribute.directive.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\tribute.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-grid.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-grid.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-grid.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-grid.min.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-icons.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-icons.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-icons.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-icons.scss">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-reboot.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-reboot.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-reboot.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-reboot.min.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap-theme.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\bootstrap.min.css.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\fonts\bootstrap-icons.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\fonts\bootstrap-icons.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\main.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\scrollbar.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\css\spinner.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\js\bootstrap.bundle.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\js\bootstrap.bundle.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\js\bootstrap.bundle.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\js\bootstrap.bundle.min.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\js\bootstrap.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\js\bootstrap.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\js\bootstrap.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Form\Scripts\AngularJS\js\bootstrap.min.js.map">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Form\InputFields.html"></EmbeddedResource>
+    <EmbeddedResource Include="Form\shapes.js" />
+    <EmbeddedResource Include="Resources\Database\S_1_InitCreateDatabase.sql" />
+    <EmbeddedResource Include="Resources\Database\S_1_InitCreateDatabase.sqlite" />
+    <Content Include="Config\ServerConnection.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\UserSettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Resources\ProcessProgramFormat.cs" />
+    <EmbeddedResource Include="Resources\StatementList.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="10.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.8" />
+    <PackageReference Include="PCRE.NET" Version="1.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\ProcessAutomation.Framework\ProcessAutomation.Framework.csproj" />
+    <ProjectReference Include="..\ProcessAutomation.Common.DTO\ProcessAutomation.Common.DTO.csproj" />
+    <ProjectReference Include="..\..\Common\ProcessAutomation.CommonExpress\ProcessAutomation.CommonExpress.csproj" />
+  </ItemGroup>
+
+  <Target Name="CleanProcessAutomationFiles" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <RootFolderFiles Include="$(TargetDir)*.*" />
+      <ProtectedFiles Include="$(TargetDir)ProcessAutomation*" />
+      <FilesToDelete Include="@(RootFolderFiles)" Exclude="@(ProtectedFiles)" />
+
+      <AllSubdirectories Include="$([System.IO.Directory]::GetDirectories('$(TargetDir)'))" />
+      
+      <ProtectedFolders Include="$(TargetDir)runtimes" />
+      <ProtectedFolders Include="$(TargetDir)Config" />
+      <ProtectedFolders Include="$(TargetDir)Form" />
+      
+      <FoldersToDelete Include="@(AllSubdirectories)" Exclude="@(ProtectedFolders)" />
+    </ItemGroup>
+
+    <Delete Files="@(FilesToDelete)" />
+    
+    <RemoveDir Directories="@(FoldersToDelete)" />
+    
+    <Message Text="[Cleanup] Unused root files and folders removed. Kept 'runtimes', 'Config', 'Form', and 'ProcessAutomation*' files successfully." Importance="high" />
+  </Target>
+
+  <Target Name="CopyAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <ItemGroup>
+      <PackageCommon Include="$(TargetDir)/$(TargetFileName);" />
+      <!--<PackageFormHtml Include="$(TargetDir)/Form/*.html;" /> -->
+      <PackageFormAngular Include="$(TargetDir)/Form/Scripts/AngularJS/angular/*;" />
+      <PackageFormCss Include="$(TargetDir)/Form/Scripts/AngularJS/css/*;" />
+      <PackageFormJS Include="$(TargetDir)/Form/Scripts/AngularJS/js/*;" />
+      <PackageConfig Include="$(TargetDir)/Config/*;" />
+    </ItemGroup>
+    <Message Text="Copy PackageCommon" Importance="normal" />
+    <Copy SourceFiles="@(PackageCommon)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+    <!--<Message Text="Copy Form" Importance="normal" />
+    <Copy SourceFiles="@(PackageFormHtml)" DestinationFolder="$(SolutionDir)/Build/App/Form" ContinueOnError="true" /> -->
+
+    <Message Text="Copy Angular Forms" Importance="normal" />
+    <!-- LUIS VERA: ESTAS COPIAS NO DEBEN DE IR AQUI, SI NO EN EL EJECUTABLE QUE LAS NECESITE-->
+    <!--<Copy SourceFiles="@(PackageFormAngular)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomation/Form/AngularJS/angular" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageFormCss)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomation/Form/AngularJS/css" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageFormJS)" DestinationFolder="$(SolutionDir)/Build/App/ProcessAutomation/Form/AngularJS/js" ContinueOnError="true" />-->
+
+    <Copy SourceFiles="@(PackageFormAngular)" DestinationFolder="$(SolutionDir)/Build/Resources/Scripts/AngularJS/angular" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageFormCss)" DestinationFolder="$(SolutionDir)/Build/Resources/Scripts/AngularJS/css" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageFormJS)" DestinationFolder="$(SolutionDir)/Build/Resources/Scripts/AngularJS/js" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageConfig)" DestinationFolder="$(SolutionDir)/Build/Config" ContinueOnError="true" />
+  </Target>
+
+  <Target Name="CopyRuntimeFiles" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release' OR '$(Configuration)'=='DebugMAC' OR '$(Configuration)'=='ReleaseMAC'">
+    <ItemGroup>
+      <CopyRuntimeCommon Include="$(TargetDir)runtimes\$(ActiveCommonFolder)\**\*.*" />
+      <CopyRuntimeSpecific Include="$(TargetDir)runtimes\$(ActiveRuntime)\**\*.*" />
+    </ItemGroup>
+
+    <Message Text="Copy CopyRuntimeFiles" Importance="high" />
+    <Copy SourceFiles="@(CopyRuntimeCommon)" DestinationFolder="$(SolutionDir)/Build/runtimes/$(ActiveCommonFolder)/%(RecursiveDir)" ContinueOnError="true" />
+    <Copy SourceFiles="@(CopyRuntimeSpecific)" DestinationFolder="$(SolutionDir)/Build/runtimes/$(ActiveRuntime)/%(RecursiveDir)" ContinueOnError="true" />
+  </Target>
+
+</Project>

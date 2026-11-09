@@ -1,0 +1,113 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Accion",
+        "Field": "Action",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "READ", "WRITE" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo de codigo de barras",
+        "Field": "BarcodeType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [
+          "",
+          "AZTEC",
+          "CODABAR",
+          "CODE_39",
+          "CODE_93",
+          "CODE_128",
+          "DATA_MATRIX",
+          "EAN_8",
+          "EAN_13",
+          "ITF",
+          "MAXICODE",
+          "PDF_417",
+          "QR_CODE",
+          "RSS_14",
+          "RSS_EXPANDED",
+          "UPC_A",
+          "UPC_E",
+          "All_1D",
+          "UPC_EAN_EXTENSION",
+          "MSI",
+          "PLESSEY",
+          "IMB",
+          "PHARMA_CODE"
+        ],
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'WRITE'"
+      },
+      {
+        "Label": "Valor",
+        "Field": "Value",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Ancho",
+        "Field": "Width",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'WRITE'"
+      },
+      {
+        "Label": "Altura",
+        "Field": "Height",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'WRITE'"
+      },
+      {
+        "Label": "Path de salida",
+        "Field": "OutputPath",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'WRITE'"
+      },
+      {
+        "Label": "Only barcode",
+        "Field": "OnlyBarcode",
+        "Value": "",
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'WRITE'"
+      }
+    ]
+  }
+]

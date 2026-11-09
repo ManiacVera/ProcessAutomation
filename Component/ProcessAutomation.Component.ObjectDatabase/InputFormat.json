@@ -1,0 +1,529 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Esquema default",
+        "Field": "DefaultScheme",
+        "Value": "dbo",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": "dbo"
+      },
+      {
+        "Label": "Source from",
+        "Field": "SourceFrom",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "JSON_FILE", "TEXT_FILE", "CVS_FILE", "EXCEL", "XML_FILE", "SQLSERVER", "SQLITE", "DATA" ],
+        "OptionSort": true,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Column separator",
+        "Field": "ColumnSeparator",
+        "Value": ";",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": ";",
+        "Visible": "$data.SourceFrom == 'TEXT_FILE' || $data.SourceFrom == 'CVS_FILE'"
+      },
+      {
+        "Label": "First row as column",
+        "Field": "FistRowAsColumn",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": false,
+        "Visible": "$data.SourceFrom == 'TEXT_FILE' || $data.SourceFrom == 'CVS_FILE'"
+      },
+      {
+        "Label": "Component reference",
+        "Field": "ComponentReference",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": "",
+        "Visible": "$data.SourceFrom == 'SQLSERVER' || $data.SourceFrom == 'SQLITE'"
+      },
+      {
+        "Label": "Source",
+        "Field": "Source",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": "",
+        "Visible": "$data.SourceFrom != 'DATA'"
+      },
+      {
+        "Label": "Data",
+        "Field": "Data",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": "",
+        "Visible": "$data.SourceFrom == 'DATA'"
+      },
+      {
+        "Label": "Do nothing on 0 records",
+        "Field": "DoNothingOnZeroRecords",
+        "Value": true,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": true
+      },
+      {
+        "Label": "Dont upload empty row",
+        "Field": "DontUploadEmptyRow",
+        "Value": true,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": true
+      },
+      {
+        "Label": "Table attributes",
+        "Field": "TableAttributeList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "DefaultValue": [
+          {
+            "Label": "Import option",
+            "Field": "ImportOption",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": [ "", "NONE", "NONE_IF_EXISTS", "DROP_AND_CREATE", "TRUNCATE_TABLE", "DELETE_ALL" ],
+            "DefaultValue": null
+          },
+          {
+            "Label": "Table",
+            "Field": "Table",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Rename table",
+            "Field": "RenameTable",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Scheme",
+            "Field": "Scheme",
+            "Value": "dbo",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": "dbo"
+          },
+          {
+            "Label": "Columns",
+            "Field": "Columns",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Primary key",
+            "Field": "PrimaryKeyName",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Columns primary key",
+            "Field": "PrimaryKeyColumns",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Remove duplicates",
+            "Field": "RemoveDuplicate",
+            "Value": false,
+            "ValueType": "BOOL",
+            "ControlType": "CHECKBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": false
+          }
+        ]
+      },
+      {
+        "Label": "Structure",
+        "Field": "StructureTableList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "DefaultValue": [
+          {
+            "Label": "Table",
+            "Field": "Table",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": "$data.TableAttributeList",
+            "OptionDisplay": "Table",
+            "OptionKey": "Table",
+            "OptionSort": true,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Column",
+            "Field": "Column",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Type",
+            "Field": "Type",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": [ "VARCHAR", "NVARCHAR", "INT", "BIGINT", "BIT", "DECIMAL", "NUMERIC", "FLOAT", "REAL", "DATETIME", "DATE", "TIME", "TEXT", "CHAR", "NCHAR", "BINARY", "IMAGE", "XML" ],
+            "DefaultValue": null
+          },
+          {
+            "Label": "Length",
+            "Field": "Length",
+            "Value": "",
+            "ValueType": "TEXTBOX",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "DefaultValue",
+            "Field": "DefaultValue",
+            "Value": null,
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          }
+        ]
+      },
+      {
+        "Label": "Foreign",
+        "Field": "ForeignTableList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "DefaultValue": [
+          {
+            "Label": "Table",
+            "Field": "Table",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Foreign key",
+            "Field": "ForeignKey",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Columns",
+            "Field": "Columns",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Unique",
+            "Field": "Unique",
+            "Value": null,
+            "ValueType": "BOOL",
+            "ControlType": "CHECKBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": false
+          }
+        ]
+      },
+      {
+        "Label": "Index",
+        "Field": "IndexTableList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "DefaultValue": [
+          {
+            "Label": "Table",
+            "Field": "Table",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Index",
+            "Field": "Index",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Type",
+            "Field": "Type",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": [ "NON_CLUSTERED_INDEX", "CLUSTERED_INDEX", "COLUMN_STORE_INDEX", "FILTERED_INDEX", "HASH_INDEX" ],
+            "DefaultValue": null
+          },
+          {
+            "Label": "Columns",
+            "Field": "Columns",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Unique",
+            "Field": "Unique",
+            "Value": null,
+            "ValueType": "BOOL",
+            "ControlType": "CHECKBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": false
+          }
+        ]
+      },
+      {
+        "Label": "Constraint",
+        "Field": "ConstraintTableList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "DefaultValue": [
+          {
+            "Label": "Table",
+            "Field": "Table",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Constraint",
+            "Field": "Constraint",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Columns",
+            "Field": "Columns",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          }
+        ]
+      },
+      {
+        "Label": "Special option",
+        "Field": "SpecialOptionList",
+        "Value": [],
+        "ValueType": "TEXT",
+        "ControlType": "GRID",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": [ "MOVE", "DELETE", "ADD" ],
+        "DefaultValue": [
+          {
+            "Label": "Table",
+            "Field": "Table",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Column",
+            "Field": "Column",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          },
+          {
+            "Label": "Option",
+            "Field": "Option",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "COMBOBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": [ "SPLIT", "CONCATENATE", "LEFT", "RIGHT", "SUBSTRING", "OPERATION", "SQL" ],
+            "DefaultValue": null
+          },
+          {
+            "Label": "Separator",
+            "Field": "Separator",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null,
+            "Visible": "$dataRow.Option == 'SPLIT'"
+          },
+          {
+            "Label": "Columns",
+            "Field": "Columns",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": true,
+            "IsPassword": false,
+            "OptionValue": null,
+            "Visible": "$dataRow.Option == 'SPLIT' || $dataRow.Option == 'LEFT' || $dataRow.Option == 'RIGHT' || $dataRow.Option == 'SUBSTRING'"
+          },
+          {
+            "Label": "Value",
+            "Field": "Value",
+            "Value": "",
+            "ValueType": "TEXT",
+            "ControlType": "TEXTBOX",
+            "Required": false,
+            "IsPassword": false,
+            "OptionValue": null,
+            "DefaultValue": null
+          }
+        ]
+      }
+    ]
+  }
+]

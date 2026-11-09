@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
+    <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <Target Name="CopyAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <ItemGroup>
+      <PackageCommon Include="$(TargetDir)/$(TargetFileName);" />
+    </ItemGroup>
+    <Message Text="Copy PackageCommon" Importance="normal" />
+    <Copy SourceFiles="@(PackageCommon)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+  </Target>
+
+  <ItemGroup>
+    <Compile Remove="Entity\**" />
+    <EmbeddedResource Remove="Entity\**" />
+    <None Remove="Entity\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\ProcessAutomation.FrameworkExpress\ProcessAutomation.FrameworkExpress.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extension\" />
+    <Folder Include="Helper\" />
+    <Folder Include="Manager\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+</Project>

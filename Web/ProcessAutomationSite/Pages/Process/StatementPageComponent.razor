@@ -1,0 +1,264 @@
+﻿@page "/Statement"
+@using ProcessAutomation.Common.DTO.Info;
+@using ProcessAutomationSite.Pages.Common;
+@using Microsoft.Extensions.Localization;
+@inject DialogService dialogService
+@inject IStringLocalizer<StatementPageComponent> localizer
+@attribute [Authorize]
+
+    <br />
+    <div class="row bg-dark rounded shadow" style="border-left: 0px; border-right: 0px; border-top: 15px; border-bottom: 15px; border-style: solid; border-color: orange;">
+        <div class="col-md-12">
+			<br />
+			<RadzenFieldset class="rounded shadow" Style="color: white; font-size: 20px;">
+                <HeaderTemplate>
+                    <RadzenLabel Text="@localizer["StatementResultInformation"]" Style="color: white; font-size: 22px;"></RadzenLabel>
+                </HeaderTemplate>
+                <ChildContent>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" style="margin-bottom: 5px;">
+                                <div class="col-md-2 align-items-start d-flex">
+                                    <RadzenLabel Text="@localizer["Variable"]" />
+                                </div>
+                                <div class="col-md-4 align-items-start d-flex">
+                                    <RadzenTextBox Name="txtVariable" @bind-Value="@variable" Style="width: 100%" />
+                                </div>
+								<div class="col-md-5 align-items-start d-flex">
+                                    <RadzenTextBox id="txtSentenceResult" Name="txtSentenceResult" @bind-Value="@sentenceResult" Style="width: 100%" ReadOnly="true"/>
+                                </div>
+								<div class="col-md-1 align-items-start d-flex">
+									<RadzenButton id="btnCopyToClipboard" Name="btnCopyToClipboard" Text="..." Click='() => CopyToClipboard(JsRuntime, "txtSentenceResult")'></RadzenButton>
+								</div>
+                            </div>
+						</div>
+					</div>
+				</ChildContent>
+			</RadzenFieldset>
+            <br />
+            <RadzenFieldset class="rounded shadow" Style="color: white; font-size: 20px;">
+                <HeaderTemplate>
+                    <RadzenLabel Text="@localizer["StatementInformation"]" Style="color: white; font-size: 22px;"></RadzenLabel>
+                </HeaderTemplate>
+                <ChildContent>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="row" style="margin-bottom: 5px;">
+                                <div class="col-md-3 align-items-start d-flex">
+                                    <RadzenLabel Text="@localizer["Number"]" />
+                                </div>
+                                <div class="col-md-4 align-items-start d-flex">
+                                    <RadzenLabel Name="Id" Text="@statementInfo.StatementId.ToString()" Style="width: 100%" />
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 5px;">
+                                <div class="col-md-3 align-items-start d-flex">
+                                    <RadzenLabel Text="@localizer["Statement"]" />
+                                </div>
+                                <div class="col-md-6 align-items-start d-flex">
+                                    <RadzenDropDown Name="Statement" @bind-Value="@statementInfo.Statement"
+                                                    AllowClear="false" AllowFiltering="false"
+                                                    Multiple="false" TValue="string"
+                                                    TextProperty="Text" ValueProperty="Text" Data="@statementTypeList"
+                                                    Style="width: 100%;"
+                                                    Change="() => OnStatementSelect()">
+                                     </RadzenDropDown>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 5px;">
+                                <div class="col-md-3 align-items-start d-flex">
+                                    <RadzenLabel Text="@localizer["Separator"]" />
+                                </div>
+                                <div class="col-md-4 align-items-start d-flex">
+                                    <RadzenTextBox Name="Separator" @bind-Value="@statementInfo.Separator"
+                                                    Style="width: 100%"></RadzenTextBox>
+                                </div>
+                            </div>
+							<div class="row" style="margin-bottom: 5px;">
+                                <div class="col-md-3 align-items-start d-flex">
+                                    <RadzenLabel Text="@localizer["Symbol"]" />
+                                </div>
+                                <div class="col-md-4 align-items-start d-flex">
+                                    <RadzenLabel Name="Symbol" Text="@statementInfo.Symbol"></RadzenLabel>
+                                </div>
+                            </div>
+							@*<div class="row" style="margin-bottom: 5px;">
+                                <div class="col-md-3 align-items-start d-flex">
+                                    <RadzenLabel Text="@localizer["Format"]" />
+                                </div>
+                                <div class="col-md-4 align-items-start d-flex">
+                                    <RadzenLabel Name="Format" Text="@statementInfo.Format"></RadzenLabel>
+                                </div>
+                            </div>*@
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12" style="margin-bottom: 8px;">
+                                    <RadzenButton class="col-md-12" Text="@localizer["Accept"]" Click="() => AcceptStatement()"></RadzenButton>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12" style="margin-bottom: 8px;">
+                                    <RadzenButton class="col-md-12" Text="@localizer["Cancel"]" Click="() => CancelStatement()"></RadzenButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <RadzenDataGrid WrapItems="true" PagerPosition="PagerPosition.TopAndBottom"
+                                                    AllowFiltering="false" AllowPaging="false" PageSize="100" AllowSorting="false"
+                                                    AllowColumnResize="true" Data="@statementInfo.ParameterList" TItem="FieldDataInfo"
+                                                    style="height: 300px; width: 1200px; padding: 0px; margin: 0px;">
+                                <Columns>
+									<RadzenDataGridColumn TItem="FieldDataInfo" TextAlign="TextAlign.Center" Width="120px">
+										<Template Context="parameter">
+											<RadzenLabel Text="@parameter.Label"></RadzenLabel>
+										</Template>
+									</RadzenDataGridColumn>
+                                    <RadzenDataGridColumn TItem="FieldDataInfo">
+										<Template Context="parameter">
+											<RadzenDropDown Name="cmbValueParameter" @bind-Value="@parameter.Value"
+													AllowClear="false" AllowFiltering="false"
+													Multiple="false" TValue="string"
+													TextProperty="Text" ValueProperty="Value" Data="@(LoadComboValue(parameter.OptionValue, true))"
+													Visible="@(parameter.ControlType == "COMBOBOX")"
+													Style="width: 100%;">
+											</RadzenDropDown>
+											<RadzenTextBox Name="txtValueParameter" @bind-Value="@parameter.Value"  Style="width: 100%" Visible="@(parameter.ControlType == "TEXTBOX" || string.IsNullOrWhiteSpace(parameter.ControlType))"></RadzenTextBox>
+											<RadzenTextArea Name="txtValueParameter" @bind-Value="@parameter.Value"  Style="width: 100%" Visible="@(parameter.ControlType == "TEXTAREA")" Rows="5"></RadzenTextArea>
+											<RadzenLabel Name="txtValueParameter" Text="@parameter.Value"  Style="width: 100%" Visible="@(parameter.ControlType == "LABEL")"></RadzenLabel>
+											<RadzenCheckBox Name="chkValueParameter" @bind-Value="@parameter.ValueBool" Visible="@(parameter.ControlType == "CHECKBOX")"/>
+
+											<RadzenButton class="col-md-12" Text="@localizer["AddParameter"]" Click="() => NewParameter(parameter)" Style="width: 100%" Visible="@(parameter.ControlType == "GRID")" />
+											<br />
+											<RadzenDataGrid WrapItems="true" PagerPosition="PagerPosition.TopAndBottom"
+													AllowFiltering="false" AllowPaging="false" PageSize="100" AllowSorting="false"
+													AllowColumnResize="true" Data="@(GetDynamicGrid(parameter.Field, parameter.DefaultValue))" TItem="DynamicGrid"
+													style="height: 300px; padding: 0px; margin: 0px;"
+													Visible="@(parameter.ControlType == "GRID")" >
+												<Columns>
+													<RadzenDataGridColumn TItem="DynamicGrid" Width="60px">
+														<Template Context="gridValue">
+															<RadzenLabel Text="@((GetDynamicGrid(parameter.Field, null).IndexOf(gridValue) + 1).ToString())"/>
+														</Template>
+													</RadzenDataGridColumn>
+													<RadzenDataGridColumn TItem="DynamicGrid">
+														<Template Context="gridValue">
+															<RadzenDataList WrapItems="true" PagerPosition="PagerPosition.TopAndBottom"
+																AllowFiltering="false" AllowPaging="false" PageSize="100" AllowSorting="false"
+																AllowColumnResize="true" Data="@gridValue.FieldList" TItem="FieldDataInfo"
+																style="padding: 0px; margin: 0px;">
+																<Template Context="data">
+																	@*<div class="row">
+																		<div class="col-md-12">*@
+																			<RadzenLabel Text="@(string.Format("{0}:",data.Label))"></RadzenLabel>&nbsp;
+																			<RadzenDropDown Name="cmbValueParameterGrid" @bind-Value="@data.Value"
+																				AllowClear="false" AllowFiltering="false"
+																				Multiple="false" TValue="string"
+																				TextProperty="Text" ValueProperty="Value" Data="@(LoadComboValue(data.OptionValue, true))"
+																				Visible="@(data.ControlType == "COMBOBOX")">
+																			</RadzenDropDown>
+																			<RadzenTextBox Name="txtValueParameterGrid" @bind-Value="@data.Value"  Visible="@(data.ControlType == "TEXTBOX" || string.IsNullOrWhiteSpace(data.ControlType))"></RadzenTextBox>
+																			<RadzenTextArea Name="txtValueParameterGrid" @bind-Value="@data.Value"  Visible="@(data.ControlType == "TEXTAREA")" Rows="5"></RadzenTextArea>
+																			<RadzenLabel Name="txtValueParameterGrid" Text="@data.Value"  Visible="@(data.ControlType == "LABEL")"></RadzenLabel>
+																			<RadzenCheckBox Name="chkValueParameterGrid" @bind-Value="@data.ValueBool" Visible="@(data.ControlType == "CHECKBOX")"/>
+																			&nbsp;&nbsp;
+																		@*</div>
+																	</div>*@
+																</Template>
+															</RadzenDataList>
+														</Template>
+													</RadzenDataGridColumn>
+													<RadzenDataGridColumn TItem="DynamicGrid" Title="@localizer["DeleteHeader"]" TextAlign="TextAlign.Center" Width="120px">
+														<Template Context="gridValue">
+															<RadzenButton Text="@localizer["Delete"]" class="gridview-font" Click="() => DeleteParameter(parameter.Field, gridValue)" />
+														</Template>
+													</RadzenDataGridColumn>
+												</Columns>
+											</RadzenDataGrid>
+										</Template>
+									</RadzenDataGridColumn>
+                                </Columns>
+                            </RadzenDataGrid>
+                        </div>
+                    </div>
+                </ChildContent>
+            </RadzenFieldset>
+            <br />
+            <RadzenFieldset class="rounded shadow" Style="color: white; font-size: 20px;">
+                <HeaderTemplate>
+                    <RadzenLabel Text="@localizer["StatementList"]" Style="color: white; font-size: 22px;"></RadzenLabel>
+                </HeaderTemplate>
+                <ChildContent>
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                    <RadzenDataGrid WrapItems="true" PagerPosition="PagerPosition.TopAndBottom"
+                                AllowFiltering="false" AllowPaging="false" PageSize="100" AllowSorting="false"
+                                AllowColumnResize="true" Data="@statementList" TItem="StatementInfo"
+                                style="height: 500px; width: 1200px; padding: 0px; margin: 0px;">
+                        <Columns>
+                            @*<RadzenDataGridColumn TItem="StepInfo" Title="@localizer["NumberHeader"]" Width="80px">
+                                <Template Context="data">
+                                    <RadzenNumeric Name="Number" @bind-Value="@data.Number" TValue="int" class="gridview-font" Style="width: 100%;"></RadzenNumeric>
+                                </Template>
+                            </RadzenDataGridColumn>*@
+
+                            @*<RadzenDataGridColumn TItem="StepInfo" Title="@localizer["ComponentHeader"]" Width="250px">
+                                <Template Context="data">
+                                    <RadzenDropDown Name="Componente" @bind-Value="@data.Component"
+                                                    AllowClear="false" AllowFiltering="false"
+                                                    Multiple="false"
+                                                    TextProperty="Text" ValueProperty="Value" Data="@componentList"
+                                                    Style="width: 100%;" class="gridview-font">
+                                    </RadzenDropDown>
+                                </Template>
+                            </RadzenDataGridColumn>*@
+
+                            <RadzenDataGridColumn TItem="StatementInfo" Title="@localizer["StatementHeader"]" Width="150px">
+                                <Template Context="data">
+                                    <RadzenLabel Name="Statement" Text="@data.Statement"
+                                                    Style="width: 100%" class="gridview-font"></RadzenLabel>
+                                </Template>
+                            </RadzenDataGridColumn>
+
+                            <RadzenDataGridColumn TItem="StatementInfo" Title="@localizer["SeparatorHeader"]" Width="100px">
+                                <Template Context="data">
+                                    <RadzenLabel Name="Separator" Text="@data.Separator"
+                                                    Style="width: 100%" class="gridview-font"></RadzenLabel>
+                                </Template>
+                            </RadzenDataGridColumn>
+
+                            <RadzenDataGridColumn TItem="StatementInfo" Title="@localizer["FormatHeader"]">
+                                <Template Context="data">
+                                    <RadzenLabel Name="Separator" Text="@data.Format"
+                                                    Style="width: 100%" class="gridview-font"></RadzenLabel>
+                                </Template>
+                            </RadzenDataGridColumn>
+
+                            <RadzenDataGridColumn TItem="StatementInfo" Title="@localizer["EditHeader"]" TextAlign="TextAlign.Center" Width="120px">
+                                <Template Context="data">
+                                    <RadzenButton Text="@localizer["Edit"]" class="gridview-font" Click="() => EditStatement(data)" />
+                                </Template>
+                            </RadzenDataGridColumn>
+
+                            <RadzenDataGridColumn TItem="StatementInfo" Title="@localizer["DeleteHeader"]" TextAlign="TextAlign.Center" Width="120px">
+                                <Template Context="data">
+                                    <RadzenButton Text="@localizer["Delete"]" class="gridview-font" Click="() => DeleteStatement(data)" />
+                                </Template>
+                            </RadzenDataGridColumn>
+                        </Columns>
+                    </RadzenDataGrid>
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                </ChildContent>
+            </RadzenFieldset>
+            <br />
+            <br />
+        </div>
+    </div>
+    <br />

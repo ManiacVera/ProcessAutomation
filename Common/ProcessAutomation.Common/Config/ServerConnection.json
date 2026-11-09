@@ -1,0 +1,8 @@
+{
+  "server": "localhost\\SqlExpress",
+  "port": 1401,
+  "database": "TESTDB",
+  "username": "sa",
+  "password": "Pass01",
+  "databaseType": "SQLSERVER"
+}

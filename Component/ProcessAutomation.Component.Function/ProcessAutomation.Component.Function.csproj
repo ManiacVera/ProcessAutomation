@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>FunctionComponent</AssemblyName>
+    <RootNamespace>ProcessAutomation.Component</RootNamespace>
+    <Configurations>Debug;Release</Configurations>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="InputFormat.json" />
+    <None Remove="Resources\i18n\i18n_en-US.json" />
+    <None Remove="Resources\i18n\i18n_es-MX.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="InputFormat.json" />
+    <EmbeddedResource Include="Resources\i18n\i18n_en-US.json" />
+    <EmbeddedResource Include="Resources\i18n\i18n_es-MX.json" />
+  </ItemGroup>
+
+		<ItemGroup>
+			<ProjectReference Include="..\..\Common\ProcessAutomation.Common\ProcessAutomation.Common.csproj" />
+		</ItemGroup>
+
+		<Target Name="CopyAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+			<ItemGroup>
+				<PackageComponent Include="$(TargetDir)/$(TargetFileName);" />
+			</ItemGroup>
+			<Message Text="Copy PackageComponent" Importance="normal" />
+			<Copy SourceFiles="@(PackageComponent)" DestinationFolder="$(SolutionDir)/Build/Component" ContinueOnError="true" />
+		</Target>
+
+</Project>

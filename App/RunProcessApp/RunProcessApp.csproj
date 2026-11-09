@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+      <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <Configurations>Debug;Release</Configurations>
+	  <Platforms>AnyCPU;x64;x86</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\ProcessAutomation.FrameworkExpress\ProcessAutomation.FrameworkExpress.csproj" />
+    <ProjectReference Include="..\..\Common\ProcessAutomation.Common.DTO\ProcessAutomation.Common.DTO.csproj" />
+	  <ProjectReference Include="..\..\Common\ProcessAutomation.Interface\ProcessAutomation.Interface.csproj" />
+  </ItemGroup>
+
+  <Target Name="RemoveBuild" AfterTargets="AfterBuild;Publish" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <Message Text="Delete build app folder" Importance="high" />
+    <RemoveDir Directories="$(SolutionDir)Build/App/$(TargetName)" ContinueOnError="true"></RemoveDir>
+  </Target>
+
+  <Target Name="CopyAssembly" AfterTargets="AfterBuild;Publish" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+    <ItemGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+      <PackageApp Include="$(TargetDir)$(TargetName).exe;$(TargetDir)$(TargetName).dll;$(TargetDir)Microsoft.CSharp.dll" />
+    </ItemGroup>
+
+    <ItemGroup Condition="$([MSBuild]::IsOSPlatform('OSX')) Or $([MSBuild]::IsOSPlatform('Linux'))">
+        <PackageApp Include="$(TargetDir)$(TargetName);$(TargetDir)$(TargetName).dll;$(TargetDir)Microsoft.CSharp.dll" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageCommon Include="$(TargetDir)ProcessAutomation.Interface.dll;$(TargetDir)ProcessAutomation.FrameworkExpress.dll;$(TargetDir)ProcessAutomation.Common.DTO.dll;$(TargetDir)Microsoft.CSharp.dll" />
+    </ItemGroup>
+    
+    <Message Text="Copy App INIT" Importance="high" />
+    <Copy SourceFiles="@(PackageApp)" DestinationFolder="$(SolutionDir)Build/App/$(TargetName)" ContinueOnError="true"/>
+    <Copy SourceFiles="@(PackageCommon)" DestinationFolder="$(SolutionDir)Build/App/$(TargetName)" ContinueOnError="true" />
+    <Copy SourceFiles="@(PackageCommon)" DestinationFolder="$(SolutionDir)Build/Package" ContinueOnError="true" />
+    <Message Text="Copy App END" Importance="high" />
+  </Target>
+
+</Project>

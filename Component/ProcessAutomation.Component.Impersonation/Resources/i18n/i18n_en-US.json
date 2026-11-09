@@ -1,0 +1,28 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "User": {
+      "Label": "User",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Password": {
+      "Label": "Password",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "LogonType": {
+      "Label": "Logon type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

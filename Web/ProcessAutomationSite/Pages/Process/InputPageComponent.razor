@@ -1,0 +1,16 @@
+﻿@page "/InputPage/{taskNumber:int}/{value}/{valueAction}/{component}/{description}/{language}/{variableArray}/{enabledOptions:bool}"
+@using Microsoft.Extensions.Localization;
+@inject DialogService dialogService
+@inject IStringLocalizer<InputPageComponent> localizer
+
+<div class="row rounded shadow" style="background-color: #454d55">
+    <div class="col-md-12">
+        <iframe id="ifrmInputFields" src="@iframeUrl" style="width: 100%; height: 500px;" onload="javascript:SetFullScreenHeight('ifrmInputFields', 300)">
+        </iframe>
+    </div>
+    <div class="col-md-12 text-center">
+        <RadzenButton Text="@localizer["Accept"]" Click="() => AcceptDialog()"></RadzenButton>
+        &nbsp;&nbsp;
+        <RadzenButton Text="@localizer["Cancel"]" Click="() => CloseDialog()"></RadzenButton>
+    </div>
+</div>

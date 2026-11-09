@@ -1,0 +1,70 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Columns": {
+      "Label": "Columns",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Data": {
+      "Label": "Data",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "EnableReturnData": {
+      "Label": "Enable return data",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ReturnData": {
+      "Label": "Return data",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Where": {
+      "Label": "Where",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "GroupBy": {
+      "Label": "Group by",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OrderBy": {
+      "Label": "Order by",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Distinct": {
+      "Label": "Distinct",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Limit": {
+      "Label": "Limit",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Action": {
+      "Label": "Action",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

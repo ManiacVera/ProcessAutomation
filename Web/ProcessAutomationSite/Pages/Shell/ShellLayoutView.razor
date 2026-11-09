@@ -1,0 +1,26 @@
+﻿@inherits LayoutComponentBase
+@using ProcessAutomationSite.Service;
+@using ProcessAutomationSite.Data;
+@inject StateManagement stateManagement
+
+
+<div class="main">
+    <CascadingValue Value="@GlobalData" Name="GlobalData">
+        <div>
+            <RadzenDialog />
+            <RadzenNotification />
+            <ShellTopComponent></ShellTopComponent>
+        </div>
+        <div>
+            <ShellMenuComponent />
+        </div>
+
+        <div style="min-height:500px;">
+            @Body
+        </div>
+
+        <div>
+            <!-- BOTTOM -->
+        </div>
+    </CascadingValue>
+</div>

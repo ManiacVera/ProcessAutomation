@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+	<Configurations>Debug;Release</Configurations>
+	<Platforms>AnyCPU;x64;x86</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Api\ProcessAutomation.Api.Adapter\ProcessAutomation.Api.Adapter.csproj" />
+    <ProjectReference Include="..\..\Common\ProcessAutomation.Interface\ProcessAutomation.Interface.csproj" />
+    <ProjectReference Include="..\..\Common\ProcessAutomation.Common\ProcessAutomation.Common.csproj" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <Reference Include="ProcessAutomation.Interface">
+      <HintPath>..\..\App\ProcessAutomationWin\bin\Debug\net6.0-windows\Publishing\DEFAULT_USER\Publish\ProcessAutomation.Interface.dll</HintPath>
+    </Reference>
+  </ItemGroup>-->
+
+</Project>

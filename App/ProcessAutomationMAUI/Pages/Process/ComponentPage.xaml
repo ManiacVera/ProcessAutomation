@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ProcessAutomationMAUI.Pages.Process.ComponentPage"
+             xmlns:dtoInfo="clr-namespace:ProcessAutomationMAUI.DTO.Model"
+             BackgroundColor="{StaticResource bgPage}"
+             Title="Input"
+             xmlns:Converter="clr-namespace:ProcessAutomationMAUI.Converter">
+    <ContentPage.Resources>
+        <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></Converter:BooleanToVisibilityConverter>
+        <Converter:PickerSelectorConverter x:Key="PickerSelectorConverter"></Converter:PickerSelectorConverter>
+        <Converter:BoolToColorConverter x:Key="BoolToColorConverter"></Converter:BoolToColorConverter>
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+        <toolkit:EventToCommandBehavior Command="{Binding DisappearingCommand}" EventName="Disappearing" />
+        <!--<toolkit:EventToCommandBehavior Command="{Binding BackButtonPressedCommand}" EventName="BackButtonPressed" />-->
+    </ContentPage.Behaviors>
+
+    <Grid Margin="2, 10, 2, 10">
+        <Border BackgroundColor="{StaticResource bgForm}">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="5"/>
+            </Border.StrokeShape>
+
+            <Grid Margin="0,14,0,14">
+                <Border BackgroundColor="{StaticResource bgArea}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="0"/>
+                    </Border.StrokeShape>
+
+                    <ScrollView>
+                        <Grid Padding="5" ColumnSpacing="20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Text="Component:" VerticalOptions="Center" Style="{StaticResource PageLabel}"></Label>
+                            <Border Grid.Row="0" Grid.Column="1" Stroke="White" StrokeThickness="2" Margin="0,2,0,2" BackgroundColor="White">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="2" />
+                                </Border.StrokeShape>
+                                <Picker Grid.Column="0" ItemsSource="{Binding BindingContext.ComponentTypeList, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}" 
+                                    ItemDisplayBinding="{Binding Text}">
+                                    <Picker.SelectedItem>
+                                        <MultiBinding Converter="{StaticResource PickerSelectorConverter}" ConverterParameter="Value">
+                                            <Binding Mode="TwoWay" Path="ComponentData.ComponentType" />
+                                            <Binding Mode="OneWay" Path="BindingContext.ComponentTypeList" Source="{x:RelativeSource AncestorType={x:Type ContentPage}}" />
+                                        </MultiBinding>
+                                    </Picker.SelectedItem>
+                                </Picker>
+                            </Border>
+
+                            <Label Grid.Row="1" Grid.Column="0" Text="Nombre:" VerticalOptions="Center" Style="{StaticResource PageLabel}"></Label>
+                            <Border Grid.Row="1" Grid.Column="1" Stroke="Black" StrokeThickness="2" Margin="0,2,0,2" BackgroundColor="White">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="2" />
+                                </Border.StrokeShape>
+                                <Entry Text="{Binding ComponentData.Name}"></Entry>
+                            </Border>
+
+                            <Label Grid.Row="2" Grid.Column="0" Text="Descripción:" VerticalOptions="Center" Style="{StaticResource PageLabel}"></Label>
+                            <Border Grid.Row="2" Grid.Column="1" Stroke="Black" StrokeThickness="2" Margin="0,2,0,2" BackgroundColor="White">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="2" />
+                                </Border.StrokeShape>
+                                <Entry Text="{Binding ComponentData.Description}"></Entry>
+                            </Border>
+
+                            <Label Grid.Row="3" Grid.Column="0" Text="Value:" VerticalOptions="Center" Style="{StaticResource PageLabel}"></Label>
+                            <Border Grid.Row="3" Grid.Column="1" Stroke="Black" StrokeThickness="2" Margin="0,2,0,2" BackgroundColor="White">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="2" />
+                                </Border.StrokeShape>
+                                <ScrollView MaximumHeightRequest="100" VerticalScrollBarVisibility="Always">
+                                    <Editor Text="{Binding ComponentData.Value}" AutoSize="TextChanges"></Editor>
+                                </ScrollView>
+                            </Border>
+
+                            <Label Grid.Row="4" Grid.Column="0" Text="Value by format:" VerticalOptions="Center" Style="{StaticResource PageLabel}"></Label>
+                            <Button Grid.Row="4" Grid.Column="1" Text="..."  VerticalOptions="Center" Style="{StaticResource PageLabel}" 
+                                Command="{Binding BindingContext.ConfigValueByFormatCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                CommandParameter="{Binding ComponentData}" HorizontalOptions="Center"></Button>
+
+                            <Label Grid.Row="5" Grid.Column="0" Text="Tipo Valor:" VerticalOptions="Center" Style="{StaticResource PageLabel}"></Label>
+                            <Border Grid.Row="5" Grid.Column="1" Stroke="White" StrokeThickness="2" Margin="0,2,0,2" BackgroundColor="White">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="2" />
+                                </Border.StrokeShape>
+                                <Picker ItemsSource="{Binding BindingContext.TypeValueTypeList, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                    ItemDisplayBinding="{Binding Text}">
+                                    <Picker.SelectedItem>
+                                        <MultiBinding Converter="{StaticResource PickerSelectorConverter}" ConverterParameter="Value">
+                                            <Binding Mode="TwoWay" Path="ComponentData.ValueType" />
+                                            <Binding Mode="OneWay" Path="BindingContext.TypeValueTypeList" Source="{x:RelativeSource AncestorType={x:Type ContentPage}}" />
+                                        </MultiBinding>
+                                    </Picker.SelectedItem>
+                                </Picker>
+                            </Border>
+
+                            <StackLayout Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Margin="0, 20, 0, 10">
+                                <Button Text="Aceptar" Command="{Binding AcceptCommand}" ></Button>
+                                <Button Text="Cancelar" Command="{Binding CancelCommand}"></Button>
+                            </StackLayout>
+
+                        </Grid>
+                    </ScrollView>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

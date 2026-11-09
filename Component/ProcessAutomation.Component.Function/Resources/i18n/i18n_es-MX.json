@@ -1,0 +1,76 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Parameter": {
+      "Label": "Parametro",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ParameterType": {
+      "Label": "Tipo de dato",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ParameterValue": {
+      "Label": "Valor",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Type": {
+      "Label": "Tipo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FunctionName": {
+      "Label": "Funcion",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "HttpMethod": {
+      "Label": "Metodo HTTP",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Variable": {
+      "Label": "Variable",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "VariableType": {
+      "Label": "Tipo de dato",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "ActiveWebApi": {
+      "Label": "Activar WebApi",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "WebApiBody": {
+      "Label": "Body",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "IsArray": {
+      "Label": "Es arreglo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

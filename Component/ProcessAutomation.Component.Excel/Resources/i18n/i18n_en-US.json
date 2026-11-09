@@ -1,0 +1,88 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "File": {
+      "Label": "File",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Sheet": {
+      "Label": "Sheet",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Separator": {
+      "Label": "Separator",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FirstRowColumns": {
+      "Label": "First row as columns",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Distinct": {
+      "Label": "Unique regedits",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "QueryFilter": {
+      "Label": "Query filter",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "OrderBy": {
+      "Label": "Order by",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Columns": {
+      "Label": "Columns",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Column": {
+      "Label": "Column",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Type": {
+      "Label": "Type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Format": {
+      "Label": "Format",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "InputFileType": {
+      "Label": "File type",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Data": {
+      "Label": "Data",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

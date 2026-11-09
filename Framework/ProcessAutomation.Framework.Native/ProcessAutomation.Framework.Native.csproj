@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    
+    <PublishAot>true</PublishAot>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <OutputType>Library</OutputType>
+    <NativeLib>Shared</NativeLib>
+
+    <!-- OPTIONAL-->
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+
+    <TargetName Condition="$([MSBuild]::IsOsPlatform('OSX')) OR $([MSBuild]::IsOsPlatform('Linux'))">lib$(MSBuildProjectName)</TargetName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProcessAutomation.FrameworkExpress\ProcessAutomation.FrameworkExpress.csproj" />
+  </ItemGroup>
+
+	<Target Name="CopyAssembly" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+		<ItemGroup>
+			<PackageFramework Include="$(TargetDir)/Native/*" />
+		</ItemGroup>
+		<Message Text="Copy PackageApp" Importance="normal" />
+		<Copy SourceFiles="@(PackageFramework)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+	</Target>
+
+	<Target Name="CopyRuntimeFiles" AfterTargets="AfterBuild" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
+      <ItemGroup>
+          <CopyRuntimeFiles Include="$(TargetDir)runtimes\$(ActiveCommonFolder)\**\*.dll;$(TargetDir)runtimes\$(ActiveRuntime)\**\*.dll;" />
+      </ItemGroup>
+
+      <Message Text="Copy CopyRuntimeFiles @(CopyRuntimeFiles)" Importance="high" />
+      <Copy SourceFiles="@(CopyRuntimeFiles)" DestinationFolder="$(SolutionDir)/Build/Package" ContinueOnError="true" />
+  </Target>
+
+</Project>

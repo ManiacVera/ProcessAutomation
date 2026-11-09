@@ -1,0 +1,127 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Tipo bandera",
+        "Field": "FlagType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "TEXT_FILE", "SQL", "MYSQL", "EXCEL" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Source",
+        "Field": "Source",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Con condicion",
+        "Field": "WithCondition",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Condicion",
+        "Field": "ConditionType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "=", "<>", ">", ">=", "<", "<=", "CONTAINS", "BEGIN WITH", "END WITH", "CUSTOM" ],
+        "DefaultValue": null,
+        "Visible": "$data.WithCondition == true"
+      },
+      {
+        "Label": "Tipo de dato",
+        "Field": "DataType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "", "STRING", "NUMBER", "OBJECT" ],
+        "DefaultValue": null,
+        "Visible": "$data.WithCondition == true"
+      },
+      {
+        "Label": "Valor",
+        "Field": "Value",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.WithCondition == true"
+      },
+      {
+        "Label": "Reintentos",
+        "Field": "Retries",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Intervalo",
+        "Field": "Interval",
+        "Value": 5,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  },
+  {
+    "FORMAT": "COMPONENT",
+    "FIELD_LIST": [
+      {
+        "Label": "Componente base de datos",
+        "Field": "DatabaseComponent",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "IsDependencyComponent": true
+      }
+      //{
+      //  "Label": "Componente IF",
+      //  "Field": "IfComponent",
+      //  "Value": "",
+      //  "ValueType": "TEXT",
+      //  "ControlType": "TEXTBOX",
+      //  "Required": true,
+      //  "IsPassword": false,
+      //  "OptionValue": null,
+      //  "DefaultValue": null,
+      //  "IsDependencyComponent": true
+      //}
+    ]
+  }
+]

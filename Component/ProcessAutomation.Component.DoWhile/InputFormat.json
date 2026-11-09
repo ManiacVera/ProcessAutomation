@@ -1,0 +1,51 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Valor 1",
+        "Field": "Value1",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Condicion",
+        "Field": "ConditionType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "=", "<>", ">", ">=", "<", "<=", "CONTAINS", "BEGIN WITH", "END WITH", "CUSTOM" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Valor 2",
+        "Field": "Value2",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Tipo de dato",
+        "Field": "DataType",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "STRING", "NUMBER", "OBJECT" ],
+        "DefaultValue": null
+      }
+    ]
+  }
+]

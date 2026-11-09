@@ -1,0 +1,80 @@
+[
+  {
+    "FORMAT": "COMPONENT",
+    "FIELD_LIST": [
+      {
+        "Label": "Impresora",
+        "Field": "Printer",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      }
+    ]
+  },
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Impresora",
+        "Field": "Printer",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Archivo",
+        "Field": "File",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Paginas",
+        "Field": "OptionPrint",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "ALL", "RANGE", "CURRENT_PAGE" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Rango inicial",
+        "Field": "BeginRange",
+        "Value": 0,
+        "ValueType": "INTEGER",
+        "ControlType": "NUMBER",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.OptionPrint == 'RANGE'"
+      },
+      {
+        "Label": "Rango fin",
+        "Field": "EndRange",
+        "Value": 0,
+        "ValueType": "INTEGER",
+        "ControlType": "NUMBER",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.OptionPrint == 'RANGE'"
+      }
+    ]
+  }
+]

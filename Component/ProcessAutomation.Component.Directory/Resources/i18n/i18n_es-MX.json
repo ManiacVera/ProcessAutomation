@@ -1,0 +1,58 @@
+{
+  "COMPONENT": {
+    "Title": "",
+    "Description": "",
+    "Return": "",
+    "Dependency": ""
+  },
+  "FIELD_LIST": {
+    "Action": {
+      "Label": "Accion",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Path": {
+      "Label": "Path",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "FileType": {
+      "Label": "Tipo de archivo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "IsRecursive": {
+      "Label": "Recursivo",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "RegEx": {
+      "Label": "Regular expression",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "Directory": {
+      "Label": "Directorio",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "NewDirectory": {
+      "Label": "Nuevo directorio",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    },
+    "NewPath": {
+      "Label": "Nuevo path",
+      "Description": "",
+      "ErrorMessage": "",
+      "ValueExample": ""
+    }
+  }
+}

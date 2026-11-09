@@ -1,0 +1,125 @@
+[
+  {
+    "FORMAT": "STEP",
+    "FIELD_LIST": [
+      {
+        "Label": "Action",
+        "Field": "Action",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "COMBOBOX",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": [ "SELECT", "INSERT", "UPDATE", "DELETE", "OPEN_SELECT", "OPEN_INSERT", "OPEN_UPDATE", "OPEN_DELETE" ],
+        "DefaultValue": null
+      },
+      {
+        "Label": "Data",
+        "Field": "Data",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null
+      },
+      {
+        "Label": "Enable return data",
+        "Field": "EnableReturnData",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'OPEN_INSERT' || $data.Action == 'OPEN_UPDATE' || $data.Action == 'OPEN_DELETE'"
+      },
+      {
+        "Label": "Return data query",
+        "Field": "ReturnData",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": true,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "($data.Action == 'OPEN_INSERT' || $data.Action == 'OPEN_UPDATE' || $data.Action == 'OPEN_DELETE') && $data.EnableReturnData"
+      },
+      {
+        "Label": "Columns",
+        "Field": "Columns",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'SELECT'"
+      },
+      {
+        "Label": "Where",
+        "Field": "Where",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'SELECT'"
+      },
+      {
+        "Label": "GroupBy",
+        "Field": "GroupBy",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'SELECT'"
+      },
+      {
+        "Label": "OrderBy",
+        "Field": "OrderBy",
+        "Value": "",
+        "ValueType": "TEXT",
+        "ControlType": "TEXTAREA",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'SELECT'"
+      },
+      {
+        "Label": "Distinct",
+        "Field": "Distinct",
+        "Value": false,
+        "ValueType": "BOOL",
+        "ControlType": "CHECKBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'SELECT'"
+      },
+      {
+        "Label": "Limit",
+        "Field": "Limit",
+        "Value": 0,
+        "ValueType": "NUMBER",
+        "ControlType": "TEXTBOX",
+        "Required": false,
+        "IsPassword": false,
+        "OptionValue": null,
+        "DefaultValue": null,
+        "Visible": "$data.Action == 'SELECT'"
+      }
+    ]
+  }
+]

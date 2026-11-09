@@ -1,0 +1,47 @@
+﻿@page "/CommentPage"
+@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<CommentPageComponent> localizer
+@attribute [Authorize]
+
+<br />
+<div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+        <div class="row bg-dark rounded shadow" style="border-left: 0px; border-right: 0px; border-top: 15px; border-bottom: 15px; border-style: solid; border-color: orange;">
+            <div class="col-md-12">
+                <br />
+                <RadzenFieldset class="rounded shadow" Style="color: white; font-size: 20px;">
+                    <HeaderTemplate>
+                        <RadzenLabel Text="@localizer["Comment"]" Style="color: white; font-size: 22px;"></RadzenLabel>
+                    </HeaderTemplate>
+                    <ChildContent>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <RadzenTextArea @bind-Value="@comment" Rows="8" Style="width: 100%;" MaxLength="1000" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <RadzenLabel Text="@localizer["Alert"]" Style="font-size: 12pt;"></RadzenLabel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <RadzenLabel Text="@localizer["Message"]" Style="font-size: 12pt; font-weight: bold;" Visible="@visibleMessage"></RadzenLabel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <br />
+                                <RadzenButton Text="@localizer["Send"]" Click="() => SendComment()"></RadzenButton>
+                            </div>
+                        </div>
+                    </ChildContent>
+                </RadzenFieldset>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+<br />
