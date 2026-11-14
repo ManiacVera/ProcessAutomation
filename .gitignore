@@ -41,6 +41,7 @@ App/ProcessAutomationElectron/Resources/InputFields.html
 App/ProcessAutomationElectron/Resources/InputTextField.html
 App/ProcessAutomationElectron/Resources/OutputValueOption.html
 App/ProcessAutomationElectron/Scripts/AngularJS
+App/ProcessAutomationElectron/Scripts/CodeMirror
 App/ProcessAutomationElectron/ProcessFiles
 App/ProcessAutomationElectron/system_token*
 App/ProcessAutomationElectron/*ProcessAutomation.Framework.Native.*
@@ -55,6 +56,7 @@ App/ProcessViewerElectron/Resources/InputFields.html
 App/ProcessViewerElectron/Resources/InputTextField.html
 App/ProcessViewerElectron/Resources/OutputValueOption.html
 App/ProcessViewerElectron/Scripts/AngularJS
+App/ProcessViewerElectron/Scripts/CodeMirror
 App/ProcessViewerElectron/system_token*
 App/ProcessViewerElectron/*ProcessAutomation.Framework.Native.*
 App/TemplateLauncherRust/target/

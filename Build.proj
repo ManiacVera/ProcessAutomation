@@ -84,23 +84,23 @@
         <Message Text="Publishing @(FrameworkNativeProjects) in Debug (Native AOT)" Importance="high" />
 
         <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
-        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Publish" Properties="Configuration=Debug;PublishAot=true;SelfContained=true;RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Publish" Properties="Configuration=Debug;PublishAot=true;SelfContained=true;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" />
     </Target>
 
     <Target Name="RebuildFrameworkNative">
         <Message Text="Clean and Publishing @(FrameworkNativeProjects) in Debug (Native AOT)" Importance="high" />
         
         <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
-        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Clean" Properties="Configuration=Debug;PublishAot=true;SelfContained=true;RuntimeIdentifier=$(RuntimeIdentifier)" />
-        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Publish" Properties="Configuration=Debug;PublishAot=true;SelfContained=true;RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Clean" Properties="Configuration=Debug;PublishAot=true;SelfContained=true;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Publish" Properties="Configuration=Debug;PublishAot=true;SelfContained=true;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" />
     </Target>
 
     <Target Name="ReleaseFrameworkNative">
         <Message Text="Publishing @(FrameworkNativeProjects) in Release (Native AOT)" Importance="high" />
 
         <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
-        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Clean" Properties="Configuration=Release;PublishAot=true;SelfContained=true;RuntimeIdentifier=$(RuntimeIdentifier)" />
-        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Publish" Properties="Configuration=Release;PublishAot=true;SelfContained=true;RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Clean" Properties="Configuration=Release;PublishAot=true;SelfContained=true;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(FrameworkNativeProjects)" Targets="Publish" Properties="Configuration=Release;PublishAot=true;SelfContained=true;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" />
     </Target>
 
     <Target Name="RestoreFramework">
@@ -110,17 +110,17 @@
 
     <Target Name="BuildFramework" DependsOnTargets="RestoreFramework">
         <Message Text="Building @(FrameworkProjects)" Importance="high" />
-        <MSBuild Projects="@(FrameworkProjects)" Targets="Build" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(FrameworkProjects)" Targets="Build" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="RebuildFramework" DependsOnTargets="RestoreFramework">
         <Message Text="Rebuilding @(FrameworkProjects)" Importance="high" />
-        <MSBuild Projects="@(FrameworkProjects)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(FrameworkProjects)" Targets="Rebuild" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="ReleaseFramework" DependsOnTargets="RestoreFramework">
         <Message Text="Rebuilding @(FrameworkProjects) in Release" Importance="high" />
-        <MSBuild Projects="@(FrameworkProjects)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(FrameworkProjects)" Targets="Rebuild" Properties="Configuration=Release;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" />
     </Target>
 
     <Target Name="RestoreCommon">
@@ -130,17 +130,17 @@
 
     <Target Name="BuildCommon" DependsOnTargets="RestoreCommon">
         <Message Text="Building @(CommonProjects)" Importance="high" />
-        <MSBuild Projects="@(CommonProjects)" Targets="Build" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(CommonProjects)" Targets="Build" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="RebuildCommon" DependsOnTargets="RestoreCommon">
         <Message Text="Rebuilding @(CommonProjects)" Importance="high" />
-        <MSBuild Projects="@(CommonProjects)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(CommonProjects)" Targets="Rebuild" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="ReleaseCommon" DependsOnTargets="RestoreCommon">
         <Message Text="Rebuilding @(CommonProjects) in Release" Importance="high" />
-        <MSBuild Projects="@(CommonProjects)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(CommonProjects)" Targets="Rebuild" Properties="Configuration=Release;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="RestoreComponents">
@@ -150,7 +150,7 @@
 
     <Target Name="BuildComponents" DependsOnTargets="RestoreComponents">
         <Message Text="Building @(ComponentProjects)" Importance="high" />
-        <MSBuild Projects="@(ComponentProjects)" Targets="Build" BuildInParallel="true"/>
+        <MSBuild Projects="@(ComponentProjects)" Targets="Build" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" BuildInParallel="true"/>
     </Target>
 
     <PropertyGroup>
@@ -163,12 +163,12 @@
 
     <Target Name="RebuildComponents" DependsOnTargets="RestoreComponents;CleanComponents">
         <Message Text="Rebuilding @(ComponentProjects)" Importance="high" />
-        <MSBuild Projects="@(ComponentProjects)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" BuildInParallel="true"/>
+        <MSBuild Projects="@(ComponentProjects)" Targets="Rebuild" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" BuildInParallel="true"/>
     </Target>
 
     <Target Name="ReleaseComponents" DependsOnTargets="RestoreComponents;CleanComponents">
         <Message Text="Rebuilding @(ComponentProjects) in Release" Importance="high" />
-        <MSBuild Projects="@(ComponentProjects)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier)" BuildInParallel="true" />
+        <MSBuild Projects="@(ComponentProjects)" Targets="Rebuild" Properties="Configuration=Release;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" BuildInParallel="true" />
     </Target>
 
     <Target Name="RestoreWeb">
@@ -178,22 +178,22 @@
 
     <Target Name="BuildWeb" DependsOnTargets="RestoreWeb">
         <Message Text="Building @(WebProjects)" Importance="high" />
-        <MSBuild Projects="@(WebProjects)" Targets="Build" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(WebProjects)" Targets="Build" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="RebuildWeb" DependsOnTargets="RestoreWeb">
         <Message Text="Rebuilding @(WebProjects)" Importance="high" />
-        <MSBuild Projects="@(WebProjects)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(WebProjects)" Targets="Rebuild" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="ReleaseWeb" DependsOnTargets="RestoreWeb">
         <Message Text="Rebuilding @(WebProjects) in Release" Importance="high" />
-        <MSBuild Projects="@(WebProjects)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(WebProjects)" Targets="Rebuild" Properties="Configuration=Release;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" />
     </Target>
 
     <Target Name="PublishWeb" DependsOnTargets="RestoreWeb">
         <Message Text="Publishing @(WebProjects)" Importance="high" />
-        <MSBuild Projects="@(WebProjects)" Targets="Publish" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(WebProjects)" Targets="Publish" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="RestoreApi">
@@ -203,24 +203,24 @@
 
     <Target Name="BuildApi" DependsOnTargets="RestoreApi">
         <Message Text="Building @(ApiProjects)" Importance="high" />
-        <MSBuild Projects="@(ApiProjects)" Targets="Build" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(ApiProjects)" Targets="Build" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="RebuildApi" DependsOnTargets="RestoreApi">
         <Message Text="Rebuilding @(ApiProjects)" Importance="high" />
-        <MSBuild Projects="@(ApiProjects)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(ApiProjects)" Targets="Rebuild" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="ReleaseApi" DependsOnTargets="RestoreApi">
         <Message Text="Rebuilding @(ApiProjects) in Release" Importance="high" />
-        <MSBuild Projects="@(ApiProjects)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier);DefineConstants=ENABLE_TOKEN_VALIDATION" />
+        <MSBuild Projects="@(ApiProjects)" Targets="Rebuild" Properties="Configuration=Release;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier);DefineConstants=ENABLE_TOKEN_VALIDATION" />
     </Target>
     
     <Target Name="PublishApi" DependsOnTargets="RestoreApi;ReleaseSystemToken;ReleaseTemplateLauncher;PublishRunProcessApp;ReleaseComponents">
         <PropertyGroup>
             <AppDir>$(SolutionDir)Api\ProcessAutomation.Api</AppDir>
             <BuildDir>$(SolutionDir)Build\App\ProcessAutomationApi</BuildDir>
-            <PublishProperties>Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier);SelfContained=true;PublishSingleFile=false;PublishTrimmed=false;AppendRuntimeIdentifierToOutputPath=false;DefineConstants=ENABLE_TOKEN_VALIDATION</PublishProperties>
+            <PublishProperties>Configuration=Release;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier);SelfContained=true;PublishSingleFile=false;PublishTrimmed=false;DefineConstants=ENABLE_TOKEN_VALIDATION</PublishProperties>
             <ApiProjectPath>%(ApiProjects.FullPath)</ApiProjectPath>
         </PropertyGroup>
 
@@ -306,17 +306,17 @@
 
     <Target Name="BuildSolution" DependsOnTargets="RestoreSolution;DebugSystemToken;DebugTemplateLauncher;DebugDevInstaller">
         <Message Text="Building @(Solution)" Importance="high"/>
-        <MSBuild Projects="@(Solution)" Targets="Build" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(Solution)" Targets="Build" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
     
     <Target Name="RebuildSolution" DependsOnTargets="RestoreSolution;ReleaseSystemToken;ReleaseTemplateLauncher;ReleaseDevInstaller">
         <Message Text="Rebuilding @(Solution)" Importance="high"/>
-        <MSBuild Projects="@(Solution)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(Solution)" Targets="Rebuild" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="ReleaseSolution" DependsOnTargets="RestoreSolution;ReleaseSystemToken;ReleaseTemplateLauncher;ReleaseDevInstaller">
         <Message Text="Rebuilding @(Solution) in Release" Importance="high" />
-        <MSBuild Projects="@(Solution)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(Solution)" Targets="Rebuild" Properties="Configuration=Release;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" />
     </Target>
 
     <Target Name="RestoreTest">
@@ -326,32 +326,32 @@
 
     <Target Name="BuildTest" DependsOnTargets="RestoreTest">
         <Message Text="Building @(TestProjects)" Importance="high" />
-        <MSBuild Projects="@(TestProjects)" Targets="Build" BuildInParallel="true" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(TestProjects)" Targets="Build" BuildInParallel="true" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="RebuildTest" DependsOnTargets="RestoreTest">
         <Message Text="Rebuilding @(TestProjects)" Importance="high" />
-        <MSBuild Projects="@(TestProjects)" Targets="Rebuild" BuildInParallel="true" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(TestProjects)" Targets="Rebuild" BuildInParallel="true" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="RestoreRunProcessApp">
         <Message Text="Restoring packages for @(RunProcessProjects)" Importance="high" />
-        <MSBuild Projects="@(RunProcessProjects)" Targets="Restore" Properties="RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(RunProcessProjects)" Targets="Restore" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" />
     </Target>
 
     <Target Name="BuildRunProcessApp" DependsOnTargets="RestoreRunProcessApp">
         <Message Text="Building @(RunProcessProjects)" Importance="high" />
-        <MSBuild Projects="@(RunProcessProjects)" Targets="Build" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(RunProcessProjects)" Targets="Build" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="RebuildRunProcessApp" DependsOnTargets="RestoreRunProcessApp">
         <Message Text="Rebuilding @(RunProcessProjects)" Importance="high" />
-        <MSBuild Projects="@(RunProcessProjects)" Targets="Rebuild" Properties="RuntimeIdentifier=$(RuntimeIdentifier)"/>
+        <MSBuild Projects="@(RunProcessProjects)" Targets="Rebuild" Properties="AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)"/>
     </Target>
 
     <Target Name="ReleaseRunProcessApp" DependsOnTargets="RestoreRunProcessApp">
         <Message Text="Rebuilding @(RunProcessProjects) in Release" Importance="high" />
-        <MSBuild Projects="@(RunProcessProjects)" Targets="Rebuild" Properties="Configuration=Release;RuntimeIdentifier=$(RuntimeIdentifier)" />
+        <MSBuild Projects="@(RunProcessProjects)" Targets="Rebuild" Properties="Configuration=Release;AppendRuntimeIdentifierToOutputPath=false;RuntimeIdentifier=$(RuntimeIdentifier)" />
     </Target>
 
     <Target Name="PublishRunProcessApp" DependsOnTargets="RestoreRunProcessApp">

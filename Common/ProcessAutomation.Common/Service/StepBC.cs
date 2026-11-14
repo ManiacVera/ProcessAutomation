@@ -395,7 +395,7 @@ namespace ProcessAutomation.Common.Service
 
             if (Path.GetExtension(formatFile) == CommonConstants.HTML_EXTENSION)
             {
-                Assembly commonAssembly = Assembly.LoadFrom(Path.Combine(WorkSpaceDirectoryResolver(rootComponentFolder), CommonConstants.PACKAGE_FOLDER, string.Format("{0}.dll", CommonConstants.COMMON_NAMESPACE)));
+                Assembly commonAssembly = AssemblyManager.LoadFrom(Path.Combine(WorkSpaceDirectoryResolver(rootComponentFolder), CommonConstants.PACKAGE_FOLDER, string.Format("{0}.dll", CommonConstants.COMMON_NAMESPACE)));
 
                 using (Stream stream = commonAssembly.GetManifestResourceStream(string.Format("{0}.{1}", CommonConstants.COMMON_FORM_NAMESPACE, formatFile)))
                 {

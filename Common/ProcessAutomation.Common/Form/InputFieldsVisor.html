@@ -4,6 +4,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<link href="../Scripts/AngularJS/angular/jquery-ui/jquery-ui.css" rel="stylesheet">
 	<link href="../Scripts/AngularJS/css/tribute.css" rel="stylesheet">
+	<link href="../Scripts/CodeMirror/lib/codemirror.css" rel="stylesheet">
+	<link href="../Scripts/CodeMirror/addon/hint/show-hint.css" rel="stylesheet">
 	<link href="../Scripts/AngularJS/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../Scripts/AngularJS/css/scrollbar.css" rel="stylesheet">
 	<link href="../Scripts/AngularJS/css/spinner.css" rel="stylesheet">
@@ -77,7 +79,7 @@
 										<div ng-switch="value.ControlType">
 											<input class="form-control" type="text" datepicker="" format="{{(value.Settings.Format ? value.Settings.Format : 'dd/mm/yy')}}" ng-model="value.Value" ng-switch-when="DATE" ng-disabled="!value.EditableByUser" ng-required="onValueRequired(value)" />
 											<input tribute class="form-control" type="text" ng-model="$data[value.Field]" ng-switch-when="TEXTBOX" ng-disabled="!value.EditableByUser" ng-required="onValueRequired(value)" />
-											<textarea tribute class="form-control" ng-model="$data[value.Field]" ng-switch-when="TEXTAREA" rows="3" ng-disabled="!value.EditableByUser" ng-required="onValueRequired(value)"></textarea>
+											<textarea code-mirror-editor tribute class="form-control" ng-model="$data[value.Field]" ng-switch-when="TEXTAREA" rows="3" ng-disabled="!value.EditableByUser" ng-required="onValueRequired(value)"></textarea>
 											<input class="form-control" type="checkbox" ng-model="$data[value.Field]" ng-switch-when="CHECKBOX" ng-disabled="!value.EditableByUser" />
 											<select class="form-control" ng-model="$data[value.Field]" ng-options="x for x in onSetOptionValue(value.OptionValue, value.OptionDisplay, value.OptionKey, value.OptionSort)" ng-switch-when="COMBOBOX" ng-disabled="!value.EditableByUser" ng-required="onValueRequired(value)"></select>
 											<div ng-init="onCheckboxListInit(value)" ng-dropdown-multiselect="" options="value.OptionValue" selected-model="$data[value.Field]" checkboxes="true" extra-settings="checkboxListSettings" ng-switch-when="CHECKBOXLIST" ng-disabled="!value.EditableByUser" ng-required="onValueRequired(value)"></div>
@@ -112,7 +114,7 @@
 																		<div ng-switch="gridDefaultValue.ControlType">
 																			<input class="form-control" type="text" datepicker="" format="{{(gridDefaultValue.Settings.Format ? gridDefaultValue.Settings.Format : 'dd/mm/yy')}}" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="DATE" ng-disabled="!value.EditableByUser" ng-required="onValueRequiredGrid(gridDefaultValue, gridDefaultValue.Required)" />
 																			<input class="form-control" type="text" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="TEXTBOX" ng-disabled="!value.EditableByUser" ng-required="onValueRequiredGrid(gridDefaultValue, gridDefaultValue.Required)" />
-																			<textarea tribute class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="TEXTAREA" rows="3" ng-disabled="!value.EditableByUser" ng-required="onValueRequiredGrid(gridDefaultValue, gridDefaultValue.Required)"></textarea>
+																			<textarea code-mirror-editor tribute class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="TEXTAREA" rows="3" ng-disabled="!value.EditableByUser" ng-required="onValueRequiredGrid(gridDefaultValue, gridDefaultValue.Required)"></textarea>
 																			<input class="form-control" type="checkbox" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="CHECKBOX" ng-disabled="!value.EditableByUser" />
 																			<select class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" ng-options="x for x in onSetOptionValue(gridDefaultValue.OptionValue, gridDefaultValue.OptionDisplay, gridDefaultValue.OptionKey, gridDefaultValue.OptionSort)" ng-switch-when="COMBOBOX" ng-disabled="!value.EditableByUser" ng-required="onValueRequiredGrid(gridDefaultValue, gridDefaultValue.Required)"></select>
 																			<div ng-init="onGridCheckboxListInit(gridRowValue, gridKey, gridDefaultValue)" ng-dropdown-multiselect="" options="gridDefaultValue.OptionValue"
@@ -143,7 +145,7 @@
 																<div ng-switch="gridDefaultValue.ControlType">
 																	<input class="form-control" type="text" datepicker="" format="{{(gridDefaultValue.Settings.Format ? gridDefaultValue.Settings.Format : 'dd/mm/yy')}}" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="DATE" />
 																	<input tribute class="form-control" type="text" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="TEXTBOX">
-																	<textarea tribute class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="TEXTAREA" rows="3"></textarea>
+																	<textarea code-mirror-editor tribute class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="TEXTAREA" rows="3"></textarea>
 																	<input class="form-control" type="checkbox" ng-model="$dataRow[gridDefaultValue.Field]" ng-switch-when="CHECKBOX">
 																	<select class="form-control" ng-model="$dataRow[gridDefaultValue.Field]" ng-options="x for x in onSetOptionValue(gridDefaultValue.OptionValue, gridDefaultValue.OptionDisplay, gridDefaultValue.OptionKey, gridDefaultValue.OptionSort)" ng-switch-when="COMBOBOX"></select>
 																	<div ng-init="onGridCheckboxListInit($dataRow[gridDefaultValue.Field], gridDefaultValue.Field, gridDefaultValue)" ng-dropdown-multiselect="" options="gridDefaultValue.OptionValue"
@@ -179,6 +181,11 @@
 	<script src="../Scripts/AngularJS/angular/angular-translate-loader-partial.min.js" type="text/javascript"></script>
 	<script src="../Scripts/AngularJS/angular/generic-scripts.js" type="text/javascript"></script>
 	<script src="../Scripts/AngularJS/angular/tribute.min.js" type="text/javascript"></script>
+	<script src="../Scripts/CodeMirror/lib/codemirror.js" type="text/javascript"></script>
+	<script src="../Scripts/CodeMirror/addon/hint/show-hint.js"></script>
+	<script src="../Scripts/CodeMirror/mode/javascript/javascript.js"></script>
+	<script src="../Scripts/CodeMirror/mode/clike/clike.js"></script>
+	<script src="../Scripts/CodeMirror/mode/python/python.js"></script>
 
 	<!-- GLOBAL VARIABLE FOR APPLICATION -->
 	<script>
@@ -188,6 +195,10 @@
 	<script src="../Scripts/AngularJS/angular/tribute.data.js"></script>
 	<script src="../Scripts/AngularJS/angular/tribute.service.js"></script>
 	<script src="../Scripts/AngularJS/angular/tribute.directive.js"></script>
+
+	<script src="../Scripts/AngularJS/angular/codeMirror.service.js"></script>
+	<script src="../Scripts/AngularJS/angular/codeMirror.directive.js"></script>
+	<script src="../Scripts/AngularJS/angular/codeMirrorToggle.directive.js"></script>
 
 	<script>
 		var translationValue = null;
@@ -215,7 +226,7 @@
 
 		});
 
-		app.controller("AppController", function ($scope, $translate, $translatePartialLoader, tributeService) {
+		app.controller("AppController", function ($scope, $translate, $translatePartialLoader, tributeService, codeMirrorService) {
 			$scope.isLoading = true;
 			$scope.fieldName = "[@fieldName]";
 			$scope.componentName = "[@componentName]";
@@ -226,6 +237,28 @@
 				scrollable: true,
 				enableSearch: false
 			};
+
+			$scope.codeMirrorLanguage = codeMirrorService.getLanguage();
+			$scope.codeMirrorEnabled = !codeMirrorService.isDisabled();
+
+			$scope.changeLanguageCodeMirror = function (lang) {
+				$scope.codeMirrorLanguage = lang;
+				codeMirrorService.setLanguage(lang);
+			};
+
+			$scope.toggleCodeMirrorEnabled = function () {
+				$scope.codeMirrorEnabled = !$scope.codeMirrorEnabled;
+
+				codeMirrorService.setDisabled(
+					!$scope.codeMirrorEnabled
+				);
+			};
+			
+			$scope.languages = [
+				{ label: 'C#', value: 'text/x-csharp' },
+				{ label: 'JavaScript', value: 'javascript' },
+				{ label: 'Python', value: 'python' }
+			]
 
 			$scope.fieldList = [];
 			$scope.fieldArray = [];
@@ -264,9 +297,14 @@
 					tributeService.setVariables(variableArray.map(function (item) {
 						return { 'key': item, 'value': item};
 					}));
+
+					codeMirrorService.setVariables(variableArray.map(function (item) {
+						return { 'key': item, 'value': item };
+					}));
 				}
 
 				tributeService.setFunctions(functionsList);
+				codeMirrorService.setFunctions(functionsList);
 
 				document.getElementById('btnDummy').click();
 
