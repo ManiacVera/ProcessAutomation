@@ -37,6 +37,7 @@
   "build": {
     "appId": "com.processautomation.app",
     "productName": "ProcessAutomation",
+    "artifactName": "${productName}-${os}-${arch}.${ext}",
     "afterPack": "./Scripts/after-pack.js",
     "directories": {
       "output": "release"

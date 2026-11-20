@@ -15,6 +15,14 @@
         <RustTarget Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">aarch64-unknown-linux-gnu</RustTarget>
         <RustTarget Condition="'$(RuntimeIdentifier)' == 'osx-x64'">x86_64-apple-darwin</RustTarget>
         <RustTarget Condition="'$(RuntimeIdentifier)' == 'osx-arm64'">aarch64-apple-darwin</RustTarget>
+
+
+        <OSTarget Condition="'$(RuntimeIdentifier)' == 'win-x64'">win-x64</OSTarget>
+        <OSTarget Condition="'$(RuntimeIdentifier)' == 'win-arm64'">win-arm64</OSTarget>
+        <OSTarget Condition="'$(RuntimeIdentifier)' == 'linux-x64'">linux-x64</OSTarget>
+        <OSTarget Condition="'$(RuntimeIdentifier)' == 'linux-arm64'">linux-arm64</OSTarget>
+        <OSTarget Condition="'$(RuntimeIdentifier)' == 'osx-x64'">mac-x64</OSTarget>
+        <OSTarget Condition="'$(RuntimeIdentifier)' == 'osx-arm64'">mac-arm64</OSTarget>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -467,7 +475,7 @@
         </ItemGroup>
 
         <Copy SourceFiles="@(ElectronArtifacts)" DestinationFolder="$(ElectronDestinationDir)" />
-        <Copy SourceFiles="@(ElectronUnpacked)" DestinationFiles="@(ElectronUnpacked->'$(ElectronDestinationDir)\unpacked_$(RuntimeIdentifier)\%(RecursiveDir)%(Filename)%(Extension)')" />
+        <Copy SourceFiles="@(ElectronUnpacked)" DestinationFiles="@(ElectronUnpacked->'$(ElectronDestinationDir)\$(OSTarget)-unpacked\%(RecursiveDir)%(Filename)%(Extension)')" />
 
         <Message Text="Electron build artifacts for $(RuntimeIdentifier) copied successfully to $(ElectronDestinationDir)" Importance="high" />
         <Message Text="Cleaning release directory" Importance="high" />
