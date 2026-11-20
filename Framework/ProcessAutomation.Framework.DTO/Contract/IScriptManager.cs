@@ -12,7 +12,15 @@ namespace ProcessAutomation.Framework.DTO.Contract
         T ExecuteScriptImplicitReturn<T>(string sourceCode);
         T Execute<T>(string sourceCode, object scriptOptions = null, string variableReturn = null);
 
+        void SetWorkspacePath(string workspacePath);
+        string GetWorkspacePath();
+
         void SetSearchPaths(List<string> pathList);
         void ClearSearchPaths();
+
+        void AddReference(string assemblyPath);
+        void AddImport(string importNamespace);
+        void SetDefaultReferences();
+        void SetDefaultImports();
     }
 }

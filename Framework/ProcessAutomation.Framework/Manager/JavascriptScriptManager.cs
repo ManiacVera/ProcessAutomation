@@ -5,16 +5,21 @@ using ProcessAutomation.Framework.DTO.Contract;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace ProcessAutomation.Framework.Manager
 {
     public class JavascriptScriptManager : IScriptManager
     {
         private static string RETURN_RESULT = FrameworkConstants.SCRIPT_RETURN_RESULT;
-        private Engine scriptEngine =null;
-        private List<string> assemblyList = null;
+        private Engine scriptEngine = null;
+        private List<string> assemblyList = new List<string>();
         private List<string> importList = null;
+        private string workspacePath = null;
+        private readonly HttpClient httpClient = new();
 
         private List<string> DefaultAssemblyList
         {
@@ -44,6 +49,40 @@ namespace ProcessAutomation.Framework.Manager
             scriptEngine = new Engine(); 
         }
 
+        public void LoadScripts()
+        {
+            foreach(string source in assemblyList)
+            {
+                if (!string.IsNullOrWhiteSpace(source) && File.Exists(source))
+                {            
+                    string javascript;
+
+                    if (Uri.TryCreate(source, UriKind.Absolute, out var uri) &&
+                        (uri.Scheme == Uri.UriSchemeHttp ||
+                        uri.Scheme == Uri.UriSchemeHttps))
+                    {
+                        javascript = httpClient.GetStringAsync(uri).GetAwaiter().GetResult();
+                    }
+                    else
+                    {
+                        javascript = File.ReadAllText(source);
+                    }
+
+                    scriptEngine.Execute(javascript, source);
+                }
+            }
+        }
+
+        public void SetWorkspacePath(string workspacePath)
+        {
+            this.workspacePath = workspacePath;
+        }
+
+        public string GetWorkspacePath()
+        {
+            return workspacePath;
+        }
+
         public void SetSearchPaths(List<string> pathList)
         {
             if (pathList?.Count > 0)
@@ -60,9 +99,45 @@ namespace ProcessAutomation.Framework.Manager
         {
             if (assemblyList == null)
             {
+                assemblyList = new List<string>();
             }
 
             return assemblyList;
+        }
+
+        public void SetDefaultReferences()
+        {
+            if (assemblyList != null)
+            {
+                assemblyList.Clear();
+            }
+        }
+
+        public void SetDefaultImports()
+        {
+        }
+
+        public void AddImport(string importNamespace)
+        {  
+        }
+
+        public void AddReference(string assemblyPath)
+        {
+            if (string.IsNullOrWhiteSpace(assemblyPath) || !File.Exists(assemblyPath))
+                return;
+
+            if (assemblyList == null)
+                assemblyList = new List<string>();
+
+            assemblyPath = assemblyPath.Trim();
+            string fullPath = Path.GetFullPath(assemblyPath);
+
+            if (assemblyList.Any(a => !string.IsNullOrEmpty(a) && string.Equals(Path.GetFullPath(a), fullPath, StringComparison.OrdinalIgnoreCase)))
+            {
+                return;
+            }
+
+            assemblyList.Add(fullPath);
         }
 
         private T ResultToType<T>(T result, JsValue jsValue)
@@ -123,18 +198,16 @@ namespace ProcessAutomation.Framework.Manager
             T result = default(T);
             if (!string.IsNullOrWhiteSpace(sourceCode))
             {
+                LoadScripts();
                 JsValue jsValue = null;
                 if (string.IsNullOrWhiteSpace(variableReturn))
                 {
-                    //jsValue = scriptEngine.Execute(sourceCode).GetCompletionValue();
                     jsValue = scriptEngine.Evaluate(sourceCode);
                 }
                 else
                 {
                     // LUIS VERA COMPROBAR SI FUNCIONA DE ESTA MANERA SIN EL SetValue
-                    jsValue = scriptEngine
-                        .Execute(sourceCode)
-                        .GetValue(variableReturn);
+                    jsValue = scriptEngine.Execute(sourceCode).GetValue(variableReturn);
                 }
 
                 result = ResultToType(result, jsValue);
@@ -165,6 +238,7 @@ namespace ProcessAutomation.Framework.Manager
         {
             if (!string.IsNullOrWhiteSpace(sourceCode))
             {
+                LoadScripts();
                 scriptEngine.Execute(sourceCode);
             }
         }
@@ -185,6 +259,7 @@ namespace ProcessAutomation.Framework.Manager
         {
             if (File.Exists(scriptFile))
             {
+                LoadScripts();
                 scriptEngine.Execute(File.ReadAllText(scriptFile));
             }
         }

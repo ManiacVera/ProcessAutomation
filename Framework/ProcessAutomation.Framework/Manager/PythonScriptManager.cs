@@ -5,6 +5,7 @@ using ProcessAutomation.Framework.DTO.Contract;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace ProcessAutomation.Framework.Manager
@@ -16,6 +17,7 @@ namespace ProcessAutomation.Framework.Manager
         private string execPath = null;
         private List<string> assemblyList = null;
         private List<string> importList = null;
+        private string workspacePath = null;
 
         private List<string> DefaultAssemblyList
         {
@@ -25,10 +27,7 @@ namespace ProcessAutomation.Framework.Manager
             }
         }
 
-        private List<string> defaultImportList = new List<string>
-                    {
-                        "System"                       
-                    };
+        private List<string> defaultImportList = new List<string>();
         
         public PythonScriptManager(List<string> importList, List<string> assemblyList, string execPath = null)
         {
@@ -95,9 +94,55 @@ namespace ProcessAutomation.Framework.Manager
             return assemblyList;
         }
 
+        public void SetDefaultReferences()
+        {
+        }
+
+        public void SetDefaultImports()
+        {
+            if (importList.Count > 0)
+            {
+                importList.Clear();
+            }
+
+            importList = defaultImportList;
+        }
+
+        public void AddImport(string importNamespace)
+        {
+            if (!string.IsNullOrWhiteSpace(importNamespace))
+            {
+                importNamespace = importNamespace.Trim();
+                
+                if (importList == null)
+                {
+                    importList = new List<string>();
+                }
+
+                if (!importList.Contains(importNamespace))
+                {
+                    importList.Add(importNamespace);
+                }
+            }
+        }
+
+        public void AddReference(string assemblyPath)
+        {
+            AddSearchPath(assemblyPath);
+        }
+
+        private ScriptScope CreatePythonScopeWithImports()
+        {
+            ScriptScope scope = scriptEngine.CreateScope();
+            string imports = string.Join(Environment.NewLine, importList.Select(x => $"import {x}") );
+            scriptEngine.Execute(imports, scope);
+
+            return scope;
+        }
+
         public string PatchParameter(string parameter, int serviceid)
         {
-            var scope = scriptEngine.CreateScope(); // Introduce Python namespace (scope)
+            ScriptScope scope = CreatePythonScopeWithImports();
             var d = new Dictionary<string, object>
             {
                 { "serviceid", serviceid},
@@ -111,6 +156,17 @@ namespace ProcessAutomation.Framework.Manager
             return parameter;
         }
 
+        public void SetWorkspacePath(string workspacePath)
+        {
+            this.workspacePath = workspacePath;
+            AddSearchPath(workspacePath);
+        }
+
+        public string GetWorkspacePath()
+        {
+            return workspacePath;
+        }
+
         /// <summary>
         /// Add additional search path to look for modules/packages in the filesystem
         /// </summary>
@@ -119,9 +175,14 @@ namespace ProcessAutomation.Framework.Manager
         {
             if (!string.IsNullOrWhiteSpace(path))
             {
+                path = path.Trim();                
                 var paths = scriptEngine.GetSearchPaths();
-                paths.Add(path);
-                scriptEngine.SetSearchPaths(paths);
+
+                if (!paths.Contains(path))
+                {
+                    paths.Add(path);
+                    scriptEngine.SetSearchPaths(paths);
+                }
             }
         }
 
@@ -137,7 +198,7 @@ namespace ProcessAutomation.Framework.Manager
             if (!string.IsNullOrWhiteSpace(sourceCode)
                 && !string.IsNullOrWhiteSpace(variableReturn))
             {
-                ScriptScope scope = scriptEngine.CreateScope();
+                ScriptScope scope = CreatePythonScopeWithImports();
                 scope.SetVariable(variableReturn, null);
                 scriptEngine.Execute(sourceCode, scope);
                 result = scope.GetVariable<T>(variableReturn);
@@ -150,7 +211,8 @@ namespace ProcessAutomation.Framework.Manager
         {
             if (!string.IsNullOrWhiteSpace(sourceCode))
             {
-                scriptEngine.Execute(sourceCode);
+                ScriptScope scope = CreatePythonScopeWithImports();
+                scriptEngine.Execute(sourceCode, scope);
             }
         }
 
@@ -161,9 +223,9 @@ namespace ProcessAutomation.Framework.Manager
             if (File.Exists(scriptFile)
                 && !string.IsNullOrWhiteSpace(variableReturn))
             {
-                ScriptScope scope = scriptEngine.CreateScope();
+                ScriptScope scope = CreatePythonScopeWithImports();
                 scope.SetVariable(variableReturn, null);
-                scriptEngine.ExecuteFile(scriptFile);
+                scriptEngine.ExecuteFile(scriptFile, scope);
                 result = scope.GetVariable<T>(variableReturn);
             }
 
@@ -174,7 +236,8 @@ namespace ProcessAutomation.Framework.Manager
         {
             if (File.Exists(scriptFile))
             {
-                scriptEngine.ExecuteFile(scriptFile);
+                ScriptScope scope = CreatePythonScopeWithImports();
+                scriptEngine.ExecuteFile(scriptFile, scope);
             }
         }
 
@@ -184,9 +247,9 @@ namespace ProcessAutomation.Framework.Manager
 
             if (!string.IsNullOrWhiteSpace(sourceCode))
             {
-                ScriptScope scope = scriptEngine.CreateScope();
+                ScriptScope scope = CreatePythonScopeWithImports();
                 scope.SetVariable(RETURN_RESULT, null);
-                scriptEngine.Execute(FormatImplicitReturn(sourceCode));
+                scriptEngine.Execute(FormatImplicitReturn(sourceCode), scope);
                 result = scope.GetVariable<T>(RETURN_RESULT);
             }           
 

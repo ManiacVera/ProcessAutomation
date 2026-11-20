@@ -198,6 +198,9 @@
         public const string JSON_STRUCTURE_VALIDATE_EXPRESSION = @"\{(?:\r|\n|\t|\s*)(?<PROPERTY>(?:""|') (?:[^""\n\r\t\\\\]* | \\\\ [""\\\\bfnrt\/] | \\\\ u [0-9a-f]{4} )* (?:""|'))(?:\r|\n|\t|\s*)(?:\:)(?<VALUE>(?:[@\{\}\(\)\n\r\t\s*""a-zA-Z0-9\W\S_]+))\}";
 
         //public const string GET_VARIABLE_CONVERTER_CODE_REGULAR_EXPRESSION = @"@(?<TYPE>[a-zA-Z_]+)(?:[\s]+|)(?<CONTENT>" + GET_STATEMENT_BY_SYMBOL + @")";
+        public const string GET_VARIABLE_WORKSPACE_SET_CODE_REGULAR_EXPRESSION = @$"@(?<TYPE>{SET_WORKSPACE_VARIABLE})(?:[\s]+|)(?<CONTENT>" + GET_STATEMENT_BY_SYMBOL + @")";
+        public const string GET_VARIABLE_IMPORT_CONVERTER_CODE_REGULAR_EXPRESSION = @$"@(?<TYPE>{CONVERTER_IMPORTS_VARIABLE})(?:[\s]+|)(?<CONTENT>" + GET_STATEMENT_BY_SYMBOL + @")";
+        public const string GET_VARIABLE_REFERENCE_CONVERTER_CODE_REGULAR_EXPRESSION = @$"@(?<TYPE>{CONVERTER_REFERENCES_VARIABLE})(?:[\s]+|)(?<CONTENT>" + GET_STATEMENT_BY_SYMBOL + @")";
         public const string GET_VARIABLE_CONVERTER_CODE_REGULAR_EXPRESSION = @$"@(?<TYPE>{CONVERTER_TYPE_ENUM_VARIABLE})(?:[\s]+|)(?<CONTENT>" + GET_STATEMENT_BY_SYMBOL + @")";
         public const string GET_VARIABLE_RESULT_CONVERTER_CODE_REGULAR_EXPRESSION = @$"@(?<TYPE>{RESULT_TYPE_ENUM_VARIABLE})(?:[\s]+|)(?<CONTENT>" + GET_STATEMENT_BY_SYMBOL + @")";
         public const string GET_STATEMENT_REGULAR_EXPRESSION = @"\[" + GET_STATEMENT_BY_SYMBOL + @"\]";
@@ -358,6 +361,9 @@
         public const string LANGUAGE_SOURCE_ENUM_VARIABLE = "[@LANGUAGE_SOURCE_ENUM]";
         public const string CONVERTER_TYPE_ENUM_VARIABLE = "[@CONVERTER_TYPE_ENUM]";
         public const string RESULT_TYPE_ENUM_VARIABLE = "[@RESULT_TYPE_ENUM]";
+        public const string CONVERTER_IMPORTS_VARIABLE = "CONVERTER_IMPORTS";
+        public const string CONVERTER_REFERENCES_VARIABLE = "CONVERTER_REFERENCES";
+        public const string SET_WORKSPACE_VARIABLE = "SET_WORKSPACE";
 
         //public const string GET_STRING_TREATMENT_EXPRESSION = @"\@(?:[\n\s\t]*)\{(?:[\n\s\t]*)(.*?)(?:[\n\s\t]*)\}$";
         public const string GET_STRING_TREATMENT_EXPRESSION = @"\[@(?:[\n\s\t]*)\{(?:[\n\s\t]*)(.*?)(?:[\n\s\t]*)\}(?:[\n\s\t]*)\]$";

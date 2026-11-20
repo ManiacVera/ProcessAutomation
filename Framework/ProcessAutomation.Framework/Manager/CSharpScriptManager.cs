@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
+using ProcessAutomation.Framework.DTO.Constants;
 using ProcessAutomation.Framework.DTO.Contract;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace ProcessAutomation.Framework.Manager
         private List<Assembly> assemblyList = null;
         private List<string> importList = null;
         private ScriptState<object> scriptState = null;
+        private string workspacePath = null;
 
         private List<Assembly> DefaultAssemblyList 
         {
@@ -53,12 +55,19 @@ namespace ProcessAutomation.Framework.Manager
             }
         }
 
+
+        public void SetWorkspacePath(string workspacePath)
+        {
+            this.workspacePath = workspacePath;
+        }
+
+        public string GetWorkspacePath()
+        {
+            return workspacePath;
+        }
+
         public void SetSearchPaths(List<string> pathList)
         {
-            if (pathList?.Count > 0)
-            {
-                //scriptEngine.SetSearchPaths(pathList);
-            }
         }
 
         public void ClearSearchPaths()
@@ -69,7 +78,7 @@ namespace ProcessAutomation.Framework.Manager
         {
             if (assemblyList == null)
             {
-                string assemblyLocation = Path.Combine(AppContext.BaseDirectory, "Package");
+                string assemblyLocation = Path.Combine(Utilities.GetApplicationPath(), FrameworkConstants.PACKAGE_FOLDER);
                 if (Directory.Exists(assemblyLocation))
                 {
                     assemblyList = Directory.GetFiles(assemblyLocation, "System.*.dll")
@@ -102,6 +111,65 @@ namespace ProcessAutomation.Framework.Manager
             }
 
             return assemblyList;
+        }
+
+        public void SetDefaultReferences()
+        {
+            if (assemblyList != null)
+            {
+                assemblyList.Clear();
+            }
+
+            assemblyList = null;
+            GetDefaultReference();
+        }
+
+        public void SetDefaultImports()
+        {
+            if (importList != null)
+            {
+                importList.Clear();
+            }
+            
+            importList = defaultImportList;
+        }
+
+        public void AddImport(string importNamespace)
+        {
+            if (!string.IsNullOrWhiteSpace(importNamespace))
+            {
+                importNamespace = importNamespace.Trim();
+                
+                if (importList == null)
+                {
+                    importList = new List<string>();
+                }
+
+                if (!importList.Contains(importNamespace))
+                {
+                    importList.Add(importNamespace);
+                }
+            }
+        }
+
+        public void AddReference(string assemblyPath)
+        {
+            if (string.IsNullOrWhiteSpace(assemblyPath) || !File.Exists(assemblyPath))
+                return;
+
+            if (assemblyList == null)
+                assemblyList = new List<Assembly>();
+
+            string fullPath = Path.GetFullPath(assemblyPath);
+
+            if (assemblyList.Any(a => !string.IsNullOrEmpty(a.Location) && string.Equals( Path.GetFullPath(a.Location), fullPath, StringComparison.OrdinalIgnoreCase)))
+            {
+                return;
+            }
+
+            Assembly assembly = Assembly.LoadFrom(fullPath);
+
+            assemblyList.Add(assembly);
         }
 
         public T ExecuteScript<T>(string sourceCode, string variableReturn)

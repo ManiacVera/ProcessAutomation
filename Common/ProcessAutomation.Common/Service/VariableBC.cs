@@ -24,6 +24,9 @@ namespace ProcessAutomation.Common.Service
         private string getAllScriptCodeExpression = null;
         private string getAllScriptFileExpression = null;
         private string getConverterCodeExpression = null;
+        private string getImportConverterCodeExpression = null;
+        private string getReferenceConverterCodeExpression = null;
+        private string getWorkspaceConverterCodeExpression = null;
         private string getResultConverterCodeExpression = null;
         private string getStatementRegularExpression = null;
         private string getVariableStatementRegularExpression = null;
@@ -64,9 +67,25 @@ namespace ProcessAutomation.Common.Service
             getAllScriptFileExpression = FunctionConstants.GET_ALL_SCRIPT_FILE_EXPRESSION.Replace(FunctionConstants.LANGUAGE_SOURCE_ENUM_VARIABLE, languageSource);
             getStatementRegularExpression = FunctionConstants.GET_STATEMENT_REGULAR_EXPRESSION.Replace(FunctionConstants.OPEN_SYMBOL_VARIABLE, "{").Replace(FunctionConstants.CLOSE_SYMBOL_VARIABLE, "}");
             getVariableStatementRegularExpression = FunctionConstants.GET_VARIABLE_STATEMENT_REGULAR_EXPRESSION.Replace(FunctionConstants.STATEMENT_REGULAR_VARIABLE, getStatementRegularExpression);
-            getConverterCodeExpression = FunctionConstants.GET_VARIABLE_CONVERTER_CODE_REGULAR_EXPRESSION.Replace(FunctionConstants.CONVERTER_TYPE_ENUM_VARIABLE, converterType)
+
+            getWorkspaceConverterCodeExpression = FunctionConstants.GET_VARIABLE_WORKSPACE_SET_CODE_REGULAR_EXPRESSION
+                .Replace(FunctionConstants.SET_WORKSPACE_VARIABLE, FunctionConstants.SET_WORKSPACE_VARIABLE)
                 .Replace(FunctionConstants.OPEN_SYMBOL_VARIABLE, "[").Replace(FunctionConstants.CLOSE_SYMBOL_VARIABLE, "]");
-            getResultConverterCodeExpression = FunctionConstants.GET_VARIABLE_RESULT_CONVERTER_CODE_REGULAR_EXPRESSION.Replace(FunctionConstants.RESULT_TYPE_ENUM_VARIABLE, resultType)
+
+            getImportConverterCodeExpression = FunctionConstants.GET_VARIABLE_IMPORT_CONVERTER_CODE_REGULAR_EXPRESSION
+                .Replace(FunctionConstants.CONVERTER_IMPORTS_VARIABLE, FunctionConstants.CONVERTER_IMPORTS_VARIABLE)
+                .Replace(FunctionConstants.OPEN_SYMBOL_VARIABLE, "[").Replace(FunctionConstants.CLOSE_SYMBOL_VARIABLE, "]");
+
+            getReferenceConverterCodeExpression = FunctionConstants.GET_VARIABLE_REFERENCE_CONVERTER_CODE_REGULAR_EXPRESSION
+                .Replace(FunctionConstants.CONVERTER_REFERENCES_VARIABLE, FunctionConstants.CONVERTER_REFERENCES_VARIABLE)
+                .Replace(FunctionConstants.OPEN_SYMBOL_VARIABLE, "[").Replace(FunctionConstants.CLOSE_SYMBOL_VARIABLE, "]");
+
+            getConverterCodeExpression = FunctionConstants.GET_VARIABLE_CONVERTER_CODE_REGULAR_EXPRESSION
+                .Replace(FunctionConstants.CONVERTER_TYPE_ENUM_VARIABLE, converterType)
+                .Replace(FunctionConstants.OPEN_SYMBOL_VARIABLE, "[").Replace(FunctionConstants.CLOSE_SYMBOL_VARIABLE, "]");
+            
+            getResultConverterCodeExpression = FunctionConstants.GET_VARIABLE_RESULT_CONVERTER_CODE_REGULAR_EXPRESSION
+                .Replace(FunctionConstants.RESULT_TYPE_ENUM_VARIABLE, resultType)
                 .Replace(FunctionConstants.OPEN_SYMBOL_VARIABLE, "[").Replace(FunctionConstants.CLOSE_SYMBOL_VARIABLE, "]");
         }
 
@@ -705,14 +724,24 @@ namespace ProcessAutomation.Common.Service
                         string filePath = Path.GetDirectoryName(scriptCode.Trim());
                         if (Directory.Exists(filePath))
                         {
-                            scriptManager.SetSearchPaths(new List<string> { filePath });
+                            scriptManager.SetWorkspacePath(filePath);
                         }
 
                         dynamic scriptCodeDynamic = File.ReadAllText(scriptCode);
                         ProcessVariables(ref scriptCodeDynamic);
                         scriptCode = scriptCodeDynamic.ToString();
                     }
+                    else
+                    {
+                        scriptManager.SetWorkspacePath(processBC.GetWorkspacePath());
+                    }
 
+                    scriptManager.SetDefaultImports();
+                    scriptManager.SetDefaultReferences();
+
+                    scriptCode = ScriptCodeSetWorkspace(scriptCode, scriptManager);
+                    scriptCode = ScriptCodeImportConverter(languageType, scriptCode, scriptManager);
+                    scriptCode = ScriptCodeReferenceConverter(languageType, scriptCode, scriptManager);
                     scriptCode = ScriptCodeConverter(languageType, scriptCode);
                     
                     Type scriptType = null;
@@ -773,6 +802,124 @@ namespace ProcessAutomation.Common.Service
             }
             
             return returnValueScript;
+        }
+
+        private string ScriptCodeSetWorkspace(string scriptCode, IScriptManager scriptManager)
+        {
+            string result = scriptCode;
+            MatchCollection converterMatchCollection = Regex.Matches(scriptCode, getWorkspaceConverterCodeExpression, RegexOptions.IgnorePatternWhitespace);
+
+            if (converterMatchCollection.Any())
+            {
+                foreach (Match converterMatch in converterMatchCollection)
+                {
+                    string statementValue = converterMatch.Groups["STATEMENT"].Value;
+                    scriptManager.SetWorkspacePath(Utilities.NormalizePath(Utilities.EscapeString(statementValue)));
+                    result = Utilities.ReplaceAt(result, converterMatch.Index, converterMatch.Length, string.Empty);
+                }
+            }
+
+            return result;
+        }
+
+        private string ScriptCodeImportConverter(string languageType, string scriptCode, IScriptManager scriptManager)
+        {
+            const string TYPE = "TYPE";
+            const string STATEMENT = "STATEMENT";
+            string result = scriptCode;
+            MatchCollection converterMatchCollection = Regex.Matches(scriptCode, getImportConverterCodeExpression, RegexOptions.IgnorePatternWhitespace);
+
+            if (converterMatchCollection.Any())
+            {
+                foreach (Match converterMatch in converterMatchCollection)
+                {
+                    string typeValue = converterMatch.Groups[TYPE].Value;
+                    string statementValue = converterMatch.Groups[STATEMENT].Value;
+
+                    switch (Enum.Parse(typeof(LanguageSourceEnum), languageType))
+                    {
+                        case LanguageSourceEnum.CSHARP:
+                        case LanguageSourceEnum.PYTHON:
+                            {
+                                switch (typeValue)
+                                {
+                                    case FunctionConstants.CONVERTER_IMPORTS_VARIABLE:
+                                        {
+                                            Utilities.EscapeString(statementValue).Split(new string[] { "\r\n", "\n", ";", "," }, StringSplitOptions.RemoveEmptyEntries).ToList().ForEach(s => scriptManager.AddImport(s));
+                                            result = Utilities.ReplaceAt(result, converterMatch.Index, converterMatch.Length, string.Empty);
+                                        }
+                                        break;
+                                    default:
+                                        result = Utilities.ReplaceAt(result, converterMatch.Index, converterMatch.Length, string.Empty);
+                                        break;
+                                }
+                            }
+                            break;
+                        default:
+                            result = Utilities.ReplaceAt(result, converterMatch.Index, converterMatch.Length, string.Empty);
+                            break;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private string ScriptCodeReferenceConverter(string languageType, string scriptCode, IScriptManager scriptManager)
+        {
+            const string TYPE = "TYPE";
+            const string STATEMENT = "STATEMENT";
+            string result = scriptCode;
+            MatchCollection converterMatchCollection = Regex.Matches(scriptCode, getReferenceConverterCodeExpression, RegexOptions.IgnorePatternWhitespace);
+
+            if (converterMatchCollection.Any())
+            {
+                foreach (Match converterMatch in converterMatchCollection)
+                {
+                    string typeValue = converterMatch.Groups[TYPE].Value;
+                    string statementValue = converterMatch.Groups[STATEMENT].Value;
+
+                    switch (Enum.Parse(typeof(LanguageSourceEnum), languageType))
+                    {
+                        case LanguageSourceEnum.CSHARP:
+                        case LanguageSourceEnum.PYTHON:
+                            {
+                                switch (typeValue)
+                                {
+                                    case FunctionConstants.CONVERTER_REFERENCES_VARIABLE:
+                                        {
+                                            Utilities.EscapeString(statementValue).Split(new string[] { "\r\n", "\n", ";", "," }, StringSplitOptions.RemoveEmptyEntries).ToList()
+                                            .ForEach(s =>
+                                            {
+                                                var reference = s.Trim();
+
+                                                if (!Path.IsPathRooted(reference))
+                                                {
+                                                    reference = Path.Combine(scriptManager.GetWorkspacePath(), reference);
+                                                }
+
+                                                scriptManager.AddReference(reference);
+                                            });
+                                            
+                                            result = Utilities.ReplaceAt(result, converterMatch.Index, converterMatch.Length, string.Empty);
+                                        }
+                                        break;
+                                        
+                                    default:
+                                        result = Utilities.ReplaceAt(result, converterMatch.Index, converterMatch.Length, string.Empty);
+                                        break;
+                                }
+                            }
+                            break;
+
+                        default:
+                            result = Utilities.ReplaceAt(result, converterMatch.Index, converterMatch.Length, string.Empty);
+                            break;
+                    }
+                }
+            }
+
+            return result;
         }
 
         private string ScriptCodeConverter(string languageType, string scriptCode)

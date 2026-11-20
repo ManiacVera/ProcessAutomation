@@ -384,6 +384,7 @@ namespace ProcessAutomation.Common.Service
             switch (languageSource)
             {
                 case LanguageSourceEnum.PYTHON:
+                case LanguageSourceEnum.JAVASCRIPT: // ES PARA QUE LIBERE LOS SCRIPTS DADOS DE ALTA
                     ForceReloadScriptManager(languageSource);
                     break;
             }
@@ -519,8 +520,18 @@ namespace ProcessAutomation.Common.Service
                 languageInfo.CustomLibraryList = new List<string>();
                 languageInfo.ImportList = new List<string>();
 
-                scriptManagerDictionary.Add(languageSource, new PythonScriptManager(languageInfo.ImportList
+                switch (languageSource)
+                {
+                    case LanguageSourceEnum.PYTHON:
+                        scriptManagerDictionary.Add(languageSource, new PythonScriptManager(languageInfo.ImportList
                                     , GetLibraryListByLanguageInfo(languageInfo)));
+                        break;
+
+                    case LanguageSourceEnum.JAVASCRIPT:
+                        scriptManagerDictionary.Add(languageSource, new JavascriptScriptManager(languageInfo.ImportList
+                                    , GetLibraryListByLanguageInfo(languageInfo)));
+                        break;
+                }
             }
         }
 
