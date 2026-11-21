@@ -1,0 +1,25 @@
+
+name: Publish All Applications
+
+on:
+  workflow_dispatch:
+    inputs:
+      os:
+        description: Select the platform to build
+        required: true
+        default: all
+        type: choice
+        options:
+          - all
+          - macos
+          - windows
+          - linux
+
+jobs:
+  dummy:
+    name: Workflow placeholder
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Placeholder
+        run: echo "This workflow is available for manual execution."
