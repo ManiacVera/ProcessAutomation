@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       os:
-        description: Select the platform to build
+        description: 'Select the platform to build'
         required: true
-        default: all
+        default: 'all'
         type: choice
         options:
           - all
@@ -17,9 +17,8 @@ on:
 jobs:
 
   # ==========================================
-  # 1. PREPARE MATRIX
+  # 1. GENERATE DYNAMIC MATRIX
   # ==========================================
-
   prepare:
     name: Prepare build matrix
     runs-on: ubuntu-latest
@@ -28,100 +27,145 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
     steps:
-      - name: Generate platform matrix
+      - name: Generate matrix according to selected OS
         id: set-matrix
-        env:
-          SELECTED_OS: ${{ inputs.os }}
         shell: bash
+        env:
+          SELECTED_OS: ${{ github.event.inputs.os }}
         run: |
-          matrix=$(jq -cn --arg selected "$SELECTED_OS" '
-          [
-            {
-              os:"macos", runner:"macos-latest",
-              target:"PublishProcessAutomationApp",
-              app:"ProcessAutomationElectron", rid:"osx-x64"
-            },
-            {
-              os:"macos", runner:"macos-latest",
-              target:"PublishProcessAutomationApp",
-              app:"ProcessAutomationElectron", rid:"osx-arm64"
-            },
-            {
-              os:"macos", runner:"macos-latest",
-              target:"PublishProcessViewerApp",
-              app:"ProcessViewerElectron", rid:"osx-x64"
-            },
-            {
-              os:"macos", runner:"macos-latest",
-              target:"PublishProcessViewerApp",
-              app:"ProcessViewerElectron", rid:"osx-arm64"
-            },
+          cat > matrix.json <<'JSON'
+          {
+            "include": [
+              {
+                "os": "macos",
+                "runner": "macos-latest",
+                "target": "PublishProcessAutomationApp",
+                "app": "ProcessAutomationElectron",
+                "rid": "osx-x64",
+                "display-name": "ProcessAutomation-mac-x64.dmg"
+              },
+              {
+                "os": "macos",
+                "runner": "macos-latest",
+                "target": "PublishProcessAutomationApp",
+                "app": "ProcessAutomationElectron",
+                "rid": "osx-arm64",
+                "display-name": "ProcessAutomation-mac-arm64.dmg"
+              },
+              {
+                "os": "macos",
+                "runner": "macos-latest",
+                "target": "PublishProcessViewerApp",
+                "app": "ProcessViewerElectron",
+                "rid": "osx-x64",
+                "display-name": "ProcessViewer-mac-x64.dmg"
+              },
+              {
+                "os": "macos",
+                "runner": "macos-latest",
+                "target": "PublishProcessViewerApp",
+                "app": "ProcessViewerElectron",
+                "rid": "osx-arm64",
+                "display-name": "ProcessViewer-mac-arm64.dmg"
+              },
 
-            {
-              os:"windows", runner:"windows-latest",
-              target:"PublishProcessAutomationApp",
-              app:"ProcessAutomationElectron", rid:"win-x64"
-            },
-            {
-              os:"windows", runner:"windows-latest",
-              target:"PublishProcessAutomationApp",
-              app:"ProcessAutomationElectron", rid:"win-arm64"
-            },
-            {
-              os:"windows", runner:"windows-latest",
-              target:"PublishProcessAutomationApp",
-              app:"ProcessAutomationElectron", rid:"win-x64-unpacked"
-            },
-            {
-              os:"windows", runner:"windows-latest",
-              target:"PublishProcessAutomationApp",
-              app:"ProcessAutomationElectron", rid:"win-arm64-unpacked"
-            },
-            {
-              os:"windows", runner:"windows-latest",
-              target:"PublishProcessViewerApp",
-              app:"ProcessViewerElectron", rid:"win-x64"
-            },
-            {
-              os:"windows", runner:"windows-latest",
-              target:"PublishProcessViewerApp",
-              app:"ProcessViewerElectron", rid:"win-arm64"
-            },
+              {
+                "os": "windows",
+                "runner": "windows-latest",
+                "target": "PublishProcessAutomationApp",
+                "app": "ProcessAutomationElectron",
+                "rid": "win-x64",
+                "display-name": "ProcessAutomation-win-x64.msi"
+              },
+              {
+                "os": "windows",
+                "runner": "windows-latest",
+                "target": "PublishProcessAutomationApp",
+                "app": "ProcessAutomationElectron",
+                "rid": "win-arm64",
+                "display-name": "ProcessAutomation-win-arm.msi"
+              },
+              {
+                "os": "windows",
+                "runner": "windows-latest",
+                "target": "PublishProcessAutomationApp",
+                "app": "ProcessAutomationElectron",
+                "rid": "win-x64-unpacked",
+                "display-name": "win-x64-unpacked.zip"
+              },
+              {
+                "os": "windows",
+                "runner": "windows-latest",
+                "target": "PublishProcessAutomationApp",
+                "app": "ProcessAutomationElectron",
+                "rid": "win-arm64-unpacked",
+                "display-name": "win-arm64-unpacked.zip"
+              },
+              {
+                "os": "windows",
+                "runner": "windows-latest",
+                "target": "PublishProcessViewerApp",
+                "app": "ProcessViewerElectron",
+                "rid": "win-x64",
+                "display-name": "ProcessViewer-win-x64.msi"
+              },
+              {
+                "os": "windows",
+                "runner": "windows-latest",
+                "target": "PublishProcessViewerApp",
+                "app": "ProcessViewerElectron",
+                "rid": "win-arm64",
+                "display-name": "ProcessViewer-win-arm.msi"
+              },
 
-            {
-              os:"linux", runner:"ubuntu-latest",
-              target:"PublishProcessAutomationApp",
-              app:"ProcessAutomationElectron", rid:"linux-x64"
-            },
-            {
-              os:"linux", runner:"ubuntu-latest",
-              target:"PublishProcessAutomationApp",
-              app:"ProcessAutomationElectron", rid:"linux-arm64"
-            },
-            {
-              os:"linux", runner:"ubuntu-latest",
-              target:"PublishProcessViewerApp",
-              app:"ProcessViewerElectron", rid:"linux-x64"
-            },
-            {
-              os:"linux", runner:"ubuntu-latest",
-              target:"PublishProcessViewerApp",
-              app:"ProcessViewerElectron", rid:"linux-arm64"
-            }
-          ]
-          | if $selected == "all" then .
-            else map(select(.os == $selected))
-            end
-          ')
+              {
+                "os": "linux",
+                "runner": "ubuntu-latest",
+                "target": "PublishProcessAutomationApp",
+                "app": "ProcessAutomationElectron",
+                "rid": "linux-x64",
+                "display-name": "ProcessAutomation-linux-x64.AppImage"
+              },
+              {
+                "os": "linux",
+                "runner": "ubuntu-latest",
+                "target": "PublishProcessAutomationApp",
+                "app": "ProcessAutomationElectron",
+                "rid": "linux-arm64",
+                "display-name": "ProcessAutomation-linux-arm.AppImage"
+              },
+              {
+                "os": "linux",
+                "runner": "ubuntu-latest",
+                "target": "PublishProcessViewerApp",
+                "app": "ProcessViewerElectron",
+                "rid": "linux-x64",
+                "display-name": "ProcessViewer-linux-x64.AppImage"
+              },
+              {
+                "os": "linux",
+                "runner": "ubuntu-latest",
+                "target": "PublishProcessViewerApp",
+                "app": "ProcessViewerElectron",
+                "rid": "linux-arm64",
+                "display-name": "ProcessViewer-linux-arm.AppImage"
+              }
+            ]
+          }
+          JSON
 
-          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+          FILTERED_MATRIX=$(jq -c --arg os "$SELECTED_OS" \
+            '{include: [.include[] | select($os == "all" or .os == $os)]}' \
+            matrix.json)
+
           echo "Selected platform: $SELECTED_OS"
-          echo "$matrix"
+          echo "Generated matrix: $FILTERED_MATRIX"
+
+          echo "matrix=$FILTERED_MATRIX" >> "$GITHUB_OUTPUT"
 
   # ==========================================
-  # 2. PUBLISH APPLICATIONS
+  # 2. BUILD AND PUBLISH APPLICATIONS
   # ==========================================
-
   publish:
     name: Publish (${{ matrix.os }} - ${{ matrix.app }} - ${{ matrix.rid }})
 
@@ -129,51 +173,41 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        include: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
 
     runs-on: ${{ matrix.runner }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       # ==========================================
-      # LINUX DEPENDENCIES
+      # PLATFORM-SPECIFIC DEPENDENCIES
       # ==========================================
 
-      - name: Setup Linux Dependencies
+      - name: Setup Linux System Dependencies & Zig
         if: matrix.os == 'linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            build-essential \
-            zlib1g-dev \
-            libfuse2 \
-            curl \
-            tar \
-            wget \
-            libssl-dev \
-            pkg-config \
-            zig
+          sudo apt-get install -y build-essential zlib1g-dev libfuse2 curl tar wget libssl-dev pkg-config zig
 
       # ==========================================
-      # TOOLCHAINS
+      # SHARED TOOLCHAINS
       # ==========================================
 
-      - name: Setup Node.js
+      - name: Setup Node.js (v25.5.0)
         uses: actions/setup-node@v4
         with:
           node-version: '25.5.0'
 
-      - name: Setup Rust
-        uses: dtolnay/rust-toolchain@stable
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-action@stable
         with:
-          targets: ${{ matrix.rid == 'osx-arm64' && 'aarch64-apple-darwin' || matrix.rid == 'osx-x64' && 'x86_64-apple-darwin' || matrix.rid == 'win-arm64' && 'aarch64-pc-windows-msvc' || matrix.rid == 'win-x64' && 'x86_64-pc-windows-msvc' || matrix.rid == 'linux-arm64' && 'aarch64-unknown-linux-gnu' || 'x86_64-unknown-linux-gnu' }}
+          targets: ${{ startsWith(matrix.rid, 'osx-arm64') && 'aarch64-apple-darwin' || startsWith(matrix.rid, 'osx-x64') && 'x86_64-apple-darwin' || startsWith(matrix.rid, 'win-arm64') && 'aarch64-pc-windows-msvc' || startsWith(matrix.rid, 'win-x64') && 'x86_64-pc-windows-msvc' || startsWith(matrix.rid, 'linux-arm64') && 'aarch64-unknown-linux-gnu' || 'x86_64-unknown-linux-gnu' }}
 
-      - name: Install cargo-zigbuild
+      - name: Install cargo-zigbuild (Linux only)
         if: matrix.os == 'linux'
-        run: cargo install --locked cargo-zigbuild
+        run: |
+          cargo install --locked cargo-zigbuild
 
       - name: Setup .NET 10
         uses: actions/setup-dotnet@v4
@@ -181,56 +215,52 @@ jobs:
           dotnet-version: '10.0.x'
 
       # ==========================================
-      # RESTORE
+      # RESTORE APPLICATIONS
       # ==========================================
 
-      - name: Restore applications
+      - name: Restore applications via MSBuild
         shell: pwsh
         run: |
-          $actualRid = "${{ matrix.rid }}".Replace("-unpacked", "")
+          Write-Host "Restoring applications - ${{ matrix.rid }}"
 
-          Write-Host "Restoring for $actualRid"
+          $actualRid = "${{ matrix.rid }}".Replace("-unpacked", "")
 
           dotnet msbuild Build.proj `
             "/t:RestoreApplications" `
             "/p:UserRuntimeIdentifier=$actualRid"
 
           if ($LASTEXITCODE -ne 0) {
-            throw "Restore failed for $actualRid"
+            throw "MSBuild restore failed for $actualRid"
           }
 
       # ==========================================
-      # BUILD
+      # PUBLISH APPLICATIONS
       # ==========================================
 
-      - name: Publish application
+      - name: Publish application via MSBuild
         shell: pwsh
         run: |
-          $actualRid = "${{ matrix.rid }}".Replace("-unpacked", "")
+          Write-Host "Publishing target ${{ matrix.target }} for app ${{ matrix.app }} - ${{ matrix.rid }}"
 
-          Write-Host "Publishing ${{ matrix.app }} for $actualRid"
+          $actualRid = "${{ matrix.rid }}".Replace("-unpacked", "")
 
           dotnet msbuild Build.proj `
             "/t:${{ matrix.target }}" `
             "/p:UserRuntimeIdentifier=$actualRid"
 
           if ($LASTEXITCODE -ne 0) {
-            throw "Publish failed for ${{ matrix.target }} - $actualRid"
+            throw "MSBuild publish failed for ${{ matrix.target }} - $actualRid"
           }
 
       # ==========================================
-      # PACKAGE
+      # PACKAGE OUTPUTS
       # ==========================================
 
-      - name: Process outputs
+      - name: Process outputs, renaming and zipping
         shell: pwsh
         run: |
           $sourceDir = "Build/App/${{ matrix.app }}"
           $destBase = "Publicaciones/${{ matrix.os }}/${{ matrix.app }}"
-
-          if (!(Test-Path -LiteralPath $sourceDir)) {
-            throw "Output directory not found: $sourceDir"
-          }
 
           New-Item -ItemType Directory -Force -Path $destBase | Out-Null
 
@@ -239,20 +269,24 @@ jobs:
           if ($rid.EndsWith("-unpacked")) {
             $zipName = "${{ matrix.app }}-$rid.zip"
 
-            Compress-Archive `
-              -Path "$sourceDir/*" `
-              -DestinationPath "$destBase/$zipName" `
-              -Force
+            Write-Host "Compressing folder $sourceDir to ZIP: $zipName"
+
+            if (!(Test-Path -LiteralPath $sourceDir)) {
+              throw "Source directory not found: $sourceDir"
+            }
+
+            Compress-Archive -Path "$sourceDir\*" `
+              -DestinationPath "$destBase/$zipName" -Force
           }
           else {
+            Write-Host "Copying built files from $sourceDir"
+
+            if (!(Test-Path -LiteralPath $sourceDir)) {
+              throw "Source directory not found: $sourceDir"
+            }
+
             Get-ChildItem -LiteralPath $sourceDir -Force |
               Copy-Item -Destination $destBase -Recurse -Force
-          }
-
-          $files = Get-ChildItem -LiteralPath $destBase -File -Recurse
-
-          if (!$files) {
-            throw "No publication files generated in $destBase"
           }
 
       # ==========================================
@@ -265,7 +299,6 @@ jobs:
           name: pub-${{ matrix.os }}-${{ matrix.app }}-${{ matrix.rid }}
           path: Publicaciones/
           if-no-files-found: error
-          retention-days: 30
 
   # ==========================================
   # 3. COLLECT ALL PUBLICATIONS
@@ -282,20 +315,9 @@ jobs:
       - name: Download all publications
         uses: actions/download-artifact@v4
         with:
-          pattern: pub-*
           path: Final/
+          pattern: pub-*
           merge-multiple: true
-
-      - name: Verify final package
-        shell: bash
-        run: |
-          echo "Generated publications:"
-          find Final -type f
-
-          if [ -z "$(find Final -type f -print -quit)" ]; then
-            echo "No publication files found"
-            exit 1
-          fi
 
       - name: Upload final package
         uses: actions/upload-artifact@v4
