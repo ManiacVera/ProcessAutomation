@@ -1,0 +1,237 @@
+name: Publish All Applications
+
+on:
+  workflow_dispatch:
+    inputs:
+      os:
+        description: 'Select the platform to build'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - macos
+          - windows
+          - linux
+
+jobs:
+  publish:
+    name: Publish (${{ matrix.os }} - ${{ matrix.app }} - ${{ matrix.rid }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # ==========================================
+          # MACOS MATRIX ITEMS
+          # ==========================================
+          - os: macos
+            runner: macos-latest
+            target: PublishProcessAutomationApp
+            app: ProcessAutomationElectron
+            rid: osx-x64
+            display-name: "ProcessAutomation-mac-x64.dmg"
+          - os: macos
+            runner: macos-latest
+            target: PublishProcessAutomationApp
+            app: ProcessAutomationElectron
+            rid: osx-arm64
+            display-name: "ProcessAutomation-mac-arm64.dmg"
+          - os: macos
+            runner: macos-latest
+            target: PublishProcessViewerApp
+            app: ProcessViewerElectron
+            rid: osx-x64
+            display-name: "ProcessViewer-mac-x64.dmg"
+          - os: macos
+            runner: macos-latest
+            target: PublishProcessViewerApp
+            app: ProcessViewerElectron
+            rid: osx-arm64
+            display-name: "ProcessViewer-mac-arm64.dmg"
+
+          # ==========================================
+          # WINDOWS MATRIX ITEMS
+          # ==========================================
+          - os: windows
+            runner: windows-latest
+            target: PublishProcessAutomationApp
+            app: ProcessAutomationElectron
+            rid: win-x64
+            display-name: "ProcessAutomation-win-x64.msi"
+          - os: windows
+            runner: windows-latest
+            target: PublishProcessAutomationApp
+            app: ProcessAutomationElectron
+            rid: win-arm64
+            display-name: "ProcessAutomation-win-arm.msi"
+          - os: windows
+            runner: windows-latest
+            target: PublishProcessAutomationApp
+            app: ProcessAutomationElectron
+            rid: win-x64-unpacked
+            display-name: "win-x64-unpacked.zip"
+          - os: windows
+            runner: windows-latest
+            target: PublishProcessAutomationApp
+            app: ProcessAutomationElectron
+            rid: win-arm64-unpacked
+            display-name: "win-arm64-unpacked.zip"
+          - os: windows
+            runner: windows-latest
+            target: PublishProcessViewerApp
+            app: ProcessViewerElectron
+            rid: win-x64
+            display-name: "ProcessViewer-win-x64.msi"
+          - os: windows
+            runner: windows-latest
+            target: PublishProcessViewerApp
+            app: ProcessViewerElectron
+            rid: win-arm64
+            display-name: "ProcessViewer-win-arm.msi"
+
+          # ==========================================
+          # LINUX MATRIX ITEMS
+          # ==========================================
+          - os: linux
+            runner: ubuntu-latest
+            target: PublishProcessAutomationApp
+            app: ProcessAutomationElectron
+            rid: linux-x64
+            display-name: "ProcessAutomation-linux-x64.AppImage"
+          - os: linux
+            runner: ubuntu-latest
+            target: PublishProcessAutomationApp
+            app: ProcessAutomationElectron
+            rid: linux-arm64
+            display-name: "ProcessAutomation-linux-arm.AppImage"
+          - os: linux
+            runner: ubuntu-latest
+            target: PublishProcessViewerApp
+            app: ProcessViewerElectron
+            rid: linux-x64
+            display-name: "ProcessViewer-linux-x64.AppImage"
+          - os: linux
+            runner: ubuntu-latest
+            target: PublishProcessViewerApp
+            app: ProcessViewerElectron
+            rid: linux-arm64
+            display-name: "ProcessViewer-linux-arm.AppImage"
+
+    if: ${{ github.event.inputs.os == 'all' || github.event.inputs.os == matrix.os }}
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ==========================================
+      # 1. PLATFORM-SPECIFIC SETUP & DEPENDENCIES
+      # ==========================================
+
+      # --- Linux Environment Setup ---
+      - name: Setup Linux System Dependencies & Zig
+        if: matrix.os == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential zlib1g-dev libfuse2 curl tar wget libssl-dev pkg-config zig
+
+      # --- Shared Toolchains Setup ---
+      - name: Setup Node.js (v25.5.0)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '25.5.0'
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-action@stable
+        with:
+          targets: ${{ matrix.rid == 'osx-arm64' && 'aarch64-apple-darwin' || matrix.rid == 'osx-x64' && 'x86_64-apple-darwin' || matrix.rid == 'win-arm64' && 'aarch64-pc-windows-msvc' || matrix.rid == 'win-x64' && 'x86_64-pc-windows-msvc' || matrix.rid == 'linux-arm64' && 'aarch64-unknown-linux-gnu' || 'x86_64-unknown-linux-gnu' }}
+
+      - name: Install cargo-zigbuild (Linux only)
+        if: matrix.os == 'linux'
+        run: |
+          cargo install --locked cargo-zigbuild
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # ==========================================
+      # 2. RESTORE & BUILD STEPS VIA MSBUILD
+      # ==========================================
+
+      - name: Restore applications via MSBuild
+        shell: pwsh
+        run: |
+          Write-Host "Restoring applications - ${{ matrix.rid }}"
+          $actualRid = "${{ matrix.rid }}".Replace("-unpacked", "")
+
+          dotnet msbuild Build.proj `
+            "/t:RestoreApplications" `
+            "/p:UserRuntimeIdentifier=$actualRid"
+
+          if ($LASTEXITCODE -ne 0) {
+            throw "MSBuild restore failed for $actualRid"
+          }
+
+      - name: Publish application via MSBuild
+        shell: pwsh
+        run: |
+          Write-Host "Publishing target ${{ matrix.target }} for app ${{ matrix.app }} - ${{ matrix.rid }}"
+          $actualRid = "${{ matrix.rid }}".Replace("-unpacked", "")
+
+          dotnet msbuild Build.proj `
+            "/t:${{ matrix.target }}" `
+            "/p:UserRuntimeIdentifier=$actualRid"
+
+          if ($LASTEXITCODE -ne 0) {
+            throw "MSBuild publish failed for ${{ matrix.target }} - $actualRid"
+          }
+
+      # ==========================================
+      # 3. PACKAGING & ARTIFACT UPLOAD
+      # ==========================================
+
+      - name: Process outputs, renaming and zipping
+        shell: pwsh
+        run: |
+          $sourceDir = "Build/App/${{ matrix.app }}"
+          $destBase = "Publicaciones/${{ matrix.os }}/${{ matrix.app }}"
+          New-Item -ItemType Directory -Force -Path $destBase | Out-Null
+
+          $rid = "${{ matrix.rid }}"
+          
+          if ($rid.EndsWith("-unpacked")) {
+            $zipName = "${{ matrix.app }}-$rid.zip"
+            Write-Host "Compressing folder $sourceDir to ZIP: $zipName"
+            Compress-Archive -Path "$sourceDir\*" -DestinationPath "$destBase/$zipName" -Force
+          } 
+          else {
+            Write-Host "Copying built files from $sourceDir"
+            Get-ChildItem -LiteralPath $sourceDir -Force | Copy-Item -Destination $destBase -Recurse -Force
+          }
+
+      - name: Upload individual artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pub-${{ matrix.os }}-${{ matrix.app }}-${{ matrix.rid }}
+          path: Publicaciones/
+          if-no-files-found: error
+
+  collect:
+    name: Collect all publications
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all publications
+        uses: actions/download-artifact@v4
+        with:
+          path: Final/
+          merge-multiple: true
+
+      - name: Upload final package
+        uses: actions/upload-artifact@v4
+        with:
+          name: All-Publications-${{ github.run_number }}
+          path: Final/
+          retention-days: 30
+          if-no-files-found: error
