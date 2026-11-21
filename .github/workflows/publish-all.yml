@@ -1,4 +1,3 @@
-
 name: Publish All Applications
 
 on:
@@ -136,7 +135,6 @@ jobs:
     runs-on: ${{ matrix.runner }}
 
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -242,7 +240,7 @@ jobs:
             $zipName = "${{ matrix.app }}-$rid.zip"
 
             Compress-Archive `
-              -Path "$sourceDir\*" `
+              -Path "$sourceDir/*" `
               -DestinationPath "$destBase/$zipName" `
               -Force
           }
@@ -281,7 +279,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Download all publications
         uses: actions/download-artifact@v4
         with:
