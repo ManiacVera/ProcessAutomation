@@ -6,6 +6,7 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
+	<UseAppHost>true</UseAppHost>
     <AssemblyName>ProcessAutomationApi</AssemblyName>
     <RootNamespace>ProcessAutomationApi</RootNamespace>
     <Configurations>Debug;Release</Configurations>
@@ -63,6 +64,7 @@
   <Target Name="CopyAssembly" AfterTargets="AfterBuild;Publish" Condition="'$(Configuration)'=='Debug' OR '$(Configuration)'=='Release'">
     <ItemGroup>
       <PackageApp Include="$(TargetDir)$(TargetName).*;" Exclude="$(TargetDir)$(TargetName).json;$(TargetDir)$(TargetName).xml;$(TargetDir)$(TargetName).pdb" />
+      <PackageApp Include="$(TargetDir)$(TargetName)" Condition="Exists('$(TargetDir)$(TargetName)')" />
       <PackageAppResources Include="$(TargetDir)Resources/*.*;" />
       <PackageForm Include="$(TargetDir)Form/**/*.*;" />
       <PackageProcessFiles Include="$(TargetDir)ProcessFiles/*.json;" />

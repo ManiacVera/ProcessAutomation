@@ -1,0 +1,341 @@
+
+name: Build Apps
+
+on:
+  workflow_dispatch:
+    inputs:
+      os:
+        description: Select the platform to build
+        required: true
+        default: all
+        type: choice
+        options:
+          - all
+          - macos
+          - windows
+          - linux
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  prepare:
+    name: Prepare build matrix
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+    steps:
+      - name: Generate matrix
+        id: set-matrix
+        shell: bash
+        env:
+          SELECTED_OS: ${{ inputs.os }}
+        run: |
+          MATRIX='{
+            "include": [
+              {"os":"macos","runner":"macos-latest","target":"PublishProcessAutomationApp","app":"ProcessAutomationElectron","rid":"osx-x64"},
+              {"os":"macos","runner":"macos-latest","target":"PublishProcessAutomationApp","app":"ProcessAutomationElectron","rid":"osx-arm64"},
+              {"os":"macos","runner":"macos-latest","target":"PublishProcessViewerApp","app":"ProcessViewerElectron","rid":"osx-x64"},
+              {"os":"macos","runner":"macos-latest","target":"PublishProcessViewerApp","app":"ProcessViewerElectron","rid":"osx-arm64"},
+
+              {"os":"windows","runner":"windows-latest","target":"PublishProcessAutomationApp","app":"ProcessAutomationElectron","rid":"win-x64"},
+              {"os":"windows","runner":"windows-latest","target":"PublishProcessAutomationApp","app":"ProcessAutomationElectron","rid":"win-arm64"},
+              {"os":"windows","runner":"windows-latest","target":"PublishProcessViewerApp","app":"ProcessViewerElectron","rid":"win-x64"},
+              {"os":"windows","runner":"windows-latest","target":"PublishProcessViewerApp","app":"ProcessViewerElectron","rid":"win-arm64"},
+
+              {"os":"linux","runner":"ubuntu-latest","target":"PublishProcessAutomationApp","app":"ProcessAutomationElectron","rid":"linux-x64"},
+              {"os":"linux","runner":"ubuntu-latest","target":"PublishProcessAutomationApp","app":"ProcessAutomationElectron","rid":"linux-arm64"},
+              {"os":"linux","runner":"ubuntu-latest","target":"PublishProcessViewerApp","app":"ProcessViewerElectron","rid":"linux-x64"},
+              {"os":"linux","runner":"ubuntu-latest","target":"PublishProcessViewerApp","app":"ProcessViewerElectron","rid":"linux-arm64"}
+            ]
+          }'
+
+          FILTERED=$(echo "$MATRIX" | jq -c --arg os "$SELECTED_OS" \
+            '{include: [.include[] | select($os == "all" or .os == $os)]}')
+
+          echo "matrix=$FILTERED" >> "$GITHUB_OUTPUT"
+
+  publish:
+    name: Publish (${{ matrix.os }} - ${{ matrix.app }} - ${{ matrix.rid }})
+    needs: prepare
+
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Linux dependencies
+        if: matrix.os == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential zlib1g-dev libfuse2 curl tar wget libssl-dev pkg-config zig
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '25.5.0'
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ startsWith(matrix.rid, 'osx-arm64') && 'aarch64-apple-darwin' || startsWith(matrix.rid, 'osx-x64') && 'x86_64-apple-darwin' || startsWith(matrix.rid, 'win-arm64') && 'aarch64-pc-windows-msvc' || startsWith(matrix.rid, 'win-x64') && 'x86_64-pc-windows-msvc' || startsWith(matrix.rid, 'linux-arm64') && 'aarch64-unknown-linux-gnu' || 'x86_64-unknown-linux-gnu' }}
+
+      - name: Install cargo-zigbuild
+        if: matrix.os == 'linux'
+        run: cargo install --locked cargo-zigbuild
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Install nuget-license
+        shell: pwsh
+        run: |
+          dotnet tool install --global nuget-license
+
+          $dotnetToolsPath = Join-Path $HOME ".dotnet/tools"
+
+          if ($IsWindows) {
+            $env:PATH += ";$dotnetToolsPath"
+          }
+          else {
+            $env:PATH += ":$dotnetToolsPath"
+          }
+
+          "PATH=$env:PATH" >> $env:GITHUB_ENV
+
+      - name: Restore applications
+        shell: pwsh
+        run: |
+          $actualRid = "${{ matrix.rid }}"
+
+          dotnet msbuild Build.proj `
+            "/t:RestoreApplications" `
+            "/p:UserRuntimeIdentifier=$actualRid"
+
+          if ($LASTEXITCODE -ne 0) {
+            throw "MSBuild restore failed for $actualRid"
+          }
+
+      - name: Publish application
+        shell: pwsh
+        run: |
+          $actualRid = "${{ matrix.rid }}"
+
+          dotnet msbuild Build.proj `
+            "/t:${{ matrix.target }}" `
+            "/p:UserRuntimeIdentifier=$actualRid"
+
+          if ($LASTEXITCODE -ne 0) {
+            throw "MSBuild publish failed for $actualRid"
+          }
+      
+      - name: Package outputs
+        shell: pwsh
+        run: |
+          $sourceDir = "Build/App/${{ matrix.app }}"
+          $destBase = "Publicaciones"
+          $platform = "${{ matrix.os }}"
+          $rid = "${{ matrix.rid }}"
+          $app = "${{ matrix.app }}"
+
+          if (!(Test-Path -LiteralPath $sourceDir)) {
+            throw "Source directory not found: $sourceDir"
+          }
+
+          New-Item -ItemType Directory -Force -Path $destBase | Out-Null
+
+          $platformName = switch ($platform) {
+            "linux"   { "linux" }
+            "macos"   { "mac" }
+            "windows" { "win" }
+          }
+
+          $architecture = $rid -replace '^(linux|osx|win)-', ''
+
+          $appPrefix = $app -replace 'Electron$', ''
+
+          $originalUnpackedName = "$platformName-$architecture-unpacked"
+          $unpackedName = "$appPrefix-$originalUnpackedName"
+
+          $unpackedSource = Join-Path $sourceDir $originalUnpackedName
+
+          if (!(Test-Path -LiteralPath $unpackedSource -PathType Container)) {
+            throw "Unpacked directory not found: $unpackedSource"
+          }
+
+          if ($platform -eq "macos") {
+            Get-ChildItem -LiteralPath $unpackedSource -Filter "*.app" -Directory | ForEach-Object {
+              Write-Host "Removing extended attributes: $($_.FullName)"
+              & xattr -cr $_.FullName
+
+              if ($LASTEXITCODE -ne 0) {
+                throw "Failed to remove extended attributes"
+              }
+            }
+          }
+
+          $zipName = "$unpackedName.zip"
+          $zipPath = Join-Path (Resolve-Path $destBase).Path $zipName
+
+          if ($platform -in @("linux", "macos")) {
+            Push-Location $sourceDir
+
+            try {
+              if (Test-Path -LiteralPath $zipPath) {
+                Remove-Item -LiteralPath $zipPath -Force
+              }
+
+              if ($platform -eq "macos") {
+                /usr/bin/ditto -c -k --sequesterRsrc --keepParent `
+                  $originalUnpackedName $zipPath
+              }
+              else {
+                Push-Location $originalUnpackedName
+
+                try {
+                  zip -r -y $zipPath .
+                }
+                finally {
+                  Pop-Location
+                }
+              }
+
+              if ($LASTEXITCODE -ne 0) {
+                throw "ZIP packaging failed for $platform"
+              }
+            }
+            finally {
+              Pop-Location
+            }
+          }
+          else {
+            Compress-Archive `
+              -Path "$unpackedSource/*" `
+              -DestinationPath $zipPath `
+              -Force
+          }
+
+          $extensions = switch ($platform) {
+            "linux"   { @(".AppImage") }
+            "macos"   { @(".dmg") }
+            "windows" { @(".msi", ".exe") }
+          }
+
+          $expectedFiles = if ($platform -eq "windows") { 2 } else { 1 }
+
+          $installerFiles = @()
+
+          $architecturesToSearch = if ($architecture -eq "x64") {
+            @("x64", "x86_64")
+          }
+          else {
+            @($architecture)
+          }
+
+          foreach ($installerArchitecture in $architecturesToSearch) {
+            $installerFiles = @(
+              Get-ChildItem -LiteralPath $sourceDir -File |
+                Where-Object {
+                  $_.Extension -in $extensions -and
+                  $_.Name -match [regex]::Escape("-$platformName-$installerArchitecture")
+                }
+            )
+
+            if ($installerFiles.Count -ge $expectedFiles) {
+              break
+            }
+          }
+
+          if ($installerFiles.Count -ne $expectedFiles) {
+            throw "Expected $expectedFiles installer files, found $($installerFiles.Count)"
+          }
+
+          if ($platform -eq "macos") {
+            foreach ($file in $installerFiles) {
+              $mountPoint = Join-Path $env:RUNNER_TEMP ([guid]::NewGuid().ToString())
+
+              New-Item -ItemType Directory -Force -Path $mountPoint | Out-Null
+
+              try {
+                & hdiutil attach $file.FullName -mountpoint $mountPoint -nobrowse -quiet
+
+                if ($LASTEXITCODE -ne 0) {
+                  throw "Failed to mount DMG: $($file.Name)"
+                }
+
+                Get-ChildItem -LiteralPath $mountPoint -Filter "*.app" -Directory | ForEach-Object {
+                  Write-Host "Removing extended attributes: $($_.FullName)"
+                  & xattr -cr $_.FullName
+
+                  if ($LASTEXITCODE -ne 0) {
+                    throw "Failed to remove extended attributes from DMG application"
+                  }
+                }
+              }
+              finally {
+                & hdiutil detach $mountPoint -force -quiet
+
+                if ($LASTEXITCODE -ne 0) {
+                  throw "Failed to unmount DMG: $($file.Name)"
+                }
+
+                Remove-Item -LiteralPath $mountPoint -Force -Recurse -ErrorAction SilentlyContinue
+              }
+            }
+          }
+
+          foreach ($file in $installerFiles) {
+            Copy-Item -LiteralPath $file.FullName -Destination $destBase -Force
+          }
+
+          Write-Host "Packaging completed for $unpackedName"
+          Get-ChildItem -LiteralPath $destBase -File
+
+      - name: Upload AppImage
+        if: matrix.os == 'linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.app }}-${{ matrix.rid }}-AppImage
+          path: Publicaciones/*.AppImage
+          if-no-files-found: error
+
+      - name: Upload DMG
+        if: matrix.os == 'macos'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.app }}-${{ matrix.rid }}-DMG
+          path: Publicaciones/*.dmg
+          if-no-files-found: error
+
+      - name: Upload MSI
+        if: matrix.os == 'windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.app }}-${{ matrix.rid }}-MSI
+          path: Publicaciones/*.msi
+          if-no-files-found: error
+
+      - name: Upload EXE
+        if: matrix.os == 'windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.app }}-${{ matrix.rid }}-EXE
+          path: Publicaciones/*.exe
+          if-no-files-found: error
+
+      - name: Upload Unpacked
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.app }}-${{ matrix.rid }}-Unpacked
+          path: Publicaciones/*-unpacked.zip
+          if-no-files-found: error

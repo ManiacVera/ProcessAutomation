@@ -1,0 +1,131 @@
+name: Release Apps
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release version (example 1.2.0)
+        required: true
+        type: string
+
+      release_description:
+        description: Release description / changelog
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Validate release version
+        shell: bash
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: |
+          if [[ -z "$RELEASE_VERSION" ]]; then
+            echo "Release version is required."
+            exit 1
+          fi
+
+          if [[ ! "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Invalid version format: $RELEASE_VERSION"
+            echo "Use a version such as 1.2.0 or 1.2.0-beta.1"
+            exit 1
+          fi
+
+      - name: Find latest successful full build
+        id: find-build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          echo "Searching for the latest successful Build Apps..."
+
+          RUNS=$(gh run list \
+            --workflow "Build Apps" \
+            --branch "$GITHUB_REF_NAME" \
+            --status success \
+            --limit 100 \
+            --json databaseId,headSha \
+            --jq '.[] | "\(.databaseId) \(.headSha)"')
+
+          SELECTED_RUN=""
+          SELECTED_SHA=""
+
+          while read -r RUN_ID RUN_SHA; do
+            [[ -z "$RUN_ID" ]] && continue
+
+            echo "Checking run $RUN_ID..."
+
+            PUBLISH_COUNT=$(gh run view "$RUN_ID" \
+              --json jobs \
+              --jq '[.jobs[] | select((.name | startswith("Publish (")) and .conclusion == "success")] | length')
+
+            echo "Successful Publish jobs: $PUBLISH_COUNT"
+
+            if [[ "$PUBLISH_COUNT" -eq 12 ]]; then
+              SELECTED_RUN="$RUN_ID"
+              SELECTED_SHA="$RUN_SHA"
+              break
+            fi
+          done <<< "$RUNS"
+
+          if [[ -z "$SELECTED_RUN" ]]; then
+            echo "No successful full Build Apps run was found."
+            echo "Run Build Apps with all platforms before creating a release."
+            exit 1
+          fi
+
+          echo "Selected build run: $SELECTED_RUN"
+          echo "Selected commit: $SELECTED_SHA"
+
+          echo "run_id=$SELECTED_RUN" >> "$GITHUB_OUTPUT"
+          echo "head_sha=$SELECTED_SHA" >> "$GITHUB_OUTPUT"
+          
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ steps.find-build.outputs.run_id }}
+          pattern: "*"
+          path: release-assets
+          merge-multiple: true
+
+      - name: Validate downloaded assets
+        shell: bash
+        run: |
+          echo "Downloaded release assets:"
+          find release-assets -maxdepth 1 -type f -printf '%f\n' | sort
+
+          FILE_COUNT=$(find release-assets -maxdepth 1 -type f | wc -l)
+
+          if [[ "$FILE_COUNT" -ne 28 ]]; then
+            echo "Expected 28 release files, found $FILE_COUNT"
+            exit 1
+          fi
+
+          echo "All 28 release files are ready."
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ inputs.version }}
+          name: v${{ inputs.version }}
+          body: ${{ inputs.release_description }}
+          target_commitish: ${{ steps.find-build.outputs.head_sha }}
+          draft: true
+          fail_on_unmatched_files: true
+          files: release-assets/*
