@@ -1,4 +1,3 @@
-
 name: Build Apps
 
 on:
@@ -70,7 +69,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Linux dependencies
         if: matrix.os == 'linux'
@@ -79,7 +78,7 @@ jobs:
           sudo apt-get install -y build-essential zlib1g-dev libfuse2 curl tar wget libssl-dev pkg-config zig
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '25.5.0'
 
@@ -93,7 +92,7 @@ jobs:
         run: cargo install --locked cargo-zigbuild
 
       - name: Setup .NET 10
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '10.0.x'
 
@@ -138,7 +137,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) {
             throw "MSBuild publish failed for $actualRid"
           }
-      
+
       - name: Package outputs
         shell: pwsh
         run: |
@@ -303,7 +302,7 @@ jobs:
 
       - name: Upload AppImage
         if: matrix.os == 'linux'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.app }}-${{ matrix.rid }}-AppImage
           path: Publicaciones/*.AppImage
@@ -311,7 +310,7 @@ jobs:
 
       - name: Upload DMG
         if: matrix.os == 'macos'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.app }}-${{ matrix.rid }}-DMG
           path: Publicaciones/*.dmg
@@ -319,7 +318,7 @@ jobs:
 
       - name: Upload MSI
         if: matrix.os == 'windows'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.app }}-${{ matrix.rid }}-MSI
           path: Publicaciones/*.msi
@@ -327,14 +326,14 @@ jobs:
 
       - name: Upload EXE
         if: matrix.os == 'windows'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.app }}-${{ matrix.rid }}-EXE
           path: Publicaciones/*.exe
           if-no-files-found: error
 
       - name: Upload Unpacked
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.app }}-${{ matrix.rid }}-Unpacked
           path: Publicaciones/*-unpacked.zip
