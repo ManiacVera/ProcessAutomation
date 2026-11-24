@@ -45,6 +45,20 @@ It provides the following main features:
 - **Process Cloning:** Create copies of existing processes for independent use or customization.
 - **Shortcut Creation:** Create shortcuts for quick and convenient access to frequently used processes.
 
+## Important Notice – macOS Security Permissions
+
+This software is **not digitally signed or notarized by Apple**. Therefore, macOS may prevent you from opening the applications due to its security restrictions.
+
+To allow the applications to run, you must manually remove the quarantine attribute using the appropriate command, depending on how you downloaded the application.
+
+### DMG Installation
+
+If you downloaded and installed the application using a `.dmg` file, open Terminal and execute the command corresponding to the application:
+
+**ProcessAutomation**
+```bash
+sudo xattr -cr "/Applications/ProcessAutomation.app"
+
 ## Project Status
 
 **Please note:** This project is currently in the **alpha stage** and is still under active development.

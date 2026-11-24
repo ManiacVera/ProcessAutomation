@@ -118,6 +118,38 @@ jobs:
           fi
 
           echo "All 28 release files are ready."
+      
+      - name: Add version to asset filenames
+        shell: bash
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: |
+          echo "Adding version $RELEASE_VERSION to asset filenames..."
+
+          find release-assets -maxdepth 1 -type f | while IFS= read -r FILE; do
+            FILENAME=$(basename "$FILE")
+
+            case "$FILENAME" in
+              ProcessAutomation-*)
+                NEW_FILENAME="ProcessAutomation-$RELEASE_VERSION-${FILENAME#ProcessAutomation-}"
+                ;;
+              ProcessViewer-*)
+                NEW_FILENAME="ProcessViewer-$RELEASE_VERSION-${FILENAME#ProcessViewer-}"
+                ;;
+              *)
+                echo "Skipping file: $FILENAME"
+                continue
+                ;;
+            esac
+
+            if [[ "$FILENAME" != "$NEW_FILENAME" ]]; then
+              mv "$FILE" "release-assets/$NEW_FILENAME"
+              echo "Renamed: $FILENAME -> $NEW_FILENAME"
+            fi
+          done
+
+          echo "Final release assets:"
+          find release-assets -maxdepth 1 -type f -printf '%f\n' | sort
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
