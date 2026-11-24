@@ -53,11 +53,35 @@ To allow the applications to run, you must manually remove the quarantine attrib
 
 ### DMG Installation
 
-If you downloaded and installed the application using a `.dmg` file, open Terminal and execute the command corresponding to the application:
+If you downloaded and installed the application using a `.dmg` file, open Terminal and execute the command corresponding to the application.
 
 **ProcessAutomation**
 ```bash
 sudo xattr -cr "/Applications/ProcessAutomation.app"
+```
+
+**ProcessViewer**
+```bash
+sudo xattr -cr "/Applications/ProcessViewer.app"
+```
+
+### Unpacked Installation
+
+If you downloaded an unpacked version of the application, replace `(YOUR_PATH)` with the actual path where the application is located.
+
+**ProcessAutomation**
+```bash
+sudo xattr -cr "/(YOUR_PATH)/ProcessAutomation.app"
+```
+
+**ProcessViewer**
+```bash
+sudo xattr -cr "/(YOUR_PATH)/ProcessViewer.app"
+```
+
+After executing the appropriate command, try opening the application again.
+
+**Note:** Only execute these commands for applications downloaded from a source you trust.
 
 ## Project Status
 
